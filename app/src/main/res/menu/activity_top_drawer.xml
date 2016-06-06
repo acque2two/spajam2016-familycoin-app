@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_top_drawer_japanese"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="国語" />
+        <item
+            android:id="@+id/activity_top_drawer_math"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="数学" />
+        <item
+            android:id="@+id/activity_top_drawer_science"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="理科" />
+        <item
+            android:id="@+id/activity_top_drawer_social_studies"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="社会" />
+        <item
+            android:id="@+id/activity_top_drawer_english"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="英語" />
+        <item
+            android:id="@+id/activity_top_drawer_other"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="その他" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/activity_top_drawer_rankings"
+                android:icon="@drawable/ic_menu_share"
+                android:title="ランキング" />
+            <item
+                android:id="@+id/activity_top_drawer_mydata"
+                android:icon="@drawable/ic_menu_send"
+                android:title="MyData" />
+        </menu>
+    </item>
+
+</menu>
