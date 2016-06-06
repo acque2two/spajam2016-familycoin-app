@@ -8,4 +8,5 @@ package rainbow_rider.kirin.a0606.Data;
  * Todo:
  */
 public class Data {
+
 }
