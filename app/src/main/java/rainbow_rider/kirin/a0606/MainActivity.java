@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(callIntent);
             }
         });
-/*
+
         assert top_button != null;
         top_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(callIntent);
             }
         });
-*/
+
         assert detail_button != null;
         detail_button.setOnClickListener(new View.OnClickListener() {
             @Override
