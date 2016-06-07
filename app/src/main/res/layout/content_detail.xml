@@ -11,66 +11,233 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="rainbow_rider.kirin.a0606.DetailActivity"
     tools:showIn="@layout/activity_detail">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#41f1b1b1"
-        android:layout_alignParentBottom="true"
-        android:weightSum="1">
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="false">
 
-        <FrameLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#8dc6f6ff">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/scrollView2"
+            android:layout_gravity="center_horizontal"
+            android:fillViewport="false">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Image"
-                android:id="@+id/new_recipe_image_button"
-                android:layout_gravity="center"
-                android:background="#00ffffff"
-                android:paddingStart="1dp"
-                android:paddingEnd="1dp" />
+                android:background="#41f1b1b1"
+                android:layout_alignParentBottom="true"
+                android:weightSum="1">
 
-        </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#8dc6f6ff"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/newRecipe_title"
-            android:hint="タイトル"
-            android:gravity="center_horizontal" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView" />
 
-        <Space
-            android:layout_width="20px"
-            android:layout_height="30px" />
+                </FrameLayout>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/new_recipe_spinner"
-            android:spinnerMode="dialog"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="ジャンル"
+                    android:id="@+id/detail_genre_text"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp" />
 
-        <Space
-            android:layout_width="20px"
-            android:layout_height="30px" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="タイトル"
+                    android:id="@+id/detail_title_text"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/newRecipe_mainText"
-            android:hint="本文"
-            android:gravity="center_horizontal" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="投稿者"
+                    android:id="@+id/detail_user_text"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="内容"
+                    android:id="@+id/detail_main_text"
+                    android:gravity="center_horizontal"
+
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center_horizontal|bottom">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentBottom="true">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="A"
+                                android:id="@+id/textView8"
+                                android:layout_marginRight="10dp"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="aaaaaaa"
+                                android:id="@+id/detail_answerA_text"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="B"
+                                android:id="@+id/textView10"
+                                android:layout_marginRight="10dp"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="bbbbbbb"
+                                android:id="@+id/detail_answerB_text"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="C"
+                                android:id="@+id/textView12"
+                                android:layout_marginRight="10dp"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="ccccccc"
+                                android:id="@+id/detail_answerC_text"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="D"
+                                android:id="@+id/textView14"
+                                android:layout_marginRight="10dp"
+                                android:gravity="center_vertical" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="ddddddd"
+                                android:id="@+id/detail_answerD_text"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Spinner
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/detail_answer_spinner"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentStart="true"
+                                android:spinnerMode="dialog"
+                                android:layout_gravity="left|center_vertical" />
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="送信"
+                                android:id="@+id/detail_send_button"
+                                android:layout_gravity="center_vertical|right" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 
