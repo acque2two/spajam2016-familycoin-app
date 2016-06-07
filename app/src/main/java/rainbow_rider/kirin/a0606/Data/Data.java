@@ -27,7 +27,7 @@ public class Data {
     }
 
     private Boolean status;
-    private
+    //private
     public Anss getAns( ) {
         return ans;
     }
