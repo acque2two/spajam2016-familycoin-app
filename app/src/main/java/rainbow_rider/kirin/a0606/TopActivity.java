@@ -2,6 +2,7 @@ package rainbow_rider.kirin.a0606;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,7 +21,7 @@ import android.widget.Toast;
 import com.twitter.sdk.android.core.models.User;
 
 public class TopActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TopFragment.OnFragmentInteractionListener {
 ///     /*3=befor_code
 ///    public Data listdata = new Data();
 ///    public Data listdata = new Data();
@@ -73,41 +74,7 @@ public class TopActivity extends AppCompatActivity
                 .addToBackStack("aaa")
                 .commit();
 
-///        Genre genre = new Genre();
-///        genre.setGenre_id(0);
-///        new RecipeGenreGet(genre) {
-///            @Override
-///            protected void onPostExecute(Data data) {
-///                super.onPostExecute(data);
-///
-///                mAdapter = new ItemListAdapter(TopActivity.this.getApplicationContext(), R.layout.activity_top);
-///                mListView = (AbsListView) findViewById(R.id.list_view);
-///                Data reply = getReply();
-///                //mListView.setAdapter( mAdapter);
-///
-///                //for ( int i=0; listdata.getRecipe().get(i).getImage_url() != null ; i++ ){
-///                //    mAdapter.add(listdata.getRecipe().get(i).getImage_url())
-///                //}
-///
-///                ListItem listItem = new ListItem();
-///                List<ListItem> listItemList = new ArrayList<ListItem>();
-///                for (int i = 0; i < reply.getRecipe().size(); i++) {
-/////                        String a = listdata.getRecipe().get(i).getImage_url();
-/////                        String b = listdata.getRecipe().get(i).getRecipe_name();
-///                    String a = reply.getRecipe().get(i).getImage_url();
-///                    String b = reply.getRecipe().get(i).getRecipe_name();
-///                    listItem.setFoodIcon(a);
-///                    listItem.setTitle(b);
-///                    listItemList.add(listItem);
-///                    Log.d("a", a + b);
-///                }
-///                Log.d("Comp", "Leate");
-///
-///                mAdapter.addAll(listItemList);
-///
-///            }
-///        }.execute();
-/////        mListView.setAdapter( mAdapter);
+//        mListView.setAdapter( mAdapter);
 
         //for ( int i=0; listdata.getRecipe().get(i).getImage_url() != null ; i++ ){
         //    mAdapter.add(listdata.getRecipe().get(i).getImage_url())
@@ -198,6 +165,11 @@ public class TopActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 

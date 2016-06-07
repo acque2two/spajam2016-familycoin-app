@@ -3,10 +3,23 @@ package rainbow_rider.kirin.a0606;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rainbow_rider.kirin.a0606.Data.Data;
+import rainbow_rider.kirin.a0606.Data.Genre;
+import rainbow_rider.kirin.a0606.Data.Question;
+import rainbow_rider.kirin.a0606.transfer.ItemListAdapter;
+import rainbow_rider.kirin.a0606.transfer.genre.GenreGet;
+import rainbow_rider.kirin.a0606.transfer.user.ListItem;
 
 
 /**
@@ -65,6 +78,52 @@ public class TopFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_top, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Question question = new Question();
+        Genre genre = new Genre();
+
+        ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
+        AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
+
+        genre.setGenre_id(0);
+        question.getGenre().getGenre_id();
+        question.getGenre().getGenre_name();
+
+
+        new Question(question) {
+            @Override
+            protected void onPostExecute(Data data) {
+                super.onPostExecute(data);
+
+                Data reply = getReply();
+                //mListView.setAdapter( mAdapter);
+
+                //for ( int i=0; listdata.getRec
+                // ipe().get(i).getImage_url() != null ; i++ ){
+                //    mAdapter.add(listdata.getRecipe().get(i).getImage_url())
+                //}
+
+                ListItem listItem = new ListItem();
+                List<ListItem> listItemList = new ArrayList<ListItem>();
+                for (int i = 0; i < reply.getGenre().size(); i++) {
+//                        String a = listdata.getRecipe().get(i).getImage_url();
+//                        String b = listdata.getRecipe().get(i).getRecipe_name();
+                    String b = reply.getRecipe().get(i).getRecipe_name();
+                    listItem.setFoodIcon(a);
+                    listItem.setTitle(b);
+                    listItemList.add(listItem);
+                    Log.d("a", a + b);
+                }
+                Log.d("Comp", "Leate");
+
+                mAdapter.addAll(listItemList);
+
+            }
+        }.execute();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

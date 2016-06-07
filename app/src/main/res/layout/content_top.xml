@@ -3,6 +3,7 @@
 <fragment android:layout_width="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:id="@+id/content_top_fragment"
+    android:name="rainbow_rider.kirin.a0606.TopFragment"
+    android:id="@+id/content_top_fragmen"
     tools:layout="@layout/item_list_view"
     xmlns:android="http://schemas.android.com/apk/res/android" />
