@@ -34,7 +34,6 @@ public class ItemListAdapter extends GenericArrayAdapter<Question> {
             convertView.setTag( mViewHolder );
 
         } else {
-
             mViewHolder = ( ViewHolder ) convertView.getTag();
         }
 

@@ -22,6 +22,7 @@ import rainbow_rider.kirin.a0606.Data.Data;
  * Memo:
  * Todo:
  */
+
 public class ImagePut extends AsyncTask<byte[], byte[], byte[]> {
     public static final MediaType jsontype = MediaType.parse( "application/json; charset=utf-8" );
     public String urlPath = "/index.html";

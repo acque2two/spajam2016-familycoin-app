@@ -8,10 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +25,14 @@ import android.widget.Toast;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import rainbow_rider.kirin.a0606.Data.Ans;
+import rainbow_rider.kirin.a0606.Data.Data;
+import rainbow_rider.kirin.a0606.Data.Genre;
+import rainbow_rider.kirin.a0606.Data.Multiple.Anss;
+import rainbow_rider.kirin.a0606.Data.Question;
+import rainbow_rider.kirin.a0606.transfer.question.QuestionAdd;
 
 public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
@@ -178,21 +183,106 @@ public class PostActivity extends AppCompatActivity {
 
     //アクションバーの設定
     @Override
-    public boolean onCreateOptionsMenu( Menu menu ) {
+    public boolean onCreateOptionsMenu(final Menu menu ) {
         //menu.add( 1, 0, Menu.NONE, "設定" );
+
+        //杉山追加
+        final Spinner genre_spinner = (Spinner) findViewById(R.id.post_genre_spinner);
+        final Spinner answer_spinner = (Spinner) findViewById(R.id.post_selectAnswer_spinner);
+        final EditText title = (EditText) findViewById(R.id.post_title);
+        final EditText mainText = (EditText) findViewById(R.id.post_mainText);
+        final EditText answerA = (EditText) findViewById(R.id.post_answerA_editText);
+        final EditText answerB = (EditText) findViewById(R.id.post_answerB_editText);
+        final EditText answerC = (EditText) findViewById(R.id.post_answerC_editText);
+        final EditText answerD = (EditText) findViewById(R.id.post_answerD_editText);
+        //------
 
         //menu.findItem(R.id.menu_move_to_add_friend_button);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate( R.menu.menu_post, menu );
         setTitle("問題投稿");
-        MenuItem a = menu.findItem( R.id.menu_detail_image_button );
-        a.setTitle( "投稿" );;
+        final MenuItem a = menu.findItem( R.id.menu_detail_image_button );
+        a.setTitle( "投稿" );
         a.setCheckable( true );
         a.setOnMenuItemClickListener( new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick( MenuItem item ) {
                 //    Intent callIntent = new Intent( DetailActivity.this, AddFriendActivity.class );
                 //    startActivity( callIntent );
+                Question question = new Question();
+                Genre genre = new Genre();
+
+                String genreName = genre_spinner.getSelectedItem().toString();
+
+                //genreをidに変換    NullPointer対策にelse
+                if ( genreName.equals("国語") ){
+                    genre.setGenre_id(1);
+                } else if( genreName.equals("数学") ) {
+                    genre.setGenre_id(2);
+                } else if( genreName.equals("理科") ) {
+                    genre.setGenre_id(3);
+                } else if( genreName.equals("社会") ) {
+                    genre.setGenre_id(4);
+                } else if( genreName.equals("英語") ) {
+                    genre.setGenre_id(5);
+                } else if( genreName.equals("その他") ) {
+                    genre.setGenre_id(6);
+                } else {
+                    genre.setGenre_id(7);
+                }
+
+                Ans ans = new Ans();
+                String answer = answer_spinner.getSelectedItem().toString();
+                Long trueId;
+
+                //answerのidは A = 1, B = 2, C = 3, D = 4    NullPointer対策にelse5を追加
+                if ( genreName.equals("A") ){
+                    trueId = 1L;
+                } else if( genreName.equals("B") ) {
+                    trueId = 2L;
+                } else if( genreName.equals("C") ) {
+                    trueId = 3L;
+                } else if( genreName.equals("D") ) {
+                    trueId = 4L;
+                } else {
+                    trueId = 5L;
+                }
+
+                Anss anss = new Anss();
+
+                ArrayList<String> answerText = new ArrayList<String>();
+                answerText.add(answerA.getText().toString());
+                answerText.add(answerB.getText().toString());
+                answerText.add(answerC.getText().toString());
+                answerText.add(answerD.getText().toString());
+
+                int i = 1;
+                for (String a : answerText) {
+                    Ans ansText = new Ans();
+                    ansText.setAns_id(i);
+                    ansText.setAns_text(a);
+                    anss.add(i, ansText);
+                    i ++;
+                }
+
+                question.setQ_name( title.getText().toString() );
+                question.setGenre(genre);
+                question.setQ_text( mainText.getText().toString() );
+                question.setTrue_id(trueId);
+                question.setAnswer(ans);
+
+                new QuestionAdd(question, anss){
+                    @Override
+                    protected void onPostExecute(Data data) {
+                        super.onPostExecute(data);
+
+                        Toast.makeText(PostActivity.this, "送信しました！", Toast.LENGTH_SHORT).show();
+                        PostActivity.this.onDestroy();
+
+                    }
+                }.execute();
+
+
                 Toast.makeText(PostActivity.this, "oni", Toast.LENGTH_SHORT).show();
                 return false;
             }
