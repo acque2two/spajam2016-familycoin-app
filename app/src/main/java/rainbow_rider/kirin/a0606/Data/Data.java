@@ -21,13 +21,12 @@ public class Data {
     private Genres genre;
     private UserAnss userans;
     private Favs fav;
+    private Boolean status;
 
     public Boolean isStatus( ) {
         return status;
     }
 
-    private Boolean status;
-    private
     public Anss getAns( ) {
         return ans;
     }
