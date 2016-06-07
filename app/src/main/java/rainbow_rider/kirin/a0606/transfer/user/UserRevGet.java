@@ -10,8 +10,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 
-public class UserRevGet extends Sender{
-    public UserRevGet(){
+public class UserRevGet extends Sender {
+    public UserRevGet( ) {
         super.setPath( "/userrevget" );
     }
 }

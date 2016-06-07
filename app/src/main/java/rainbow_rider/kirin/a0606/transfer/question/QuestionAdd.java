@@ -10,8 +10,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 
-public class QuestionAdd extends Sender{
-    public QuestionAdd(){
-        super.setPath("/questionadd" );
+public class QuestionAdd extends Sender {
+    public QuestionAdd( ) {
+        super.setPath( "/questionadd" );
     }
 }

@@ -10,8 +10,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 
-public class FavoriteAdd extends Sender{
-    public FavoriteAdd(){
+public class FavoriteAdd extends Sender {
+    public FavoriteAdd( ) {
         super.setPath( "/favorite" );
     }
 }

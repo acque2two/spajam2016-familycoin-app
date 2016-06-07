@@ -9,8 +9,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Memo:
  * Todo:
  */
-public class AnswerAdd extends Sender{
-    public AnswerAdd(){
+public class AnswerAdd extends Sender {
+    public AnswerAdd( ) {
         super.setPath( "/ansadd" );
     }
 }

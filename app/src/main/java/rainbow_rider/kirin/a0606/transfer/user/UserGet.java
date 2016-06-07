@@ -10,8 +10,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 
-public class UserGet extends Sender{
-    public UserGet(){
+public class UserGet extends Sender {
+    public UserGet( ) {
         super.setPath( "/userget" );
     }
 }

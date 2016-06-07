@@ -10,8 +10,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 
-public class GenreAdd extends Sender{
-    public GenreAdd(){
+public class GenreAdd extends Sender {
+    public GenreAdd( ) {
         super.setPath( "/genreadd" );
     }
 }

@@ -47,6 +47,7 @@ public class Data {
     public Questions getQuestion( ) {
         return question;
     }
+
     public void setQuestion( Questions question ) {
         this.question = question;
     }

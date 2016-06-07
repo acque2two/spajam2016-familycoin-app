@@ -10,8 +10,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 
-public class QuestionExist extends Sender{
-    public QuestionExist(){
+public class QuestionExist extends Sender {
+    public QuestionExist( ) {
         super.setPath( "/questionexist" );
     }
 }

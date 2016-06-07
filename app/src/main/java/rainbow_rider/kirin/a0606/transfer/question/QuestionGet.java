@@ -10,8 +10,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 
-public class QuestionGet extends Sender{
-    public QuestionGet(){
+public class QuestionGet extends Sender {
+    public QuestionGet( ) {
         super.setPath( "/questionget" );
     }
 }

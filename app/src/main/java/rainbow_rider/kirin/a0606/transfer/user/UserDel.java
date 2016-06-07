@@ -10,8 +10,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 
-public class UserDel extends Sender{
-    public UserDel(){
+public class UserDel extends Sender {
+    public UserDel( ) {
         super.setPath( "/userdel" );
     }
 }

@@ -10,7 +10,7 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 public class QuestionUserRankList extends Sender {
-    public QuestionUserRankList(){
-        super.setPath("/questionuserrank" );
+    public QuestionUserRankList( ) {
+        super.setPath( "/questionuserrank" );
     }
 }
