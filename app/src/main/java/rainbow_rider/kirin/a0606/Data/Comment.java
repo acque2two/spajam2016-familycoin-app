@@ -4,6 +4,7 @@ public class Comment {
     private Question question;
     private User user;
     private String body;
+    private Long count;
 
     public Question getQuestion( ) {
         return question;

@@ -4,6 +4,7 @@ public class Ans {
     private User user;
     private Question question;
     private long ans_id;
+    private Long count;
 
     public User getUser( ) {
         return user;

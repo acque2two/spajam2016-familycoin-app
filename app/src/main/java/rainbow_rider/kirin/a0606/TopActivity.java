@@ -34,6 +34,7 @@ public class TopActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Toast.makeText( getApplicationContext(),"AAA",Toast.LENGTH_LONG ).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);

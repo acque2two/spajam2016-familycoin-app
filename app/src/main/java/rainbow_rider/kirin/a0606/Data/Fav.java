@@ -11,6 +11,7 @@ package rainbow_rider.kirin.a0606.Data;
 public class Fav {
     private Genre genre;
     private User user;
+    private Long count;
 
     public Genre getGenre( ) {
         return genre;
