@@ -123,44 +123,6 @@ public class Sender extends AsyncTask<Data, Data, Data> {
         allData.setAns( anss );
     }
 
-    public Sender( Long user_id, String user_name ) {
-        User user = new User();
-        user.setUser_id( user_id );
-        user.setUser_name( user_name );
-        Users userList = new Users();
-        userList.add( user );
-        allData = new Data();
-        allData.setUser( userList );
-    }
-
-    public Sender( Integer genre_id ) {
-        Genre genre = new Genre();
-        genre.setGenre_id( genre_id );
-        Genres genreList = new Genres();
-        genreList.add( genre );
-        allData = new Data();
-        allData.setGenre( genreList );
-    }
-
-    /*
-    public Sender(
-            Integer recipe_id, String recipe_name, Long recipe_date, String image_url, String recipe_text, Users user,
-            Genres genre
-    ) {
-        Recipe recipe = new Recipe();
-        recipe.setRecipe_id( recipe_id );
-        recipe.setRecipe_name( recipe_name );
-        recipe.setRecipe_date( recipe_date );
-        recipe.setImage_url( image_url );
-        recipe.setRecipe_text( recipe_text );
-        recipe.setUser( user );
-        recipe.setGenre( genre );
-        Recipes recipes = new Recipes();
-        recipes.add( recipe );
-        allData = new Data();
-        allData.setRecipe( recipes );
-    }
-*/
     public Sender( Data data ) {
         allData = data;
     }
