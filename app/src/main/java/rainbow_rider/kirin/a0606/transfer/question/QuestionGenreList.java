@@ -9,9 +9,8 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Memo:
  * Todo:
  */
-
-public class QuestionAdd extends Sender{
-    public QuestionAdd(){
-        super.setPath("/questionadd" );
+public class QuestionGenreList extends Sender {
+    public QuestionGenreList(){
+        super.setPath("/questiongenre" );
     }
 }
