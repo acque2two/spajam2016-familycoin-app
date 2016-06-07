@@ -1,4 +1,4 @@
-package rainbow_rider.kirin.a0606.transfer;
+package rainbow_rider.kirin.a0606.Data;
 
 import android.content.Context;
 import android.view.View;
@@ -7,10 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import rainbow_rider.kirin.a0606.R;
-import rainbow_rider.kirin.a0606.transfer.user.ListItem;
 
 
-public class ItemListAdapter extends GenericArrayAdapter<ListItem> {
+public class ItemListAdapter extends GenericArrayAdapter<Question> {
 
     ViewHolder mViewHolder;
 
@@ -20,7 +19,7 @@ public class ItemListAdapter extends GenericArrayAdapter<ListItem> {
 
     public View getView(int position, View convertView, ViewGroup parent ) {
 
-        ListItem listitem = getItem(position);
+        Question listItem = getItem(position);
 
         if ( convertView == null ) {
 
@@ -42,7 +41,7 @@ public class ItemListAdapter extends GenericArrayAdapter<ListItem> {
         //mViewHolder.food_icon.setBackground();
 
         //mViewHolder.food_icon.setBackground( listitem.getFoodIcon() );
-        mViewHolder.title.setText( listitem.getTitle() );
+        mViewHolder.title.setText( listItem.getQ_name() );
 
         return convertView;
     }

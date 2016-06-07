@@ -11,14 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
-import rainbow_rider.kirin.a0606.transfer.ItemListAdapter;
+import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
+import rainbow_rider.kirin.a0606.Data.ItemListAdapter;
 import rainbow_rider.kirin.a0606.transfer.question.QuestionGenreList;
-import rainbow_rider.kirin.a0606.transfer.user.ListItem;
 
 
 /**
@@ -88,7 +85,7 @@ public class TopFragment extends Fragment {
         final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
         AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
-        genre.setGenre_id(0);
+        genre.setGenre_id(1);
 
         new QuestionGenreList(genre) {
             @Override
@@ -101,25 +98,16 @@ public class TopFragment extends Fragment {
                 //    mAdapter.add(listdata.getRecipe().get(i).getImage_url())
                 //}
 
-
-                ListItem listItem = new ListItem();
-                List<ListItem> listItemList = new ArrayList<ListItem>();
+                Questions listItemList = new Questions();
                 if ( reply.getGenre() != null ) {
                     for (int i = 0; i < reply.getGenre().size(); i++) {
 //                        String a = listdata.getRecipe().get(i).getImage_url();
 //                        String b = listdata.getRecipe().get(i).getRecipe_name();
-                        Long id = reply.getQuestion().get(i).getQ_id();
-                        String name = reply.getQuestion().get(i).getQ_name();
-                        String image = reply.getQuestion().get(i).getImage_url();
-
-                        listItem.setId(id);
-                        listItem.setTitle(name);
-                        listItem.setIconUrl(image);
 
                         //imageをurlから画像に変換する処理を書く
 
-                        listItemList.add(listItem);
-                        Log.d("a", id + name);
+                        listItemList.add(reply.getQuestion().get(i));
+                        Log.d("a","");
                     }
                 }else{
                     Log.d("TOPFRAGMENT", "GENRE"+Long.toString(allData.getGenre().get(0).getGenre_id())+" IS NULL");

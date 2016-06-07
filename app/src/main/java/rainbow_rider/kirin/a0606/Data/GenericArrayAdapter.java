@@ -1,4 +1,4 @@
-package rainbow_rider.kirin.a0606.transfer;
+package rainbow_rider.kirin.a0606.Data;
 
 import android.content.Context;
 import android.view.LayoutInflater;
