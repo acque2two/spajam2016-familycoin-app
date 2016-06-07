@@ -46,8 +46,8 @@ public class Sender extends AsyncTask<Data, Data, Data> {
     public Data allData;
     // 受信したデータ
     Data reply;
-    private OkHttpClient client = new OkHttpClient();
-    private String url;
+    public OkHttpClient client = new OkHttpClient();
+    public String url;
 
     public Sender( ) {
         allData = new Data();
