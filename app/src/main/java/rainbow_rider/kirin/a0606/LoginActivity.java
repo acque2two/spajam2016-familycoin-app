@@ -1,12 +1,20 @@
 package rainbow_rider.kirin.a0606;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
-import com.twitter.sdk.android.core.*;
-import com.twitter.sdk.android.core.identity.*;
+
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+
+import rainbow_rider.kirin.a0606.Data.Data;
+import rainbow_rider.kirin.a0606.Data.User;
+import rainbow_rider.kirin.a0606.transfer.user.UserAdd;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,8 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
+
         loginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
@@ -29,6 +37,17 @@ public class LoginActivity extends AppCompatActivity {
                 // with your app's user model
                 String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                User userData = new User();
+                userData.setUser_id( session.getUserId() );
+                userData.setUser_name( session.getUserName() );
+                new UserAdd() {
+                    @Override
+                    protected void onPostExecute( Data data ) {
+                        super.onPostExecute( data );
+
+                        Toast.makeText(getApplicationContext(), "Sent to server.", Toast.LENGTH_LONG).show();
+                    }
+                }.execute( );
             }
             @Override
             public void failure(TwitterException exception) {
