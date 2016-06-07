@@ -4,6 +4,16 @@ public class Ans {
     private User user;
     private Question question;
     private long ans_id;
+
+    public String getAns_text( ) {
+        return ans_text;
+    }
+
+    public void setAns_text( String ans_text ) {
+        this.ans_text = ans_text;
+    }
+
+    private String  ans_text;
     private Long count;
     public Long getCount( ) {
         return count;

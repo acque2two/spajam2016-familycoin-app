@@ -28,9 +28,9 @@ ublic class ImagePut extends AsyncTask<String, byte[], byte[]> {
     Data reply;
     public OkHttpClient client = new OkHttpClient();
     public String url;
-
-    public Imagr( Bitmap bmp ) {
-        allData = new Data();
+    public Bitmap bitmap;
+    public ImagePut( Bitmap bmp ) {
+        Bitmap = bmp;
     }
 
 }
