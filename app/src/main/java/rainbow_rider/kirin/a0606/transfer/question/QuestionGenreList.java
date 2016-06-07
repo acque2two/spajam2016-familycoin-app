@@ -11,6 +11,6 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  */
 public class QuestionGenreList extends Sender {
     public QuestionGenreList(){
-        super.setPath("/questiongenre" );
+        super.setPath("/questiongenrek" );
     }
 }
