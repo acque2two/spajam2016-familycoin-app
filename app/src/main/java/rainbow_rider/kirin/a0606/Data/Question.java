@@ -9,4 +9,68 @@ public class Question {
     private String image_url;
     private Ans answer;
     private long true_id;
+
+    public long getQ_id( ) {
+        return q_id;
+    }
+
+    public void setQ_id( long q_id ) {
+        this.q_id = q_id;
+    }
+
+    public Genre getGenre( ) {
+        return genre;
+    }
+
+    public void setGenre( Genre genre ) {
+        this.genre = genre;
+    }
+
+    public User getUser( ) {
+        return user;
+    }
+
+    public void setUser( User user ) {
+        this.user = user;
+    }
+
+    public String getQ_name( ) {
+        return q_name;
+    }
+
+    public void setQ_name( String q_name ) {
+        this.q_name = q_name;
+    }
+
+    public String getQ_text( ) {
+        return q_text;
+    }
+
+    public void setQ_text( String q_text ) {
+        this.q_text = q_text;
+    }
+
+    public String getImage_url( ) {
+        return image_url;
+    }
+
+    public void setImage_url( String image_url ) {
+        this.image_url = image_url;
+    }
+
+    public Ans getAnswer( ) {
+        return answer;
+    }
+
+    public void setAnswer( Ans answer ) {
+        this.answer = answer;
+    }
+
+    public long getTrue_id( ) {
+        return true_id;
+    }
+
+    public void setTrue_id( long true_id ) {
+        this.true_id = true_id;
+    }
 }
