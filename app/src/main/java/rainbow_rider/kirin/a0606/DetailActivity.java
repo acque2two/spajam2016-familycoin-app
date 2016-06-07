@@ -20,18 +20,17 @@ public class DetailActivity extends AppCompatActivity {
         requestWindowFeature( Window.FEATURE_ACTION_BAR );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu( Menu menu ) {
-        menu.add( 1, 0, Menu.NONE, "設定" );
+        //menu.add( 1, 0, Menu.NONE, "設定" );
 
         //menu.findItem(R.id.menu_move_to_add_friend_button);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate( R.menu.menu_detail, menu );
         MenuItem a = menu.findItem( R.id.menu_detail_favourite_button );
-        a.setTitle( "お気に入り" );
+        a.setTitle( "★" );
 
         a.setCheckable( true );
         a.setOnMenuItemClickListener( new MenuItem.OnMenuItemClickListener() {

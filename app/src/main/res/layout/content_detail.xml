@@ -11,5 +11,67 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="rainbow_rider.kirin.a0606.DetailActivity"
     tools:showIn="@layout/activity_detail">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#41f1b1b1"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#8dc6f6ff">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Image"
+                android:id="@+id/new_recipe_image_button"
+                android:layout_gravity="center"
+                android:background="#00ffffff"
+                android:paddingStart="1dp"
+                android:paddingEnd="1dp" />
+
+        </FrameLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/newRecipe_title"
+            android:hint="タイトル"
+            android:gravity="center_horizontal" />
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="30px" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/new_recipe_spinner"
+            android:spinnerMode="dialog"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal" />
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="30px" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/newRecipe_mainText"
+            android:hint="本文"
+            android:gravity="center_horizontal" />
+
+    </LinearLayout>
 
 </RelativeLayout>

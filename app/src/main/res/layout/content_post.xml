@@ -12,4 +12,179 @@
     tools:context="rainbow_rider.kirin.a0606.PostActivity"
     tools:showIn="@layout/activity_post">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:fillViewport="false">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#41f1b1b1"
+            android:layout_alignParentBottom="true"
+            android:weightSum="1"
+            android:transitionGroup="false"
+            android:gravity="bottom">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#8dc6f6ff">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="画像を選択"
+                    android:id="@+id/post_image_button"
+                    android:layout_gravity="center"
+                    android:background="#00ffffff"
+                    android:paddingStart="1dp"
+                    android:paddingEnd="1dp" />
+
+            </FrameLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_title"
+                android:hint="タイトル"
+                android:gravity="center_horizontal" />
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="30px" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="ジャンル"
+                    android:id="@+id/textView4"
+                    android:gravity="center_vertical" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_genre_spinner"
+                    android:spinnerMode="dialog"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="30px" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/post_mainText"
+                android:hint="問題文を入力してね"
+                android:gravity="center_horizontal" />
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="答え"
+                    android:id="@+id/textView3"
+                    android:gravity="center_vertical" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_selectAnswer_spinner"
+                    android:spinnerMode="dialog"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="1">
+
+                <EditText
+                    android:layout_width="0.5dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_answerA_editText"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:hint="解答A"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="0.50" />
+
+                <EditText
+                    android:layout_width="0.5dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_answerB_editText"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:hint="解答B"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="0.5" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_width="0.5dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_answerC_editText"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:hint="解答C"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="0.5" />
+
+                <EditText
+                    android:layout_width="0.5dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_answerD_editText"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:hint="解答D"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="0.5" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>

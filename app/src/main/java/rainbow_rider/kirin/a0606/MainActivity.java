@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(callIntent);
             }
         });
-/*
+
         assert post_button != null;
         post_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +70,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(callIntent);
             }
         });
-*/
-
     }
 }
