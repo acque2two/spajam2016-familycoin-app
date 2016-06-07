@@ -12,6 +12,6 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
 
 public class FavoriteQuestionList extends Sender{
     public FavoriteQuestionList(){
-        super.setPath( "/favoriteuserlist" );
+        super.setPath( "/favoritequestionlist" );
     }
 }
