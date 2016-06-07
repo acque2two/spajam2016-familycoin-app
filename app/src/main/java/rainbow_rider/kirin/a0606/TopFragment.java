@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Toast;
 
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
@@ -67,6 +68,7 @@ public class TopFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -80,12 +82,15 @@ public class TopFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         QuestionGenreList questionGenreList = new QuestionGenreList();
+
+        Toast.makeText( view.getContext() ,mParam2,Toast.LENGTH_SHORT ).show();
+
         Genre genre = new Genre();
 
         final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
         AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
-        genre.setGenre_id(1);
+        genre.setGenre_id(Integer.parseInt(mParam1));
 
         new QuestionGenreList(genre) {
             @Override

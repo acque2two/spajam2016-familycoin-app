@@ -34,7 +34,7 @@ public class TopActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Toast.makeText( getApplicationContext(),"AAA",Toast.LENGTH_LONG ).show();
+        Toast.makeText( getApplicationContext(),"ようこそ",Toast.LENGTH_LONG ).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
@@ -71,8 +71,8 @@ public class TopActivity extends AppCompatActivity
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.content_top_fragment, TopFragment.newInstance("aaaaa","bbbbbb"))
-                .addToBackStack("aaa")
+                .replace(R.id.content_top_fragment, TopFragment.newInstance("1","newlist"))
+                .addToBackStack("新規投稿")
                 .commit();
 
 //        mListView.setAdapter( mAdapter);
@@ -149,17 +149,41 @@ public class TopActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.activity_top_drawer_japanese) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "1","Japanese"))
+                    .addToBackStack("国語")
+                    .commit();
         } else if (id == R.id.activity_top_drawer_math) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "2","math"))
+                    .addToBackStack("数学")
+                    .commit();
         } else if (id == R.id.activity_top_drawer_science) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "3","science"))
+                    .addToBackStack("理科")
+                    .commit();
         } else if (id == R.id.activity_top_drawer_social_studies) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "4","social_studies"))
+                    .addToBackStack("社会")
+                    .commit();
         } else if (id == R.id.activity_top_drawer_english) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "5","english"))
+                    .addToBackStack("英語")
+                    .commit();
         } else if (id == R.id.activity_top_drawer_other) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "6","other"))
+                    .addToBackStack("その他")
+                    .commit();
         }
 
 

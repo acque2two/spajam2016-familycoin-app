@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/activity_top_drawer_japanese"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="国語" />
         <item
             android:id="@+id/activity_top_drawer_math"
@@ -12,19 +12,19 @@
             android:title="数学" />
         <item
             android:id="@+id/activity_top_drawer_science"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="理科" />
         <item
             android:id="@+id/activity_top_drawer_social_studies"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="社会" />
         <item
             android:id="@+id/activity_top_drawer_english"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="英語" />
         <item
             android:id="@+id/activity_top_drawer_other"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="その他" />
     </group>
 
@@ -32,11 +32,11 @@
         <menu>
             <item
                 android:id="@+id/activity_top_drawer_rankings"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_menu_slideshow"
                 android:title="ランキング" />
             <item
                 android:id="@+id/activity_top_drawer_mydata"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_menu_slideshow"
                 android:title="MyData" />
         </menu>
     </item>
