@@ -19,7 +19,6 @@ repositories {
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
-
     defaultConfig {
         applicationId "rainbow_rider.kirin.a0606"
         minSdkVersion 21
@@ -33,9 +32,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
-dependencies {1
+dependencies {
+    1
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile('com.twitter.sdk.android:twitter:1.13.2@aar') {
@@ -45,6 +47,5 @@ dependencies {1
     compile 'com.android.support:design:23.4.0'
     compile 'net.arnx:jsonic:1.3.9'
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
-
     compile 'com.android.support:support-v4:23.4.0'
 }

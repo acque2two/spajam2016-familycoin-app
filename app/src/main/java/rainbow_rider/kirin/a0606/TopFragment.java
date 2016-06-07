@@ -16,9 +16,8 @@ import java.util.List;
 
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
-import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.transfer.ItemListAdapter;
-import rainbow_rider.kirin.a0606.transfer.genre.GenreGet;
+import rainbow_rider.kirin.a0606.transfer.question.QuestionGenreList;
 import rainbow_rider.kirin.a0606.transfer.user.ListItem;
 
 
@@ -83,22 +82,17 @@ public class TopFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Question question = new Question();
+        QuestionGenreList questionGenreList = new QuestionGenreList();
         Genre genre = new Genre();
 
-        ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
+        final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
         AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
         genre.setGenre_id(0);
-        question.getGenre().getGenre_id();
-        question.getGenre().getGenre_name();
 
-
-        new Question(question) {
+        new QuestionGenreList() {
             @Override
             protected void onPostExecute(Data data) {
-                super.onPostExecute(data);
-
                 Data reply = getReply();
                 //mListView.setAdapter( mAdapter);
 
@@ -112,14 +106,20 @@ public class TopFragment extends Fragment {
                 for (int i = 0; i < reply.getGenre().size(); i++) {
 //                        String a = listdata.getRecipe().get(i).getImage_url();
 //                        String b = listdata.getRecipe().get(i).getRecipe_name();
-                    String b = reply.getRecipe().get(i).getRecipe_name();
-                    listItem.setFoodIcon(a);
-                    listItem.setTitle(b);
+                    Long id = reply.getQuestion().get(i).getQ_id();
+                    String name = reply.getQuestion().get(i).getQ_name();
+                    String image = reply.getQuestion().get(i).getImage_url();
+
+                    listItem.setId(id);
+                    listItem.setTitle(name);
+                    listItem.setIconUrl(image);
+
+                    //imageをurlから画像に変換する処理を書く
+
                     listItemList.add(listItem);
-                    Log.d("a", a + b);
+                    Log.d("a", id + name);
                 }
                 Log.d("Comp", "Leate");
-
                 mAdapter.addAll(listItemList);
 
             }
