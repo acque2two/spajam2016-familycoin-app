@@ -23,6 +23,7 @@ public class TopActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 ///     /*3=befor_code
 ///    public Data listdata = new Data();
+///    public Data listdata = new Data();
 ///    private ItemListAdapter mAdapter;
     private AbsListView mListView;
     NavigationView navigationView;
@@ -65,6 +66,12 @@ public class TopActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_top_fragment, TopFragment.newInstance("aaaaa","bbbbbb"))
+                .addToBackStack("aaa")
+                .commit();
 
 ///        Genre genre = new Genre();
 ///        genre.setGenre_id(0);
