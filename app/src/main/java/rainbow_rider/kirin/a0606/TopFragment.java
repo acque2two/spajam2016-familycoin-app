@@ -90,7 +90,7 @@ public class TopFragment extends Fragment {
 
         genre.setGenre_id(0);
 
-        new QuestionGenreList() {
+        new QuestionGenreList(genre) {
             @Override
             protected void onPostExecute(Data data) {
                 Data reply = getReply();
@@ -101,23 +101,28 @@ public class TopFragment extends Fragment {
                 //    mAdapter.add(listdata.getRecipe().get(i).getImage_url())
                 //}
 
+
                 ListItem listItem = new ListItem();
                 List<ListItem> listItemList = new ArrayList<ListItem>();
-                for (int i = 0; i < reply.getGenre().size(); i++) {
+                if ( reply.getGenre() != null ) {
+                    for (int i = 0; i < reply.getGenre().size(); i++) {
 //                        String a = listdata.getRecipe().get(i).getImage_url();
 //                        String b = listdata.getRecipe().get(i).getRecipe_name();
-                    Long id = reply.getQuestion().get(i).getQ_id();
-                    String name = reply.getQuestion().get(i).getQ_name();
-                    String image = reply.getQuestion().get(i).getImage_url();
+                        Long id = reply.getQuestion().get(i).getQ_id();
+                        String name = reply.getQuestion().get(i).getQ_name();
+                        String image = reply.getQuestion().get(i).getImage_url();
 
-                    listItem.setId(id);
-                    listItem.setTitle(name);
-                    listItem.setIconUrl(image);
+                        listItem.setId(id);
+                        listItem.setTitle(name);
+                        listItem.setIconUrl(image);
 
-                    //imageをurlから画像に変換する処理を書く
+                        //imageをurlから画像に変換する処理を書く
 
-                    listItemList.add(listItem);
-                    Log.d("a", id + name);
+                        listItemList.add(listItem);
+                        Log.d("a", id + name);
+                    }
+                }else{
+                    Log.d("TOPFRAGMENT", "GENRE"+Long.toString(allData.getGenre().get(0).getGenre_id())+" IS NULL");
                 }
                 Log.d("Comp", "Leate");
                 mAdapter.addAll(listItemList);

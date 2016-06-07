@@ -40,17 +40,14 @@ public class LoginActivity extends AppCompatActivity {
                 User userData = new User();
                 userData.setUser_id( session.getUserId() );
                 userData.setUser_name( session.getUserName() );
-                new UserAdd() {
+                new UserAdd(userData) {
                     @Override
                     protected void onPostExecute( Data data ) {
                         super.onPostExecute( data );
-                        if ( getReply().isStatus() ) {
                             Toast.makeText( getApplicationContext(), "Sent to server.", Toast.LENGTH_LONG ).show();
                             startActivity( new Intent( LoginActivity.this, TopActivity.class ) );
-                        } else {
                             Toast.makeText( getApplicationContext(), "Server connection ERROR", Toast.LENGTH_LONG )
                                  .show();
-                        }
                     }
                 }.execute();
             }

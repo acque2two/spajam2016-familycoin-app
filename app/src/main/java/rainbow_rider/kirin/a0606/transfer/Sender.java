@@ -43,7 +43,7 @@ public class Sender extends AsyncTask<Data, Data, Data> {
 
     // 入力データ群
     // 全データ
-    Data allData;
+    public Data allData;
     // 受信したデータ
     Data reply;
     private OkHttpClient client = new OkHttpClient();
