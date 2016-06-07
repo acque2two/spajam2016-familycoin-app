@@ -10,6 +10,10 @@ public class Question {
     private Ans answer;
     private long true_id;
     private Long count;
+    public Long getCount( ) {
+        return count;
+    }
+
 
     public long getQ_id( ) {
         return q_id;

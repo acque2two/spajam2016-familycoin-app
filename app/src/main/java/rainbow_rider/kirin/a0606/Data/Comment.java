@@ -5,6 +5,10 @@ public class Comment {
     private User user;
     private String body;
     private Long count;
+    public Long getCount( ) {
+        return count;
+    }
+
 
     public Question getQuestion( ) {
         return question;

@@ -12,6 +12,11 @@ public class UserAns {
     private User user;
     private Genre genre;
     private long ans_id;
+
+    public Long getCount( ) {
+        return count;
+    }
+
     private Long count;
 
     public User getUser( ) {

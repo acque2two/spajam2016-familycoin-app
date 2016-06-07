@@ -22,7 +22,6 @@ public class Data {
     private UserAnss userans;
     private Favs fav;
     private Boolean status;
-    private Long count;
 
     public Boolean isStatus( ) {
         return status;

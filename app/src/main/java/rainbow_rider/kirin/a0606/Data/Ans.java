@@ -5,6 +5,10 @@ public class Ans {
     private Question question;
     private long ans_id;
     private Long count;
+    public Long getCount( ) {
+        return count;
+    }
+
 
     public User getUser( ) {
         return user;

@@ -4,6 +4,10 @@ public class Genre {
     private long genre_id;
     private String genre_name;
     private Long count;
+    public Long getCount( ) {
+        return count;
+    }
+
 
     public long getGenre_id( ) {
         return genre_id;

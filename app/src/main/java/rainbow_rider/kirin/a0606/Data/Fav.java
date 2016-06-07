@@ -12,6 +12,10 @@ public class Fav {
     private Genre genre;
     private User user;
     private Long count;
+    public Long getCount( ) {
+        return count;
+    }
+
 
     public Genre getGenre( ) {
         return genre;

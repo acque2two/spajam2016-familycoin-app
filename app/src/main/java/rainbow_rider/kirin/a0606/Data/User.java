@@ -4,6 +4,10 @@ public class User {
     private long user_id;
     private String user_name;
     private Long count;
+    public Long getCount( ) {
+        return count;
+    }
+
 
     public long getUser_id( ) {
         return user_id;
