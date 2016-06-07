@@ -5,19 +5,27 @@ public class Comment {
     private User user;
     private String body;
 
-    public long getUser_id( ) {
-        return user_id;
+    public Question getQuestion( ) {
+        return question;
     }
 
-    public void setUser_id( long user_id ) {
-        this.user_id = user_id;
+    public void setQuestion( Question question ) {
+        this.question = question;
     }
 
-    public String getUser_name( ) {
-        return user_name;
+    public User getUser( ) {
+        return user;
     }
 
-    public void setUser_name( String user_name ) {
-        this.user_name = user_name;
+    public void setUser( User user ) {
+        this.user = user;
+    }
+
+    public String getBody( ) {
+        return body;
+    }
+
+    public void setBody( String body ) {
+        this.body = body;
     }
 }
