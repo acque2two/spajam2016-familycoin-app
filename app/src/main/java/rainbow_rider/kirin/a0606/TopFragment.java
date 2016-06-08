@@ -115,7 +115,7 @@ public class TopFragment extends Fragment {
                 }
                 Log.d("Comp", "Leate");
                 mAdapter.addAll(listItemList);
-
+                mListView.setAdapter( mAdapter );
                 try {
                     mListView.setAdapter( mAdapter );
                 } catch (NullPointerException v) {
