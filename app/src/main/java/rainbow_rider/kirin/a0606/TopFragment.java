@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
-import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
 import rainbow_rider.kirin.a0606.Data.ItemListAdapter;
+import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
 import rainbow_rider.kirin.a0606.transfer.question.QuestionGenreList;
 
 
@@ -81,7 +81,7 @@ public class TopFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         QuestionGenreList questionGenreList = new QuestionGenreList();
 
@@ -90,7 +90,7 @@ public class TopFragment extends Fragment {
         Genre genre = new Genre();
 
         final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
-        AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
+        final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
         genre.setGenre_id(Integer.parseInt(mParam1));
 
@@ -98,23 +98,17 @@ public class TopFragment extends Fragment {
             @Override
             protected void onPostExecute(Data data) {
                 Data reply = getReply();
-                //mListView.setAdapter( mAdapter);
-
-                //for ( int i=0; listdata.getRec
-                // ipe().get(i).getImage_url() != null ; i++ ){
-                //    mAdapter.add(listdata.getRecipe().get(i).getImage_url())
-                //}
-
                 Questions listItemList = new Questions();
-                if ( reply.getGenre() != null ) {
-                    for (int i = 0; i < reply.getGenre().size(); i++) {
-//                        String a = listdata.getRecipe().get(i).getImage_url();
-//                        String b = listdata.getRecipe().get(i).getRecipe_name();
+                Log.d("Dataサイズ", String.valueOf(new Integer(reply.getQuestion().size())));
+                if ( reply.getQuestion() != null ) {
+                    Log.d("Question_size","notnull");
+//                    for (int i = 0; i < reply.getGenre().size(); i++) {
+                    for (int i = 0; i < reply.getQuestion().size(); i++) {
 
+                        Log.d("QId", String.valueOf(new Integer((int) reply.getQuestion().get(i).getQ_id())));
                         //imageをurlから画像に変換する処理を書く
-
                         listItemList.add(reply.getQuestion().get(i));
-                        Log.d("a","");
+
                     }
                 }else{
                     Log.d("TOPFRAGMENT", "GENRE"+Long.toString(allData.getGenre().get(0).getGenre_id())+" IS NULL");
@@ -122,8 +116,23 @@ public class TopFragment extends Fragment {
                 Log.d("Comp", "Leate");
                 mAdapter.addAll(listItemList);
 
+                try {
+                    mListView.setAdapter( mAdapter );
+                } catch (NullPointerException v) {
+                    Toast.makeText( view.getContext() ,"データが空です" ,Toast.LENGTH_SHORT ).show();
+                }
+
+
             }
         }.execute();
+
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//        });
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
