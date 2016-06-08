@@ -28,11 +28,11 @@ public class RankingActivity extends AppCompatActivity {
                 Data replay = getReply();
                 for (int i = 0; i < 10; i++) {
                     String a = replay.getUser().get(i).getUser_name();
-                    String b = replay.getUser().toString();
-                    String c = replay.getFav().toString();
+                    Long b = replay.getUser().get(i).getCount();
+                    Long c = replay.getUser().get(i).getUser_id();
                     hashTmp.put("main", a);
-                    hashTmp.put("sub", b);
-                    hashTmp.put("right", c);
+                    hashTmp.put("sub", b.toString());
+                    hashTmp.put("right", c.toString());
                     list_data.add(new HashMap<String, String>(hashTmp));
 
                     hashTmp.clear();

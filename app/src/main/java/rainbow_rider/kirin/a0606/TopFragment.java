@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
-import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
 import rainbow_rider.kirin.a0606.Data.ItemListAdapter;
+import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
 import rainbow_rider.kirin.a0606.transfer.question.QuestionGenreList;
 
 
@@ -99,19 +99,23 @@ public class TopFragment extends Fragment {
             protected void onPostExecute(Data data) {
                 Data reply = getReply();
                 Questions listItemList = new Questions();
-                if ( reply.getGenre() != null ) {
-                    for (int i = 0; i < reply.getGenre().size(); i++) {
+                Log.d("Dataサイズ", String.valueOf(new Integer(reply.getQuestion().size())));
+                if ( reply.getQuestion() != null ) {
+                    Log.d("Question_size","notnull");
+//                    for (int i = 0; i < reply.getGenre().size(); i++) {
+                    for (int i = 0; i < reply.getQuestion().size(); i++) {
 
+                        Log.d("QId", String.valueOf(new Integer((int) reply.getQuestion().get(i).getQ_id())));
                         //imageをurlから画像に変換する処理を書く
-
                         listItemList.add(reply.getQuestion().get(i));
-                        Log.d("a","");
+
                     }
                 }else{
                     Log.d("TOPFRAGMENT", "GENRE"+Long.toString(allData.getGenre().get(0).getGenre_id())+" IS NULL");
                 }
                 Log.d("Comp", "Leate");
                 mAdapter.addAll(listItemList);
+                mListView.setAdapter( mAdapter );
                 try {
                     mListView.setAdapter( mAdapter );
                 } catch (NullPointerException v) {
@@ -121,6 +125,14 @@ public class TopFragment extends Fragment {
 
             }
         }.execute();
+
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//        });
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
