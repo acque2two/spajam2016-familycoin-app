@@ -4,4 +4,9 @@
     android:layout_height="match_parent"
     tools:context="rainbow_rider.kirin.a0606.TopFragment">
 
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/item_list"
+        android:layout_gravity="left|top" />
 </FrameLayout>
