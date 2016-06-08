@@ -58,6 +58,8 @@ public class TopFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+        Log.d("-------","--------");
+        Log.d(param1,param2);
         return fragment;
     }
 
