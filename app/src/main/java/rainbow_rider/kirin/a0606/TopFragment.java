@@ -81,7 +81,7 @@ public class TopFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         QuestionGenreList questionGenreList = new QuestionGenreList();
 
@@ -90,7 +90,7 @@ public class TopFragment extends Fragment {
         Genre genre = new Genre();
 
         final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
-        AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
+        final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
         genre.setGenre_id(Integer.parseInt(mParam1));
 
@@ -98,18 +98,9 @@ public class TopFragment extends Fragment {
             @Override
             protected void onPostExecute(Data data) {
                 Data reply = getReply();
-                //mListView.setAdapter( mAdapter);
-
-                //for ( int i=0; listdata.getRec
-                // ipe().get(i).getImage_url() != null ; i++ ){
-                //    mAdapter.add(listdata.getRecipe().get(i).getImage_url())
-                //}
-
                 Questions listItemList = new Questions();
                 if ( reply.getGenre() != null ) {
                     for (int i = 0; i < reply.getGenre().size(); i++) {
-//                        String a = listdata.getRecipe().get(i).getImage_url();
-//                        String b = listdata.getRecipe().get(i).getRecipe_name();
 
                         //imageをurlから画像に変換する処理を書く
 
@@ -121,6 +112,12 @@ public class TopFragment extends Fragment {
                 }
                 Log.d("Comp", "Leate");
                 mAdapter.addAll(listItemList);
+                try {
+                    mListView.setAdapter( mAdapter );
+                } catch (NullPointerException v) {
+                    Toast.makeText( view.getContext() ,"データが空です" ,Toast.LENGTH_SHORT ).show();
+                }
+
 
             }
         }.execute();

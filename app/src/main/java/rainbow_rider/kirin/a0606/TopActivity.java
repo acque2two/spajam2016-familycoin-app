@@ -40,8 +40,8 @@ public class TopActivity extends AppCompatActivity
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         //setSupportActionBar(toolbar);
 
-        Intent intent = getIntent();
-///        user = setUserData(intent);
+//        Intent intent = getIntent();
+//        user = setUserData(intent);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -184,6 +184,11 @@ public class TopActivity extends AppCompatActivity
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "6","other"))
                     .addToBackStack("その他")
                     .commit();
+        } else if (id == R.id.activity_top_drawer_rankings) {
+            Intent callintent = new Intent(TopActivity.this, RankingActivity.class);
+            startActivity(callintent);
+        } else if (id == R.id.activity_top_drawer_mydata) {
+
         }
 
 
