@@ -18,7 +18,8 @@ import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.twitter.sdk.android.core.models.User;
+import rainbow_rider.kirin.a0606.Data.User;
+
 
 public class TopActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TopFragment.OnFragmentInteractionListener {
@@ -40,8 +41,8 @@ public class TopActivity extends AppCompatActivity
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         //setSupportActionBar(toolbar);
 
-//        Intent intent = getIntent();
-//        user = setUserData(intent);
+        Intent intent = getIntent();
+        user = setUserData(intent);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -200,12 +201,17 @@ public class TopActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-
+        //画面遷移時
+        //callIntent.putExtra("user_id", user.getUser_id());
+        //callIntent.putExtra("user_name",user.getUser_name());
     }
 
-    ///private User setUserData(Intent intent) {
-    ///    User u = new User();
-    ///    u.setUser_id(intent.getLongExtra("user_id", -1));
-    ///    return u;
-    ///}
+    private User setUserData(Intent intent) {
+        User u = new User();
+        u.setUser_id(intent.getLongExtra("user_id", -1));
+        return u;
+    }
+
+
+
 }
