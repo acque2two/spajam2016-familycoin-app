@@ -1,19 +1,13 @@
 package rainbow_rider.kirin.a0606;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,17 +21,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import rainbow_rider.kirin.a0606.Data.Data;
-import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.Data.User;
-import rainbow_rider.kirin.a0606.transfer.question.QuestionGet;
 import rainbow_rider.kirin.a0606.transfer.question.QuestionList;
 
 public class DetailActivity extends AppCompatActivity {
@@ -48,17 +38,17 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature( Window.FEATURE_ACTION_BAR );
+        requestWindowFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-        new QuestionList(){
+/*
+        new QuestionList() {
             @Override
             protected void onPostExecute(Data data) {
                 super.onPostExecute(data);
             }
         }.execute();
-
+*/
         //ここ
         Intent intent = getIntent();
         user = setUserData(intent);
@@ -81,6 +71,8 @@ public class DetailActivity extends AppCompatActivity {
         String strtitle = "title";
         String struser = "user";
         String strmain = "aaaa\n\n\n\naaaaa";
+
+        setTitle(strtitle);
 
         List<TextView> ansList = new ArrayList<TextView>(){
             {
@@ -108,7 +100,6 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         //image
-
         final boolean[] send = new boolean[]{false};
         //send button
         assert send_button != null;
@@ -126,6 +117,9 @@ public class DetailActivity extends AppCompatActivity {
                     alert01.show();
                 }else{
                     Toast.makeText(DetailActivity.this,"send",Toast.LENGTH_SHORT).show();
+
+                    //解答送信
+
                     send_button.setText("正解を見る");
                     send[0] = true;
                 }
@@ -166,7 +160,7 @@ public class DetailActivity extends AppCompatActivity {
     //ここ
     private User setUserData(Intent intent){
         User u = new User();
-        u.setUser_id(intent.getLongExtra("user_id", -1));
+        u.setUser_id(intent.getLongExtra("user_id", 740373350904520704L));
         u.setUser_name(intent.getStringExtra("user_name"));
         return u;
     }
@@ -200,6 +194,9 @@ public class DetailActivity extends AppCompatActivity {
             //    Intent callIntent = new Intent( DetailActivity.this, AddFriendActivity.class );
             //    startActivity( callIntent );
                 Toast.makeText(DetailActivity.this,"okini",Toast.LENGTH_SHORT).show();
+
+                //お気に入り処理
+
                 return false;
             }
         } );

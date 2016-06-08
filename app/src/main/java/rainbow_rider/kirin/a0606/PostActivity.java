@@ -146,7 +146,8 @@ public class PostActivity extends AppCompatActivity {
 
     private User setUserData(Intent intent){
         User u = new User();
-        u.setUser_id(intent.getLongExtra("user_id", 3104480156L));
+        long i = 740373350904520704L;
+        u.setUser_id(intent.getLongExtra("user_id", i));
         u.setUser_name(intent.getStringExtra("user_name"));
         return u;
     }

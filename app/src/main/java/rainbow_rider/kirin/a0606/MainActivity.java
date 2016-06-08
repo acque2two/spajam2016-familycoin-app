@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Twitter(authConfig));
         setContentView( R.layout.activity_main );
 
+        setTitle("Crea's");
+
         Intent callintent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(callintent);
 

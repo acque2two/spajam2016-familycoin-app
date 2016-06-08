@@ -24,6 +24,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_login );
+
+        setTitle("Crea's");
+
         loginButton = ( TwitterLoginButton ) findViewById( R.id.twitter_login_button );
 
         loginButton.setCallback( new Callback<TwitterSession>() {
