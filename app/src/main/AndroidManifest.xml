@@ -36,7 +36,8 @@
             android:name=".TopActivity"
             android:label="@string/title_activity_top"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RankingActivity"></activity>
+        <activity android:name=".RankingActivity" />
+
     </application>
 
 </manifest>

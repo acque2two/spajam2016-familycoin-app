@@ -29,7 +29,6 @@ public class TopActivity extends AppCompatActivity
 ///    private ItemListAdapter mAdapter;
     private AbsListView mListView;
     NavigationView navigationView;
-    private final String[] talk_ilist = new String[]{"aa", "bb", "cc", "dd", "ee", "ff"};
     private User user;
 
 
