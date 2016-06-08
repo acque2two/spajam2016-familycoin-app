@@ -35,8 +35,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rainbow_rider.kirin.a0606.Data.Data;
+import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.Data.User;
 import rainbow_rider.kirin.a0606.transfer.question.QuestionGet;
+import rainbow_rider.kirin.a0606.transfer.question.QuestionList;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -50,16 +52,16 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Intent intent = getIntent();
-        user = setUserData(intent);
-
-        new QuestionGet(){
+        new QuestionList(){
             @Override
             protected void onPostExecute(Data data) {
                 super.onPostExecute(data);
-                Qdata = data;
             }
         }.execute();
+
+        //ここ
+        Intent intent = getIntent();
+        user = setUserData(intent);
 
         final Button send_button = (Button) findViewById(R.id.detail_send_button);
         Spinner answer_spinner = (Spinner) findViewById(R.id.detail_answer_spinner);
@@ -161,6 +163,7 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    //ここ
     private User setUserData(Intent intent){
         User u = new User();
         u.setUser_id(intent.getLongExtra("user_id", -1));
