@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
@@ -33,11 +34,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import rainbow_rider.kirin.a0606.Data.Data;
+import rainbow_rider.kirin.a0606.Data.User;
+import rainbow_rider.kirin.a0606.transfer.question.QuestionGet;
+
 public class DetailActivity extends AppCompatActivity {
 
-    private static final int RESULT_PICK_IMAGEFILE = 1001;
-    private ImageView imageView;
     private Uri uri;
+    private Data Qdata;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +50,20 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Button send_button = (Button) findViewById(R.id.detail_send_button);
+        Intent intent = getIntent();
+        user = setUserData(intent);
+
+        new QuestionGet(){
+            @Override
+            protected void onPostExecute(Data data) {
+                super.onPostExecute(data);
+                Qdata = data;
+            }
+        }.execute();
+
+        final Button send_button = (Button) findViewById(R.id.detail_send_button);
         Spinner answer_spinner = (Spinner) findViewById(R.id.detail_answer_spinner);
-        imageView = (ImageView) findViewById(R.id.imageView);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
         TextView genre_text = (TextView) findViewById(R.id.detail_genre_text);
         TextView title_text = (TextView) findViewById(R.id.detail_title_text);
@@ -57,6 +73,7 @@ public class DetailActivity extends AppCompatActivity {
         final TextView ansB_text = (TextView) findViewById(R.id.detail_answerB_text);
         final TextView ansC_text = (TextView) findViewById(R.id.detail_answerC_text);
         final TextView ansD_text = (TextView) findViewById(R.id.detail_answerD_text);
+
 
         String strgenre = "genre";
         String strtitle = "title";
@@ -89,20 +106,27 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         //image
-        Bitmap bmp = null;
-        try {
-            bmp = getBitmapFromUri(uri);
-            imageView.setImageBitmap(bmp);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
+        final boolean[] send = new boolean[]{false};
         //send button
         assert send_button != null;
         send_button.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Toast.makeText(DetailActivity.this,"send",Toast.LENGTH_SHORT).show();
+                if (send[0]){
+//                    Toast.makeText(DetailActivity.this,"ans",Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder alert01 = new AlertDialog.Builder(DetailActivity.this);
+                    //ダイアログタイトルをセット
+                    alert01.setTitle("正解は" + "A");
+                    //ダイアログメッセージをセット
+                    alert01.setMessage("解説");
+                    //ダイアログ表示
+                    alert01.show();
+                }else{
+                    Toast.makeText(DetailActivity.this,"send",Toast.LENGTH_SHORT).show();
+                    send_button.setText("正解を見る");
+                    send[0] = true;
+                }
             }
         });
 
@@ -137,6 +161,12 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    private User setUserData(Intent intent){
+        User u = new User();
+        u.setUser_id(intent.getLongExtra("user_id", -1));
+        u.setUser_name(intent.getStringExtra("user_name"));
+        return u;
+    }
 
     //Bitmap
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {

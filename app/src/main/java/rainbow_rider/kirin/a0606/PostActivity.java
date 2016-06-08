@@ -40,12 +40,16 @@ public class PostActivity extends AppCompatActivity {
     private ImageView imageView;
     private Button image_button;
     private Uri uri;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature( Window.FEATURE_ACTION_BAR );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        Intent intent = getIntent();
+        user = setUserData(intent);
 
         imageView = (ImageView) findViewById(R.id.imageView);
         image_button = (Button) findViewById(R.id.post_image_button);
@@ -140,6 +144,14 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
+    private User setUserData(Intent intent){
+        User u = new User();
+        u.setUser_id(intent.getLongExtra("user_id", 3104480156L));
+        u.setUser_name(intent.getStringExtra("user_name"));
+        return u;
+    }
+
+
     private String getGalleryPath() {
         return Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/";
     }
@@ -192,6 +204,7 @@ public class PostActivity extends AppCompatActivity {
         final Spinner answer_spinner = (Spinner) findViewById(R.id.post_selectAnswer_spinner);
         final EditText title = (EditText) findViewById(R.id.post_title);
         final EditText mainText = (EditText) findViewById(R.id.post_mainText);
+        final EditText xplanationText = (EditText) findViewById(R.id.post_xplanation_text);
         final EditText answerA = (EditText) findViewById(R.id.post_answerA_editText);
         final EditText answerB = (EditText) findViewById(R.id.post_answerB_editText);
         final EditText answerC = (EditText) findViewById(R.id.post_answerC_editText);
@@ -270,9 +283,7 @@ public class PostActivity extends AppCompatActivity {
                 question.setQ_text( mainText.getText().toString() );
                 question.setTrue_id(trueId);
                 question.setAnswer(ans);
-                User user = new User();
-                user.setUser_id( 3104480156L );
-                question.setUser( user );
+                question.setUser(user);
 
                 new QuestionAdd(question, anss){
                     @Override

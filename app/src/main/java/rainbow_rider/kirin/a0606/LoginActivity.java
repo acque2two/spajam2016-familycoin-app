@@ -20,7 +20,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private TwitterLoginButton loginButton;
 
-
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
@@ -32,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
             public void success( Result<TwitterSession> result ) {
                 // The TwitterSession is also available through:
                 // Twitter.getInstance().core.getSessionManager().getActiveSession()
-                TwitterSession session = result.data;
+                final TwitterSession session = result.data;
                 // TODO: Remove toast and use the TwitterSession's userID
                 // with your app's user model
                 String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
@@ -45,7 +44,10 @@ public class LoginActivity extends AppCompatActivity {
                     protected void onPostExecute( Data data ) {
                         super.onPostExecute( data );
                             Toast.makeText( getApplicationContext(), "Sent to server.", Toast.LENGTH_LONG ).show();
-                            startActivity( new Intent( LoginActivity.this, TopActivity.class ) );
+                            Intent callIntent = new Intent(LoginActivity.this, TopActivity.class);
+                            callIntent.putExtra("user_id", session.getUserId());
+                            callIntent.putExtra("user_name", session.getUserName());
+                            startActivity(callIntent);
                             Toast.makeText( getApplicationContext(), "Server connection ERROR", Toast.LENGTH_LONG )
                                  .show();
                     }
