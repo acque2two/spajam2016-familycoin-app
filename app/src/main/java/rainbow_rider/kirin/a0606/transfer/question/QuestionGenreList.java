@@ -13,16 +13,16 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  * Todo:
  */
 public class QuestionGenreList extends Sender {
-    public QuestionGenreList() {
-        super.setPath("/questiongenre");
+    public QuestionGenreList( ) {
+        super.setPath( "/questiongenre" );
     }
 
 
-    public QuestionGenreList(Genre genre) {
+    public QuestionGenreList( Genre genre ) {
         Genres genreList = new Genres();
-        genreList.set(genre);
+        genreList.set( genre );
         allData = new Data();
-        allData.setGenre(genreList);
-        super.setPath("/questiongenre");
+        allData.setGenre( genreList );
+        super.setPath( "/questiongenre" );
     }
 }

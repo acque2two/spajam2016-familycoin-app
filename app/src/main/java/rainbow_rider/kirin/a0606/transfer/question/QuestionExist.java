@@ -1,5 +1,8 @@
 package rainbow_rider.kirin.a0606.transfer.question;
 
+import rainbow_rider.kirin.a0606.Data.Data;
+import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
+import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.transfer.Sender;
 
 /**
@@ -11,7 +14,11 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  */
 
 public class QuestionExist extends Sender {
-    public QuestionExist( ) {
+    public QuestionExist( Question question ) {
+        Questions questionList = new Questions();
+        questionList.set( question );
+        allData = new Data();
+        allData.setQuestion( questionList );
         super.setPath( "/questionexist" );
     }
 }

@@ -1,5 +1,9 @@
 package rainbow_rider.kirin.a0606.transfer.question;
 
+import rainbow_rider.kirin.a0606.Data.Data;
+import rainbow_rider.kirin.a0606.Data.Multiple.Anss;
+import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
+import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.transfer.Sender;
 
 /**
@@ -11,7 +15,12 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  */
 
 public class QuestionGet extends Sender {
-    public QuestionGet( ) {
+    public QuestionGet( Question question, Anss answer ) {
+        Questions questionList = new Questions();
+        questionList.set( question );
+        allData = new Data();
+        allData.setQuestion( questionList );
+        allData.setAns( answer );
         super.setPath( "/questionget" );
     }
 }

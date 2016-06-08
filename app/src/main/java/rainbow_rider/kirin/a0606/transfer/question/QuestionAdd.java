@@ -18,6 +18,7 @@ public class QuestionAdd extends Sender {
     public QuestionAdd( ) {
         super.setPath( "/questionadd" );
     }
+
     public QuestionAdd( Question question, Anss answer ) {
         Questions questionList = new Questions();
         questionList.set( question );
