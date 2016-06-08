@@ -32,6 +32,7 @@ import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
 import rainbow_rider.kirin.a0606.Data.Multiple.Anss;
 import rainbow_rider.kirin.a0606.Data.Question;
+import rainbow_rider.kirin.a0606.Data.User;
 import rainbow_rider.kirin.a0606.transfer.question.QuestionAdd;
 
 public class PostActivity extends AppCompatActivity {
@@ -230,7 +231,6 @@ public class PostActivity extends AppCompatActivity {
                 } else {
                     genre.setGenre_id(7);
                 }
-
                 Ans ans = new Ans();
                 String answer = answer_spinner.getSelectedItem().toString();
                 Long trueId;
@@ -261,7 +261,7 @@ public class PostActivity extends AppCompatActivity {
                     Ans ansText = new Ans();
                     ansText.setAns_id(i);
                     ansText.setAns_text(a);
-                    anss.add(i, ansText);
+                    anss.add(ansText);
                     i ++;
                 }
 
@@ -270,6 +270,9 @@ public class PostActivity extends AppCompatActivity {
                 question.setQ_text( mainText.getText().toString() );
                 question.setTrue_id(trueId);
                 question.setAnswer(ans);
+                User user = new User();
+                user.setUser_id( 3104480156L );
+                question.setUser( user );
 
                 new QuestionAdd(question, anss){
                     @Override
@@ -277,7 +280,7 @@ public class PostActivity extends AppCompatActivity {
                         super.onPostExecute(data);
 
                         Toast.makeText(PostActivity.this, "送信しました！", Toast.LENGTH_SHORT).show();
-                        PostActivity.this.onDestroy();
+                        PostActivity.this.finish();
 
                     }
                 }.execute();
