@@ -23,3 +23,4 @@ public class UserRevGet extends Sender {
             super.setPath( "/userrevget" );
         }
     }
+}
