@@ -1,5 +1,10 @@
 package rainbow_rider.kirin.a0606.transfer.fav;
 
+import rainbow_rider.kirin.a0606.Data.Data;
+import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
+import rainbow_rider.kirin.a0606.Data.Multiple.Users;
+import rainbow_rider.kirin.a0606.Data.Question;
+import rainbow_rider.kirin.a0606.Data.User;
 import rainbow_rider.kirin.a0606.transfer.Sender;
 
 /**
@@ -11,7 +16,15 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  */
 
 public class FavoriteAdd extends Sender {
-    public FavoriteAdd( ) {
+    public FavoriteAdd( User user, Question question ) {
+
+        Users userList = new Users();
+        userList.set( user );
+        Questions questionList = new Questions();
+        questionList.set( question );
+        allData = new Data();
+        allData.setUser( userList );
+        allData.setQuestion( questionList );
         super.setPath( "/favorite" );
     }
 }
