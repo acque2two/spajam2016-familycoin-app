@@ -9,13 +9,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,7 +32,7 @@ import rainbow_rider.kirin.a0606.Data.Genre;
 import rainbow_rider.kirin.a0606.Data.Multiple.Anss;
 import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.Data.User;
-import rainbow_rider.kirin.a0606.transfer.question.QuestionAdd;
+import rainbow_rider.kirin.a0606.transfer.async.question.QuestionAdd;
 
 public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;

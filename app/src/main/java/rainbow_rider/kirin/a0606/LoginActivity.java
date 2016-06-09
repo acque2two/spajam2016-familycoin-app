@@ -18,7 +18,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.User;
-import rainbow_rider.kirin.a0606.transfer.user.UserAdd;
+import rainbow_rider.kirin.a0606.transfer.async.user.UserAdd;
 
 public class LoginActivity extends AppCompatActivity {
 

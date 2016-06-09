@@ -1,5 +1,7 @@
 package rainbow_rider.kirin.a0606.Data.Multiple;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,7 +22,7 @@ public class Multiple<T> extends ArrayList<T> implements List<T> {
     }
 
     @Override
-    public boolean addAll( Collection collection ) {
+    public boolean addAll( @NonNull Collection collection ) {
         return super.addAll( collection );
     }
 

@@ -28,7 +28,6 @@ import java.util.List;
 
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.User;
-import rainbow_rider.kirin.a0606.transfer.question.QuestionList;
 
 public class DetailActivity extends AppCompatActivity {
 

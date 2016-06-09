@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import rainbow_rider.kirin.a0606.Data.Data;
-import rainbow_rider.kirin.a0606.transfer.question.QuestionUserRankList;
+import rainbow_rider.kirin.a0606.transfer.async.question.QuestionUserRankList;
 
 public class RankingActivity extends AppCompatActivity {
 

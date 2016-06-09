@@ -16,8 +16,8 @@ import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
 import rainbow_rider.kirin.a0606.Data.ItemListAdapter;
 import rainbow_rider.kirin.a0606.Data.Question;
-import rainbow_rider.kirin.a0606.transfer.question.QuestionGenreList;
-import rainbow_rider.kirin.a0606.transfer.question.QuestionGet;
+import rainbow_rider.kirin.a0606.transfer.async.question.QuestionGenreList;
+import rainbow_rider.kirin.a0606.transfer.async.question.QuestionGet;
 
 
 /**
