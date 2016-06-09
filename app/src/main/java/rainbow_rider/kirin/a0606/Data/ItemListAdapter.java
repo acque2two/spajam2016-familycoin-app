@@ -44,6 +44,7 @@ public class ItemListAdapter extends GenericArrayAdapter<Question> {
         //mViewHolder.food_icon.setBackground( listitem.getFoodIcon() );
         //Log.d("q",listItem.getQ_name());
         mViewHolder.title.setText( listItem.getQ_name() );
+        mViewHolder.icon.setImageResource(R.mipmap.eigo);
 
         return convertView;
     }

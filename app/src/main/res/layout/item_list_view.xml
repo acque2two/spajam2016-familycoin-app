@@ -1,36 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="-20dp">
 
-    <ImageView
-        android:id="@+id/item_list_view_icon"
-        android:layout_width="78dp"
-        android:layout_height="78dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="16dp"
-        android:src="@android:mipmap/sym_def_app_icon" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/item_list_view_icon"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_marginStart="38dp"
+            android:src="@android:mipmap/sym_def_app_icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/item_list_view_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="問  題  文"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/item_list_view_icon" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/item_list_view_illust"
+                        android:src="@android:drawable/star_big_on"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="9999999999"
+                        android:id="@+id/textView11"
+                        android:textAlignment="center"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/item_list_view_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32dp"
-        android:text="問  題  文"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/item_list_view_icon" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/item_list_view_illust"
-        android:src="@android:drawable/star_big_on"
-        android:layout_marginEnd="100dp"
-        android:layout_alignBottom="@+id/item_list_view_icon"
-        android:layout_alignParentEnd="true" />
-
-</RelativeLayout>
+</LinearLayout>
