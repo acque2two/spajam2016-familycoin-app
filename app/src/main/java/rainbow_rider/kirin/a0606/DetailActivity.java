@@ -133,6 +133,7 @@ public class DetailActivity extends AppCompatActivity {
                     Toast.makeText(DetailActivity.this,"send",Toast.LENGTH_SHORT).show();
 
                     //解答送信
+
                     if( selectedId == Qdata.getQuestion().get(0).getTrue_id() ) {
                         Toast.makeText(getApplicationContext(), "制界!", Toast.LENGTH_LONG).show();
                     }else{

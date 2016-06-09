@@ -2,8 +2,6 @@ package rainbow_rider.kirin.a0606.transfer;
 
 import android.os.AsyncTask;
 
-import rainbow_rider.kirin.a0606.Data.Data;
-
 import java.io.IOException;
 
 import okhttp3.MediaType;
@@ -11,6 +9,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import rainbow_rider.kirin.a0606.Data.Data;
 
 /**
  * Created by acq on 16/05/30.
@@ -20,7 +19,7 @@ import okhttp3.Response;
  * Todo:
  */
 public class Transfer extends AsyncTask<Data, Data, Data> {
-    public static final MediaType jsontype = MediaType.parse( "application/json; charset=utf-8" );
+    public static final MediaType jsontype = MediaType.parse( "application/json; charset=utf-16" );
     private OkHttpClient client = new OkHttpClient();
 
     private String Post( String url, String json ) throws IOException {
