@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent callIntent = new Intent( LoginActivity.this , PostActivity.class);
+                Intent callIntent = new Intent( LoginActivity.this , DetailActivity.class);
                 startActivity(callIntent);
 
             }
