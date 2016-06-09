@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+<item android:title="教科一覧">
+    <menu>
         <item
             android:id="@+id/activity_top_drawer_japanese"
-            android:icon="@drawable/ic_menu_gallery"
+            android:src="@mipmap/kokugo"
             android:title="国語" />
         <item
             android:id="@+id/activity_top_drawer_math"
-            android:icon="@drawable/ic_menu_gallery"
+            android:src="@mipmap/suugaku"
             android:title="数学" />
         <item
             android:id="@+id/activity_top_drawer_science"
-            android:icon="@drawable/ic_menu_gallery"
+            android:src="@mipmap/rika"
             android:title="理科" />
         <item
             android:id="@+id/activity_top_drawer_social_studies"
-            android:icon="@drawable/ic_menu_gallery"
+            android:src="@mipmap/shakai"
             android:title="社会" />
         <item
             android:id="@+id/activity_top_drawer_english"
-            android:icon="@drawable/ic_menu_gallery"
+            android:src="@mipmap/eigo"
             android:title="英語" />
         <item
             android:id="@+id/activity_top_drawer_other"
             android:icon="@drawable/ic_menu_gallery"
             android:title="その他" />
-    </group>
+    </menu>
+</item>
 
-    <item android:title="Communicate">
+
+    <item android:title="Communicat">
         <menu>
             <item
                 android:id="@+id/activity_top_drawer_rankings"
