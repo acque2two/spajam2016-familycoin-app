@@ -15,12 +15,11 @@ import rainbow_rider.kirin.a0606.transfer.Sender;
  */
 
 public class QuestionGet extends Sender {
-    public QuestionGet( Question question, Anss answer ) {
+    public QuestionGet( Question question ) {
         Questions questionList = new Questions();
         questionList.set( question );
         allData = new Data();
         allData.setQuestion( questionList );
-        allData.setAns( answer );
         super.setPath( "/questionget" );
     }
 }

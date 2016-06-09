@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
+import java.util.Iterator;
+
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
 import rainbow_rider.kirin.a0606.Data.ItemListAdapter;
 import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
+import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.transfer.question.QuestionGenreList;
+import rainbow_rider.kirin.a0606.transfer.question.QuestionGet;
 
 
 /**
@@ -80,6 +84,7 @@ public class TopFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_top, container, false);
     }
 
+    public Questions listItemList;
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -96,17 +101,31 @@ public class TopFragment extends Fragment {
 
         new QuestionGenreList(genre) {
             @Override
+
             protected void onPostExecute(Data data) {
                 Data reply = getReply();
-                Questions listItemList = new Questions();
-                Log.d("Dataサイズ", String.valueOf(new Integer(reply.getQuestion().size())));
+//                Log.d("Dataサイズ", String.valueOf(new Integer(reply.getQuestion().size())));
                 if ( reply.getQuestion() != null ) {
+                    listItemList = reply.getQuestion();
+                    for(int i=0; i<listItemList.size(); i++){
+                        new QuestionGet(listItemList.get(i)){
+                            @Override
+                            protected void onPostExecute(Data data) {
+                                Data reply = getReply();
+                                super.onPostExecute(data);
+                                listItemList.set((int) (reply.getQuestion().get(0).getQ_id()), reply.getQuestion().get(0));
+                                mAdapter.remove(listItemList.get((int) (reply.getQuestion().get(0).getQ_id())));
+                                mAdapter.add(listItemList.get((int) (reply.getQuestion().get(0).getQ_id())));
+                            }
+                        }.execute();
+                    }
                     Log.d("Question_size","notnull");
 //                    for (int i = 0; i < reply.getGenre().size(); i++) {
                     for (int i = 0; i < reply.getQuestion().size(); i++) {
 
                         Log.d("QId", String.valueOf(new Integer((int) reply.getQuestion().get(i).getQ_id())));
                         //imageをurlから画像に変換する処理を書く
+
                         listItemList.add(reply.getQuestion().get(i));
 
                     }
@@ -115,6 +134,7 @@ public class TopFragment extends Fragment {
                 }
                 Log.d("Comp", "Leate");
                 mAdapter.addAll(listItemList);
+
                 mListView.setAdapter( mAdapter );
                 try {
                     mListView.setAdapter( mAdapter );
