@@ -43,6 +43,7 @@ public class TopActivity extends AppCompatActivity
         Intent intent = getIntent();
         user = setUserData(intent);
 
+        findViewById(R.id.nav_header_top_imageView);
         user.getUser_name();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
