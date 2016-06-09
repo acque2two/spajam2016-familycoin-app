@@ -106,18 +106,14 @@ public class TopFragment extends Fragment {
                 //Log.d("Dataサイズ", String.valueOf(new Integer(reply.getQuestion().size())));
                 if ( reply.getQuestion() != null ) {
                     for ( int i = 0; i < reply.getQuestion().size(); i++ ){
-                        try {
-                            new QuestionGet(reply.getQuestion().get(i) ){
-                                @Override
-                                protected void onPostExecute(Data data) {
-                                    super.onPostExecute(data);
-                                    Data reply2 = getReply();
-                                    reply.getQuestion().set(reply2.getQuestion().get(0));
-                                }
-                            }.execute().wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        new QuestionGet(reply.getQuestion().get(i) ){
+                            @Override
+                            protected void onPostExecute(Data data) {
+                                super.onPostExecute(data);
+                                //Data reply2 = getReply();
+                                //reply.getQuestion().set(reply2.getQuestion().get(0));
+                            }
+                        }.execute();
                     }
                     Log.d("Question_size","notnull");
                     mAdapter.addAll(reply.getQuestion());

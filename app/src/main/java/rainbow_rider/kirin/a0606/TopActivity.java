@@ -11,11 +11,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import rainbow_rider.kirin.a0606.Data.Question;
@@ -32,18 +34,21 @@ public class TopActivity extends AppCompatActivity
     NavigationView navigationView;
     private User user;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Toast.makeText( getApplicationContext(),"ようこそ",Toast.LENGTH_LONG ).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Crea's");
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         user = setUserData(intent);
+
+        TextView a = (TextView) findViewById(R.id.nav_header_top_textView);
+        Log.d("twitter_user_id",user.getUser_name());
+        //a.setText(user.getUser_name());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 

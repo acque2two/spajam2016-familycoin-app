@@ -19,7 +19,11 @@
     <TextView
         android:id="@+id/item_list_view_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="32dp"
+        android:text="問  題  文"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/item_list_view_icon" />
 
     <ImageView
         android:layout_width="wrap_content"
