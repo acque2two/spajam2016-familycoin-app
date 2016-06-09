@@ -65,6 +65,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed(){
+        //戻るボタンの禁止
+        //super.onBackPressed();
+    }
+
+    @Override
     protected void onActivityResult( int requestCode, int resultCode, Intent data ) {
         super.onActivityResult( requestCode, resultCode, data );
         // Make sure that the loginButton hears the result from any
