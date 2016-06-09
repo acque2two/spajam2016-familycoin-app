@@ -2,7 +2,6 @@ package rainbow_rider.kirin.a0606;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,11 +18,12 @@ import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.Data.User;
 
 
 public class TopActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TopFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TopFragment.OnTopFragmentListener {
 ///     /*3=befor_code
 ///    public Data listdata = new Data();
 ///    public Data listdata = new Data();
@@ -201,7 +201,7 @@ public class TopActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onTopFragmentItemClick(Question question) {
         //画面遷移時
         //callIntent.putExtra("user_id", user.getUser_id());
         //callIntent.putExtra("user_name",user.getUser_name());

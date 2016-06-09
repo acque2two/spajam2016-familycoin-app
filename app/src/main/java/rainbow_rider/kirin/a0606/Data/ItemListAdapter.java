@@ -27,9 +27,11 @@ public class ItemListAdapter extends GenericArrayAdapter<Question> {
 
             mViewHolder = new ViewHolder();
 
-            mViewHolder.food_icon = (ImageView) convertView.findViewById( R.id.item_list_view_food_icon );
+            mViewHolder.icon = (ImageView) convertView.findViewById( R.id.item_list_view_icon);
 
             mViewHolder.title = (TextView) convertView.findViewById( R.id.item_list_view_title );
+
+            mViewHolder.illust = (ImageView) convertView.findViewById( R.id.item_list_view_illust );
 
             convertView.setTag( mViewHolder );
 
@@ -46,7 +48,8 @@ public class ItemListAdapter extends GenericArrayAdapter<Question> {
     }
 
     static class ViewHolder {
-        ImageView food_icon;
+        ImageView icon;
+        ImageView illust;
         TextView title;
     }
 }

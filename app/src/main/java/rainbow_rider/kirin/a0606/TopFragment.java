@@ -1,7 +1,6 @@
 package rainbow_rider.kirin.a0606;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,19 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
 import rainbow_rider.kirin.a0606.Data.ItemListAdapter;
 import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
+import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.transfer.question.QuestionGenreList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TopFragment.OnFragmentInteractionListener} interface
+ * {@link OnTopFragmentListener} interface
  * to handle interaction events.
  * Use the {@link TopFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -37,7 +38,7 @@ public class TopFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private OnTopFragmentListener mListener;
 
     public TopFragment() {
         // Required empty public constructor
@@ -93,8 +94,8 @@ public class TopFragment extends Fragment {
 
         Genre genre = new Genre();
 
-        final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
-        final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
+        final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.item_list_view);
+        final AbsListView mListView = (AbsListView) view.findViewById(R.id.top_item_list);
 
         genre.setGenre_id(Integer.parseInt(mParam1));
 
@@ -102,29 +103,28 @@ public class TopFragment extends Fragment {
             @Override
             protected void onPostExecute(Data data) {
                 Data reply = getReply();
-                Questions listItemList = new Questions();
-                Log.d("Dataサイズ", String.valueOf(new Integer(reply.getQuestion().size())));
+                Questions questionsList = new Questions();
+                //Log.d("Dataサイズ", String.valueOf(new Integer(reply.getQuestion().size())));
                 if ( reply.getQuestion() != null ) {
                     Log.d("Question_size","notnull");
-//                    for (int i = 0; i < reply.getGenre().size(); i++) {
-                    for (int i = 0; i < reply.getQuestion().size(); i++) {
-
-                        Log.d("QId", String.valueOf(new Integer((int) reply.getQuestion().get(i).getQ_id())));
-                        //imageをurlから画像に変換する処理を書く
-                        listItemList.add(reply.getQuestion().get(i));
-
-                    }
+                    mAdapter.addAll(reply.getQuestion());
                 }else{
                     Log.d("TOPFRAGMENT", "GENRE"+Long.toString(allData.getGenre().get(0).getGenre_id())+" IS NULL");
                 }
                 Log.d("Comp", "Leate");
-                mAdapter.addAll(listItemList);
                 mListView.setAdapter( mAdapter );
                 try {
                     mListView.setAdapter( mAdapter );
                 } catch (NullPointerException v) {
                     Toast.makeText( view.getContext() ,"データが空です" ,Toast.LENGTH_SHORT ).show();
                 }
+
+                mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        mListener.onTopFragmentItemClick((Question) parent.getAdapter().getItem(position));
+                    }
+                });
 
 
             }
@@ -139,21 +139,14 @@ public class TopFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnTopFragmentListener) {
+            mListener = (OnTopFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnTopFragmentListener");
         }
     }
 
@@ -173,8 +166,8 @@ public class TopFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnTopFragmentListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onTopFragmentItemClick(Question question);
     }
 }
