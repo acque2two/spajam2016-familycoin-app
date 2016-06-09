@@ -153,4 +153,14 @@ public class Sender  {
         return JSON.decode(response.body().string());
     }
 
+    public String Send(){
+        try {
+            return Post( JSON.encode( allData ) );
+        } catch ( IOException e ) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
 }
