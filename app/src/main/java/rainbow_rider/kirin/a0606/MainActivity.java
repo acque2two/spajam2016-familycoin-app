@@ -5,10 +5,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,14 +34,6 @@ public class MainActivity extends AppCompatActivity {
         MyThread myThread = new MyThread();
         myThread.start();
 
-        Button login_button = (Button) findViewById(R.id.main_login_button);
-
-        Button top_button = (Button) findViewById(R.id.main_top_button);
-
-        Button detail_button = (Button) findViewById(R.id.main_detail_button);
-
-        Button post_button = (Button) findViewById(R.id.main_post_button);
-
         ImageView actiity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
 
         TextView activity_main_title_textView = (TextView) findViewById(R.id.activity_main_title_text);
@@ -60,47 +50,10 @@ public class MainActivity extends AppCompatActivity {
         actiity_main_imageView.startAnimation(alphaAnimation);
         activity_main_title_textView.startAnimation(alphaAnimation);
 
+        //font設定
         activity_main_title_textView.setTypeface(Typeface.SERIF);
 
-        assert login_button != null;
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(callIntent);
-            }
-        });
-
-        assert top_button != null;
-        top_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent callIntent = new Intent(MainActivity.this, TopActivity.class);
-                startActivity(callIntent);
-            }
-        });
-
-        assert detail_button != null;
-        detail_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent callIntent = new Intent(MainActivity.this, DetailActivity.class);
-                startActivity(callIntent);
-            }
-        });
-
-        assert post_button != null;
-        post_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent callIntent = new Intent(MainActivity.this, PostActivity.class);
-                startActivity(callIntent);
-            }
-
-
-        });
-
-    }
+}
 
     private class MyThread extends Thread {
         public void run() {

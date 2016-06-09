@@ -1,9 +1,11 @@
 package rainbow_rider.kirin.a0606;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.twitter.sdk.android.core.Callback;
@@ -26,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView( R.layout.activity_login );
 
         setTitle("Crea's");
+
+        TextView activity_login_title_textView = (TextView) findViewById(R.id.activity_login_title_textView);
+
+        activity_login_title_textView.setTypeface(Typeface.SERIF);
 
         loginButton = ( TwitterLoginButton ) findViewById( R.id.twitter_login_button );
 
