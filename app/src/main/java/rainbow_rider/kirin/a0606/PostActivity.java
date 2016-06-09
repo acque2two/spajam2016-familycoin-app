@@ -47,7 +47,7 @@ public class PostActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature( Window.FEATURE_ACTION_BAR );
+        //requestWindowFeature( Window.FEATURE_ACTION_BAR );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
