@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_login );
 
-        setTitle("Crea's");
+        setTitle(getString(R.string.app_name));
 
         TextView activity_login_title_textView = (TextView) findViewById(R.id.activity_login_title_textView);
 

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Twitter(authConfig));
         setContentView( R.layout.activity_main );
 
-        setTitle("Crea's");
+        setTitle(getString(R.string.app_name));
 
         MyThread myThread = new MyThread();
         myThread.start();
