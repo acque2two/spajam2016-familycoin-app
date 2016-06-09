@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.Data.User;
 
@@ -207,6 +208,9 @@ public class TopActivity extends AppCompatActivity
 
     @Override
     public void onTopFragmentItemClick(Question question) {
+        Intent callInTent = new Intent(TopActivity.this, DetailActivity.class);
+        callInTent.putExtra("question", new Data());
+        startActivity(callInTent);
         //画面遷移時
         //callIntent.putExtra("user_id", user.getUser_id());
         //callIntent.putExtra("user_name",user.getUser_name());

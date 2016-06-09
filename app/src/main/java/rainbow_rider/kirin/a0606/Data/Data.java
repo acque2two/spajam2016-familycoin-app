@@ -1,5 +1,7 @@
 package rainbow_rider.kirin.a0606.Data;
 
+import java.io.Serializable;
+
 import rainbow_rider.kirin.a0606.Data.Multiple.Anss;
 import rainbow_rider.kirin.a0606.Data.Multiple.Favs;
 import rainbow_rider.kirin.a0606.Data.Multiple.Genres;
@@ -14,7 +16,7 @@ import rainbow_rider.kirin.a0606.Data.Multiple.Users;
  * Memo:
  * Todo:
  */
-public class Data {
+public class Data implements Serializable {
     private Anss ans;
     private Users user;
     private Questions question;

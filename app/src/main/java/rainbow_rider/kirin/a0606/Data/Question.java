@@ -1,6 +1,8 @@
 package rainbow_rider.kirin.a0606.Data;
 
-public class Question {
+import java.io.Serializable;
+
+public class Question implements Serializable {
     private long q_id;
     private Genre genre;
     private User user;
