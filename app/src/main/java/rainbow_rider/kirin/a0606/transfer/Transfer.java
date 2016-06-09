@@ -19,7 +19,7 @@ import rainbow_rider.kirin.a0606.Data.Data;
  * Todo:
  */
 public class Transfer extends AsyncTask<Data, Data, Data> {
-    public static final MediaType jsontype = MediaType.parse( "application/json; charset=utf-16" );
+    public static final MediaType jsontype = MediaType.parse( "application/json; charset=utf-8" );
     private OkHttpClient client = new OkHttpClient();
 
     private String Post( String url, String json ) throws IOException {
