@@ -4,23 +4,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/activity_top_drawer_japanese"
-            android:src="@drawable/kokugo"
+            android:src="@mipmap/kokugo"
             android:title="国語" />
         <item
             android:id="@+id/activity_top_drawer_math"
-            android:src="@drawable/suugaku"
+            android:src="@mipmap/suugaku"
             android:title="数学" />
         <item
             android:id="@+id/activity_top_drawer_science"
-            android:src="@drawable/rika"
+            android:src="@mipmap/rika"
             android:title="理科" />
         <item
             android:id="@+id/activity_top_drawer_social_studies"
-            android:src="@drawable/syakai"
+            android:src="@mipmap/shakai"
             android:title="社会" />
         <item
             android:id="@+id/activity_top_drawer_english"
-            android:src="@drawable/eigo"
+            android:src="@mipmap/eigo"
             android:title="英語" />
         <item
             android:id="@+id/activity_top_drawer_other"
