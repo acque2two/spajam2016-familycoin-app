@@ -5,6 +5,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,17 @@ public class LoginActivity extends AppCompatActivity {
         TextView activity_login_title_textView = (TextView) findViewById(R.id.activity_login_title_textView);
 
         activity_login_title_textView.setTypeface(Typeface.SERIF);
+
+        //詳細画面遷移
+
+        Button detailButton = (Button) findViewById(R.id.activity_login_button);
+        detailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent callIntent = new Intent( LoginActivity.this , PostActivity.class);
+                startActivity(callIntent);
+            }
+        });
 
         loginButton = ( TwitterLoginButton ) findViewById( R.id.twitter_login_button );
 

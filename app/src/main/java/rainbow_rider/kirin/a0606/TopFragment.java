@@ -15,16 +15,16 @@ import android.widget.Toast;
 import rainbow_rider.kirin.a0606.Data.Data;
 import rainbow_rider.kirin.a0606.Data.Genre;
 import rainbow_rider.kirin.a0606.Data.ItemListAdapter;
-import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
 import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.transfer.question.QuestionGenreList;
+import rainbow_rider.kirin.a0606.transfer.question.QuestionGet;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link OnTopFragmentListener} interface
- * to handle interaction events.
+ * to handle interaction events.activity_top_button
  * Use the {@link TopFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
@@ -95,17 +95,30 @@ public class TopFragment extends Fragment {
         Genre genre = new Genre();
 
         final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.item_list_view);
-        final AbsListView mListView = (AbsListView) view.findViewById(R.id.top_item_list);
+        final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
         genre.setGenre_id(Integer.parseInt(mParam1));
 
         new QuestionGenreList(genre) {
             @Override
             protected void onPostExecute(Data data) {
-                Data reply = getReply();
-                Questions questionsList = new Questions();
+                final Data reply = getReply();
                 //Log.d("Dataサイズ", String.valueOf(new Integer(reply.getQuestion().size())));
                 if ( reply.getQuestion() != null ) {
+                    for ( int i = 0; i < reply.getQuestion().size(); i++ ){
+                        try {
+                            new QuestionGet(reply.getQuestion().get(i) ){
+                                @Override
+                                protected void onPostExecute(Data data) {
+                                    super.onPostExecute(data);
+                                    Data reply2 = getReply();
+                                    reply.getQuestion().set(reply2.getQuestion().get(0));
+                                }
+                            }.execute().wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     Log.d("Question_size","notnull");
                     mAdapter.addAll(reply.getQuestion());
                 }else{
