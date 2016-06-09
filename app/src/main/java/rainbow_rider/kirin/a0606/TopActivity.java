@@ -43,6 +43,8 @@ public class TopActivity extends AppCompatActivity
         Intent intent = getIntent();
         user = setUserData(intent);
 
+        user.getUser_name();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -208,6 +210,7 @@ public class TopActivity extends AppCompatActivity
     private User setUserData(Intent intent) {
         User u = new User();
         u.setUser_id(intent.getLongExtra("user_id", -1));
+        u.setUser_name(intent.getStringExtra("user_name"));
         return u;
     }
 
