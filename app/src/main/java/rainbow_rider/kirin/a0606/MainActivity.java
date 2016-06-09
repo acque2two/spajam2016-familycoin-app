@@ -3,6 +3,7 @@ package rainbow_rider.kirin.a0606;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,13 +28,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView( R.layout.activity_main );
 
         setTitle("Crea's");
-        try {
-            Thread.sleep(3);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Intent callintent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(callintent);
+
+        MyThread myThread = new MyThread();
+        myThread.start();
+
+        //Intent callintent = new Intent(MainActivity.this, LoginActivity.class);
+        //startActivity(callintent);
 
         Button login_button = (Button) findViewById(R.id.main_login_button);
 
@@ -77,6 +77,23 @@ public class MainActivity extends AppCompatActivity {
                 Intent callIntent = new Intent(MainActivity.this, PostActivity.class);
                 startActivity(callIntent);
             }
+
+
         });
+
+    }
+    private class MyThread extends Thread {
+        public void run() {
+            //時間のかかる処理実行します。今回は仮で10秒停止させています。
+            try {
+                //1秒停止します。
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+            }
+            //画面のtextViewへ"処理が完了しました。"を表示させる。
+            Log.d("処理が完了しました。", "----------------------------------------");
+            Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(callIntent);
+        }
     }
 }
