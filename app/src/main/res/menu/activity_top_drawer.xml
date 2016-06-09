@@ -2,32 +2,33 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<item android:title="教科一覧">
+<item android:title="教 科 一 覧">
     <menu>
         <item
             android:id="@+id/activity_top_drawer_japanese"
             android:src="@mipmap/kokugo"
-            android:title="国語" />
+            android:layout_width="match_parent"
+            android:title="国    語" />
         <item
             android:id="@+id/activity_top_drawer_math"
             android:src="@mipmap/suugaku"
-            android:title="数学" />
+            android:title="数    学" />
         <item
             android:id="@+id/activity_top_drawer_science"
             android:src="@mipmap/rika"
-            android:title="理科" />
+            android:title="理    科" />
         <item
             android:id="@+id/activity_top_drawer_social_studies"
             android:src="@mipmap/shakai"
-            android:title="社会" />
+            android:title="社    会" />
         <item
             android:id="@+id/activity_top_drawer_english"
             android:src="@mipmap/eigo"
-            android:title="英語" />
+            android:title="英    語" />
         <item
             android:id="@+id/activity_top_drawer_other"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="その他" />
+            android:title="そ の 他" />
     </menu>
 </item>
 

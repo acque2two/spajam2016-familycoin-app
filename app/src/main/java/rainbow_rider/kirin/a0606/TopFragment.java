@@ -85,7 +85,11 @@ public class TopFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         QuestionGenreList questionGenreList = new QuestionGenreList();
 
-        Toast.makeText( view.getContext() ,mParam2,Toast.LENGTH_SHORT ).show();
+        if ( mParam2.equals("") ){
+
+        } else {
+            Toast.makeText(view.getContext(), mParam2, Toast.LENGTH_SHORT).show();
+        }
 
         Genre genre = new Genre();
 

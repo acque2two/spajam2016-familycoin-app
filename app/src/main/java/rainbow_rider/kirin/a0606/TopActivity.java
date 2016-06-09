@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,19 +33,17 @@ public class TopActivity extends AppCompatActivity
     private User user;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Toast.makeText( getApplicationContext(),"ようこそ",Toast.LENGTH_LONG ).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         user = setUserData(intent);
-
-        findViewById(R.id.nav_header_top_imageView);
-        user.getUser_name();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -74,7 +73,7 @@ public class TopActivity extends AppCompatActivity
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.content_top_fragment, TopFragment.newInstance("1","newlist"))
+                .replace(R.id.content_top_fragment, TopFragment.newInstance("1",""))
                 .addToBackStack("新規投稿")
                 .commit();
 
