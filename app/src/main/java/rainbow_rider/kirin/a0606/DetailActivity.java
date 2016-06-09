@@ -57,7 +57,6 @@ public class DetailActivity extends AppCompatActivity {
         Spinner answer_spinner = (Spinner) findViewById(R.id.detail_answer_spinner);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
-        TextView genre_text = (TextView) findViewById(R.id.detail_genre_text);
         TextView title_text = (TextView) findViewById(R.id.detail_title_text);
         TextView user_text = (TextView) findViewById(R.id.detail_user_text);
         TextView main_text = (TextView) findViewById(R.id.detail_main_text);
@@ -72,7 +71,7 @@ public class DetailActivity extends AppCompatActivity {
         String struser = "user";
         String strmain = "aaaa\n\n\n\naaaaa";
 
-        setTitle(strtitle);
+        setTitle(strgenre);
 
         List<TextView> ansList = new ArrayList<TextView>(){
             {
@@ -84,11 +83,9 @@ public class DetailActivity extends AppCompatActivity {
         };
 
         assert main_text != null;
-        assert genre_text != null;
         assert title_text != null;
         assert user_text != null;
 
-        genre_text.setText(strgenre);
         title_text.setText(strtitle);
         user_text.setText(struser);
         main_text.setText(strmain);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -269,6 +270,7 @@ public class PostActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate( R.menu.menu_post, menu );
         setTitle("問題投稿");
+
         final MenuItem a = menu.findItem( R.id.menu_detail_image_button );
         a.setTitle( "投稿" );
         a.setCheckable( true );
