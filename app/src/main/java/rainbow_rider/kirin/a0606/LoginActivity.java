@@ -71,8 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                             callIntent.putExtra("user_id", session.getUserId());
                             callIntent.putExtra("user_name", session.getUserName());
                             startActivity(callIntent);
-                            Toast.makeText( getApplicationContext(), "Server connection ERROR", Toast.LENGTH_LONG )
-                                 .show();
+
                     }
                 }.execute();
             }

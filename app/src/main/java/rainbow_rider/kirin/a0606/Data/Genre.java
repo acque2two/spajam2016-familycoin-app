@@ -1,9 +1,12 @@
 package rainbow_rider.kirin.a0606.Data;
 
-public class Genre {
+import java.io.Serializable;
+
+public class Genre  implements Serializable {
     private long genre_id;
     private String genre_name;
     private Long count;
+
     public Long getCount( ) {
         return count;
     }

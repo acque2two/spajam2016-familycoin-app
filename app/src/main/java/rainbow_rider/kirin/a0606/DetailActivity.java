@@ -27,13 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rainbow_rider.kirin.a0606.Data.Data;
+import rainbow_rider.kirin.a0606.Data.Multiple.Questions;
+import rainbow_rider.kirin.a0606.Data.Multiple.Users;
+import rainbow_rider.kirin.a0606.Data.Question;
 import rainbow_rider.kirin.a0606.Data.User;
+import rainbow_rider.kirin.a0606.transfer.async.fav.FavoriteAdd;
 
 public class DetailActivity extends AppCompatActivity {
 
     private Uri uri;
-    private Data Qdata;
+    private Data Qdata = new Data();
     private User user;
+    private long selectedId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +53,20 @@ public class DetailActivity extends AppCompatActivity {
             }
         }.execute();
 */
-        //ここ
+        //TopActivityからQuestionを受け取る。
+        Question tr = (Question) getIntent().getSerializableExtra("question");
+        Questions trl = new Questions();
+        trl.add(tr);
+        Users usl = new Users();
+        usl.add(user);
+        Qdata.setQuestion(trl);
+
+        user = (User) getIntent().getSerializableExtra("myUser");
         Intent intent = getIntent();
         user = setUserData(intent);
 
         final Button send_button = (Button) findViewById(R.id.detail_send_button);
-        Spinner answer_spinner = (Spinner) findViewById(R.id.detail_answer_spinner);
+        final Spinner answer_spinner = (Spinner) findViewById(R.id.detail_answer_spinner);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
         TextView title_text = (TextView) findViewById(R.id.detail_title_text);
@@ -64,11 +77,11 @@ public class DetailActivity extends AppCompatActivity {
         final TextView ansC_text = (TextView) findViewById(R.id.detail_answerC_text);
         final TextView ansD_text = (TextView) findViewById(R.id.detail_answerD_text);
 
-
-        String strgenre = "genre";
-        String strtitle = "title";
-        String struser = "user";
-        String strmain = "aaaa\n\n\n\naaaaa";
+        String strgenre = tr.getGenre().getGenre_name();
+        String strtitle = tr.getQ_name();
+        //String struser = tr.getUser().getUser_name();
+        String struser = tr.getUser().getUser_name();
+        String strmain = tr.getQ_text();
 
         setTitle(strgenre);
 
@@ -90,10 +103,15 @@ public class DetailActivity extends AppCompatActivity {
         main_text.setText(strmain);
 
         //answer
-        String[] stransList = new String[]{"答えはなんだろうね", "わかんなーい", "なんでー", "の・ぞ・み"};
+        /*String[] stransList = new String[]{"答えはなんだろうね", "わかんなーい", "なんでー", "の・ぞ・み"};
         for(int i = 0; i < ansList.size(); i++){
             ansList.get(i).setText(stransList[i]);
+        }*/
+
+        for(int i = 0; i < tr.getAnswer().size(); i++ ) {
+            ansList.get(i).setText(tr.getAnswer().get(i).getAns_text());
         }
+
 
         //image
         final boolean[] send = new boolean[]{false};
@@ -115,7 +133,11 @@ public class DetailActivity extends AppCompatActivity {
                     Toast.makeText(DetailActivity.this,"send",Toast.LENGTH_SHORT).show();
 
                     //解答送信
-
+                    if( selectedId == Qdata.getQuestion().get(0).getTrue_id() ) {
+                        Toast.makeText(getApplicationContext(), "制界!", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "まけ", Toast.LENGTH_LONG).show();
+                    }
                     send_button.setText("正解を見る");
                     send[0] = true;
                 }
@@ -144,7 +166,7 @@ public class DetailActivity extends AppCompatActivity {
             ){
                 Spinner spinner = (Spinner) parent;
                 // 選択されたアイテムを取得します
-                spinner.getSelectedItemId();
+                selectedId = spinner.getSelectedItemId();
             }
 
             @Override
@@ -190,7 +212,7 @@ public class DetailActivity extends AppCompatActivity {
             //    Intent callIntent = new Intent( DetailActivity.this, AddFriendActivity.class );
             //    startActivity( callIntent );
                 Toast.makeText(DetailActivity.this,"okini",Toast.LENGTH_SHORT).show();
-
+                new FavoriteAdd(Qdata).execute();
                 //お気に入り処理
 
                 return false;

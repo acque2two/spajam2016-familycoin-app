@@ -1,6 +1,8 @@
 package rainbow_rider.kirin.a0606.Data;
 
-public class User {
+import java.io.Serializable;
+
+public class User  implements Serializable {
     private long user_id;
     private String user_name;
     private Long count;

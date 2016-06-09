@@ -16,8 +16,11 @@ import rainbow_rider.kirin.a0606.transfer.async.Sender;
  */
 
 public class FavoriteAdd extends Sender {
+    public FavoriteAdd( Data data ){
+        allData = data;
+        super.setPath("/favorite");
+    }
     public FavoriteAdd( User user, Question question ) {
-
         Users userList = new Users();
         userList.set( user );
         Questions questionList = new Questions();

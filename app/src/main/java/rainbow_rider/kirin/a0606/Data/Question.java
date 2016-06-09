@@ -2,14 +2,26 @@ package rainbow_rider.kirin.a0606.Data;
 
 import java.io.Serializable;
 
+import rainbow_rider.kirin.a0606.Data.Multiple.Anss;
+
 public class Question implements Serializable {
+    private static final long serialVersionUID = 1741796578394857L;
     private long q_id;
     private Genre genre;
     private User user;
     private String q_name;
     private String q_text;
     private String image_url;
-    private Ans answer;
+
+    public Anss getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Anss answer) {
+        this.answer = answer;
+    }
+
+    private Anss answer;
     private long true_id;
     private Long count;
     public Long getCount( ) {
@@ -65,13 +77,7 @@ public class Question implements Serializable {
         this.image_url = image_url;
     }
 
-    public Ans getAnswer( ) {
-        return answer;
-    }
 
-    public void setAnswer( Ans answer ) {
-        this.answer = answer;
-    }
 
     public long getTrue_id( ) {
         return true_id;

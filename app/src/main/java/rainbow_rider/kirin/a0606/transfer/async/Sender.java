@@ -168,6 +168,7 @@ public class Sender extends AsyncTask<Data, Data, Data> {
             e.printStackTrace();
         } catch ( JSONException e){
             Log.e( "TRANSFER/ERROR/EXCEPT", "JSONException Error" );
+            e.printStackTrace();
         }
 
         Log.d( "TRANSFER/FINISH", "TRANSFER FINISHED." );

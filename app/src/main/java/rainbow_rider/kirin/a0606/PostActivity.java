@@ -336,7 +336,7 @@ public class PostActivity extends AppCompatActivity {
                 question.setGenre(genre);
                 question.setQ_text( mainText.getText().toString() );
                 question.setTrue_id(trueId);
-                question.setAnswer(ans);
+                question.setAnswer(anss);
                 question.setUser(user);
 
                 new QuestionAdd(question, anss){
