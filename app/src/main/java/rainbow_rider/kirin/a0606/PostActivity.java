@@ -38,6 +38,8 @@ import rainbow_rider.kirin.a0606.transfer.question.QuestionAdd;
 public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
     private ImageView imageView;
+    private ImageView imageView2;
+    private ImageView imageView3;
     private Button image_button;
     private Uri uri;
     private User user;
@@ -52,7 +54,8 @@ public class PostActivity extends AppCompatActivity {
         user = setUserData(intent);
 
         imageView = (ImageView) findViewById(R.id.imageView);
-        image_button = (Button) findViewById(R.id.post_image_button);
+        imageView2 = (ImageView) findViewById(R.id.imageView2);
+        imageView3 = (ImageView) findViewById(R.id.imageView3);
         Spinner genre_spinner = (Spinner) findViewById(R.id.post_genre_spinner);
         Spinner answer_spinner = (Spinner) findViewById(R.id.post_selectAnswer_spinner);
         EditText title = (EditText) findViewById(R.id.post_title);
@@ -60,10 +63,60 @@ public class PostActivity extends AppCompatActivity {
         EditText answerB = (EditText) findViewById(R.id.post_answerB_editText);
         EditText answerC = (EditText) findViewById(R.id.post_answerC_editText);
         EditText answerD = (EditText) findViewById(R.id.post_answerD_editText);
+        EditText mainText = (EditText) findViewById(R.id.post_mainText);
+        EditText kaisetu = (EditText) findViewById(R.id.post_xplanation_text);
+
+        assert mainText != null;
+        mainText.setHint("例：Ａ、Ｂ、Ｃの３種類の本があります。\n" +
+                "この３つの本の中で一番評判がよく面白い本がＣだそうです。" +
+                "\nでも本屋によるお客たちは必ずＡの本を買っていきます。" +
+                "\nなんででしょう？"
+        );
+
+        kaisetu.setHint("例：三部作の著書、クライマックスの下巻Ｃが面白いが、必ず上巻のＡから買って行く");
 
 
-        assert image_button != null;
-        image_button.setOnClickListener(new View.OnClickListener() {
+
+        assert imageView != null;
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+
+                // Filter to only show results that can be "opened", such as a
+                // file (as opposed to a list of contacts or timezones)
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+                // Filter to show only images, using the image MIME data type.
+                // it would be "*/*".
+                intent.setType("image/*");
+
+                startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
+            }
+        });
+
+        assert imageView2 != null;
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+
+                // Filter to only show results that can be "opened", such as a
+                // file (as opposed to a list of contacts or timezones)
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+                // Filter to show only images, using the image MIME data type.
+                // it would be "*/*".
+                intent.setType("image/*");
+
+                startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
+            }
+        });
+
+        assert imageView3 != null;
+        imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
