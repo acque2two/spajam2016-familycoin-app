@@ -12,8 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="36dp"
         android:layout_marginTop="16dp"
-        android:src="@android:mipmap/sym_def_app_icon"
-        android:background="@mipmap/ic_launcher" />
+        android:src="@android:mipmap/sym_def_app_icon" />
 
 
     <TextView
