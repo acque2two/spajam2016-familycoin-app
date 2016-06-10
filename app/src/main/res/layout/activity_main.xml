@@ -4,31 +4,31 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="@drawable/bg_grad"
 	android:paddingBottom="@dimen/activity_vertical_margin"
 	android:paddingLeft="@dimen/activity_horizontal_margin"
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
-	android:background="@drawable/bg_grad"
-	tools:context="rainbow_rider.kirin.a0606.MainActivity">
+	tools:context="rainbow_rider.kirin.spajam.MainActivity">
 
 	<ImageView
+		android:id="@+id/activity_main_imageView"
 		android:layout_width="250dp"
 		android:layout_height="250dp"
-		android:id="@+id/activity_main_imageView"
-		android:src="@mipmap/ic_launcher"
+		android:layout_centerHorizontal="true"
 		android:layout_centerVertical="true"
-		android:layout_centerHorizontal="true" />
+		android:src="@mipmap/ic_launcher"/>
 
 	<TextView
+		android:id="@+id/activity_main_title_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Crea&apos;s"
-		android:id="@+id/activity_main_title_text"
-		android:textColor="#ffffff"
-		android:textSize="54dp"
+		android:layout_below="@+id/activity_main_imageView"
+		android:layout_centerHorizontal="true"
 		android:password="false"
 		android:phoneNumber="false"
-		android:layout_below="@+id/activity_main_imageView"
-		android:layout_centerHorizontal="true" />
+		android:text="Crea&apos;s"
+		android:textColor="#ffffff"
+		android:textSize="54dp"/>
 
 </RelativeLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="rainbow_rider.kirin.a0606">
+          package="rainbow_rider.kirin.spajam">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity"
+            android:name="rainbow_rider.kirin.spajam.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name="rainbow_rider.kirin.spajam.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
@@ -30,19 +30,19 @@
             android:value="d92ec791daa89f95031edbbc3617b6fa035e3ad3" />
 
         <activity
-            android:name=".DetailActivity"
+            android:name="rainbow_rider.kirin.spajam.DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name=".PostActivity"
+            android:name="rainbow_rider.kirin.spajam.PostActivity"
             android:label="@string/title_activity_post"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".TopActivity"
+            android:name="rainbow_rider.kirin.spajam.TopActivity"
             android:label="@string/title_activity_top"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RankingActivity" />
+        <activity android:name="rainbow_rider.kirin.spajam.RankingActivity"/>
 
     </application>
 

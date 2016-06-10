@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="rainbow_rider.kirin.a0606.DetailActivity"
-    tools:showIn="@layout/activity_detail"
-    android:background="#41868282">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#41868282"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:context="rainbow_rider.kirin.spajam.DetailActivity"
+                tools:showIn="@layout/activity_detail">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
-        android:layout_alignWithParentIfMissing="false"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentStart="false"
         android:layout_alignParentBottom="false"
-        android:layout_alignParentLeft="false">
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignWithParentIfMissing="false"
+        android:orientation="vertical">
 
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/scrollView2"
             android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
             android:fillViewport="false">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
-                android:weightSum="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp">
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -50,45 +50,45 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left|center_vertical"
-                            android:background="#ffffff"
-                            android:layout_margin="10dp">
+                            android:layout_margin="10dp"
+                            android:background="#ffffff">
 
                             <ImageView
+                                android:id="@+id/imageView"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:id="@+id/imageView"
-                                android:background="@drawable/ic_menu_gallery"
-                                android:layout_gravity="center" />
+                                android:layout_gravity="center"
+                                android:background="@drawable/ic_menu_gallery"/>
                         </FrameLayout>
 
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:background="#ffffff"
-                            android:layout_margin="10dp">
+                            android:layout_margin="10dp"
+                            android:background="#ffffff">
 
                             <ImageView
+                                android:id="@+id/imageView2"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:id="@+id/imageView2"
-                                android:background="@drawable/ic_menu_gallery"
-                                android:layout_gravity="center" />
+                                android:layout_gravity="center"
+                                android:background="@drawable/ic_menu_gallery"/>
                         </FrameLayout>
 
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
-                            android:background="#ffffff"
-                            android:layout_margin="10dp">
+                            android:layout_margin="10dp"
+                            android:background="#ffffff">
 
                             <ImageView
+                                android:id="@+id/imageView3"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:id="@+id/imageView3"
-                                android:background="@drawable/ic_menu_gallery"
-                                android:layout_gravity="center" />
+                                android:layout_gravity="center"
+                                android:background="@drawable/ic_menu_gallery"/>
                         </FrameLayout>
 
                     </FrameLayout>
@@ -96,255 +96,255 @@
                 </FrameLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:background="#ffffff"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
                     <TextView
+                        android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_marginTop="10dp"
                         android:text="タイトル"
-                        android:id="@+id/textView7"
-                        android:textColor="#56a466"
-                        android:layout_marginTop="10dp" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#56a466"/>
 
                     <TextView
+                        android:id="@+id/detail_title_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="なぞなぞ"
-                        android:id="@+id/detail_title_text"
-                        android:gravity="left"
+                        android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp" />
+                        android:gravity="left"
+                        android:text="なぞなぞ"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp"
-                    android:background="#ffffff"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp">
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
                     <TextView
+                        android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="タイトル"
-                        android:id="@+id/textView9"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#56a466" />
 
                     <TextView
+                        android:id="@+id/detail_main_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="内容"
-                        android:id="@+id/detail_main_text"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
                         android:gravity="left"
 
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp" />
+                        android:text="内容"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentStart="true"
-                    android:layout_gravity="center_horizontal|bottom">
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="3dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#ffffff"
+                            android:orientation="horizontal"
                             android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:background="#ffffff">
+                            android:paddingRight="10dp">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:text="A"
                                 android:id="@+id/textView8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_marginRight="10dp"
-                                android:gravity="center_vertical" />
+                                android:gravity="center_vertical"
+                                android:text="A"
+                                android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="aaaaaaa"
                                 android:id="@+id/detail_answerA_text"
-                                android:gravity="center_vertical" />
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="aaaaaaa"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
                         </LinearLayout>
 
                         <LinearLayout
-                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="3dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#ffffff"
+                            android:orientation="horizontal"
                             android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:background="#ffffff">
+                            android:paddingRight="10dp">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:text="B"
                                 android:id="@+id/textView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_marginRight="10dp"
-                                android:gravity="center_vertical" />
+                                android:gravity="center_vertical"
+                                android:text="B"
+                                android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="bbbbbbb"
                                 android:id="@+id/detail_answerB_text"
-                                android:gravity="center_vertical" />
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="bbbbbbb"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
                         </LinearLayout>
 
                         <LinearLayout
-                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
                             android:layout_marginBottom="3dp"
-                            android:paddingRight="10dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#ffffff"
+                            android:orientation="horizontal"
                             android:paddingLeft="10dp"
-                            android:background="#ffffff">
+                            android:paddingRight="10dp">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:text="C"
                                 android:id="@+id/textView12"
-                                android:layout_marginRight="10dp"
-                                android:gravity="center_vertical" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="ccccccc"
-                                android:id="@+id/detail_answerC_text"
-                                android:gravity="center_vertical" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="3dp"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:background="#ffffff">
-
-                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:text="D"
-                                android:id="@+id/textView14"
                                 android:layout_marginRight="10dp"
-                                android:gravity="center_vertical" />
+                                android:gravity="center_vertical"
+                                android:text="C"
+                                android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                             <TextView
+                                android:id="@+id/detail_answerC_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="ddddddd"
-                                android:id="@+id/detail_answerD_text"
-                                android:gravity="center_vertical" />
+                                android:gravity="center_vertical"
+                                android:text="ccccccc"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
                         </LinearLayout>
 
                         <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#ffffff"
                             android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp">
+
+                            <TextView
+                                android:id="@+id/textView14"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:gravity="center_vertical"
+                                android:text="D"
+                                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                            <TextView
+                                android:id="@+id/detail_answerD_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="ddddddd"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#ffffff"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp">
+                            android:background="#ffffff"
+                            android:orientation="horizontal">
 
                             <Spinner
+                                android:id="@+id/detail_answer_spinner"
                                 android:layout_width="200dp"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/detail_answer_spinner"
                                 android:layout_alignParentBottom="true"
                                 android:layout_alignParentStart="true"
-                                android:spinnerMode="dialog"
-                                android:layout_gravity="left|center_vertical" />
+                                android:layout_gravity="left|center_vertical"
+                                android:spinnerMode="dialog"/>
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#ffffff"
                             android:layout_marginBottom="5dp"
-                            android:layout_marginTop="5dp">
+                            android:layout_marginTop="5dp"
+                            android:background="#ffffff"
+                            android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/textView6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="投稿者"
-                                android:id="@+id/textView6"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="10dp"
+                                android:text="投稿者"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="#56a466" />
 
                             <TextView
+                                android:id="@+id/detail_user_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:text="キリン"
-                                android:id="@+id/detail_user_text"
                                 android:layout_marginBottom="5dp"
+                                android:layout_marginLeft="10dp"
                                 android:layout_marginTop="5dp"
                                 android:gravity="left"
-                                android:layout_marginLeft="10dp"
+                                android:text="キリン"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
                                 android:textSize="20dp" />
                         </LinearLayout>
 
                         <Button
+                            android:id="@+id/detail_send_button"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="送信"
-                            android:id="@+id/detail_send_button"
                             android:layout_gravity="center_vertical|right"
-                            android:background="#f58c8c"
+                            android:layout_marginBottom="20dp"
                             android:layout_marginLeft="30dp"
                             android:layout_marginRight="30dp"
                             android:layout_marginTop="15dp"
-                            android:layout_marginBottom="20dp" />
+                            android:background="#f58c8c"
+                            android:text="送信"/>
 
                     </LinearLayout>
 

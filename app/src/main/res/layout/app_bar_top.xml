@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="rainbow_rider.kirin.a0606.TopActivity">
+    tools:context="rainbow_rider.kirin.spajam.TopActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -27,13 +27,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/content_top_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/content_top_fragment"
-            android:orientation="horizontal"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="58dp">
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="58dp"
+            android:orientation="horizontal">
         </LinearLayout>
     </RelativeLayout>
 
