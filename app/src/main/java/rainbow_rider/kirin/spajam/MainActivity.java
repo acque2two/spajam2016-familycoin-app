@@ -35,11 +35,20 @@ public class MainActivity extends AppCompatActivity {
 
         loadUserData(MainActivity.this);
 
-        Button detail_button = (Button) findViewById(R.id.main_detail_button);
-        Button post_button = (Button) findViewById(R.id.main_post_button);
-        Button login_button = (Button) findViewById(R.id.main_login_button);
+        Button detailButton = (Button) findViewById(R.id.main_detail_button);
+        Button postButton = (Button) findViewById(R.id.main_post_button);
+        Button loginButton = (Button) findViewById(R.id.main_login_button);
+        Button topButton = (Button) findViewById(R.id.main_top_button);
 
-        detail_button.setOnClickListener(new View.OnClickListener() {
+        topButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callintent = new Intent(MainActivity.this, TopActivity.class);
+                startActivity(callintent);
+            }
+        });
+
+        detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent callintent = new Intent(MainActivity.this, DetailActivity.class);
@@ -47,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        post_button.setOnClickListener(new View.OnClickListener() {
+        postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent callintent = new Intent(MainActivity.this, PostActivity.class);
@@ -55,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        login_button.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent callintent = new Intent(MainActivity.this, LoginActivity.class);
