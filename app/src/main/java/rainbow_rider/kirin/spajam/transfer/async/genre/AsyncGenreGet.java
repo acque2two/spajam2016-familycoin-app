@@ -14,12 +14,12 @@ import rainbow_rider.kirin.spajam.transfer.async.Sender;
  * Todo:
  */
 
-public class GenreAdd extends Sender {
-    public GenreAdd( Genre genre ) {
+public class AsyncGenreGet extends Sender {
+    public AsyncGenreGet( Genre genre ) {
         ArrayList<Genre> genreList = new ArrayList<>();
         genreList.add( genre );
         allData = new Data();
         allData.setGenre( genreList );
-        super.setPath( "/genreadd" );
+        super.setPath( "/genreget" );
     }
 }

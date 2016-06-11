@@ -47,7 +47,7 @@ public class TopActivity extends AppCompatActivity
         user = setUserData(intent);
 
         TextView a = (TextView) findViewById(R.id.nav_header_top_textView);
-        Log.d("twitter_user_id",user.getUser_name());
+        Log.d( "twitter_user_id", user.getUser_name() );
         //a.setText(user.getUser_name());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

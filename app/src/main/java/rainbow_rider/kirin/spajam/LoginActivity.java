@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                 User userData = new User();
 //                userData.setUser_id( session.getUserId() );
 //                userData.setUser_name( session.getUserName() );
-//                new UserAdd(userData) {
+//                new AsyncUserAdd(userData) {
 //                    @Override
 //                    protected void onPostExecute( Data data ) {
 //                        super.onPostExecute( data );

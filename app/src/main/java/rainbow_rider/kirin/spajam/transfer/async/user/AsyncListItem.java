@@ -1,12 +1,12 @@
 package rainbow_rider.kirin.spajam.transfer.async.user;
 
-public class ListItem {
+public class AsyncListItem {
 
     private Long mId;
     private String mIconUrl;
     private String mTitle;
 
-    public ListItem( ) {}
+    public AsyncListItem( ) {}
 
     public Long getId( ) {
         return this.mId;

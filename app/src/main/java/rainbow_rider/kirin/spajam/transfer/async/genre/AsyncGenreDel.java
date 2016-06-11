@@ -14,8 +14,8 @@ import rainbow_rider.kirin.spajam.transfer.async.Sender;
  * Todo:
  */
 
-public class GenreDel extends Sender {
-    public GenreDel( Genre genre ) {
+public class AsyncGenreDel extends Sender {
+    public AsyncGenreDel( Genre genre ) {
         ArrayList<Genre> genreList = new ArrayList<>();
         genreList.add( genre );
         allData = new Data();
