@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.User;
+import retrofit.http.POST;
 
 public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
@@ -44,23 +47,22 @@ public class PostActivity extends AppCompatActivity {
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
-        Spinner genre_spinner = (Spinner) findViewById(R.id.post_genre_spinner);
+        final Spinner genre_spinner = (Spinner) findViewById(R.id.post_genre_spinner);
         EditText title = (EditText) findViewById(R.id.post_title);
         EditText mainText = (EditText) findViewById(R.id.post_mainText);
+        FrameLayout postImageLayout = (FrameLayout) findViewById(R.id.post_image_layout);
 
         assert mainText != null;
-        mainText.setHint("例：Ａ、Ｂ、Ｃの３種類の本があります。\n" +
-                "この３つの本の中で一番評判がよく面白い本がＣだそうです。" +
-                "\nでも本屋によるお客たちは必ずＡの本を買っていきます。" +
-                "\nなんででしょう？"
-        );
+        mainText.setHint("例：お風呂をきれいにしてください");
 
-        assert imageView != null;
-        imageView.setOnClickListener(new View.OnClickListener() {
+        assert postImageLayout != null;
+        postImageLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                Intent callIntent = new Intent(PostActivity.this, PhotoActivity.class);
+                int p = genre_spinner.getSelectedItemPosition();
+                callIntent.putExtra("genre", p);
+                startActivityForResult(callIntent, 1);
             }
         });
 
@@ -109,9 +111,22 @@ public class PostActivity extends AppCompatActivity {
         return Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/";
     }
 
+    //Result
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        super.onActivityResult(requestCode, resultCode, resultData);
+        int image = resultData.getIntExtra("image", R.drawable.ic_menu_share);
+        switch (resultCode) {
+            case 1 :
+                if(resultCode == RESULT_OK) {
+                    imageView.setImageResource(image);
+                }else{
 
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     //Bitmap
@@ -132,7 +147,6 @@ public class PostActivity extends AppCompatActivity {
 
         //杉山追加
         final Spinner genre_spinner = (Spinner) findViewById(R.id.post_genre_spinner);
-        final Spinner answer_spinner = (Spinner) findViewById(R.id.post_selectAnswer_spinner);
         final EditText title = (EditText) findViewById(R.id.post_title);
         final EditText mainText = (EditText) findViewById(R.id.post_mainText);
         //------
@@ -171,43 +185,6 @@ public class PostActivity extends AppCompatActivity {
                 } else {
 //                    genre.setGenre_id(7);
                 }
-                String answer = answer_spinner.getSelectedItem().toString();
-                Long trueId;
-
-                //answerのidは A = 1, B = 2, C = 3, D = 4    NullPointer対策にelse5を追加
-                if ( genreName.equals("A") ){
-                    trueId = 1L;
-                } else if( genreName.equals("B") ) {
-                    trueId = 2L;
-                } else if( genreName.equals("C") ) {
-                    trueId = 3L;
-                } else if( genreName.equals("D") ) {
-                    trueId = 4L;
-                } else {
-                    trueId = 5L;
-                }
-
-//                Anss anss = new Anss();
-
-                ArrayList<String> answerText = new ArrayList<String>();
-                answerText.add(answerA.getText().toString());
-                answerText.add(answerB.getText().toString());
-                answerText.add(answerC.getText().toString());
-                answerText.add(answerD.getText().toString());
-
-                int i = 1;
-                for (String a : answerText) {
-                    i ++;
-                }
-
-//                question.setQ_name( title.getText().toString() );
-//                question.setGenre(genre);
-//                question.setQ_text( mainText.getText().toString() );
-//                question.setTrue_id(trueId);
-//                question.setAnswer(anss);
-//                question.setUser(user);
-
-
 
                 Toast.makeText(PostActivity.this, "oni", Toast.LENGTH_SHORT).show();
                 return false;
