@@ -6,11 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import net.arnx.jsonic.JSON;
 
@@ -97,11 +94,7 @@ public class MainActivity extends AppCompatActivity {
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
 
         boolean ans;
-        if(allData.getFamily() != null){
-            ans = true;
-        }else{
-            ans = false;
-        }
+        ans = allData.getFamily() != null;
 
         return ans;
     }
@@ -132,5 +125,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
+*/
