@@ -108,10 +108,6 @@ public class TopFragment extends Fragment {
             case 6:
                 genreName = "そのほかクエスト";
                 break;
-            case 10:
-                genreName = "家族の情報";
-                Toast.makeText( view.getContext() , "yeyeyeye",Toast.LENGTH_SHORT ).show();
-                break;
         }
         Toast.makeText( view.getContext() , mGenreId,Toast.LENGTH_SHORT ).show();
 

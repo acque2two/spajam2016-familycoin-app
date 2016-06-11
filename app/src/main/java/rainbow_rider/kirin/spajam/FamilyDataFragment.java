@@ -103,7 +103,7 @@ public class FamilyDataFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toast.makeText( view.getContext() , mFId,Toast.LENGTH_SHORT ).show();
+        Toast.makeText( view.getContext() , "かぞくのじょうほう",Toast.LENGTH_SHORT ).show();
 
         Genre genre = new Genre();
 

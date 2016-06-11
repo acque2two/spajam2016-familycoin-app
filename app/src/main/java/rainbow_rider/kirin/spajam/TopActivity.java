@@ -203,7 +203,7 @@ public class TopActivity extends AppCompatActivity
         } else if (id == R.id.activity_top_drawer_family_data) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "10", fId))
+                    .replace(R.id.content_top_fragment, FamilyDataFragment.newInstance( "10", fId))
                     .addToBackStack("かぞくのじょうほう")
                     .commit();
             toolbar.setTitle("家族の情報");
