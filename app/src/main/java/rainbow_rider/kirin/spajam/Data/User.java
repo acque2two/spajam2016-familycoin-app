@@ -12,11 +12,11 @@ public class User implements Serializable {
     private Boolean adult;
     private Boolean sex;
 
-    public long getU_id( ) {
+    public String getU_id( ) {
         return u_id;
     }
 
-    public void setU_id( long u_id ) {
+    public void setU_id( String u_id ) {
         this.u_id = u_id;
     }
 
