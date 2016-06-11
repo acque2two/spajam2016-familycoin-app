@@ -1,8 +1,11 @@
 package rainbow_rider.kirin.spajam;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +22,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.arnx.jsonic.JSON;
+
+import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.User;
 
 
@@ -31,17 +37,19 @@ public class TopActivity extends AppCompatActivity
 ///    private ItemListAdapter mAdapter;
 
     User user;
+    Data allData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Toast.makeText( getApplicationContext(),"ようこそ！",Toast.LENGTH_LONG ).show();
+        loadData( getApplicationContext() );
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Family Coin");
 
         User user = (User) getIntent().getSerializableExtra("user");
-
+        user = allData.family.get( 0 ).users.get( 0 );
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +93,29 @@ public class TopActivity extends AppCompatActivity
         //ArrayAdapter<String> la = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, talk_list);
         //ListView set_listView = (ListView) findViewById( R.id.content_top_listView);
         //set_listView.setAdapter( la );
+
+    }
+
+
+    private boolean loadData( Context context ) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences( context );
+
+        allData = JSON.decode( sp.getString( "DATA_JSON", "{}" ), Data.class );
+
+        boolean ans;
+        ans = allData.getFamily() != null;
+
+        return ans;
+    }
+
+    private boolean saveData( Context context ) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences( context );
+        SharedPreferences.Editor spedit = sp.edit();
+        spedit.putString( "DATA_JSON", JSON.encode( allData ) );
+        spedit.apply();
+        return true;
 
     }
 

@@ -19,7 +19,7 @@ import rainbow_rider.kirin.spajam.Data.Data;
  * Todo:
  */
 public class Transfer extends AsyncTask<Data, Data, Data> {
-    public static final MediaType jsontype = MediaType.parse( "application/json; charset=utf-8" );
+    public static final MediaType jsontype = MediaType.parse( "application/json; charset=utf8" );
     private OkHttpClient client = new OkHttpClient();
 
     private String Post( String url, String json ) throws IOException {
