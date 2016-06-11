@@ -119,6 +119,18 @@ public class LoginActivity extends AppCompatActivity {
                         if (!reply.isStatus()){
                             // 家族未登録
 
+                            final AsyncUserAdd userAdd = new AsyncUserAdd( family ) {
+                                @Override
+                                protected void onPostExecute( Data data ) {
+                                    super.onPostExecute( data );
+                                    LoginActivity.this.findViewById( R.id.progressBar2 )
+                                                      .setVisibility( View.GONE );
+                                    Toast.makeText( LoginActivity.this.getApplicationContext
+                                            (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
+                                    LoginActivity.this.finish();
+                                }
+                            };
+
                             // 確認ダイアログの生成
                             AlertDialog.Builder alertDlg = new AlertDialog.Builder( LoginActivity.this );
                             alertDlg.setTitle("家族が未登録です");
@@ -127,38 +139,65 @@ public class LoginActivity extends AppCompatActivity {
                                     "はぁい",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility( View.VISIBLE );
-                                            new AsyncFamilyAdd( family ){
-                                                @Override
-                                                protected void onPostExecute( Data data ) {
-                                                    super.onPostExecute( data );
-                                                    new AsyncUserAdd( family ){
-                                                        @Override
-                                                        protected void onPostExecute( Data data ) {
-                                                            super.onPostExecute( data );
-
-                                                            LoginActivity.this.findViewById( R.id.progressBar2 )
-                                                                              .setVisibility( View.GONE );
-                                                            Toast.makeText( LoginActivity.this.getApplicationContext
-                                                                    (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
-                                                            LoginActivity.this.finish();
+                                            final EditText editView = new EditText( LoginActivity.this );
+                                            new AlertDialog.Builder( LoginActivity.this )
+                                                    .setIcon( android.R.drawable.ic_dialog_info )
+                                                    .setTitle( "家族の表示名を設定してください" )
+                                                    //setViewにてビューを設定します。
+                                                    .setView( editView )
+                                                    .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                                                        public void onClick( DialogInterface dialog, int whichButton ) {
+                                                            //入力した文字をトースト出力する
+                                                            family.setF_name( editView.getText().toString() );
+                                                            new AsyncFamilyAdd( family ) {
+                                                                @Override
+                                                                protected void onPostExecute( Data data ) {
+                                                                    super.onPostExecute( data );
+                                                                    Toast.makeText(
+                                                                            LoginActivity.this.getApplicationContext(),
+                                                                            "家族登録が完了しました。",
+                                                                            Toast.LENGTH_LONG
+                                                                    ).show();
+                                                                    userAdd.execute();
+                                                                }
+                                                            }.execute();
                                                         }
-                                                    }.execute(  );
-                                                }
-                                            }.execute(  );
-
+                                                    } )
+                                                    .setNegativeButton( "キャンセル", new DialogInterface.OnClickListener() {
+                                                        public void onClick( DialogInterface dialog, int whichButton ) {
+                                                        }
+                                                    } )
+                                                    .show();
+                                            LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility(
+                                                    View.VISIBLE );
                                         }
+
+
                                     });
                             alertDlg.setNegativeButton(
                                     "いいえ",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             // Cancel ボタンクリック処理
+                                            return;
                                         }
                                     });
 
-                            // 表示
+
                             alertDlg.create().show();
+                        } else {
+
+                            new AsyncUserAdd( family ) {
+                                @Override
+                                protected void onPostExecute( Data data ) {
+                                    super.onPostExecute( data );
+                                    LoginActivity.this.findViewById( R.id.progressBar2 )
+                                                      .setVisibility( View.GONE );
+                                    Toast.makeText( LoginActivity.this.getApplicationContext
+                                            (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
+                                    LoginActivity.this.finish();
+                                }
+                            }.execute();
                         }
                     }
                 }.execute(  );
