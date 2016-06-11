@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +21,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import rainbow_rider.kirin.spajam.Data.Question;
 import rainbow_rider.kirin.spajam.Data.User;
 
 
@@ -40,7 +40,7 @@ public class TopActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Crea's");
+        toolbar.setTitle("Family Coin");
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
@@ -63,7 +63,7 @@ public class TopActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
         //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
         //        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -76,17 +76,16 @@ public class TopActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        View header = LayoutInflater.from(this).inflate(R.layout.nav_header_top, null);
+        navigationView.addHeaderView(header);
+        TextView text = (TextView) header.findViewById(R.id.nav_header_top_textView);
+        text.setText("ながのともき");
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_top_fragment, TopFragment.newInstance("1",""))
                 .addToBackStack("新規投稿")
                 .commit();
-
-//        mListView.setAdapter( mAdapter);
-
-        //for ( int i=0; listdata.getRecipe().get(i).getImage_url() != null ; i++ ){
-        //    mAdapter.add(listdata.getRecipe().get(i).getImage_url())
-        //}
 
         // 過去の遺物
         //ArrayAdapter<String> la = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, talk_list);
@@ -97,7 +96,7 @@ public class TopActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -120,7 +119,7 @@ public class TopActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.search) {
+        if (id == R.id.top_search) {
             final EditText editView = new EditText(TopActivity.this);
             new AlertDialog.Builder(TopActivity.this)
                     .setIcon(android.R.drawable.ic_dialog_info)
@@ -134,7 +133,6 @@ public class TopActivity extends AppCompatActivity
                                     editView.getText().toString(),
                                     Toast.LENGTH_LONG).show();
                             //listviewを更新
-
                         }
                     })
                     .setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
@@ -143,6 +141,11 @@ public class TopActivity extends AppCompatActivity
                     })
                     .show();
 
+            return true;
+        }
+        if (id == R.id.top_end_application) {
+            //アプリを終了する
+            moveTaskToBack(true);
             return true;
         }
 
@@ -155,74 +158,74 @@ public class TopActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.activity_top_drawer_japanese) {
+        if (id == R.id.activity_top_drawer_cleaning) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "1","Japanese"))
-                    .addToBackStack("国語")
+                    .addToBackStack("そうじ")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_math) {
+        } else if (id == R.id.activity_top_drawer_cuisine) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "2","math"))
-                    .addToBackStack("数学")
+                    .addToBackStack("りょうり")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_science) {
+        } else if (id == R.id.activity_top_drawer_washing) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "3","science"))
-                    .addToBackStack("理科")
+                    .addToBackStack("せんたく")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_social_studies) {
+        } else if (id == R.id.activity_top_drawer_social_study) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "4","social_studies"))
-                    .addToBackStack("社会")
+                    .addToBackStack("べんきょう")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_english) {
+        } else if (id == R.id.activity_top_drawer_shopping) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "5","english"))
-                    .addToBackStack("英語")
+                    .addToBackStack("かいもの")
                     .commit();
         } else if (id == R.id.activity_top_drawer_other) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "6","other"))
-                    .addToBackStack("その他")
+                    .addToBackStack("そのた")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_rankings) {
-            Intent callintent = new Intent(TopActivity.this, RankingActivity.class);
+        } else if (id == R.id.activity_top_drawer_family_data) {
+            Intent callintent = new Intent(TopActivity.this, FamilyDataActivity.class);
             startActivity(callintent);
         } else if (id == R.id.activity_top_drawer_mydata) {
 
         }
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
     }
 
-    @Override
-    public void onTopFragmentItemClick(Question question) {
-        Intent callInTent = new Intent(TopActivity.this, DetailActivity.class);
+
+    // 安全に削除できませんでした acq
+    //@Override
+    //public void onTopFragmentItemClick(Void) {
+
+/*        Intent callInTent = new Intent(TopActivity.this, DetailActivity.class);
         Question q = question;
-        callInTent.putExtra("question", q);
         callInTent.putExtra("myUser", user);
         startActivity(callInTent);
-        //画面遷移時
+        //画面遷移時*/
         //callIntent.putExtra("user_id", user.getUser_id());
         //callIntent.putExtra("user_name",user.getUser_name());
-    }
+    //}
 
     private User setUserData(Intent intent) {
         User u = new User();
-        u.setUser_id(intent.getLongExtra("user_id", -1));
-        u.setUser_name(intent.getStringExtra("user_name"));
         return u;
     }
+
 
 
 

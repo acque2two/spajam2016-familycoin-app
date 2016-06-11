@@ -26,13 +26,8 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import rainbow_rider.kirin.spajam.Data.Ans;
-import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Genre;
-import rainbow_rider.kirin.spajam.Data.Multiple.Anss;
-import rainbow_rider.kirin.spajam.Data.Question;
 import rainbow_rider.kirin.spajam.Data.User;
-import rainbow_rider.kirin.spajam.transfer.async.question.QuestionAdd;
 
 public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
@@ -199,8 +194,8 @@ public class PostActivity extends AppCompatActivity {
     private User setUserData(Intent intent){
         User u = new User();
         long i = 740373350904520704L;
-        u.setUser_id(intent.getLongExtra("user_id", i));
-        u.setUser_name(intent.getStringExtra("user_name"));
+//        u.setUser_id(intent.getLongExtra("user_id", i));
+//        u.setUser_name(intent.getStringExtra("user_name"));
         return u;
     }
 
@@ -277,28 +272,27 @@ public class PostActivity extends AppCompatActivity {
             public boolean onMenuItemClick( MenuItem item ) {
                 //    Intent callIntent = new Intent( DetailActivity.this, AddFriendActivity.class );
                 //    startActivity( callIntent );
-                Question question = new Question();
+//                Question question = new Question();
                 Genre genre = new Genre();
 
                 String genreName = genre_spinner.getSelectedItem().toString();
 
                 //genreをidに変換    NullPointer対策にelse
                 if ( genreName.equals("国語") ){
-                    genre.setGenre_id(1);
+//                    genre.setGenre_id(1);
                 } else if( genreName.equals("数学") ) {
-                    genre.setGenre_id(2);
+//                    genre.setGenre_id(2);
                 } else if( genreName.equals("理科") ) {
-                    genre.setGenre_id(3);
+//                    genre.setGenre_id(3);
                 } else if( genreName.equals("社会") ) {
-                    genre.setGenre_id(4);
+//                    genre.setGenre_id(4);
                 } else if( genreName.equals("英語") ) {
-                    genre.setGenre_id(5);
+//                    genre.setGenre_id(5);
                 } else if( genreName.equals("その他") ) {
-                    genre.setGenre_id(6);
+//                    genre.setGenre_id(6);
                 } else {
-                    genre.setGenre_id(7);
+//                    genre.setGenre_id(7);
                 }
-                Ans ans = new Ans();
                 String answer = answer_spinner.getSelectedItem().toString();
                 Long trueId;
 
@@ -315,7 +309,7 @@ public class PostActivity extends AppCompatActivity {
                     trueId = 5L;
                 }
 
-                Anss anss = new Anss();
+//                Anss anss = new Anss();
 
                 ArrayList<String> answerText = new ArrayList<String>();
                 answerText.add(answerA.getText().toString());
@@ -325,30 +319,16 @@ public class PostActivity extends AppCompatActivity {
 
                 int i = 1;
                 for (String a : answerText) {
-                    Ans ansText = new Ans();
-                    ansText.setAns_id(i);
-                    ansText.setAns_text(a);
-                    anss.add(ansText);
                     i ++;
                 }
 
-                question.setQ_name( title.getText().toString() );
-                question.setGenre(genre);
-                question.setQ_text( mainText.getText().toString() );
-                question.setTrue_id(trueId);
-                question.setAnswer(anss);
-                question.setUser(user);
+//                question.setQ_name( title.getText().toString() );
+//                question.setGenre(genre);
+//                question.setQ_text( mainText.getText().toString() );
+//                question.setTrue_id(trueId);
+//                question.setAnswer(anss);
+//                question.setUser(user);
 
-                new QuestionAdd(question, anss){
-                    @Override
-                    protected void onPostExecute(Data data) {
-                        super.onPostExecute(data);
-
-                        Toast.makeText(PostActivity.this, "送信しました！", Toast.LENGTH_SHORT).show();
-                        PostActivity.this.finish();
-
-                    }
-                }.execute();
 
 
                 Toast.makeText(PostActivity.this, "oni", Toast.LENGTH_SHORT).show();

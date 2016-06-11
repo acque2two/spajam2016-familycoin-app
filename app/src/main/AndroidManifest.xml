@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="rainbow_rider.kirin.spajam">
+    package="rainbow_rider.kirin.spajam">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,9 +10,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name="rainbow_rider.kirin.spajam.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,34 +19,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="rainbow_rider.kirin.spajam.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="d92ec791daa89f95031edbbc3617b6fa035e3ad3" />
 
         <activity
-            android:name="rainbow_rider.kirin.spajam.DetailActivity"
+            android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
-            android:name="rainbow_rider.kirin.spajam.PostActivity"
+            android:name=".PostActivity"
             android:label="@string/title_activity_post"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="rainbow_rider.kirin.spajam.TopActivity"
+            android:name=".TopActivity"
             android:label="@string/title_activity_top"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="rainbow_rider.kirin.spajam.RankingActivity"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
+        <activity android:name=".RankingActivity" />
+        <activity android:name=".FamilyDataActivity"></activity>
     </application>
 
 </manifest>

@@ -1,8 +1,9 @@
 package rainbow_rider.kirin.spajam.transfer.sync.user;
 
+import java.util.ArrayList;
+
 import rainbow_rider.kirin.spajam.Data.Data;
-import rainbow_rider.kirin.spajam.Data.Multiple.Users;
-import rainbow_rider.kirin.spajam.Data.User;
+import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.transfer.sync.Sender;
 
 /**
@@ -14,13 +15,17 @@ import rainbow_rider.kirin.spajam.transfer.sync.Sender;
  */
 
 public class UserRevGet extends Sender {
-    public UserRevGet( User user ) {
-        Users userList = new Users();
-        userList.set( user );
+    public UserRevGet( Data data ) {
+        allData = data;
+        super.setPath( "/userrevget" );
+    }
+
+    public UserRevGet( Family family ) {
+        ArrayList<Family> familyArrayList = new ArrayList<>();
+        familyArrayList.add( family );
+
         allData = new Data();
-        allData.setUser( userList );
-        {
-            super.setPath( "/userrevget" );
-        }
+        allData.setFamily( familyArrayList );
+        super.setPath( "/userrevget" );
     }
 }

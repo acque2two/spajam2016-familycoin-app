@@ -2,47 +2,47 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<item android:title="教 科 一 覧">
+<item android:title="お手伝い一覧">
     <menu>
         <item
-            android:id="@+id/activity_top_drawer_japanese"
-            android:src="@mipmap/kokugo"
+            android:id="@+id/activity_top_drawer_cleaning"
+            android:icon="@mipmap/drawer_broom"
             android:layout_width="match_parent"
-            android:title="国    語" />
+            android:title="そうじ" />
         <item
-            android:id="@+id/activity_top_drawer_math"
-            android:src="@mipmap/suugaku"
-            android:title="数    学" />
+            android:id="@+id/activity_top_drawer_cuisine"
+            android:icon="@mipmap/drawer_meal"
+            android:title="りょうり" />
         <item
-            android:id="@+id/activity_top_drawer_science"
-            android:src="@mipmap/rika"
-            android:title="理    科" />
+            android:id="@+id/activity_top_drawer_washing"
+            android:src="@mipmap/drawer_towel"
+            android:title="せんたく" />
         <item
-            android:id="@+id/activity_top_drawer_social_studies"
-            android:src="@mipmap/shakai"
-            android:title="社    会" />
+            android:id="@+id/activity_top_drawer_social_study"
+            android:src="@mipmap/drawer_book"
+            android:title="べんきょう" />
         <item
-            android:id="@+id/activity_top_drawer_english"
-            android:src="@mipmap/eigo"
-            android:title="英    語" />
+            android:id="@+id/activity_top_drawer_shopping"
+            android:src="@mipmap/drawer_cage"
+            android:title="かいもの" />
         <item
             android:id="@+id/activity_top_drawer_other"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="そ の 他" />
+            android:title="その他" />
     </menu>
 </item>
 
 
-    <item android:title="Communicat">
+    <item android:title="情報">
         <menu>
             <item
-                android:id="@+id/activity_top_drawer_rankings"
+                android:id="@+id/activity_top_drawer_family_data"
                 android:icon="@drawable/ic_menu_slideshow"
-                android:title="ランキング" />
+                android:title="かぞく" />
             <item
                 android:id="@+id/activity_top_drawer_mydata"
                 android:icon="@drawable/ic_menu_slideshow"
-                android:title="MyData" />
+                android:title="じぶん" />
         </menu>
     </item>
 
