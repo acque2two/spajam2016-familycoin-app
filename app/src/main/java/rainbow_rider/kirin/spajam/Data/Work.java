@@ -16,6 +16,15 @@ public class Work {
     private Integer g_id;
     private Integer point;
     private Genre genre;
+    private Integer image;
+
+    public Integer getImage( ) {
+        return image;
+    }
+
+    public void setImage( Integer image ) {
+        this.image = image;
+    }
 
     public Integer getW_id( ) {
         return w_id;

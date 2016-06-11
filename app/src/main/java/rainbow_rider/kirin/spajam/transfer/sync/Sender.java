@@ -21,11 +21,11 @@ import rainbow_rider.kirin.spajam.transfer.ServerInfomation;
  * Memo:
  * Todo:
  */
-public class Sender  {
+public class Sender {
     public static final MediaType jsontype = MediaType.parse( "application/json; charset=utf-8" );
     private final String urlHosts = "http://" + ServerInfomation
             .getServerHostName() + ":" + ServerInfomation
-            .getServerPort();
+                                            .getServerPort();
     public String urlPath = "/index.html";
     // 入力データ群
     // 全データ
@@ -54,15 +54,15 @@ public class Sender  {
                 .post( body )
                 .build();
         Response response = client.newCall( request ).execute();
-        if( response.code() != 200 ) {
+        if ( response.code() != 200 ) {
             Log.e( "TRANS/POST/ERROR", "Responce code is " + response.code() + "!" );
             return "{\"status\":false}";
         }
         Log.d( "TRANS/POST/SUCCESS", "POST Successful! " + response.code() + "! " + response.body().contentLength() );
-        return JSON.decode(response.body().string());
+        return JSON.decode( response.body().string() );
     }
 
-    public String Send(){
+    public String Send( ) {
         try {
             return Post( JSON.encode( allData ) );
         } catch ( IOException e ) {
