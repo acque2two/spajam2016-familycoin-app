@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.Toast;
 
-import net.arnx.jsonic.JSON;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,7 +19,7 @@ import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
-import rainbow_rider.kirin.spajam.transfer.sync.work.WorkGenreList;
+import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkGenreList;
 
 
 /**
@@ -106,20 +104,26 @@ public class TopFragment extends Fragment {
         work.setGenre(genre);
         works.add(work);
         family.setWork(works);
-        
+
         Collection<Work> works_recv = new ArrayList<>();
-        String jsonCode = new WorkGenreList(family).Send();
-        Data reply = JSON.decode(jsonCode);
+
+        new AsyncWorkGenreList( family ) {
+            @Override
+            protected void onPostExecute( Data data ) {
+                super.onPostExecute( data );
+                Data reply = getReply();
+
+                mAdapter.addAll( reply.getFamily().get( 0 ).getWork() );
+                try {
+                    mListView.setAdapter( mAdapter );
+                } catch ( NullPointerException v ) {
+                    Toast.makeText( view.getContext(), "データが空です", Toast.LENGTH_SHORT ).show();
+                }
+            }
+        }.execute();
+
 
         Log.d("------------------", "Complete");
-
-        works_recv.addAll(reply.getFamily().get(0).getWork());
-        mAdapter.addAll( works_recv );
-        try {
-            mListView.setAdapter( mAdapter );
-        } catch (NullPointerException v) {
-            Toast.makeText( view.getContext() ,"データが空です" ,Toast.LENGTH_SHORT ).show();
-        }
 
 
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
