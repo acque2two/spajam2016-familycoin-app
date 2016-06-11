@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
-import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
 import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkGenreList;
@@ -104,19 +103,14 @@ public class FamilyDataFragment extends Fragment {
 
         Toast.makeText( view.getContext() , "かぞくのじょうほう",Toast.LENGTH_SHORT ).show();
 
-        Genre genre = new Genre();
-
         final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
         final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
-        genre.setG_id(Integer.parseInt(mGenreId));
         Family family = new Family();
         family.setF_id(mFId);
-        genre = new Genre();
+        //genre = new Genre();
         Work work = new Work();
         ArrayList<Work> works = new ArrayList<>();
-        genre.setG_id(Integer.parseInt(mGenreId));
-        work.setGenre(genre);
         works.add(work);
         family.setWork(works);
 

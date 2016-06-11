@@ -122,21 +122,20 @@ public class LoginActivity extends AppCompatActivity {
                         Data reply = getReply();
                         LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility( View.GONE );
                         if (!reply.isStatus()){
-                            // 家族未登録
 
+                            // 家族未登録
                             final AsyncUserAdd userAdd = new AsyncUserAdd( family ) {
                                 @Override
                                 protected void onPostExecute( Data data ) {
                                     super.onPostExecute( data );
-                                    LoginActivity.this.findViewById( R.id.progressBar2 )
-                                                      .setVisibility( View.GONE );
+                                    LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility( View.GONE );
                                     Toast.makeText( LoginActivity.this.getApplicationContext
-                                            (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
+                                            (), "登録が完了しました。1", Toast.LENGTH_LONG ).show();
 
                                     Intent intent = new Intent();
                                     setResult(RESULT_OK, intent);
 
-                                    LoginActivity.this.finish();
+                                    finish();
                                 }
                             };
 
@@ -164,19 +163,12 @@ public class LoginActivity extends AppCompatActivity {
                                                                     super.onPostExecute( data );
 
                                                                     Toast.makeText(
-                                                                            LoginActivity.this.getApplicationContext(),
-                                                                            "家族登録が完了しました。",
-                                                                            Toast.LENGTH_LONG
-                                                                    ).show();
+                                                                            LoginActivity.this.getApplicationContext(), "家族登録が完了しました。2", Toast.LENGTH_LONG).show();
                                                                     userAdd.execute();
-                                                                    LoginActivity.this.findViewById( R.id.progressBar2 )
-                                                                                      .setVisibility(
-                                                                                              View.GONE );
+                                                                    LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility(View.GONE );
                                                                 }
                                                             }.execute();
-                                                            LoginActivity.this.findViewById( R.id.progressBar2 )
-                                                                              .setVisibility(
-                                                                                      View.VISIBLE );
+                                                            LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility(View.VISIBLE );
                                                         }
                                                     } )
                                                     .setNegativeButton( "キャンセル", new DialogInterface.OnClickListener() {
@@ -184,11 +176,8 @@ public class LoginActivity extends AppCompatActivity {
                                                         }
                                                     } )
                                                     .show();
-                                            LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility(
-                                                    View.VISIBLE );
+                                            LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility(View.VISIBLE );
                                         }
-
-
                                     });
                             alertDlg.setNegativeButton(
                                     "いいえ",
@@ -199,10 +188,9 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     });
 
-
                             alertDlg.create().show();
                         } else {
-
+                            //初回
                             new AsyncUserAdd( family ) {
                                 @Override
                                 protected void onPostExecute( Data data ) {
@@ -210,11 +198,11 @@ public class LoginActivity extends AppCompatActivity {
                                     LoginActivity.this.findViewById( R.id.progressBar2 )
                                                       .setVisibility( View.GONE );
                                     Toast.makeText( LoginActivity.this.getApplicationContext
-                                            (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
+                                            (), "登録が完了しました。3", Toast.LENGTH_LONG ).show();
                                     Intent intent = new Intent();
                                     setResult(RESULT_OK, intent);
 
-                                    LoginActivity.this.finish();
+                                    finish();
                                 }
                             }.execute();
                         }

@@ -9,11 +9,11 @@ import android.widget.TextView;
 import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.R;
 
-public class ItemListAdapter extends GenericArrayAdapter<Work> {
+public class FamilyListAdapter extends GenericArrayAdapter<Work> {
 
     ViewHolder mViewHolder;
 
-    public ItemListAdapter( Context context, int resource ) {
+    public FamilyListAdapter(Context context, int resource ) {
         super( context, resource );
     }
 
@@ -27,9 +27,9 @@ public class ItemListAdapter extends GenericArrayAdapter<Work> {
 
             mViewHolder = new ViewHolder();
 
-            mViewHolder.icon = ( ImageView ) convertView.findViewById( R.id.item_list_view_icon );
+            mViewHolder.icon = (ImageView) convertView.findViewById( R.id.item_list_view_icon );
 
-            mViewHolder.title = ( TextView ) convertView.findViewById( R.id.item_list_view_title );
+            mViewHolder.title = (TextView) convertView.findViewById( R.id.item_list_view_title );
 
             mViewHolder.illust = ( ImageView ) convertView.findViewById( R.id.item_list_view_illust );
 
@@ -56,4 +56,3 @@ public class ItemListAdapter extends GenericArrayAdapter<Work> {
         TextView title;
     }
 }
-
