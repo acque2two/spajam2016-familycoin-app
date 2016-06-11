@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import net.arnx.jsonic.JSON;
 
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(getString(R.string.app_name));
 
-        loadData(MainActivity.this);
+        if(loadData(MainActivity.this)){
+            Intent callIntent = new Intent(MainActivity.this, TopActivity.class);
+            startActivity(callIntent);
+        }else{
+            Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(callIntent);
+        }
 
         MyThread myThread = new MyThread();
         myThread.start();
@@ -89,8 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
 
-        return true;
+        boolean ans;
+        if(allData.getFamily() != null){
+            ans = true;
+        }else{
+            ans = false;
+        }
 
+        return ans;
     }
 
     private boolean saveData(Context context) {

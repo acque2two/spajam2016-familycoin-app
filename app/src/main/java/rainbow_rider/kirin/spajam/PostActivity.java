@@ -49,8 +49,7 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        //Intent intent = getIntent();
-        //user = setUserData(intent);
+        loadData(PostActivity.this);
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -66,39 +65,6 @@ public class PostActivity extends AppCompatActivity {
         assert sendButoon != null;
         assert genre_spinner != null;
         assert title != null;
-
-
-        sendButoon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Integer intTitle = Integer.valueOf(pointText.getText().toString());
-
-                Genre genre = new Genre();
-                genre.setG_id(genre_spinner.getSelectedItemPosition());
-
-                Work work = new Work();
-
-                work.setW_text(mainText.getText().toString());
-                work.setU_id(allData.getFamily().get(0).getUser().get(0).getU_id());
-                work.setW_name(title.getText().toString());
-                work.setPoint(intTitle);
-                work.setGenre(genre);
-                work.setImage(intImage);
-
-                Family family = allData.getFamily().get(0);
-                ArrayList<Work> works = new ArrayList<Work>();
-                works.add(work);
-                family.setWork(works);
-
-                new AsyncWorkAdd(family){
-                    @Override
-                    protected void onPostExecute(Data data) {
-                        super.onPostExecute(data);
-                        PostActivity.this.finish();
-                    }
-                }.execute();
-            }
-        });
 
         assert postImageLayout != null;
         postImageLayout.setOnClickListener(new View.OnClickListener() {
@@ -149,13 +115,38 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-    }
+        sendButoon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Integer intTitle = Integer.valueOf(pointText.getText().toString());
 
-    private boolean loadData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
-        return true;
+                Genre genre = new Genre();
+                genre.setG_id(genre_spinner.getSelectedItemPosition());
+
+                Work work = new Work();
+
+                work.setW_text(mainText.getText().toString());
+                work.setU_id(allData.getFamily().get(0).getUser().get(0).getU_id());
+                work.setW_name(title.getText().toString());
+                work.setPoint(intTitle);
+                work.setGenre(genre);
+                work.setImage(intImage);
+
+                Family family = allData.getFamily().get(0);
+                ArrayList<Work> works = new ArrayList<Work>();
+                works.add(work);
+                family.setWork(works);
+
+                new AsyncWorkAdd(family){
+                    @Override
+                    protected void onPostExecute(Data data) {
+                        super.onPostExecute(data);
+                        PostActivity.this.finish();
+                    }
+                }.execute();
+            }
+        });
+
     }
 
     private String getGalleryPath() {
@@ -178,6 +169,26 @@ public class PostActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+
+    private boolean loadData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
+        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
+
+        return true;
+
+    }
+
+    private boolean saveData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor spedit = sp.edit();
+        spedit.putString("DATA_JSON", JSON.encode(allData));
+        spedit.apply();
+        return true;
+
     }
 }
 
