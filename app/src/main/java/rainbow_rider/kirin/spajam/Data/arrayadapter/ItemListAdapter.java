@@ -45,7 +45,7 @@ public class ItemListAdapter extends GenericArrayAdapter<User> {
         //mViewHolder.food_icon.setBackground( listitem.getFoodIcon() );
         //Log.d("q",listItem.getQ_name());
         mViewHolder.title.setText( listItem.getU_name() );
-        mViewHolder.icon.setImageResource( R.mipmap.eigo );
+        mViewHolder.icon.setImageResource( R.mipmap.broom );
 
         return convertView;
     }
