@@ -135,11 +135,6 @@ public class PostActivity extends AppCompatActivity {
         final Spinner answer_spinner = (Spinner) findViewById(R.id.post_selectAnswer_spinner);
         final EditText title = (EditText) findViewById(R.id.post_title);
         final EditText mainText = (EditText) findViewById(R.id.post_mainText);
-        final EditText xplanationText = (EditText) findViewById(R.id.post_xplanation_text);
-        final EditText answerA = (EditText) findViewById(R.id.post_answerA_editText);
-        final EditText answerB = (EditText) findViewById(R.id.post_answerB_editText);
-        final EditText answerC = (EditText) findViewById(R.id.post_answerC_editText);
-        final EditText answerD = (EditText) findViewById(R.id.post_answerD_editText);
         //------
 
         //menu.findItem(R.id.menu_move_to_add_friend_button);
