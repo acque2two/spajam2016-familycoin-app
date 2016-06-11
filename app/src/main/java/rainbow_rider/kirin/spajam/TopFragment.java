@@ -96,7 +96,8 @@ public class TopFragment extends Fragment {
 
         genre.setG_id(Integer.parseInt(mGenreId));
         Family family = new Family();
-        family.setF_id(mFId);
+        //family.setF_id(mFId);
+        family.setF_id("sorano");
         genre = new Genre();
         Work work = new Work();
         ArrayList<Work> works = new ArrayList<>();
@@ -113,7 +114,11 @@ public class TopFragment extends Fragment {
                 super.onPostExecute( data );
                 Data reply = getReply();
 
-                mAdapter.addAll( reply.getFamily().get( 0 ).getWork() );
+                if ( reply == null ){
+                    Log.d("dame","desita");
+                } else {
+                    mAdapter.addAll(reply.getFamily().get(0).getWork());
+                }
                 try {
                     mListView.setAdapter( mAdapter );
                 } catch ( NullPointerException v ) {
@@ -121,7 +126,6 @@ public class TopFragment extends Fragment {
                 }
             }
         }.execute();
-
 
         Log.d("------------------", "Complete");
 
@@ -138,12 +142,12 @@ public class TopFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnTopFragmentListener) {
+/*        if (context instanceof OnTopFragmentListener) {
             mListener = (OnTopFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnTopFragmentListener");
-        }
+        }*/
     }
 
     @Override

@@ -187,8 +187,11 @@ public class TopActivity extends AppCompatActivity
                     .addToBackStack("そのた")
                     .commit();
         } else if (id == R.id.activity_top_drawer_family_data) {
-            Intent callintent = new Intent(TopActivity.this, FamilyDataActivity.class);
-            startActivity(callintent);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_top_fragment, FamilyDataFragment.newInstance( "6","other"))
+                    .addToBackStack("かぞくのじょうほう")
+                    .commit();
         } else if (id == R.id.activity_top_drawer_my_data) {
 
         }

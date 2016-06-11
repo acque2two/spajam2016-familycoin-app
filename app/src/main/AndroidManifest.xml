@@ -39,11 +39,9 @@
         <activity
             android:name=".TopActivity"
             android:label="@string/title_activity_top"
-            android:theme="@style/AppTheme" />
-        <!--android:theme="@style/AppTheme.NoActionBar"-->
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity android:name=".RankingActivity" />
-        <activity android:name=".FamilyDataActivity" />
         <activity android:name=".PhotoActivity"></activity>
     </application>
 
