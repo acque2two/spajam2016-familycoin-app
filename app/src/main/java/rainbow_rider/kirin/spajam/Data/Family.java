@@ -1,5 +1,6 @@
 package rainbow_rider.kirin.spajam.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * Memo:
  * Todo:
  */
-public class Family {
+public class Family implements Serializable {
     private String f_id;
     private String f_name;
 

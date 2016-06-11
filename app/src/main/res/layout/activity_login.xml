@@ -10,22 +10,30 @@
                 tools:context="rainbow_rider.kirin.spajam.LoginActivity">
 
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView3" >
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:orientation="vertical"
-                android:id="@+id/Name">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView13"
@@ -48,11 +56,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/My_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:orientation="vertical"
-                android:id="@+id/My_id">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView15"
@@ -75,11 +83,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/Family_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:orientation="vertical"
-                android:id="@+id/Family_id">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView16"
@@ -97,16 +105,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="sugiyama"
-                    android:gravity="left" />
+                    android:gravity="left"
+                    android:text="sugiyama"/>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/Sex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:orientation="vertical"
-                android:id="@+id/Sex">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView18"
@@ -119,36 +127,36 @@
                     android:textColor="#56a466" />
 
                 <RadioGroup
+                    android:id="@+id/login_radioG_sex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/login_radioG_sex"
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/men"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="おとこ"
                         android:checked="false"
-                        android:id="@+id/men" />
+                        android:text="おとこ"/>
 
                     <RadioButton
+                        android:id="@+id/woman"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="おんな"
                         android:checked="false"
-                        android:id="@+id/woman" />
+                        android:text="おんな"/>
                 </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/Adult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:orientation="vertical"
-                android:id="@+id/Adult">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView19"
@@ -161,37 +169,37 @@
                     android:textColor="#56a466" />
 
                 <RadioGroup
+                    android:id="@+id/login_radioG_adult"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/login_radioG_adult"
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/adult"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="おとな"
                         android:checked="false"
-                        android:id="@+id/adult" />
+                        android:text="おとな"/>
 
                     <RadioButton
+                        android:id="@+id/child"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="こども"
                         android:checked="false"
-                        android:id="@+id/child" />
+                        android:text="こども"/>
 
                 </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/Admin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:orientation="vertical"
-                android:id="@+id/Admin">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView17"
@@ -204,38 +212,38 @@
                     android:textColor="#56a466" />
 
                 <RadioGroup
+                    android:id="@+id/login_radioG_admin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/login_radioG_admin"
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/admin_yes"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="はい"
                         android:checked="false"
-                        android:id="@+id/admin_yes" />
+                        android:text="はい"/>
 
                     <RadioButton
+                        android:id="@+id/admin_no"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="いいえ"
                         android:checked="false"
-                        android:id="@+id/admin_no" />
+                        android:text="いいえ"/>
                 </RadioGroup>
             </LinearLayout>
 
             <Button
-                android:scaleType="fitEnd"
+                android:id="@+id/login_create_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="作成"
-                android:id="@+id/login_create_button"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:scaleType="fitEnd"
+                android:text="作成"/>
 
         </LinearLayout>
     </ScrollView>

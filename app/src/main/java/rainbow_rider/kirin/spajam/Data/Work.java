@@ -1,5 +1,7 @@
 package rainbow_rider.kirin.spajam.Data;
 
+import java.io.Serializable;
+
 /**
  * Created by acq on 16/06/11.
  * Title:
@@ -7,7 +9,7 @@ package rainbow_rider.kirin.spajam.Data;
  * Memo:
  * Todo:
  */
-public class Work {
+public class Work implements Serializable {
     private Integer w_id;
     private String w_text;
     private String u_id;

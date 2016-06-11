@@ -1,6 +1,8 @@
 package rainbow_rider.kirin.spajam;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,9 +14,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
+import java.util.ArrayList;
 
+import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.User;
+import rainbow_rider.kirin.spajam.transfer.async.family.AsyncFamilyAdd;
+import rainbow_rider.kirin.spajam.transfer.async.family.AsyncFamilyExist;
+import rainbow_rider.kirin.spajam.transfer.async.user.AsyncUserAdd;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -97,7 +104,65 @@ public class LoginActivity extends AppCompatActivity {
                 user.setSex(sex[0]);
                 user.setAdult(adult[0]);
                 user.setAdmin(admin[0]);
+                ArrayList<User> users = new ArrayList<User>(  );
+                users.add( user );
+                final Family family = new Family();
+                family.setF_id( f_id );
+                family.setUser( users );
 
+                new AsyncFamilyExist( family ){
+                    @Override
+                    protected void onPostExecute( Data data ) {
+                        super.onPostExecute( data );
+                        Data reply = getReply();
+                        LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility( View.GONE );
+                        if (!reply.isStatus()){
+                            // 家族未登録
+
+                            // 確認ダイアログの生成
+                            AlertDialog.Builder alertDlg = new AlertDialog.Builder( LoginActivity.this );
+                            alertDlg.setTitle("家族が未登録です");
+                            alertDlg.setMessage("家族を新規に登録する必要があります。登録しますか？");
+                            alertDlg.setPositiveButton(
+                                    "はぁい",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility( View.VISIBLE );
+                                            new AsyncFamilyAdd( family ){
+                                                @Override
+                                                protected void onPostExecute( Data data ) {
+                                                    super.onPostExecute( data );
+                                                    new AsyncUserAdd( family ){
+                                                        @Override
+                                                        protected void onPostExecute( Data data ) {
+                                                            super.onPostExecute( data );
+
+                                                            LoginActivity.this.findViewById( R.id.progressBar2 )
+                                                                              .setVisibility( View.GONE );
+                                                            Toast.makeText( LoginActivity.this.getApplicationContext
+                                                                    (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
+                                                            LoginActivity.this.finish();
+                                                        }
+                                                    }.execute(  );
+                                                }
+                                            }.execute(  );
+
+                                        }
+                                    });
+                            alertDlg.setNegativeButton(
+                                    "いいえ",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // Cancel ボタンクリック処理
+                                        }
+                                    });
+
+                            // 表示
+                            alertDlg.create().show();
+                        }
+                    }
+                }.execute(  );
+                LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility( View.VISIBLE );
                 saveUserData(LoginActivity.this, name, u_id, f_id, sex[0], adult[0], admin[0]);
 
                 Toast.makeText(LoginActivity.this, "作成", Toast.LENGTH_SHORT).show();
