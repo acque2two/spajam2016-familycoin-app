@@ -15,15 +15,15 @@
             android:title="りょうり" />
         <item
             android:id="@+id/activity_top_drawer_washing"
-            android:src="@mipmap/drawer_towel"
+            android:icon="@mipmap/drawer_towel"
             android:title="せんたく" />
         <item
             android:id="@+id/activity_top_drawer_social_study"
-            android:src="@mipmap/drawer_book"
+            android:icon="@mipmap/drawer_book"
             android:title="べんきょう" />
         <item
             android:id="@+id/activity_top_drawer_shopping"
-            android:src="@mipmap/drawer_cage"
+            android:icon="@mipmap/drawer_cage"
             android:title="かいもの" />
         <item
             android:id="@+id/activity_top_drawer_other"
@@ -36,13 +36,13 @@
     <item android:title="情報">
         <menu>
             <item
-                android:id="@+id/activity_top_drawer_family_data"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="かぞく" />
-            <item
-                android:id="@+id/activity_top_drawer_mydata"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:id="@+id/activity_top_drawer_my_data"
+                android:icon="@mipmap/drawer_own"
                 android:title="じぶん" />
+            <item
+                android:id="@+id/activity_top_drawer_family_data"
+                android:icon="@mipmap/drawer_family"
+                android:title="かぞく" />
         </menu>
     </item>
 

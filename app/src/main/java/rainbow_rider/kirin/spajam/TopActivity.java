@@ -196,7 +196,7 @@ public class TopActivity extends AppCompatActivity
         } else if (id == R.id.activity_top_drawer_family_data) {
             Intent callintent = new Intent(TopActivity.this, FamilyDataActivity.class);
             startActivity(callintent);
-        } else if (id == R.id.activity_top_drawer_mydata) {
+        } else if (id == R.id.activity_top_drawer_my_data) {
 
         }
 
