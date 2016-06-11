@@ -8,9 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import net.arnx.jsonic.JSON;
 
@@ -40,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
         MyThread myThread = new MyThread();
         myThread.start();
 
-        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
-
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setFillAfter(true);
+//        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
+//
+//        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+//        alphaAnimation.setDuration(1000);
+//        alphaAnimation.setFillAfter(true);
 
         //アニメーション動作
         //activity_main_imageView.startAnimation(alphaAnimation);
