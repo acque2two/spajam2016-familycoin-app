@@ -13,6 +13,7 @@ import rainbow_rider.kirin.spajam.Data.User;
 
 public class MainActivity extends AppCompatActivity {
 
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    private User loadUserData(Context context) {
+    private boolean loadUserData(Context context) {
         // アプリ標準の Preferences を取得する
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         boolean adult = sp.getBoolean("adult", false);
         boolean admin = sp.getBoolean("admin", false);
 
-        User user = new User();
+
         user.setU_name(name);
         user.setU_id(u_id);
         user.setF_id(f_id);
@@ -85,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
         user.setAdult(adult);
         user.setAdmin(admin);
 
-        return user;
+        boolean ans = true;
+
+        return ans;
 
     }
 }

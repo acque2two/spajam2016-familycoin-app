@@ -32,8 +32,6 @@ import rainbow_rider.kirin.spajam.Data.User;
 public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
     private ImageView imageView;
-    private ImageView imageView2;
-    private ImageView imageView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,18 +59,8 @@ public class PostActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 
-                // Filter to only show results that can be "opened", such as a
-                // file (as opposed to a list of contacts or timezones)
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-                // Filter to show only images, using the image MIME data type.
-                // it would be "*/*".
-                intent.setType("image/*");
-
-                startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
             }
         });
 
@@ -81,11 +69,11 @@ public class PostActivity extends AppCompatActivity {
         genre_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         genre_adapter.add("選択してください");
-        genre_adapter.add("国語");
-        genre_adapter.add("数学");
-        genre_adapter.add("理科");
-        genre_adapter.add("社会");
-        genre_adapter.add("英語");
+        genre_adapter.add("掃除");
+        genre_adapter.add("料理");
+        genre_adapter.add("洗濯");
+        genre_adapter.add("勉強");
+        genre_adapter.add("買い物");
         genre_adapter.add("その他");
 
         // アダプターを設定します
@@ -112,12 +100,10 @@ public class PostActivity extends AppCompatActivity {
 
     private User setUserData(Intent intent){
         User u = new User();
-        long i = 740373350904520704L;
 //        u.setUser_id(intent.getLongExtra("user_id", i));
 //        u.setUser_name(intent.getStringExtra("user_name"));
         return u;
     }
-
 
     private String getGalleryPath() {
         return Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/";
@@ -126,27 +112,6 @@ public class PostActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
 
-        // The ACTION_OPEN_DOCUMENT intent was sent with the request code
-        // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
-        // response to some other intent, and the code below shouldn't run at all.
-        if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == Activity.RESULT_OK) {
-            // The document selected by the user won't be returned in the intent.
-            // Instead, a URI to that document will be contained in the return intent
-            // provided to this method as a parameter.
-            // Pull that URI using resultData.getData().
-            uri = null;
-            if (resultData != null) {
-                uri = resultData.getData();
-                Log.i("", "Uri: " + uri.toString());
-
-                try {
-                    Bitmap bmp = getBitmapFromUri(uri);
-                    imageView.setImageBitmap(bmp);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     //Bitmap
