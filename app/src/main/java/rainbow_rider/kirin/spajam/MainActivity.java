@@ -6,8 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import rainbow_rider.kirin.spajam.Data.User;
 
@@ -24,6 +27,18 @@ public class MainActivity extends AppCompatActivity {
         setTitle(getString(R.string.app_name));
 
         loadUserData(MainActivity.this);
+
+        MyThread myThread = new MyThread();
+        myThread.start();
+
+        ImageView actiity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
+
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(1000);
+        alphaAnimation.setFillAfter(true);
+
+        //アニメーション動作
+        actiity_main_imageView.startAnimation(alphaAnimation);
 
         Button detailButton = (Button) findViewById(R.id.main_detail_button);
         Button postButton = (Button) findViewById(R.id.main_post_button);
@@ -89,31 +104,7 @@ public class MainActivity extends AppCompatActivity {
         return ans;
 
     }
-}
-/*過去の遺物
-        MyThread myThread = new MyThread();
-        myThread.start();
 
-        ImageView actiity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
-
-        TextView activity_main_title_textView = (TextView) findViewById(R.id.activity_main_title_text);
-
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setFillAfter(true);
-
-        TranslateAnimation translateAnimation = new TranslateAnimation(-10.0f, 10.0f, -10.0f, 10.0f);
-        translateAnimation.setDuration(1000);
-        translateAnimation.setFillAfter(true);
-
-        //アニメーション動作
-        actiity_main_imageView.startAnimation(alphaAnimation);
-        activity_main_title_textView.startAnimation(alphaAnimation);
-
-        //font設定
-        activity_main_title_textView.setTypeface(Typeface.SERIF);
-
-}
 
     private class MyThread extends Thread {
         public void run() {
@@ -130,4 +121,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-*/
+
+

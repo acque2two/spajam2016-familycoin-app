@@ -13,7 +13,6 @@ import android.widget.AbsListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
@@ -122,8 +121,6 @@ public class FamilyDataFragment extends Fragment {
         works.add(work);
         family.setWork(works);
 
-        Collection<Work> works_recv = new ArrayList<>();
-
         new AsyncWorkGenreList( family ) {
             @Override
             protected void onPostExecute( Data data ) {
@@ -131,7 +128,7 @@ public class FamilyDataFragment extends Fragment {
                 Data reply = getReply();
 
                 if ( reply == null ){
-                    Log.d("dame","desita");
+                    Log.d("reply","is null");
                 } else {
                     mAdapter.addAll(reply.getFamily().get(0).getWork());
                 }
