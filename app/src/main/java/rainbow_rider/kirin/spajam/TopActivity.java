@@ -39,7 +39,6 @@ public class TopActivity extends AppCompatActivity
         setContentView(R.layout.activity_top);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Family Coin");
-        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 

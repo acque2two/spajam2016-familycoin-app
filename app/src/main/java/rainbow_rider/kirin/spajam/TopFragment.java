@@ -39,8 +39,8 @@ public class TopFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mGenreId;
+    private String mFId;
 
     private OnTopFragmentListener mListener;
 
@@ -72,8 +72,8 @@ public class TopFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mGenreId = getArguments().getString(ARG_PARAM1);
+            mFId = getArguments().getString(ARG_PARAM2);
         }
 
     }
@@ -89,20 +89,20 @@ public class TopFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toast.makeText( view.getContext() ,mParam2,Toast.LENGTH_SHORT ).show();
+        Toast.makeText( view.getContext() , mFId,Toast.LENGTH_SHORT ).show();
 
         Genre genre = new Genre();
 
         final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
         final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
-        genre.setG_id(Integer.parseInt(mParam1));
+        genre.setG_id(Integer.parseInt(mGenreId));
         Family family = new Family();
-        family.setF_id(Integer.parseInt(mParam2));
+        family.setF_id(Integer.parseInt(mFId));
         genre = new Genre();
         Work work = new Work();
         ArrayList<Work> works = new ArrayList<>();
-        genre.setG_id(Integer.parseInt(mParam1));
+        genre.setG_id(Integer.parseInt(mGenreId));
         work.setGenre(genre);
         works.add(work);
         family.setWork(works);
