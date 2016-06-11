@@ -6,13 +6,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import net.arnx.jsonic.JSON;
 
 import rainbow_rider.kirin.spajam.Data.Data;
-import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
         MyThread myThread = new MyThread();
         myThread.start();
 
-        ImageView actiity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
+        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
 
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setDuration(1000);
         alphaAnimation.setFillAfter(true);
 
         //アニメーション動作
-        actiity_main_imageView.startAnimation(alphaAnimation);
+        //activity_main_imageView.startAnimation(alphaAnimation);
 
         Button detailButton = (Button) findViewById(R.id.main_detail_button);
         Button postButton = (Button) findViewById(R.id.main_post_button);
@@ -125,4 +127,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-*/
+
