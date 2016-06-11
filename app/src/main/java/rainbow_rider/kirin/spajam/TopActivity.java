@@ -52,6 +52,10 @@ public class TopActivity extends AppCompatActivity
         user = allData.family.get( 0 ).users.get( 0 );
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        if ( user.getAdmin() == false ) {
+          fab.setVisibility(View.GONE);
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
