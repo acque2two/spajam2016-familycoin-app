@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Create Button
         Button button = (Button) findViewById(R.id.login_create_button);
+        assert button != null;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 saveUserData(LoginActivity.this, name, u_id, f_id, sex[0], adult[0], admin[0]);
 
+                Toast.makeText(LoginActivity.this, "作成", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -111,8 +114,8 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("u_id", u_id);
         editor.putString("f_id", f_id);
         editor.putBoolean("sex", sex);
-        editor.putBoolean("admin", admin);
         editor.putBoolean("adult", adult);
+        editor.putBoolean("admin", admin);
 
         // 書き込みを確定する
         editor.commit();
