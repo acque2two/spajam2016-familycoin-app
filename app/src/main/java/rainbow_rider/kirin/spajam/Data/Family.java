@@ -18,6 +18,22 @@ public class Family implements Serializable {
     public ArrayList<Work> work;
     public ArrayList<Product> product;
 
+    public ArrayList<User> getUsers( ) {
+        return users;
+    }
+
+    public void setUsers( ArrayList<User> users ) {
+        this.users = users;
+    }
+
+    public ArrayList<Product> getProduct( ) {
+        return product;
+    }
+
+    public void setProduct( ArrayList<Product> product ) {
+        this.product = product;
+    }
+
     public String getF_id( ) {
         return f_id;
     }
