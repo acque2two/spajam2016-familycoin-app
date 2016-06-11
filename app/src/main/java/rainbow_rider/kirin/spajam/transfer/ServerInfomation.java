@@ -9,7 +9,7 @@ package rainbow_rider.kirin.spajam.transfer;
  */
 public class ServerInfomation {
     private final static String serverHost = null;
-    private final static String serverHostName = "sgnz0606.acqn.xyz";
+    private final static String serverHostName = "sj.acqn.xyz";
     private final static Integer serverPort = 80;
 
     public static String getServerHost( ) { return serverHost; }
