@@ -100,13 +100,4 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_sub">SubActivity</string>
-    <string name="genre_1">国語</string>
-    <string name="genre_2">数学</string>
-    <string name="genre_3">理科</string>
-    <string name="genre_4">社会</string>
-    <string name="genre_5">英語</string>
-    <string name="genre_6">その他</string>
-    <string name="send">投稿</string>
-    <string name="ranking">ランキング</string>
-
 </resources>

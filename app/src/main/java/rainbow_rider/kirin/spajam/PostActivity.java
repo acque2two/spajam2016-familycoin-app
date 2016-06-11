@@ -138,12 +138,12 @@ public class PostActivity extends AppCompatActivity {
         genre_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         genre_adapter.add("選択してください");
-        genre_adapter.add( "getString(R.string.genre_1)" );
-        genre_adapter.add( "getString(R.string.genre_2)" );
-        genre_adapter.add( "getString(R.string.genre_3)" );
-        genre_adapter.add( "getString(R.string.genre_4)" );
-        genre_adapter.add( "getString(R.string.genre_5)" );
-        genre_adapter.add( "getString(R.string.genre_6)" );
+        genre_adapter.add("国語");
+        genre_adapter.add("数学");
+        genre_adapter.add("理科");
+        genre_adapter.add("社会");
+        genre_adapter.add("英語");
+        genre_adapter.add("その他");
 
         // アダプターを設定します
         assert genre_spinner != null;
@@ -270,7 +270,7 @@ public class PostActivity extends AppCompatActivity {
         setTitle("問題投稿");
 
         final MenuItem a = menu.findItem( R.id.menu_detail_image_button );
-        a.setTitle( getString( R.string.send ) );
+        a.setTitle( "投稿" );
         a.setCheckable( true );
         a.setOnMenuItemClickListener( new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -283,17 +283,17 @@ public class PostActivity extends AppCompatActivity {
                 String genreName = genre_spinner.getSelectedItem().toString();
 
                 //genreをidに変換    NullPointer対策にelse
-                if ( genreName.equals( "getString(R.string.genre_1)" ) ) {
+                if ( genreName.equals("国語") ){
                     genre.setGenre_id(1);
-                } else if ( genreName.equals( "getString(R.string.genre_2)" ) ) {
+                } else if( genreName.equals("数学") ) {
                     genre.setGenre_id(2);
-                } else if ( genreName.equals( "getString(R.string.genre_3)" ) ) {
+                } else if( genreName.equals("理科") ) {
                     genre.setGenre_id(3);
-                } else if ( genreName.equals( "getString(R.string.genre_4)" ) ) {
+                } else if( genreName.equals("社会") ) {
                     genre.setGenre_id(4);
-                } else if ( genreName.equals( "getString(R.string.genre_5)" ) ) {
+                } else if( genreName.equals("英語") ) {
                     genre.setGenre_id(5);
-                } else if ( genreName.equals( "getString(R.string.genre_6)" ) ) {
+                } else if( genreName.equals("その他") ) {
                     genre.setGenre_id(6);
                 } else {
                     genre.setGenre_id(7);
