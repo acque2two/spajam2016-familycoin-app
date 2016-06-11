@@ -1,4 +1,4 @@
-package rainbow_rider.kirin.spajam.Data;
+package rainbow_rider.kirin.spajam.Data.arrayadapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -52,7 +52,7 @@ public class GenericArrayAdapter<T> extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent ) {
+    public View getView( int position, View convertView, ViewGroup parent ) {
         return ( convertView != null )
                 ? convertView
                 : mLayoutInflater.inflate( mResource, parent, false );

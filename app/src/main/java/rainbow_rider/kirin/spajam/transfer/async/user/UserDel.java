@@ -1,8 +1,9 @@
 package rainbow_rider.kirin.spajam.transfer.async.user;
 
+import java.util.ArrayList;
+
 import rainbow_rider.kirin.spajam.Data.Data;
-import rainbow_rider.kirin.spajam.Data.Multiple.Users;
-import rainbow_rider.kirin.spajam.Data.User;
+import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.transfer.async.Sender;
 
 /**
@@ -14,11 +15,17 @@ import rainbow_rider.kirin.spajam.transfer.async.Sender;
  */
 
 public class UserDel extends Sender {
-    public UserDel( User user ) {
-        Users userList = new Users();
-        userList.set( user );
+    public UserDel( Data data ) {
+        allData = data;
+        super.setPath( "/userdel" );
+    }
+
+    public UserDel( Family family ) {
+        ArrayList<Family> familyArrayList = new ArrayList<>();
+        familyArrayList.add( family );
+
         allData = new Data();
-        allData.setUser( userList );
+        allData.setFamily( familyArrayList );
         super.setPath( "/userdel" );
     }
 }

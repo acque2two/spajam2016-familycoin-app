@@ -27,9 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rainbow_rider.kirin.spajam.Data.Data;
-import rainbow_rider.kirin.spajam.Data.Multiple.Questions;
-import rainbow_rider.kirin.spajam.Data.Multiple.Users;
-import rainbow_rider.kirin.spajam.Data.Question;
 import rainbow_rider.kirin.spajam.Data.User;
 
 public class DetailActivity extends AppCompatActivity {
@@ -46,12 +43,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         //TopActivityからQuestionを受け取る。
-        Question tr = (Question) getIntent().getSerializableExtra("question");
-        Questions trl = new Questions();
-        trl.add(tr);
-        Users usl = new Users();
-        usl.add(user);
-        Qdata.setQuestion(trl);
 
         user = (User) getIntent().getSerializableExtra("myUser");
         Intent intent = getIntent();
@@ -69,13 +60,6 @@ public class DetailActivity extends AppCompatActivity {
         final TextView ansC_text = (TextView) findViewById(R.id.detail_answerC_text);
         final TextView ansD_text = (TextView) findViewById(R.id.detail_answerD_text);
 
-        String strgenre = tr.getGenre().getGenre_name();
-        String strtitle = tr.getQ_name();
-        //String struser = tr.getUser().getUser_name();
-        String struser = tr.getUser().getUser_name();
-        String strmain = tr.getQ_text();
-
-        setTitle(strgenre);
 
         List<TextView> ansList = new ArrayList<TextView>(){
             {
@@ -90,9 +74,6 @@ public class DetailActivity extends AppCompatActivity {
         assert title_text != null;
         assert user_text != null;
 
-        title_text.setText(strtitle);
-        user_text.setText(struser);
-        main_text.setText(strmain);
 
         //answer
         /*String[] stransList = new String[]{"答えはなんだろうね", "わかんなーい", "なんでー", "の・ぞ・み"};
@@ -100,9 +81,6 @@ public class DetailActivity extends AppCompatActivity {
             ansList.get(i).setText(stransList[i]);
         }*/
 
-        for(int i = 0; i < tr.getAnswer().size(); i++ ) {
-            ansList.get(i).setText(tr.getAnswer().get(i).getAns_text());
-        }
 
 
         //image
@@ -126,11 +104,6 @@ public class DetailActivity extends AppCompatActivity {
 
                     //解答送信
 
-                    if( selectedId == Qdata.getQuestion().get(0).getTrue_id() ) {
-                        Toast.makeText(getApplicationContext(), "制界!", Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(getApplicationContext(), "まけ", Toast.LENGTH_LONG).show();
-                    }
                     send_button.setText("正解を見る");
                     send[0] = true;
                 }
@@ -171,8 +144,6 @@ public class DetailActivity extends AppCompatActivity {
     //ここ
     private User setUserData(Intent intent){
         User u = new User();
-        u.setUser_id(intent.getLongExtra("user_id", 740373350904520704L));
-        u.setUser_name(intent.getStringExtra("user_name"));
         return u;
     }
 
