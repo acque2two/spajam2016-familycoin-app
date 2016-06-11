@@ -1,14 +1,20 @@
 package rainbow_rider.kirin.spajam;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -17,20 +23,58 @@ import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
-    private static final String TWITTER_KEY = "hkfp2jWmBxqSqrVYvgBKmLpXP";
-    private static final String TWITTER_SECRET = "9a8rJNzQwTwfmaXs2v6tJB7W54VOw4TeJAYa5qlZg77pO8pSSo";
 
     @Override
-    protected void onCreate( Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
-        setContentView( R.layout.activity_main );
+        setContentView(R.layout.activity_main);
 
         setTitle(getString(R.string.app_name));
 
+        Button detail_button = (Button) findViewById(R.id.main_detail_button);
+        Button post_button = (Button) findViewById(R.id.main_post_button);
+        Button login_button = (Button) findViewById(R.id.main_login_button);
+
+        detail_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callintent = new Intent(MainActivity.this, DetailActivity.class);
+                startActivity(callintent);
+            }
+        });
+
+        post_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callintent = new Intent(MainActivity.this, PostActivity.class);
+                startActivity(callintent);
+            }
+        });
+
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callintent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(callintent);
+            }
+        });
+
+        loadName(MainActivity.this);
+    }
+
+
+    private String loadName(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
+        Toast.makeText(MainActivity.this, sp.getString("name", ""), Toast.LENGTH_LONG).show();
+
+        return sp.getString("name", "");
+
+    }
+}
+/*過去の遺物
         MyThread myThread = new MyThread();
         myThread.start();
 
@@ -70,3 +114,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+*/
