@@ -55,7 +55,7 @@ android:id="@+id/main_top_button"
 			<ImageView
     android:layout_width="203dp"
     android:layout_height="222dp"
-    android:id="@+id/imageView2"
+    android:id="@+id/activity_main2_imageView"
     android:src="@mipmap/titile_rogo"
     android:layout_alignParentEnd="true"
     android:layout_alignParentStart="true"
