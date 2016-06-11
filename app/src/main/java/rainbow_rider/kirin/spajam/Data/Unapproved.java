@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Todo:
  */
 public class Unapproved extends Work implements Serializable {
-    private int date;
+    public int date;
 
     public int getDate( ) {
         return date;

@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * Todo:
  */
 public class Data implements Serializable {
-    private boolean status;
-    private ArrayList<Family> family;
-    private ArrayList<Genre> genre;
+    public boolean status;
+    public ArrayList<Family> family;
+    public ArrayList<Genre> genre;
 
     public boolean isStatus( ) {
         return status;

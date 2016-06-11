@@ -11,12 +11,12 @@ import java.util.ArrayList;
  * Todo:
  */
 public class Family implements Serializable {
-    private String f_id;
-    private String f_name;
+    public String f_id;
+    public String f_name;
 
-    private ArrayList<User> users;
-    private ArrayList<Work> work;
-    private ArrayList<Product> product;
+    public ArrayList<User> users;
+    public ArrayList<Work> work;
+    public ArrayList<Product> product;
 
     public String getF_id( ) {
         return f_id;
