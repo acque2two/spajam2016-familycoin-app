@@ -45,7 +45,9 @@
         <activity
             android:name=".PresentActivity"
             android:label="@string/title_activity_present"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".transfer.PDActivity" />
+        <activity android:name=".PDActivity"></activity>
     </application>
 
 </manifest>
