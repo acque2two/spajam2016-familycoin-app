@@ -52,7 +52,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
                     android:gravity="left"
-                    android:text="のぞみ" />
+                    android:text="きりん" />
             </LinearLayout>
 
             <LinearLayout
@@ -79,7 +79,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
                     android:gravity="left"
-                    android:text="nozomi" />
+                    android:text="kirin" />
             </LinearLayout>
 
             <LinearLayout
@@ -106,7 +106,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
                     android:gravity="left"
-                    android:text="sugiyama"/>
+                    android:text="rainbow"/>
             </LinearLayout>
 
             <LinearLayout
