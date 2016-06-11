@@ -27,6 +27,7 @@ import rainbow_rider.kirin.spajam.transfer.async.user.AsyncUserAdd;
 
 public class LoginActivity extends AppCompatActivity {
 
+    Family family;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -109,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                 user.setAdmin(admin[0]);
                 ArrayList<User> users = new ArrayList<User>(  );
                 users.add( user );
-                final Family family = new Family();
+                family = new Family();
                 family.setF_id( f_id );
                 family.setUser( users );
 
@@ -156,14 +157,21 @@ public class LoginActivity extends AppCompatActivity {
                                                                 @Override
                                                                 protected void onPostExecute( Data data ) {
                                                                     super.onPostExecute( data );
+
                                                                     Toast.makeText(
                                                                             LoginActivity.this.getApplicationContext(),
                                                                             "家族登録が完了しました。",
                                                                             Toast.LENGTH_LONG
                                                                     ).show();
                                                                     userAdd.execute();
+                                                                    LoginActivity.this.findViewById( R.id.progressBar2 )
+                                                                                      .setVisibility(
+                                                                                              View.GONE );
                                                                 }
                                                             }.execute();
+                                                            LoginActivity.this.findViewById( R.id.progressBar2 )
+                                                                              .setVisibility(
+                                                                                      View.VISIBLE );
                                                         }
                                                     } )
                                                     .setNegativeButton( "キャンセル", new DialogInterface.OnClickListener() {
@@ -224,7 +232,10 @@ public class LoginActivity extends AppCompatActivity {
         // アプリ標準の Preferences を取得する
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor spedit = sp.edit();
-
+        if ( allData.family == null ) {
+            allData.family = new ArrayList<>();
+            allData.family.add( family );
+        }
         allData.family.get(0).users.add(user);
 
         spedit.putString("DATA_JSON", JSON.encode(allData));
