@@ -1,13 +1,7 @@
 package rainbow_rider.kirin.spajam.Data;
 
 import java.io.Serializable;
-
-import rainbow_rider.kirin.spajam.Data.Multiple.Anss;
-import rainbow_rider.kirin.spajam.Data.Multiple.Favs;
-import rainbow_rider.kirin.spajam.Data.Multiple.Genres;
-import rainbow_rider.kirin.spajam.Data.Multiple.Questions;
-import rainbow_rider.kirin.spajam.Data.Multiple.UserAnss;
-import rainbow_rider.kirin.spajam.Data.Multiple.Users;
+import java.util.ArrayList;
 
 /**
  * Created by acq on 16/06/06.
@@ -17,63 +11,31 @@ import rainbow_rider.kirin.spajam.Data.Multiple.Users;
  * Todo:
  */
 public class Data implements Serializable {
-    private Anss ans;
-    private Users user;
-    private Questions question;
-    private Genres genre;
-    private UserAnss userans;
-    private Favs fav;
-    private Boolean status;
+    private boolean status;
+    private ArrayList<Family> family;
+    private ArrayList<Genre> genre;
 
-    public Boolean isStatus( ) {
+    public boolean isStatus( ) {
         return status;
     }
 
-    public Anss getAns( ) {
-        return ans;
+    public void setStatus( boolean status ) {
+        this.status = status;
     }
 
-    public void setAns( Anss ans ) {
-        this.ans = ans;
+    public ArrayList<Family> getFamily( ) {
+        return family;
     }
 
-    public Users getUser( ) {
-        return user;
+    public void setFamily( ArrayList<Family> family ) {
+        this.family = family;
     }
 
-    public void setUser( Users user ) {
-        this.user = user;
-    }
-
-    public Questions getQuestion( ) {
-        return question;
-    }
-
-    public void setQuestion( Questions question ) {
-        this.question = question;
-    }
-
-    public Genres getGenre( ) {
+    public ArrayList<Genre> getGenre( ) {
         return genre;
     }
 
-    public void setGenre( Genres genre ) {
+    public void setGenre( ArrayList<Genre> genre ) {
         this.genre = genre;
-    }
-
-    public UserAnss getUserans( ) {
-        return userans;
-    }
-
-    public void setUserans( UserAnss userans ) {
-        this.userans = userans;
-    }
-
-    public Favs getFav( ) {
-        return fav;
-    }
-
-    public void setFav( Favs fav ) {
-        this.fav = fav;
     }
 }

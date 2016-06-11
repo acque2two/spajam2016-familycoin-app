@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import rainbow_rider.kirin.spajam.Data.Question;
 import rainbow_rider.kirin.spajam.Data.User;
 
 
@@ -47,7 +46,9 @@ public class TopActivity extends AppCompatActivity
         Intent intent = getIntent();
         user = setUserData(intent);
 
+        TextView a = (TextView) findViewById(R.id.nav_header_top_textView);
         Log.d("twitter_user_id",user.getUser_name());
+        //a.setText(user.getUser_name());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -206,22 +207,22 @@ public class TopActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onTopFragmentItemClick(Question question) {
-        Intent callInTent = new Intent(TopActivity.this, DetailActivity.class);
+
+    // 安全に削除できませんでした acq
+    //@Override
+    //public void onTopFragmentItemClick(Void) {
+
+/*        Intent callInTent = new Intent(TopActivity.this, DetailActivity.class);
         Question q = question;
-        callInTent.putExtra("question", q);
         callInTent.putExtra("myUser", user);
         startActivity(callInTent);
-        //画面遷移時
+        //画面遷移時*/
         //callIntent.putExtra("user_id", user.getUser_id());
         //callIntent.putExtra("user_name",user.getUser_name());
-    }
+    //}
 
     private User setUserData(Intent intent) {
         User u = new User();
-        u.setUser_id(intent.getLongExtra("user_id", -1));
-        u.setUser_name(intent.getStringExtra("user_name"));
         return u;
     }
 

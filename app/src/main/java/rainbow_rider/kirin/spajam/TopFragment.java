@@ -9,8 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import rainbow_rider.kirin.spajam.Data.Question;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -117,6 +115,6 @@ public class TopFragment extends Fragment {
      */
     public interface OnTopFragmentListener {
         // TODO: Update argument type and name
-        void onTopFragmentItemClick(Question question);
+        //void onTopFragmentItemClick(Question question);
     }
 }

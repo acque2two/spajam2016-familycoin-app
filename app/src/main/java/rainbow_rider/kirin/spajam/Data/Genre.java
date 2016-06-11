@@ -2,29 +2,24 @@ package rainbow_rider.kirin.spajam.Data;
 
 import java.io.Serializable;
 
-public class Genre  implements Serializable {
-    private long genre_id;
-    private String genre_name;
-    private Long count;
+public class Genre implements Serializable {
+    private long g_id;
+    private String g_name;
 
-    public Long getCount( ) {
-        return count;
+    public long getG_id( ) {
+        return g_id;
     }
 
-
-    public long getGenre_id( ) {
-        return genre_id;
+    public void setG_id( long g_id ) {
+        this.g_id = g_id;
     }
 
-    public void setGenre_id( long genre_id ) {
-        this.genre_id = genre_id;
+    public String getG_name( ) {
+        return g_name;
     }
 
-    public String getGenre_name( ) {
-        return genre_name;
+    public void setG_name( String g_name ) {
+        this.g_name = g_name;
     }
 
-    public void setGenre_name( String genre_name ) {
-        this.genre_name = genre_name;
-    }
 }

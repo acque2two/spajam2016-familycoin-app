@@ -16,9 +16,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
-import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.User;
-import rainbow_rider.kirin.spajam.transfer.async.user.UserAdd;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -60,20 +58,20 @@ public class LoginActivity extends AppCompatActivity {
                 String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
                 Toast.makeText( getApplicationContext(), msg, Toast.LENGTH_LONG ).show();
                 User userData = new User();
-                userData.setUser_id( session.getUserId() );
-                userData.setUser_name( session.getUserName() );
-                new UserAdd(userData) {
-                    @Override
-                    protected void onPostExecute( Data data ) {
-                        super.onPostExecute( data );
-                            Toast.makeText( getApplicationContext(), "Sent to server.", Toast.LENGTH_LONG ).show();
-                            Intent callIntent = new Intent(LoginActivity.this, TopActivity.class);
-                            callIntent.putExtra("user_id", session.getUserId());
-                            callIntent.putExtra("user_name", session.getUserName());
-                            startActivity(callIntent);
-
-                    }
-                }.execute();
+//                userData.setUser_id( session.getUserId() );
+//                userData.setUser_name( session.getUserName() );
+//                new UserAdd(userData) {
+//                    @Override
+//                    protected void onPostExecute( Data data ) {
+//                        super.onPostExecute( data );
+//                            Toast.makeText( getApplicationContext(), "Sent to server.", Toast.LENGTH_LONG ).show();
+//                            Intent callIntent = new Intent(LoginActivity.this, TopActivity.class);
+//                            callIntent.putExtra("user_id", session.getUserId());
+//                            callIntent.putExtra("user_name", session.getUserName());
+//                            startActivity(callIntent);
+//
+//                    }
+//                }.execute();
             }
 
             @Override

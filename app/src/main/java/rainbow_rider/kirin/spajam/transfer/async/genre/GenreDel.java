@@ -1,8 +1,9 @@
 package rainbow_rider.kirin.spajam.transfer.async.genre;
 
+import java.util.ArrayList;
+
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Genre;
-import rainbow_rider.kirin.spajam.Data.Multiple.Genres;
 import rainbow_rider.kirin.spajam.transfer.async.Sender;
 
 /**
@@ -15,8 +16,8 @@ import rainbow_rider.kirin.spajam.transfer.async.Sender;
 
 public class GenreDel extends Sender {
     public GenreDel( Genre genre ) {
-        Genres genreList = new Genres();
-        genreList.set( genre );
+        ArrayList<Genre> genreList = new ArrayList<>();
+        genreList.add( genre );
         allData = new Data();
         allData.setGenre( genreList );
         super.setPath( "/genredel" );

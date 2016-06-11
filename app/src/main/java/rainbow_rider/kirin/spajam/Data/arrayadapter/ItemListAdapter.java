@@ -1,4 +1,4 @@
-package rainbow_rider.kirin.spajam.Data;
+package rainbow_rider.kirin.spajam.Data.arrayadapter;
 
 import android.content.Context;
 import android.view.View;
@@ -6,20 +6,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.R;
 
 
-public class ItemListAdapter extends GenericArrayAdapter<Question> {
+public class ItemListAdapter extends GenericArrayAdapter<User> {
 
     ViewHolder mViewHolder;
 
-    public ItemListAdapter(Context context, int resource ) {
+    public ItemListAdapter( Context context, int resource ) {
         super( context, resource );
     }
 
-    public View getView(int position, View convertView, ViewGroup parent ) {
+    public View getView( int position, View convertView, ViewGroup parent ) {
 
-        Question listItem = getItem(position);
+        User listItem = getItem( position );
 
         if ( convertView == null ) {
 
@@ -27,11 +28,11 @@ public class ItemListAdapter extends GenericArrayAdapter<Question> {
 
             mViewHolder = new ViewHolder();
 
-            mViewHolder.icon = (ImageView) convertView.findViewById( R.id.item_list_view_icon);
+            mViewHolder.icon = ( ImageView ) convertView.findViewById( R.id.item_list_view_icon );
 
-            mViewHolder.title = (TextView) convertView.findViewById( R.id.item_list_view_title );
+            mViewHolder.title = ( TextView ) convertView.findViewById( R.id.item_list_view_title );
 
-            mViewHolder.illust = (ImageView) convertView.findViewById( R.id.item_list_view_illust );
+            mViewHolder.illust = ( ImageView ) convertView.findViewById( R.id.item_list_view_illust );
 
             convertView.setTag( mViewHolder );
 
@@ -43,8 +44,8 @@ public class ItemListAdapter extends GenericArrayAdapter<Question> {
 
         //mViewHolder.food_icon.setBackground( listitem.getFoodIcon() );
         //Log.d("q",listItem.getQ_name());
-        mViewHolder.title.setText( listItem.getQ_name() );
-        mViewHolder.icon.setImageResource(R.mipmap.eigo);
+        mViewHolder.title.setText( listItem.getU_name() );
+        mViewHolder.icon.setImageResource( R.mipmap.eigo );
 
         return convertView;
     }
