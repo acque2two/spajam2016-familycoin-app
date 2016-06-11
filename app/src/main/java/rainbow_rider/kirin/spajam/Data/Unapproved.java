@@ -1,5 +1,7 @@
 package rainbow_rider.kirin.spajam.Data;
 
+import java.io.Serializable;
+
 /**
  * Created by acq on 16/06/11.
  * Title:
@@ -7,7 +9,7 @@ package rainbow_rider.kirin.spajam.Data;
  * Memo:
  * Todo:
  */
-public class Unapproved extends Work {
+public class Unapproved extends Work implements Serializable {
     private int date;
 
     public int getDate( ) {
