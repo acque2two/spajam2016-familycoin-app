@@ -80,7 +80,6 @@ public class PostActivity extends AppCompatActivity {
         genre_adapter.add("買い物");
         genre_adapter.add("その他");
 
-
         // アダプターを設定します
         assert genre_spinner != null;
         genre_spinner.setAdapter(genre_adapter);
