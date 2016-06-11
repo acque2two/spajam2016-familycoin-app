@@ -3,6 +3,7 @@ package rainbow_rider.kirin.spajam;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -131,6 +132,10 @@ public class LoginActivity extends AppCompatActivity {
                                                       .setVisibility( View.GONE );
                                     Toast.makeText( LoginActivity.this.getApplicationContext
                                             (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
+
+                                    Intent intent = new Intent();
+                                    setResult(RESULT_OK, intent);
+
                                     LoginActivity.this.finish();
                                 }
                             };
@@ -206,6 +211,9 @@ public class LoginActivity extends AppCompatActivity {
                                                       .setVisibility( View.GONE );
                                     Toast.makeText( LoginActivity.this.getApplicationContext
                                             (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
+                                    Intent intent = new Intent();
+                                    setResult(RESULT_OK, intent);
+
                                     LoginActivity.this.finish();
                                 }
                             }.execute();

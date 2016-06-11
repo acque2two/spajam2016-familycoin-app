@@ -8,7 +8,9 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import net.arnx.jsonic.JSON;
 
@@ -29,23 +31,25 @@ public class MainActivity extends AppCompatActivity {
         Intent callIntent;
         if ( !loadData( MainActivity.this ) ) {
             callIntent = new Intent( MainActivity.this, LoginActivity.class );
+            startActivityForResult( callIntent , 1);
+        }else{
+            callIntent = new Intent( MainActivity.this, TopActivity.class );
             startActivity( callIntent );
         }
 
-        callIntent = new Intent( MainActivity.this, TopActivity.class );
-        startActivity( callIntent );
+
 
         MyThread myThread = new MyThread();
         myThread.start();
 
-//        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
-//
-//        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-//        alphaAnimation.setDuration(1000);
-//        alphaAnimation.setFillAfter(true);
+        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
+
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(1000);
+        alphaAnimation.setFillAfter(true);
 
         //アニメーション動作
-        //activity_main_imageView.startAnimation(alphaAnimation);
+        activity_main_imageView.startAnimation(alphaAnimation);
 
         Button detailButton = (Button) findViewById(R.id.main_detail_button);
         Button postButton = (Button) findViewById(R.id.main_post_button);
@@ -108,7 +112,22 @@ public class MainActivity extends AppCompatActivity {
         return true;
 
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        super.onActivityResult(requestCode, resultCode, resultData);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    Intent callIntent = new Intent(MainActivity.this, TopActivity.class);
+                    startActivity(callIntent);
+                } else {
 
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     private class MyThread extends Thread {
         public void run() {

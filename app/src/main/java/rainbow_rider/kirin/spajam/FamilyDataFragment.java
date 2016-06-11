@@ -111,8 +111,7 @@ public class FamilyDataFragment extends Fragment {
 
         genre.setG_id(Integer.parseInt(mGenreId));
         Family family = new Family();
-        //family.setF_id(mFId);
-        family.setF_id("sorano");
+        family.setF_id(mFId);
         genre = new Genre();
         Work work = new Work();
         ArrayList<Work> works = new ArrayList<>();
@@ -154,7 +153,11 @@ public class FamilyDataFragment extends Fragment {
      * to the activity and potentially other fragments contained in that
      * activity.
      * <p/>
-     * See the Android Training lesson <a href=
+     * See the AndroiImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
+
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(1000);
+        alphaAnimation.setFillAfter(true);d Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
