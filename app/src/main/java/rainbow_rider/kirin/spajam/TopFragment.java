@@ -119,8 +119,7 @@ public class TopFragment extends Fragment {
 
         genre.setG_id(genreId);
         Family family = new Family();
-        //family.setF_id(mFId);
-        family.setF_id("matsubara");
+        family.setF_id(mFId);
 
         if ( genreId <= 9 ) {
             genre = new Genre();

@@ -1,24 +1,25 @@
 package rainbow_rider.kirin.spajam;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import net.arnx.jsonic.JSON;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import rainbow_rider.kirin.spajam.Data.Data;
-import rainbow_rider.kirin.spajam.Data.Family;
-import rainbow_rider.kirin.spajam.Data.Work;
-import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
-import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkGenreList;
 
 
 /**
@@ -38,6 +39,7 @@ public class FamilyDataFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mGenreId;
     private String mFId;
+    private Data allData = new Data();
 
     private OnFragmentInteractionListener mListener;
 
@@ -101,37 +103,32 @@ public class FamilyDataFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toast.makeText( view.getContext() , "かぞくのじょうほう",Toast.LENGTH_SHORT ).show();
+        Toast.makeText(view.getContext(), "かぞくのじょうほう", Toast.LENGTH_SHORT).show();
+        ArrayList<HashMap<String, String>> list_data = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> hashTmp = new HashMap<String, String>();
 
-        final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
-        final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
+        hashTmp.put("main", "定規");
+        hashTmp.put("sub", "Ruler");
+        hashTmp.put("right", "長さを測るもの");
+        list_data.add(new HashMap<String, String>(hashTmp));
 
-        Family family = new Family();
-        family.setF_id(mFId);
-        //genre = new Genre();
-        Work work = new Work();
-        ArrayList<Work> works = new ArrayList<>();
-        works.add(work);
-        family.setWork(works);
+        hashTmp.clear();
+        hashTmp.put("main", "ストップウォッチ");
+        hashTmp.put("sub", "StopWatch");
+        hashTmp.put("right", "時間を計るもの");
+        list_data.add(new HashMap<String, String>(hashTmp));
 
-        new AsyncWorkGenreList( family ) {
-            @Override
-            protected void onPostExecute( Data data ) {
-                super.onPostExecute( data );
-                Data reply = getReply();
+        hashTmp.clear();
+        hashTmp.put("main", "体重計");
+        hashTmp.put("sub", "WeightScale");
+        hashTmp.put("right", "体重を量るもの");
+        list_data.add(new HashMap<String, String>(hashTmp));
 
-                if ( reply == null ){
-                    Log.d("reply","is null");
-                } else {
-                    mAdapter.addAll(reply.getFamily().get(0).getWork());
-                }
-                try {
-                    mListView.setAdapter( mAdapter );
-                } catch ( NullPointerException v ) {
-                    Toast.makeText( view.getContext(), "データが空です", Toast.LENGTH_SHORT ).show();
-                }
-            }
-        }.execute();
+        SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
+                new String[]{"right", "main", "sub"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub});
+
+        ((ListView) view.findViewById(R.id.fragment_family_data_listView)).setAdapter(simp);
+
 
     }
 
@@ -148,10 +145,10 @@ public class FamilyDataFragment extends Fragment {
      * activity.
      * <p/>
      * See the AndroiImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
-
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setFillAfter(true);d Training lesson <a href=
+     * <p/>
+     * AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+     * alphaAnimation.setDuration(1000);
+     * alphaAnimation.setFillAfter(true);d Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
@@ -159,4 +156,17 @@ public class FamilyDataFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    private boolean loadData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
+        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
+
+        boolean ans;
+        ans = allData.getFamily() != null;
+
+        return ans;
+    }
 }
+

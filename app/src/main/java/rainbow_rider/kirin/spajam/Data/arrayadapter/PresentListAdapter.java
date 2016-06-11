@@ -9,11 +9,11 @@ import android.widget.TextView;
 import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.R;
 
-public class FamilyListAdapter extends GenericArrayAdapter<Work> {
+public class PresentListAdapter extends GenericArrayAdapter<Work> {
 
     ViewHolder mViewHolder;
 
-    public FamilyListAdapter(Context context, int resource ) {
+    public PresentListAdapter(Context context, int resource ) {
         super( context, resource );
     }
 
