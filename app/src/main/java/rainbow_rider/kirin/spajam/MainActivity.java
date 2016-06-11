@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(getString(R.string.app_name));
 
-        loadUserData(MainActivity.this);
+       // loadUserData(MainActivity.this);
 
         Button detailButton = (Button) findViewById(R.id.main_detail_button);
         Button postButton = (Button) findViewById(R.id.main_post_button);
