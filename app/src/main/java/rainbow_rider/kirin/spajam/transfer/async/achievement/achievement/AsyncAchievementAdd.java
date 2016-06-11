@@ -1,4 +1,4 @@
-package rainbow_rider.kirin.spajam.transfer.sync.work;
+package rainbow_rider.kirin.spajam.transfer.async.achievement.achievement;
 
 import java.util.ArrayList;
 
@@ -13,21 +13,20 @@ import rainbow_rider.kirin.spajam.transfer.sync.Sender;
  * Memo:
  * Todo:
  */
-public class WorkGet extends Sender {
+public class AsyncAchievementAdd extends Sender {
 
-    public WorkGet( Data data ) {
+    public AsyncAchievementAdd( Data data ) {
         allData = data;
-        super.setPath( "/workget" );
+        super.setPath( "/achievementadd" );
     }
 
-    public WorkGet( Family family ) {
+    public AsyncAchievementAdd( Family family ) {
+
         ArrayList<Family> familyArrayList = new ArrayList<>();
         familyArrayList.add( family );
-
         allData = new Data();
         allData.setFamily( familyArrayList );
-        super.setPath( "/workget" );
+        super.setPath( "/achievenmentadd" );
     }
-
 
 }

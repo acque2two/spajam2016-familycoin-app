@@ -15,22 +15,22 @@ import rainbow_rider.kirin.spajam.transfer.sync.Sender;
  * Memo:
  * Todo:
  */
-public class WorkList extends Sender {
+public class WorkGenreList extends Sender {
 
-    public WorkList( Family family ) {
+    public WorkGenreList( Family family ) {
         ArrayList<Family> familyList = new ArrayList<>();
         familyList.add( family );
         allData = new Data();
         allData.setFamily( familyList );
-        super.setPath( "/worklist" );
+        super.setPath( "/workgenrelist" );
     }
 
-    public WorkList( Data data ) {
+    public WorkGenreList( Data data ) {
         allData = data;
-        super.setPath( "/worklist" );
+        super.setPath( "/workgenrelist" );
     }
 
-    public WorkList( String g_name ) {
+    public WorkGenreList( String g_name ) {
         Genre genre = new Genre();
         genre.setG_name( g_name );
         Work work = new Work();
@@ -44,7 +44,7 @@ public class WorkList extends Sender {
         familyList.add( family );
         allData = new Data();
         allData.setFamily( familyList );
-        super.setPath( "/worklist" );
+        super.setPath( "/workgenrelist" );
     }
 
 }
