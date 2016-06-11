@@ -1,11 +1,14 @@
 package rainbow_rider.kirin.spajam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AbsListView;
+
+import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
 
 public class PresentActivity extends AppCompatActivity {
 
@@ -20,10 +23,16 @@ public class PresentActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent callIntent = new Intent(PresentActivity.this, PDActivity.class);
+                startActivity(callIntent);
             }
         });
+
+        final ItemListAdapter mAdapter = new ItemListAdapter( getApplicationContext(), R.layout.activity_top);
+        final AbsListView mListView = (AbsListView) findViewById(R.id.list_view);
+
+
+
     }
 
 }
