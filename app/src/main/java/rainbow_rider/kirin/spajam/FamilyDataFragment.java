@@ -104,31 +104,22 @@ public class FamilyDataFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Toast.makeText(view.getContext(), "かぞくのじょうほう", Toast.LENGTH_SHORT).show();
+
+        loadData(view.getContext());
         ArrayList<HashMap<String, String>> list_data = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> hashTmp = new HashMap<String, String>();
 
-        hashTmp.put("main", "定規");
-        hashTmp.put("sub", "Ruler");
-        hashTmp.put("right", "長さを測るもの");
-        list_data.add(new HashMap<String, String>(hashTmp));
-
-        hashTmp.clear();
-        hashTmp.put("main", "ストップウォッチ");
-        hashTmp.put("sub", "StopWatch");
-        hashTmp.put("right", "時間を計るもの");
-        list_data.add(new HashMap<String, String>(hashTmp));
-
-        hashTmp.clear();
-        hashTmp.put("main", "体重計");
-        hashTmp.put("sub", "WeightScale");
-        hashTmp.put("right", "体重を量るもの");
-        list_data.add(new HashMap<String, String>(hashTmp));
+        for ( int i = 0; i < allData.getFamily().get(0).getUser().size(); i++ ){
+            hashTmp.put("u_name" , allData.getFamily().get(0).getUser().get(i).getU_name());
+            hashTmp.put("u_data" , allData.getFamily().get(0).getUser().get(i).getScore().toString() );
+            list_data.add(new HashMap<String, String>(hashTmp));
+            hashTmp.clear();
+        }
 
         SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
                 new String[]{"right", "main", "sub"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub});
 
         ((ListView) view.findViewById(R.id.fragment_family_data_listView)).setAdapter(simp);
-
 
     }
 
