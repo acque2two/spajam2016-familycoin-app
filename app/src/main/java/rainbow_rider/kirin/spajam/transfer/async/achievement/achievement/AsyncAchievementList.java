@@ -1,4 +1,4 @@
-package rainbow_rider.kirin.spajam.transfer.async.achievement.unapproved;
+package rainbow_rider.kirin.spajam.transfer.async.achievement.achievement;
 
 import java.util.ArrayList;
 
@@ -13,20 +13,19 @@ import rainbow_rider.kirin.spajam.transfer.sync.Sender;
  * Memo:
  * Todo:
  */
-public class UnapprovedAdd extends Sender {
+public class AsyncAchievementList extends Sender {
 
-    public UnapprovedAdd( Data data ) {
+    public AsyncAchievementList( Data data ) {
         allData = data;
-        super.setPath( "/unapprovedadd" );
+        super.setPath( "/achievementlist" );
     }
 
-    public UnapprovedAdd( Family family ) {
-
+    public AsyncAchievementList( Family family ) {
         ArrayList<Family> familyArrayList = new ArrayList<>();
         familyArrayList.add( family );
         allData = new Data();
         allData.setFamily( familyArrayList );
-        super.setPath( "/unapprovedadd" );
+        super.setPath( "/achievenmentlist" );
     }
 
 }

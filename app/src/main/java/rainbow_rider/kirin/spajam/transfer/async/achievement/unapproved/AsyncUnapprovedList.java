@@ -13,20 +13,20 @@ import rainbow_rider.kirin.spajam.transfer.sync.Sender;
  * Memo:
  * Todo:
  */
-public class UnapprovedDel extends Sender {
+public class AsyncUnapprovedList extends Sender {
 
-    public UnapprovedDel( Data data ) {
+    public AsyncUnapprovedList( Data data ) {
         allData = data;
-        super.setPath( "/unapproveddel" );
+        super.setPath( "/unapprovedlist" );
     }
 
-    public UnapprovedDel( Family family ) {
+    public AsyncUnapprovedList( Family family ) {
 
         ArrayList<Family> familyArrayList = new ArrayList<>();
         familyArrayList.add( family );
         allData = new Data();
         allData.setFamily( familyArrayList );
-        super.setPath( "/unapproveddel" );
+        super.setPath( "/unapprovedlist" );
     }
 
 }

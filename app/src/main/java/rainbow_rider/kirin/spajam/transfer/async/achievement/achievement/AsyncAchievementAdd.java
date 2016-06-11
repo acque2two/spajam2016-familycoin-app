@@ -13,19 +13,20 @@ import rainbow_rider.kirin.spajam.transfer.sync.Sender;
  * Memo:
  * Todo:
  */
-public class AchievementList extends Sender {
+public class AsyncAchievementAdd extends Sender {
 
-    public AchievementList( Data data ) {
+    public AsyncAchievementAdd( Data data ) {
         allData = data;
-        super.setPath( "/achievementlist" );
+        super.setPath( "/achievementadd" );
     }
 
-    public AchievementList( Family family ) {
+    public AsyncAchievementAdd( Family family ) {
+
         ArrayList<Family> familyArrayList = new ArrayList<>();
         familyArrayList.add( family );
         allData = new Data();
         allData.setFamily( familyArrayList );
-        super.setPath( "/achievenmentlist" );
+        super.setPath( "/achievenmentadd" );
     }
 
 }
