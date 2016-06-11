@@ -42,7 +42,6 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         final Button send_button = (Button) findViewById(R.id.detail_send_button);
-        final Spinner answer_spinner = (Spinner) findViewById(R.id.detail_answer_spinner);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
         TextView title_text = (TextView) findViewById(R.id.detail_title_text);
