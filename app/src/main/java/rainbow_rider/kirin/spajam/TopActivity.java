@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +46,7 @@ public class TopActivity extends AppCompatActivity
         user = setUserData(intent);
 
         TextView a = (TextView) findViewById(R.id.nav_header_top_textView);
-        Log.d( "twitter_user_id", user.getUser_name() );
+        //Log.d("twitter_user_id",user.getUser_name());
         //a.setText(user.getUser_name());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
