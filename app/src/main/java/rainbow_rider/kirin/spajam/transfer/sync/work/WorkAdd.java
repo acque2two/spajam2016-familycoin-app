@@ -1,31 +1,32 @@
-package rainbow_rider.kirin.spajam.transfer.async.user;
+package rainbow_rider.kirin.spajam.transfer.sync.work;
 
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
-import rainbow_rider.kirin.spajam.transfer.async.Sender;
+import rainbow_rider.kirin.spajam.transfer.sync.Sender;
 
 /**
- * Created by acq on 16/06/07.
+ * Created by acq on 16/06/11.
  * Title:
  * Author:
  * Memo:
  * Todo:
  */
+public class WorkAdd extends Sender {
 
-public class AsyncUserRevGet extends Sender {
-    public AsyncUserRevGet( Data data ) {
+    public WorkAdd( Data data ) {
         allData = data;
-        super.setPath( "/userdel" );
+        super.setPath( "/workadd" );
     }
 
-    public AsyncUserRevGet( Family family ) {
+    public WorkAdd( Family family ) {
         ArrayList<Family> familyArrayList = new ArrayList<>();
         familyArrayList.add( family );
 
         allData = new Data();
         allData.setFamily( familyArrayList );
-        super.setPath( "/userdel" );
+        super.setPath( "/workadd" );
     }
+
 }

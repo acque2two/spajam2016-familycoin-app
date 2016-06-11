@@ -1,4 +1,4 @@
-package rainbow_rider.kirin.spajam.transfer.sync.user;
+package rainbow_rider.kirin.spajam.transfer.sync.work;
 
 import java.util.ArrayList;
 
@@ -7,25 +7,26 @@ import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.transfer.sync.Sender;
 
 /**
- * Created by acq on 16/06/07.
+ * Created by acq on 16/06/11.
  * Title:
  * Author:
  * Memo:
  * Todo:
  */
+public class WorkDel extends Sender {
 
-public class UserRevGet extends Sender {
-    public UserRevGet( Data data ) {
+    public WorkDel( Data data ) {
         allData = data;
-        super.setPath( "/userrevget" );
+        super.setPath( "/workdel" );
     }
 
-    public UserRevGet( Family family ) {
+    public WorkDel( Family family ) {
         ArrayList<Family> familyArrayList = new ArrayList<>();
         familyArrayList.add( family );
 
         allData = new Data();
         allData.setFamily( familyArrayList );
-        super.setPath( "/userrevget" );
+        super.setPath( "/workdel" );
     }
+
 }

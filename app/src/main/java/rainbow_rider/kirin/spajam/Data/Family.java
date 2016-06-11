@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Family {
     private Integer f_id;
     private String f_name;
+
     private ArrayList<User> user;
     private ArrayList<Work> work;
 
