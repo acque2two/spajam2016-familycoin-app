@@ -19,6 +19,6 @@ public class FamilyExist extends Sender {
         familyList.add( family );
         allData = new Data();
         allData.setFamily( familyList );
-        super.setPath( "/familyadd" );
+        super.setPath( "/familyexist" );
     }
 }
