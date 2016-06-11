@@ -3,12 +3,24 @@ package rainbow_rider.kirin.spajam;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+
+import io.fabric.sdk.android.Fabric;
+import rainbow_rider.kirin.spajam.Data.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,54 +33,68 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(getString(R.string.app_name));
 
+        loadUserData(MainActivity.this);
+
         Button detailButton = (Button) findViewById(R.id.main_detail_button);
         Button postButton = (Button) findViewById(R.id.main_post_button);
         Button loginButton = (Button) findViewById(R.id.main_login_button);
         Button topButton = (Button) findViewById(R.id.main_top_button);
 
+        topButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callintent = new Intent(MainActivity.this, TopActivity.class);
+                startActivity(callintent);
+            }
+        });
+
         detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(MainActivity.this, DetailActivity.class);
-                startActivity(callIntent);
+                Intent callintent = new Intent(MainActivity.this, DetailActivity.class);
+                startActivity(callintent);
             }
         });
 
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(MainActivity.this, PostActivity.class);
-                startActivity(callIntent);
+                Intent callintent = new Intent(MainActivity.this, PostActivity.class);
+                startActivity(callintent);
             }
         });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(callIntent);
+                Intent callintent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(callintent);
             }
         });
 
-        topButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent callIntent = new Intent(MainActivity.this, TopActivity.class);
-                startActivity(callIntent);
-            }
-        });
-
-        loadName(MainActivity.this);
     }
 
 
-    private String loadName(Context context) {
+    private User loadUserData(Context context) {
         // アプリ標準の Preferences を取得する
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 
-        Toast.makeText(MainActivity.this, sp.getString("name", ""), Toast.LENGTH_LONG).show();
+        String name =  sp.getString("name", "");
+        String u_id = sp.getString("u_id", "");
+        String f_id = sp.getString("f_id", "");
+        boolean sex = sp.getBoolean("sex", true);
+        boolean adult = sp.getBoolean("adult", false);
+        boolean admin = sp.getBoolean("admin", false);
 
-        return sp.getString("name", "");
+        User user = new User();
+        user.setU_name(name);
+        user.setU_id(u_id);
+        user.setF_id(f_id);
+        user.setSex(sex);
+        user.setAdult(adult);
+        user.setAdmin(admin);
+
+        return user;
 
     }
 }

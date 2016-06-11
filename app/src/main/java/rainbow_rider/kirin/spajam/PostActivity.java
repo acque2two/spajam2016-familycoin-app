@@ -34,9 +34,6 @@ public class PostActivity extends AppCompatActivity {
     private ImageView imageView;
     private ImageView imageView2;
     private ImageView imageView3;
-    private Button image_button;
-    private Uri uri;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +41,14 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        Intent intent = getIntent();
-        user = setUserData(intent);
+        //Intent intent = getIntent();
+        //user = setUserData(intent);
 
         imageView = (ImageView) findViewById(R.id.imageView);
-        imageView2 = (ImageView) findViewById(R.id.imageView2);
-        imageView3 = (ImageView) findViewById(R.id.imageView3);
+
         Spinner genre_spinner = (Spinner) findViewById(R.id.post_genre_spinner);
-        Spinner answer_spinner = (Spinner) findViewById(R.id.post_selectAnswer_spinner);
         EditText title = (EditText) findViewById(R.id.post_title);
-        EditText answerA = (EditText) findViewById(R.id.post_answerA_editText);
-        EditText answerB = (EditText) findViewById(R.id.post_answerB_editText);
-        EditText answerC = (EditText) findViewById(R.id.post_answerC_editText);
-        EditText answerD = (EditText) findViewById(R.id.post_answerD_editText);
         EditText mainText = (EditText) findViewById(R.id.post_mainText);
-        EditText kaisetu = (EditText) findViewById(R.id.post_xplanation_text);
 
         assert mainText != null;
         mainText.setHint("例：Ａ、Ｂ、Ｃの３種類の本があります。\n" +
@@ -67,50 +57,8 @@ public class PostActivity extends AppCompatActivity {
                 "\nなんででしょう？"
         );
 
-        kaisetu.setHint("例：三部作の著書、クライマックスの下巻Ｃが面白いが、必ず上巻のＡから買って行く");
-
-
-
         assert imageView != null;
         imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-
-                // Filter to only show results that can be "opened", such as a
-                // file (as opposed to a list of contacts or timezones)
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-                // Filter to show only images, using the image MIME data type.
-                // it would be "*/*".
-                intent.setType("image/*");
-
-                startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
-            }
-        });
-
-        assert imageView2 != null;
-        imageView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-
-                // Filter to only show results that can be "opened", such as a
-                // file (as opposed to a list of contacts or timezones)
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-                // Filter to show only images, using the image MIME data type.
-                // it would be "*/*".
-                intent.setType("image/*");
-
-                startActivityForResult(intent, RESULT_PICK_IMAGEFILE);
-            }
-        });
-
-        assert imageView3 != null;
-        imageView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file browser.
@@ -160,35 +108,6 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-        //Answer spinner
-        ArrayAdapter<String> answer_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
-        answer_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        answer_adapter.add("選択してください");
-        answer_adapter.add("A");
-        answer_adapter.add("B");
-        answer_adapter.add("C");
-        answer_adapter.add("D");
-
-        // アダプターを設定します
-        assert answer_spinner != null;
-        answer_spinner.setAdapter(answer_adapter);
-        // スピナーのアイテムが選択された時に呼び出されるコールバックリスナーを登録します
-        answer_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(
-                    AdapterView<?> parent, View view,
-                    int position, long id
-            ){
-                Spinner spinner = (Spinner) parent;
-                // 選択されたアイテムを取得します
-                spinner.getSelectedItemId();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
     }
 
     private User setUserData(Intent intent){
@@ -223,7 +142,6 @@ public class PostActivity extends AppCompatActivity {
                 try {
                     Bitmap bmp = getBitmapFromUri(uri);
                     imageView.setImageBitmap(bmp);
-                    image_button.setText("");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
