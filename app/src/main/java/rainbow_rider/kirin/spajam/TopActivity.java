@@ -40,7 +40,7 @@ public class TopActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Crea's");
+        toolbar.setTitle("Family Coin");
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
@@ -120,7 +120,7 @@ public class TopActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.search) {
+        if (id == R.id.top_search) {
             final EditText editView = new EditText(TopActivity.this);
             new AlertDialog.Builder(TopActivity.this)
                     .setIcon(android.R.drawable.ic_dialog_info)
@@ -134,7 +134,6 @@ public class TopActivity extends AppCompatActivity
                                     editView.getText().toString(),
                                     Toast.LENGTH_LONG).show();
                             //listviewを更新
-
                         }
                     })
                     .setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
@@ -143,6 +142,11 @@ public class TopActivity extends AppCompatActivity
                     })
                     .show();
 
+            return true;
+        }
+        if (id == R.id.top_end_application) {
+            //アプリを終了する
+            moveTaskToBack(true);
             return true;
         }
 
@@ -223,6 +227,7 @@ public class TopActivity extends AppCompatActivity
         u.setUser_name(intent.getStringExtra("user_name"));
         return u;
     }
+
 
 
 
