@@ -6,7 +6,7 @@
     <menu>
         <item
             android:id="@+id/activity_top_drawer_cleaning"
-            android:src="@mipmap/kokugo"
+            android:src="@drawable/ic_menu_camera"
             android:layout_width="match_parent"
             android:title="そうじ" />
         <item

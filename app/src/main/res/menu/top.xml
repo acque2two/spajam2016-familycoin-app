@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/search"
+        android:id="@+id/top_search"
         android:orderInCategory="100"
         android:title="検索"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/top_end_application"
+        android:orderInCategory="100"
+        android:title="アプリを終了"
         app:showAsAction="never" />
 </menu>
