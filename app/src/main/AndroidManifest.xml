@@ -40,9 +40,12 @@
             android:name=".TopActivity"
             android:label="@string/title_activity_top"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name=".RankingActivity" />
-        <activity android:name=".PhotoActivity"></activity>
+        <activity android:name=".PhotoActivity" />
+        <activity
+            android:name=".PresentActivity"
+            android:label="@string/title_activity_present"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
