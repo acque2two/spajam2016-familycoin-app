@@ -13,8 +13,9 @@ public class Family {
     private Integer f_id;
     private String f_name;
 
-    private ArrayList<User> user;
+    private ArrayList<User> users;
     private ArrayList<Work> work;
+    private ArrayList<Product> product;
 
     public Integer getF_id( ) {
         return f_id;
@@ -33,11 +34,11 @@ public class Family {
     }
 
     public ArrayList<User> getUser( ) {
-        return user;
+        return users;
     }
 
     public void setUser( ArrayList<User> user ) {
-        this.user = user;
+        this.users = user;
     }
 
     public ArrayList<Work> getWork( ) {
