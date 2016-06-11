@@ -30,9 +30,11 @@ public class TopActivity extends AppCompatActivity
 ///    public Data listdata = new Data();
 ///    private ItemListAdapter mAdapter;
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Toast.makeText( getApplicationContext(),"ようこそ",Toast.LENGTH_LONG ).show();
+        Toast.makeText( getApplicationContext(),"ようこそ！",Toast.LENGTH_LONG ).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -149,51 +151,62 @@ public class TopActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        User user = (User) getIntent().getSerializableExtra("user");
+        String fId = user.getF_id();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         if (id == R.id.activity_top_drawer_cleaning) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "1","Japanese"))
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "1",fId))
                     .addToBackStack("そうじ")
                     .commit();
+            toolbar.setTitle("そうじクエスト");
         } else if (id == R.id.activity_top_drawer_cuisine) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "2","math"))
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "2",fId))
                     .addToBackStack("りょうり")
                     .commit();
+            toolbar.setTitle("りょうりクエスト");
         } else if (id == R.id.activity_top_drawer_washing) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "3","science"))
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "3",fId))
                     .addToBackStack("せんたく")
                     .commit();
+            toolbar.setTitle("せんたくクエスト");
         } else if (id == R.id.activity_top_drawer_social_study) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "4","social_studies"))
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "4",fId))
                     .addToBackStack("べんきょう")
                     .commit();
+            toolbar.setTitle("べんきょうクエスト");
         } else if (id == R.id.activity_top_drawer_shopping) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "5","english"))
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "5",fId))
                     .addToBackStack("かいもの")
                     .commit();
+            toolbar.setTitle("かいものクエスト");
         } else if (id == R.id.activity_top_drawer_other) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "6","other"))
-                    .addToBackStack("そのた")
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "6",fId))
+                    .addToBackStack("そのほか")
                     .commit();
+            toolbar.setTitle("そのほかのクエスト");
+        } else if (id == R.id.activity_top_drawer_my_data) {
+
+
         } else if (id == R.id.activity_top_drawer_family_data) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content_top_fragment, FamilyDataFragment.newInstance( "6","other"))
+                    .replace(R.id.content_top_fragment, TopFragment.newInstance( "10", fId))
                     .addToBackStack("かぞくのじょうほう")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_my_data) {
-
+            toolbar.setTitle("家族の情報");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
