@@ -59,12 +59,12 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int p = genre_spinner.getSelectedItemPosition();
-                if(p > 0) {
+                if (p > 0) {
                     Intent callIntent = new Intent(PostActivity.this, PhotoActivity.class);
                     callIntent.putExtra("genre", p);
                     startActivityForResult(callIntent, 1);
-                }else {
-                    Toast.makeText(PostActivity.this,"ジャンルを先に選択してください", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PostActivity.this, "ジャンルを先に選択してください", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -91,7 +91,7 @@ public class PostActivity extends AppCompatActivity {
             public void onItemSelected(
                     AdapterView<?> parent, View view,
                     int position, long id
-            ){
+            ) {
                 Spinner spinner = (Spinner) parent;
                 // 選択されたアイテムを取得します
                 spinner.getSelectedItemId();
@@ -104,7 +104,7 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
-    private User setUserData(Intent intent){
+    private User setUserData(Intent intent) {
         User u = new User();
 //        u.setUser_id(intent.getLongExtra("user_id", i));
 //        u.setUser_name(intent.getStringExtra("user_name"));
@@ -121,10 +121,10 @@ public class PostActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, resultData);
         int image = resultData.getIntExtra("image", R.drawable.ic_menu_share);
         switch (requestCode) {
-            case 1 :
-                if(resultCode == RESULT_OK) {
+            case 1:
+                if (resultCode == RESULT_OK) {
                     imageView.setImageResource(image);
-                }else{
+                } else {
 
                 }
                 break;
@@ -132,18 +132,9 @@ public class PostActivity extends AppCompatActivity {
                 break;
         }
     }
+}
 
-    //Bitmap
-    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
-        ParcelFileDescriptor parcelFileDescriptor =
-                getContentResolver().openFileDescriptor(uri, "r");
-        assert parcelFileDescriptor != null;
-        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-        parcelFileDescriptor.close();
-        return image;
-    }
-
+/*
     //アクションバーの設定
     @Override
     public boolean onCreateOptionsMenu(final Menu menu ) {
@@ -212,4 +203,4 @@ public class PostActivity extends AppCompatActivity {
 
         return true;
     }
-}
+*/
