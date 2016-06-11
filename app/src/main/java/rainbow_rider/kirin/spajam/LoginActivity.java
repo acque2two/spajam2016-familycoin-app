@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //戻るボタンの禁止
-        //super.onBackPressed();
+        super.onBackPressed();
     }
 
 }
