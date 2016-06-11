@@ -27,12 +27,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Ans;
-import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.Multiple.Anss;
 import rainbow_rider.kirin.spajam.Data.Question;
 import rainbow_rider.kirin.spajam.Data.User;
-import rainbow_rider.kirin.spajam.transfer.async.question.QuestionAdd;
 
 public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
@@ -339,16 +337,6 @@ public class PostActivity extends AppCompatActivity {
                 question.setAnswer(anss);
                 question.setUser(user);
 
-                new QuestionAdd(question, anss){
-                    @Override
-                    protected void onPostExecute(Data data) {
-                        super.onPostExecute(data);
-
-                        Toast.makeText(PostActivity.this, "送信しました！", Toast.LENGTH_SHORT).show();
-                        PostActivity.this.finish();
-
-                    }
-                }.execute();
 
 
                 Toast.makeText(PostActivity.this, "oni", Toast.LENGTH_SHORT).show();

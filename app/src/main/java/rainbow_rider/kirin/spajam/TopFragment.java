@@ -8,16 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
-import rainbow_rider.kirin.spajam.Data.Data;
-import rainbow_rider.kirin.spajam.Data.Genre;
-import rainbow_rider.kirin.spajam.Data.ItemListAdapter;
 import rainbow_rider.kirin.spajam.Data.Question;
-import rainbow_rider.kirin.spajam.transfer.async.question.QuestionGenreList;
-import rainbow_rider.kirin.spajam.transfer.async.question.QuestionGet;
 
 
 /**
@@ -84,60 +76,8 @@ public class TopFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        QuestionGenreList questionGenreList = new QuestionGenreList();
-
-        if ( mParam2.equals("") ){
-
-        } else {
-            Toast.makeText(view.getContext(), mParam2, Toast.LENGTH_SHORT).show();
-        }
-
-        Genre genre = new Genre();
-
-        final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.item_list_view);
-        final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
-
-        genre.setGenre_id(Integer.parseInt(mParam1));
-
-        new QuestionGenreList(genre) {
-            @Override
-            protected void onPostExecute(Data data) {
-                final Data reply = getReply();
-                //Log.d("Dataサイズ", String.valueOf(new Integer(reply.getQuestion().size())));
-                if ( reply.getQuestion() != null ) {
-                    for ( int i = 0; i < reply.getQuestion().size(); i++ ){
-                        new QuestionGet(reply.getQuestion().get(i) ){
-                            @Override
-                            protected void onPostExecute(Data data) {
-                                super.onPostExecute(data);
-                                //Data reply2 = getReply();
-                                //reply.getQuestion().set(reply2.getQuestion().get(0));
-                            }
-                        }.execute();
-                    }
-                    Log.d("Question_size","notnull");
-                    mAdapter.addAll(reply.getQuestion());
-                }else{
-                    Log.d("TOPFRAGMENT", "GENRE"+Long.toString(allData.getGenre().get(0).getGenre_id())+" IS NULL");
-                }
-                Log.d("Comp", "Leate");
-                mListView.setAdapter( mAdapter );
-                try {
-                    mListView.setAdapter( mAdapter );
-                } catch (NullPointerException v) {
-                    Toast.makeText( view.getContext() ,"データが空です" ,Toast.LENGTH_SHORT ).show();
-                }
-
-                mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        mListener.onTopFragmentItemClick((Question) parent.getAdapter().getItem(position));
-                    }
-                });
 
 
-            }
-        }.execute();
 
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 //            @Override

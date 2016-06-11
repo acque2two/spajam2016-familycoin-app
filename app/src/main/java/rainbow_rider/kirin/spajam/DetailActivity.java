@@ -31,7 +31,6 @@ import rainbow_rider.kirin.spajam.Data.Multiple.Questions;
 import rainbow_rider.kirin.spajam.Data.Multiple.Users;
 import rainbow_rider.kirin.spajam.Data.Question;
 import rainbow_rider.kirin.spajam.Data.User;
-import rainbow_rider.kirin.spajam.transfer.async.fav.FavoriteAdd;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -45,14 +44,7 @@ public class DetailActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-/*
-        new QuestionList() {
-            @Override
-            protected void onPostExecute(Data data) {
-                super.onPostExecute(data);
-            }
-        }.execute();
-*/
+
         //TopActivityからQuestionを受け取る。
         Question tr = (Question) getIntent().getSerializableExtra("question");
         Questions trl = new Questions();
@@ -213,7 +205,7 @@ public class DetailActivity extends AppCompatActivity {
             //    Intent callIntent = new Intent( DetailActivity.this, AddFriendActivity.class );
             //    startActivity( callIntent );
                 Toast.makeText(DetailActivity.this,"okini",Toast.LENGTH_SHORT).show();
-                new FavoriteAdd(Qdata).execute();
+
                 //お気に入り処理
 
                 return false;
