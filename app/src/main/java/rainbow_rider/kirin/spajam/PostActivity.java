@@ -50,19 +50,21 @@ public class PostActivity extends AppCompatActivity {
         final Spinner genre_spinner = (Spinner) findViewById(R.id.post_genre_spinner);
         EditText title = (EditText) findViewById(R.id.post_title);
         EditText mainText = (EditText) findViewById(R.id.post_mainText);
+        EditText pointText = (EditText) findViewById(R.id.post_point_text);
         FrameLayout postImageLayout = (FrameLayout) findViewById(R.id.post_image_layout);
-
-        assert mainText != null;
-        mainText.setHint("例：お風呂をきれいにしてください");
 
         assert postImageLayout != null;
         postImageLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(PostActivity.this, PhotoActivity.class);
                 int p = genre_spinner.getSelectedItemPosition();
-                callIntent.putExtra("genre", p);
-                startActivityForResult(callIntent, 1);
+                if(p > 0) {
+                    Intent callIntent = new Intent(PostActivity.this, PhotoActivity.class);
+                    callIntent.putExtra("genre", p);
+                    startActivityForResult(callIntent, 1);
+                }else {
+                    Toast.makeText(PostActivity.this,"ジャンルを先に選択してください", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -117,7 +119,7 @@ public class PostActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
         super.onActivityResult(requestCode, resultCode, resultData);
         int image = resultData.getIntExtra("image", R.drawable.ic_menu_share);
-        switch (resultCode) {
+        switch (requestCode) {
             case 1 :
                 if(resultCode == RESULT_OK) {
                     imageView.setImageResource(image);

@@ -19,47 +19,63 @@ public class PhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
 
-        final ImageView imageView1 = (ImageView) findViewById(R.id.photo_imageView1);
-        final ImageView imageView2 = (ImageView) findViewById(R.id.photo_imageView2);
+        ImageView imageView1 = (ImageView) findViewById(R.id.photo_imageView1);
+        ImageView imageView2 = (ImageView) findViewById(R.id.photo_imageView2);
 
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         int genreId = intent.getIntExtra("genre", -1);
-
-        Toast.makeText(PhotoActivity.this, Integer.toString(genreId), Toast.LENGTH_SHORT).show();
 
         assert imageView1 != null;
         assert imageView2 != null;
 
+        final int image1;
+        final int image2;
 
         if(genreId == 1){
-            imageView1.setImageResource(R.mipmap.bath);
-            imageView2.setImageResource(R.mipmap.broom);
-        }else if(genreId == 2){
-            imageView1.setImageResource(R.mipmap.cook_beaf);
-            imageView2.setImageResource(R.mipmap.cook_knife);
-        }else if(genreId == 3){
-            imageView1.setImageResource(R.mipmap.washing_machine);
-            imageView2.setImageResource(R.mipmap.clothes);
-        }else if(genreId == 4){
-            imageView1.setImageResource(R.mipmap.study_pen);
-            imageView2.setImageResource(R.mipmap.study_book);
-        }else if(genreId == 5){
-            imageView1.setImageResource(R.mipmap.shopping_basket);
-            imageView2.setImageResource(R.mipmap.shopping_shoes);
-        }else if(genreId == 6){
-            imageView1.setImageResource(R.mipmap.etc_tonkachi);
-            imageView2.setImageResource(R.mipmap.etc_wrench);
-        }else{
+            image1 = R.mipmap.bath;
+            image2 = R.mipmap.broom;
 
+        }else if(genreId == 2){
+            image1 = R.mipmap.cook_beaf;
+            image2 = R.mipmap.cook_knife;
+        }else if(genreId == 3){
+            image1 = R.mipmap.washing_machine;
+            image2 = R.mipmap.clothes;
+        }else if(genreId == 4){
+            image1 = R.mipmap.study_pen;
+            image2 = R.mipmap.study_book;
+        }else if(genreId == 5){
+            image1 = R.mipmap.shopping_basket;
+            image2 = R.mipmap.shopping_shoes;
+        }else if(genreId == 6){
+            image1 = R.mipmap.etc_tonkachi;
+            image2  =R.mipmap.etc_wrench;
+        }else{
+            image1 = R.drawable.ic_menu_camera;
+            image2 = R.drawable.ic_menu_camera;
         }
+
+        imageView1.setImageResource(image1);
+        imageView2.setImageResource(image2);
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                // imageView1.getBackground().toString();
-                int a = R.mipmap.bath;
                 Intent intent = new Intent();
-                intent.putExtra("image", a);
+                intent.putExtra("image", image1);
+
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // imageView1.getBackground().toString();
+                Intent intent = new Intent();
+                intent.putExtra("image", image2);
 
                 setResult(RESULT_OK, intent);
                 finish();
