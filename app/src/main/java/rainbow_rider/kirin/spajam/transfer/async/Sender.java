@@ -27,7 +27,7 @@ public class Sender extends AsyncTask<Data, Data, Data> {
     public static final MediaType jsontype = MediaType.parse( "application/json; charset=utf-8" );
     private final String urlHosts = "http://" + ServerInfomation
             .getServerHostName() + ":" + ServerInfomation
-            .getServerPort();
+                                            .getServerPort();
     public String urlPath = "/index.html";
     // 入力データ群
     // 全データ
@@ -36,6 +36,7 @@ public class Sender extends AsyncTask<Data, Data, Data> {
     public String url;
     // 受信したデータ
     Data reply;
+
     public void setPath( String path ) {
         this.url = this.urlHosts + path;
     }
@@ -55,7 +56,7 @@ public class Sender extends AsyncTask<Data, Data, Data> {
                 .post( body )
                 .build();
         Response response = client.newCall( request ).execute();
-        if( response.code() != 200 ) {
+        if ( response.code() != 200 ) {
             Log.e( "TRANS/POST/ERROR", "Responce code is " + response.code() + "!" );
             return "{\"status\":false}";
         }
@@ -74,7 +75,7 @@ public class Sender extends AsyncTask<Data, Data, Data> {
         } catch ( IOException e ) {
             Log.e( "TRANSFER/ERROR/EXCEPT", "IOException Error" );
             e.printStackTrace();
-        } catch ( JSONException e){
+        } catch ( JSONException e ) {
             Log.e( "TRANSFER/ERROR/EXCEPT", "JSONException Error" );
             e.printStackTrace();
         }
