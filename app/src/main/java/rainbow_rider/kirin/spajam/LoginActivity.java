@@ -14,13 +14,16 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import rainbow_rider.kirin.spajam.Data.User;
+
 public class LoginActivity extends AppCompatActivity {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+
+    private User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,13 @@ public class LoginActivity extends AppCompatActivity {
                 String name = name_text.getText().toString();
                 String u_id = u_id_text.getText().toString();
                 String f_id = f_id_text.getText().toString();
+
+                user.setU_name(name);
+                user.setU_id(u_id);
+                user.setF_id(f_id);
+                user.setSex(sex[0]);
+                user.setAdult(adult[0]);
+                user.setAdmin(admin[0]);
 
                 saveUserData(LoginActivity.this, name, u_id, f_id, sex[0], adult[0], admin[0]);
 
