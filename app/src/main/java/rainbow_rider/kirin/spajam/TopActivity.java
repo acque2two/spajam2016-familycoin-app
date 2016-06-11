@@ -30,8 +30,6 @@ public class TopActivity extends AppCompatActivity
 ///    public Data listdata = new Data();
 ///    private ItemListAdapter mAdapter;
 
-    User user = (User) getIntent().getSerializableExtra("user");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Toast.makeText( getApplicationContext(),"ようこそ",Toast.LENGTH_LONG ).show();
@@ -39,6 +37,8 @@ public class TopActivity extends AppCompatActivity
         setContentView(R.layout.activity_top);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Family Coin");
+
+        User user = (User) getIntent().getSerializableExtra("user");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 

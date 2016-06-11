@@ -1,6 +1,5 @@
 package rainbow_rider.kirin.spajam;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,15 +8,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -28,9 +24,12 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.User;
-import retrofit.http.POST;
+import rainbow_rider.kirin.spajam.Data.Work;
+import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkAdd;
 
 public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
@@ -149,10 +148,10 @@ public class PostActivity extends AppCompatActivity {
         //menu.findItem(R.id.menu_move_to_add_friend_button);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate( R.menu.menu_post, menu );
-        setTitle("問題投稿");
+        setTitle( "仕事の追加" );
 
         final MenuItem a = menu.findItem( R.id.menu_detail_image_button );
-        a.setTitle( "投稿" );
+        a.setTitle( "追加" );
         a.setCheckable( true );
         a.setOnMenuItemClickListener( new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -166,20 +165,56 @@ public class PostActivity extends AppCompatActivity {
 
                 //genreをidに変換    NullPointer対策にelse
                 if ( genreName.equals("国語") ){
-//                    genre.setGenre_id(1);
+                    genre.setG_id( 1 );
                 } else if( genreName.equals("数学") ) {
-//                    genre.setGenre_id(2);
+                    genre.setG_id( 2 );
                 } else if( genreName.equals("理科") ) {
-//                    genre.setGenre_id(3);
+                    genre.setG_id( 3 );
                 } else if( genreName.equals("社会") ) {
-//                    genre.setGenre_id(4);
+                    genre.setG_id( 4 );
                 } else if( genreName.equals("英語") ) {
-//                    genre.setGenre_id(5);
+                    genre.setG_id( 5 );
                 } else if( genreName.equals("その他") ) {
-//                    genre.setGenre_id(6);
+                    genre.setG_id( 6 );
                 } else {
-//                    genre.setGenre_id(7);
+                    genre.setG_id( 7 );
                 }
+
+
+                Work work = new Work();
+                work.setGenre( genre );
+
+                ArrayList<Work> workArrayList = new ArrayList<Work>();
+                workArrayList.add( work );
+
+
+                User user = new User();
+                ArrayList<User> userArrayList = new ArrayList<User>();
+                userArrayList.add( user );
+
+                Family family = new Family();
+                ArrayList<Family> familyArrayList = new ArrayList<>();
+                familyArrayList.add( family );
+
+
+                Data data = new Data();
+                data.setFamily( familyArrayList );
+
+                new AsyncWorkAdd( data ) {
+                    @Override
+                    protected void onPreExecute( ) {
+                        super.onPreExecute();
+                        ( PostActivity.this.findViewById( R.id.progressBar ) ).setVisibility( View.VISIBLE );
+
+                    }
+
+                    @Override
+                    protected void onPostExecute( Data data ) {
+                        super.onPostExecute( data );
+                        Toast.makeText( getApplicationContext(), "送信が完了しました。", Toast.LENGTH_LONG ).show();
+                        PostActivity.this.finish();
+                    }
+                }.execute();
 
                 Toast.makeText(PostActivity.this, "oni", Toast.LENGTH_SHORT).show();
                 return false;
