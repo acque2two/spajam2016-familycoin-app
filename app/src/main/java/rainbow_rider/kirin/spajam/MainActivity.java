@@ -3,23 +3,12 @@ package rainbow_rider.kirin.spajam;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-
-import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,31 +21,40 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(getString(R.string.app_name));
 
-        Button detail_button = (Button) findViewById(R.id.main_detail_button);
-        Button post_button = (Button) findViewById(R.id.main_post_button);
-        Button login_button = (Button) findViewById(R.id.main_login_button);
+        Button detailButton = (Button) findViewById(R.id.main_detail_button);
+        Button postButton = (Button) findViewById(R.id.main_post_button);
+        Button loginButton = (Button) findViewById(R.id.main_login_button);
+        Button topButton = (Button) findViewById(R.id.main_top_button);
 
-        detail_button.setOnClickListener(new View.OnClickListener() {
+        detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callintent = new Intent(MainActivity.this, DetailActivity.class);
-                startActivity(callintent);
+                Intent callIntent = new Intent(MainActivity.this, DetailActivity.class);
+                startActivity(callIntent);
             }
         });
 
-        post_button.setOnClickListener(new View.OnClickListener() {
+        postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callintent = new Intent(MainActivity.this, PostActivity.class);
-                startActivity(callintent);
+                Intent callIntent = new Intent(MainActivity.this, PostActivity.class);
+                startActivity(callIntent);
             }
         });
 
-        login_button.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callintent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(callintent);
+                Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(callIntent);
+            }
+        });
+
+        topButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callIntent = new Intent(MainActivity.this, TopActivity.class);
+                startActivity(callIntent);
             }
         });
 
