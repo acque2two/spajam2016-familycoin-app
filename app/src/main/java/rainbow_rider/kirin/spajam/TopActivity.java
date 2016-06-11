@@ -11,6 +11,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,6 +47,7 @@ public class TopActivity extends AppCompatActivity
         user = setUserData(intent);
 
         TextView a = (TextView) findViewById(R.id.nav_header_top_textView);
+        Log.d("twitter_user_id",user.getUser_name());
         //a.setText(user.getUser_name());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -60,7 +63,7 @@ public class TopActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
         //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
         //        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -73,17 +76,16 @@ public class TopActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        View header = LayoutInflater.from(this).inflate(R.layout.nav_header_top, null);
+        navigationView.addHeaderView(header);
+        TextView text = (TextView) header.findViewById(R.id.nav_header_top_textView);
+        text.setText("HELLO");
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_top_fragment, TopFragment.newInstance("1",""))
                 .addToBackStack("新規投稿")
                 .commit();
-
-//        mListView.setAdapter( mAdapter);
-
-        //for ( int i=0; listdata.getRecipe().get(i).getImage_url() != null ; i++ ){
-        //    mAdapter.add(listdata.getRecipe().get(i).getImage_url())
-        //}
 
         // 過去の遺物
         //ArrayAdapter<String> la = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, talk_list);
@@ -94,7 +96,7 @@ public class TopActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -199,8 +201,7 @@ public class TopActivity extends AppCompatActivity
 
         }
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
