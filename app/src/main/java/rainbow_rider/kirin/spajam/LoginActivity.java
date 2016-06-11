@@ -116,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // 書き込みを確定する
         editor.commit();
+
     }
 
     @Override
