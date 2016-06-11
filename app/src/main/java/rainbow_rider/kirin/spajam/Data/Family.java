@@ -10,18 +10,18 @@ import java.util.ArrayList;
  * Todo:
  */
 public class Family {
-    private Integer f_id;
+    private String f_id;
     private String f_name;
 
     private ArrayList<User> users;
     private ArrayList<Work> work;
     private ArrayList<Product> product;
 
-    public Integer getF_id( ) {
+    public String getF_id( ) {
         return f_id;
     }
 
-    public void setF_id( Integer f_id ) {
+    public void setF_id( String f_id ) {
         this.f_id = f_id;
     }
 

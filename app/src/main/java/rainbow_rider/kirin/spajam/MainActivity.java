@@ -13,7 +13,7 @@ import rainbow_rider.kirin.spajam.Data.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    private User user;
+    private User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(getString(R.string.app_name));
 
-       // loadUserData(MainActivity.this);
+        loadUserData(MainActivity.this);
 
         Button detailButton = (Button) findViewById(R.id.main_detail_button);
         Button postButton = (Button) findViewById(R.id.main_post_button);
@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent callintent = new Intent(MainActivity.this, TopActivity.class);
-                User user = new User();
                 callintent.putExtra( "user", user );
                 startActivity(callintent);
             }

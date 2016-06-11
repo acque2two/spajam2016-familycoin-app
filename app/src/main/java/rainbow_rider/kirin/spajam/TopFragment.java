@@ -98,7 +98,7 @@ public class TopFragment extends Fragment {
 
         genre.setG_id(Integer.parseInt(mGenreId));
         Family family = new Family();
-        family.setF_id(Integer.parseInt(mFId));
+        family.setF_id(mFId);
         genre = new Genre();
         Work work = new Work();
         ArrayList<Work> works = new ArrayList<>();
