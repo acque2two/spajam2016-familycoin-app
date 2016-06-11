@@ -37,7 +37,7 @@
                     android:layout_height="100dp"
                     android:clickable="false"
                     android:layout_gravity="center_horizontal"
-                    android:background="@android:drawable/ic_menu_camera" />
+                    android:src="@android:drawable/ic_menu_camera" />
 
             </FrameLayout>
 
@@ -175,7 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="作成"
-                    android:id="@+id/button"
+                    android:id="@+id/post_send_button"
                     android:layout_gravity="center_vertical"
                     android:background="#ef6969"
                     android:layout_marginLeft="50dp"
