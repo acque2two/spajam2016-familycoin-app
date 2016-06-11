@@ -48,7 +48,6 @@ public class TopActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Family Coin");
 
-        User user = (User) getIntent().getSerializableExtra("user");
         user = allData.family.get( 0 ).users.get( 0 );
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -71,7 +70,19 @@ public class TopActivity extends AppCompatActivity
         //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
         //        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, R.string.navigation_drawer_open,
+
+
+
+
+
+
+
+
+
+
+
+                R.string.navigation_drawer_close);
 
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -187,7 +198,7 @@ public class TopActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         User user = (User) getIntent().getSerializableExtra("user");
-        String fId = user.getF_id();
+        String fId = allData.getFamily().get(0).getF_id();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         if (id == R.id.activity_top_drawer_cleaning) {
