@@ -159,40 +159,40 @@ public class TopActivity extends AppCompatActivity
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "1","Japanese"))
-                    .addToBackStack("国語")
+                    .addToBackStack("そうじ")
                     .commit();
         } else if (id == R.id.activity_top_drawer_cuisine) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "2","math"))
-                    .addToBackStack("数学")
+                    .addToBackStack("りょうり")
                     .commit();
         } else if (id == R.id.activity_top_drawer_washing) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "3","science"))
-                    .addToBackStack("理科")
+                    .addToBackStack("せんたく")
                     .commit();
         } else if (id == R.id.activity_top_drawer_social_study) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "4","social_studies"))
-                    .addToBackStack("社会")
+                    .addToBackStack("べんきょう")
                     .commit();
         } else if (id == R.id.activity_top_drawer_shopping) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "5","english"))
-                    .addToBackStack("英語")
+                    .addToBackStack("かいもの")
                     .commit();
         } else if (id == R.id.activity_top_drawer_other) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "6","other"))
-                    .addToBackStack("その他")
+                    .addToBackStack("そのた")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_rankings) {
-            Intent callintent = new Intent(TopActivity.this, RankingActivity.class);
+        } else if (id == R.id.activity_top_drawer_family_data) {
+            Intent callintent = new Intent(TopActivity.this, FamilyDataActivity.class);
             startActivity(callintent);
         } else if (id == R.id.activity_top_drawer_mydata) {
 

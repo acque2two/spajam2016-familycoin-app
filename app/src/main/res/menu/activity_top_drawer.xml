@@ -33,10 +33,10 @@
 </item>
 
 
-    <item android:title="Communicat">
+    <item android:title="情報">
         <menu>
             <item
-                android:id="@+id/activity_top_drawer_rankings"
+                android:id="@+id/activity_top_drawer_family_data"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="かぞく" />
             <item
