@@ -26,14 +26,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setTitle(getString(R.string.app_name));
-
-        if(loadData(MainActivity.this)){
-            Intent callIntent = new Intent(MainActivity.this, TopActivity.class);
-            startActivity(callIntent);
-        }else{
-            Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(callIntent);
+        Intent callIntent;
+        if ( !loadData( MainActivity.this ) ) {
+            callIntent = new Intent( MainActivity.this, LoginActivity.class );
+            startActivity( callIntent );
         }
+
+        callIntent = new Intent( MainActivity.this, TopActivity.class );
+        startActivity( callIntent );
 
         MyThread myThread = new MyThread();
         myThread.start();
