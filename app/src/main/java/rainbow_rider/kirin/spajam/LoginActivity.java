@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import net.arnx.jsonic.JSON;
+
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
      */
 
     private User user = new User();
+    private Data allData = new Data();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,7 +205,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }.execute(  );
                 LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility( View.VISIBLE );
-                saveUserData(LoginActivity.this, name, u_id, f_id, sex[0], adult[0], admin[0]);
+                saveData(LoginActivity.this);
 
                 Toast.makeText(LoginActivity.this, "作成", Toast.LENGTH_SHORT).show();
             }
@@ -216,23 +219,17 @@ public class LoginActivity extends AppCompatActivity {
 */
     }
 
-    private void saveUserData(Context context, String name, String u_id, String f_id, Boolean sex, Boolean adult, Boolean admin) {
+
+    private boolean saveData(Context context) {
         // アプリ標準の Preferences を取得する
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor spedit = sp.edit();
 
-        // Preferences に書き込むための Editor クラスを取得する
-        SharedPreferences.Editor editor = sp.edit();
+        allData.family.get(0).users.add(user);
 
-        // putXxxx("キー",データ) にて書き込むデータを登録する
-        editor.putString("name", name);
-        editor.putString("u_id", u_id);
-        editor.putString("f_id", f_id);
-        editor.putBoolean("sex", sex);
-        editor.putBoolean("adult", adult);
-        editor.putBoolean("admin", admin);
-
-        // 書き込みを確定する
-        editor.commit();
+        spedit.putString("DATA_JSON", JSON.encode(allData));
+        spedit.apply();
+        return true;
 
     }
 

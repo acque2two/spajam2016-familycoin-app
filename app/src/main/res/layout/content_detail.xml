@@ -142,7 +142,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="投稿者"
+                                android:text="たのんだ人"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="#56a466" />
 
@@ -168,8 +168,8 @@
                             android:layout_marginLeft="30dp"
                             android:layout_marginRight="30dp"
                             android:layout_marginTop="15dp"
-                            android:background="#f58c8c"
-                            android:text="送信"/>
+                            android:background="#efd80c"
+                            android:text="おわりました"/>
 
                     </LinearLayout>
 

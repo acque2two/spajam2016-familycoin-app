@@ -9,12 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import net.arnx.jsonic.JSON;
+
+import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.User;
 
 public class MainActivity extends AppCompatActivity {
 
     private User user = new User();
-
+    private Data allData = new Data();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(getString(R.string.app_name));
 
-        loadUserData(MainActivity.this);
+        loadData(MainActivity.this);
 
         Button detailButton = (Button) findViewById(R.id.main_detail_button);
         Button postButton = (Button) findViewById(R.id.main_post_button);
@@ -65,28 +68,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private boolean loadUserData(Context context) {
+    private boolean loadData(Context context) {
         // アプリ標準の Preferences を取得する
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
 
-        String name =  sp.getString("name", "");
-        String u_id = sp.getString("u_id", "");
-        String f_id = sp.getString("f_id", "");
-        boolean sex = sp.getBoolean("sex", true);
-        boolean adult = sp.getBoolean("adult", false);
-        boolean admin = sp.getBoolean("admin", false);
+        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
 
+        return true;
 
-        user.setU_name(name);
-        user.setU_id(u_id);
-        user.setF_id(f_id);
-        user.setSex(sex);
-        user.setAdult(adult);
-        user.setAdmin(admin);
+    }
 
-        boolean ans = true;
-
-        return ans;
+    private boolean saveData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor spedit = sp.edit();
+        spedit.putString("DATA_JSON", JSON.encode(allData));
+        spedit.apply();
+        return true;
 
     }
 }
