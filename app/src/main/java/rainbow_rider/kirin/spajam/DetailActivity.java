@@ -1,11 +1,14 @@
 package rainbow_rider.kirin.spajam;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -21,15 +24,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.arnx.jsonic.JSON;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.Unapproved;
 import rainbow_rider.kirin.spajam.Data.User;
+import rainbow_rider.kirin.spajam.transfer.async.achievement.unapproved.AsyncUnapprovedAdd;
 
 public class DetailActivity extends AppCompatActivity {
+
+    private Data allData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,31 +68,27 @@ public class DetailActivity extends AppCompatActivity {
         send_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (send[0]) {
-//                  Toast.makeText(DetailActivity.this,"ans",Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder alert01 = new AlertDialog.Builder(DetailActivity.this);
-                    //ダイアログタイトルをセット
-                    alert01.setTitle("正解は" + "A");
-                    //ダイアログメッセージをセット
-                    alert01.setMessage("解説");
-                    //ダイアログ表示
-                    alert01.show();
-                } else {
-                    Toast.makeText(DetailActivity.this, "send", Toast.LENGTH_SHORT).show();
-
-                    //解答送信
-
-                    send_button.setText("正解を見る");
-                    send[0] = true;
-                }
+                new AsyncUnapprovedAdd(allData){
+                    @Override
+                    protected void onPostExecute(Data data) {
+                        super.onPostExecute(data);
+                        finish();
+                    }
+                }.execute();
             }
         });
     }
 
-    //ここ
-    private User setUserData(Intent intent) {
-        User u = new User();
-        return u;
+    private boolean loadData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
+        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
+
+        boolean ans;
+        ans = allData.getFamily() != null;
+
+        return ans;
     }
 }
 /*

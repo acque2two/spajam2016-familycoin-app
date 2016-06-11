@@ -51,6 +51,7 @@ public class Sender {
         RequestBody body = RequestBody.create( jsontype, json );
         Request request = new Request.Builder()
                 .url( url )
+                .addHeader( "Content-Language", "ja" )
                 .post( body )
                 .build();
         Response response = client.newCall( request ).execute();
