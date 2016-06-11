@@ -30,6 +30,7 @@ public class PhotoActivity extends AppCompatActivity {
         assert imageView1 != null;
         assert imageView2 != null;
 
+
         if(genreId == 1){
             imageView1.setImageResource(R.mipmap.bath);
             imageView2.setImageResource(R.mipmap.broom);
