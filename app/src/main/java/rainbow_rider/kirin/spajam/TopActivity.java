@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +29,8 @@ public class TopActivity extends AppCompatActivity
 ///    public Data listdata = new Data();
 ///    public Data listdata = new Data();
 ///    private ItemListAdapter mAdapter;
-    private AbsListView mListView;
-    private User user;
+
+    User user = (User) getIntent().getSerializableExtra("user");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +40,6 @@ public class TopActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Family Coin");
         setSupportActionBar(toolbar);
-
-        Intent intent = getIntent();
-        user = setUserData(intent);
-
-        TextView a = (TextView) findViewById(R.id.nav_header_top_textView);
-        //Log.d("twitter_user_id",user.getUser_name());
-        //a.setText(user.getUser_name());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -78,7 +70,7 @@ public class TopActivity extends AppCompatActivity
         View header = LayoutInflater.from(this).inflate(R.layout.nav_header_top, null);
         navigationView.addHeaderView(header);
         TextView text = (TextView) header.findViewById(R.id.nav_header_top_textView);
-        text.setText("ながのともき");
+        text.setText(user.getU_name());
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -219,13 +211,5 @@ public class TopActivity extends AppCompatActivity
         //callIntent.putExtra("user_id", user.getUser_id());
         //callIntent.putExtra("user_name",user.getUser_name());
     //}
-
-    private User setUserData(Intent intent) {
-        User u = new User();
-        return u;
-    }
-
-
-
 
 }

@@ -5,6 +5,7 @@
         android:id="@+id/top_search"
         android:orderInCategory="100"
         android:title="検索"
+        android:icon="@mipmap/bath"
         app:showAsAction="never" />
     <item
         android:id="@+id/top_end_application"
