@@ -14,20 +14,18 @@ import rainbow_rider.kirin.spajam.transfer.async.Sender;
  * Todo:
  */
 
-public class UserAdd extends Sender {
-
-    public UserAdd( Data data ) {
+public class AsyncUserRevGet extends Sender {
+    public AsyncUserRevGet( Data data ) {
         allData = data;
-        super.setPath( "/useradd" );
+        super.setPath( "/userdel" );
     }
 
-    public UserAdd( Family family ) {
+    public AsyncUserRevGet( Family family ) {
         ArrayList<Family> familyArrayList = new ArrayList<>();
         familyArrayList.add( family );
 
         allData = new Data();
         allData.setFamily( familyArrayList );
-        super.setPath( "/useradd" );
+        super.setPath( "/userdel" );
     }
-
 }

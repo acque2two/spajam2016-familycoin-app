@@ -10,8 +10,8 @@ import rainbow_rider.kirin.spajam.transfer.async.Sender;
  * Todo:
  */
 
-public class GenreList extends Sender {
-    public GenreList( ) {
+public class AsyncGenreList extends Sender {
+    public AsyncGenreList( ) {
         super.setPath( "/genrelist" );
     }
 }

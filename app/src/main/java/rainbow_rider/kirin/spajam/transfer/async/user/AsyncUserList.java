@@ -10,8 +10,8 @@ import rainbow_rider.kirin.spajam.transfer.async.Sender;
  * Todo:
  */
 
-public class UserList extends Sender {
-    public UserList( ) {
+public class AsyncUserList extends Sender {
+    public AsyncUserList( ) {
         super.setPath( "/userlist" );
     }
 }
