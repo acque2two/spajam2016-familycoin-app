@@ -53,6 +53,7 @@ public class PostActivity extends AppCompatActivity {
         EditText pointText = (EditText) findViewById(R.id.post_point_text);
         FrameLayout postImageLayout = (FrameLayout) findViewById(R.id.post_image_layout);
 
+
         assert postImageLayout != null;
         postImageLayout.setOnClickListener(new View.OnClickListener() {
             @Override
