@@ -37,12 +37,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity( callIntent );
         }
 
-
-
-        MyThread myThread = new MyThread();
-        myThread.start();
-
         ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
+        ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
 
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
         alphaAnimation.setDuration(1000);
@@ -51,10 +47,15 @@ public class MainActivity extends AppCompatActivity {
         //アニメーション動作
         activity_main_imageView.startAnimation(alphaAnimation);
 
+        activity_main2_imageView.startAnimation(alphaAnimation);
+
         Button detailButton = (Button) findViewById(R.id.main_detail_button);
         Button postButton = (Button) findViewById(R.id.main_post_button);
         Button loginButton = (Button) findViewById(R.id.main_login_button);
         Button topButton = (Button) findViewById(R.id.main_top_button);
+
+        //MyThread myThread = new MyThread();
+        //myThread.start();
 
         topButton.setOnClickListener(new View.OnClickListener() {
             @Override
