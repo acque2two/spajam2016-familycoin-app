@@ -72,9 +72,11 @@ public class TopActivity extends AppCompatActivity
         TextView text = (TextView) header.findViewById(R.id.nav_header_top_textView);
         text.setText(user.getU_name());
 
+        String fId = user.getF_id();
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.content_top_fragment, TopFragment.newInstance("1",""))
+                .replace(R.id.content_top_fragment, TopFragment.newInstance("1",fId))
                 .addToBackStack("新規投稿")
                 .commit();
 

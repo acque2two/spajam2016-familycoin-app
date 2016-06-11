@@ -8,6 +8,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Toast;
+
+import net.arnx.jsonic.JSON;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.Family;
+import rainbow_rider.kirin.spajam.Data.Genre;
+import rainbow_rider.kirin.spajam.Data.Work;
+import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
+import rainbow_rider.kirin.spajam.transfer.sync.work.WorkGenreList;
 
 
 /**
@@ -75,6 +89,37 @@ public class TopFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Toast.makeText( view.getContext() ,mParam2,Toast.LENGTH_SHORT ).show();
+
+        Genre genre = new Genre();
+
+        final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
+        final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
+
+        genre.setG_id(Integer.parseInt(mParam1));
+        Family family = new Family();
+        family.setF_id(Integer.parseInt(mParam2));
+        genre = new Genre();
+        Work work = new Work();
+        ArrayList<Work> works = new ArrayList<>();
+        genre.setG_id(Integer.parseInt(mParam1));
+        work.setGenre(genre);
+        works.add(work);
+        family.setWork(works);
+        
+        Collection<Work> works_recv = new ArrayList<>();
+        String jsonCode = new WorkGenreList(family).Send();
+        Data reply = JSON.decode(jsonCode);
+
+        Log.d("------------------", "Complete");
+
+        works_recv.addAll(reply.getFamily().get(0).getWork());
+        mAdapter.addAll( works_recv );
+        try {
+            mListView.setAdapter( mAdapter );
+        } catch (NullPointerException v) {
+            Toast.makeText( view.getContext() ,"データが空です" ,Toast.LENGTH_SHORT ).show();
+        }
 
 
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
