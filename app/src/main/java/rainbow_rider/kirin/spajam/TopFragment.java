@@ -12,7 +12,6 @@ import android.widget.AbsListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
@@ -50,19 +49,19 @@ public class TopFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param genreId Parameter 1.
+     * @param fId Parameter 2.
      * @return A new instance of fragment TopFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TopFragment newInstance(String param1, String param2) {
+    public static TopFragment newInstance(String genreId, String fId) {
         TopFragment fragment = new TopFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, genreId);
+        args.putString(ARG_PARAM2, fId);
         fragment.setArguments(args);
         Log.d("-------","--------");
-        Log.d(param1,param2);
+        Log.d(genreId,fId);
         return fragment;
     }
 
@@ -87,48 +86,76 @@ public class TopFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toast.makeText( view.getContext() , mFId,Toast.LENGTH_SHORT ).show();
+        String genreName = new String();
+        Integer genreId =  Integer.valueOf(mGenreId);
+
+        switch (Integer.valueOf(genreId)){
+            case 1:
+                genreName = "そうじクエスト";
+                break;
+            case 2:
+                genreName = "りょうりクエスト";
+                break;
+            case 3:
+                genreName = "せんたくクエスト";
+                break;
+            case 4:
+                genreName = "べんきょうクエスト";
+                break;
+            case 5:
+                genreName = "かいものクエスト";
+                break;
+            case 6:
+                genreName = "そのほかクエスト";
+                break;
+        }
+        Toast.makeText( view.getContext() , mGenreId,Toast.LENGTH_SHORT ).show();
+
+        Toast.makeText( view.getContext() , genreName,Toast.LENGTH_SHORT ).show();
+
 
         Genre genre = new Genre();
 
         final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
         final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
-        genre.setG_id(Integer.parseInt(mGenreId));
+        genre.setG_id(genreId);
         Family family = new Family();
         //family.setF_id(mFId);
-        family.setF_id("sorano");
-        genre = new Genre();
-        Work work = new Work();
-        ArrayList<Work> works = new ArrayList<>();
-        genre.setG_id(Integer.parseInt(mGenreId));
-        work.setGenre(genre);
-        works.add(work);
-        family.setWork(works);
+        family.setF_id("matsubara");
 
-        Collection<Work> works_recv = new ArrayList<>();
+        if ( genreId <= 9 ) {
+            genre = new Genre();
+            Work work = new Work();
+            ArrayList<Work> works = new ArrayList<>();
+            genre.setG_id(genreId);
+            work.setGenre(genre);
+            works.add(work);
+            family.setWork(works);
 
-        new AsyncWorkGenreList( family ) {
-            @Override
-            protected void onPostExecute( Data data ) {
-                super.onPostExecute( data );
-                Data reply = getReply();
+            new AsyncWorkGenreList(family) {
+                @Override
+                protected void onPostExecute(Data data) {
+                    super.onPostExecute(data);
+                    Data reply = getReply();
 
-                if ( reply == null ){
-                    Log.d("dame","desita");
-                } else {
-                    mAdapter.addAll(reply.getFamily().get(0).getWork());
+                    if (reply == null) {
+                        Log.d("-------------", "NotComplete");
+                    } else {
+                        mAdapter.addAll(reply.getFamily().get(0).getWork());
+                    }
+                    try {
+                        mListView.setAdapter(mAdapter);
+                    } catch (NullPointerException v) {
+                        Toast.makeText(view.getContext(), "データが空です", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                try {
-                    mListView.setAdapter( mAdapter );
-                } catch ( NullPointerException v ) {
-                    Toast.makeText( view.getContext(), "データが空です", Toast.LENGTH_SHORT ).show();
-                }
-            }
-        }.execute();
+            }.execute();
 
-        Log.d("------------------", "Complete");
-
+            Log.d("------------------", "Complete");
+        } else {
+            Log.d("------------------", "----- family action----");
+        }
 
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 //            @Override
@@ -142,12 +169,12 @@ public class TopFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-/*        if (context instanceof OnTopFragmentListener) {
+        if (context instanceof OnTopFragmentListener) {
             mListener = (OnTopFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnTopFragmentListener");
-        }*/
+        }
     }
 
     @Override

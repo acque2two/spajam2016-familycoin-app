@@ -3,10 +3,24 @@ package rainbow_rider.kirin.spajam;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.Family;
+import rainbow_rider.kirin.spajam.Data.Genre;
+import rainbow_rider.kirin.spajam.Data.Work;
+import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
+import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkGenreList;
 
 
 /**
@@ -24,8 +38,8 @@ public class FamilyDataFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mGenreId;
+    private String mFId;
 
     private OnFragmentInteractionListener mListener;
 
@@ -55,8 +69,8 @@ public class FamilyDataFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mGenreId = getArguments().getString(ARG_PARAM1);
+            mFId = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -80,9 +94,55 @@ public class FamilyDataFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+/*            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");*/
         }
+    }
+
+    @Override
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Toast.makeText( view.getContext() , "かぞくのじょうほう",Toast.LENGTH_SHORT ).show();
+
+        Genre genre = new Genre();
+
+        final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
+        final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
+
+        genre.setG_id(Integer.parseInt(mGenreId));
+        Family family = new Family();
+        //family.setF_id(mFId);
+        family.setF_id("sorano");
+        genre = new Genre();
+        Work work = new Work();
+        ArrayList<Work> works = new ArrayList<>();
+        genre.setG_id(Integer.parseInt(mGenreId));
+        work.setGenre(genre);
+        works.add(work);
+        family.setWork(works);
+
+        Collection<Work> works_recv = new ArrayList<>();
+
+        new AsyncWorkGenreList( family ) {
+            @Override
+            protected void onPostExecute( Data data ) {
+                super.onPostExecute( data );
+                Data reply = getReply();
+
+                if ( reply == null ){
+                    Log.d("dame","desita");
+                } else {
+                    mAdapter.addAll(reply.getFamily().get(0).getWork());
+                }
+                try {
+                    mListView.setAdapter( mAdapter );
+                } catch ( NullPointerException v ) {
+                    Toast.makeText( view.getContext(), "データが空です", Toast.LENGTH_SHORT ).show();
+                }
+            }
+        }.execute();
+
     }
 
     @Override
