@@ -1,6 +1,5 @@
 package rainbow_rider.kirin.spajam;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,14 +8,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -190,10 +187,10 @@ public class PostActivity extends AppCompatActivity {
 //                Anss anss = new Anss();
 
                 ArrayList<String> answerText = new ArrayList<String>();
-                answerText.add(answerA.getText().toString());
+/*                answerText.add(answerA.getText().toString());
                 answerText.add(answerB.getText().toString());
                 answerText.add(answerC.getText().toString());
-                answerText.add(answerD.getText().toString());
+                answerText.add(answerD.getText().toString());*/
 
                 int i = 1;
                 for (String a : answerText) {

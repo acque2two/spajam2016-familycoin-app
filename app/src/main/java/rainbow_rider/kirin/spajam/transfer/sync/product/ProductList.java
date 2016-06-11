@@ -13,13 +13,13 @@ import rainbow_rider.kirin.spajam.transfer.async.Sender;
  * Memo:
  * Todo:
  */
-public class AsyncProductAdd extends Sender {
-    public AsyncProductAdd( Family family ) {
+public class ProductList extends Sender {
+    public ProductList( Family family ) {
         ArrayList<Family> familyArrayList = new ArrayList<>();
         familyArrayList.add( family );
 
         allData = new Data();
         allData.setFamily( familyArrayList );
-        super.setPath( "/productadd" );
+        super.setPath( "/productlist" );
     }
 }
