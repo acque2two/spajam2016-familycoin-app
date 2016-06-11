@@ -3,7 +3,7 @@ package rainbow_rider.kirin.spajam.Data;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private long u_id;
+    private String u_id;
     private String u_name;
     private Long count;
     private String f_id;
