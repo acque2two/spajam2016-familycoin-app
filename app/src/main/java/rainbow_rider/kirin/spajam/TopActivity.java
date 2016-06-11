@@ -155,31 +155,31 @@ public class TopActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.activity_top_drawer_japanese) {
+        if (id == R.id.activity_top_drawer_cleaning) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "1","Japanese"))
                     .addToBackStack("国語")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_math) {
+        } else if (id == R.id.activity_top_drawer_cuisine) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "2","math"))
                     .addToBackStack("数学")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_science) {
+        } else if (id == R.id.activity_top_drawer_washing) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "3","science"))
                     .addToBackStack("理科")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_social_studies) {
+        } else if (id == R.id.activity_top_drawer_social_study) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "4","social_studies"))
                     .addToBackStack("社会")
                     .commit();
-        } else if (id == R.id.activity_top_drawer_english) {
+        } else if (id == R.id.activity_top_drawer_shopping) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_top_fragment, TopFragment.newInstance( "5","english"))

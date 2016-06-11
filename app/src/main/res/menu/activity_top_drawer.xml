@@ -2,33 +2,33 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<item android:title="教 科 一 覧">
+<item android:title="お手伝い一覧">
     <menu>
         <item
-            android:id="@+id/activity_top_drawer_japanese"
+            android:id="@+id/activity_top_drawer_cleaning"
             android:src="@mipmap/kokugo"
             android:layout_width="match_parent"
-            android:title="国    語" />
+            android:title="掃  除" />
         <item
-            android:id="@+id/activity_top_drawer_math"
+            android:id="@+id/activity_top_drawer_cuisine"
             android:src="@mipmap/suugaku"
-            android:title="数    学" />
+            android:title="料  理" />
         <item
-            android:id="@+id/activity_top_drawer_science"
+            android:id="@+id/activity_top_drawer_washing"
             android:src="@mipmap/rika"
-            android:title="理    科" />
+            android:title="洗  濯" />
         <item
-            android:id="@+id/activity_top_drawer_social_studies"
+            android:id="@+id/activity_top_drawer_social_study"
             android:src="@mipmap/shakai"
-            android:title="社    会" />
+            android:title="勉  強" />
         <item
-            android:id="@+id/activity_top_drawer_english"
+            android:id="@+id/activity_top_drawer_shopping"
             android:src="@mipmap/eigo"
-            android:title="英    語" />
+            android:title="買い物" />
         <item
             android:id="@+id/activity_top_drawer_other"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="そ の 他" />
+            android:title="その他" />
     </menu>
 </item>
 
