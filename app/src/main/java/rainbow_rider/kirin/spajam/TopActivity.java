@@ -78,7 +78,7 @@ public class TopActivity extends AppCompatActivity
         View header = LayoutInflater.from(this).inflate(R.layout.nav_header_top, null);
         navigationView.addHeaderView(header);
         TextView text = (TextView) header.findViewById(R.id.nav_header_top_textView);
-        text.setText("HELLO");
+        text.setText("ながのともき");
 
         getSupportFragmentManager()
                 .beginTransaction()

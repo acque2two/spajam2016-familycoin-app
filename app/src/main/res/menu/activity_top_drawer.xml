@@ -6,24 +6,24 @@
     <menu>
         <item
             android:id="@+id/activity_top_drawer_cleaning"
-            android:src="@drawable/ic_menu_camera"
+            android:icon="@mipmap/drawer_broom"
             android:layout_width="match_parent"
             android:title="そうじ" />
         <item
             android:id="@+id/activity_top_drawer_cuisine"
-            android:src="@mipmap/suugaku"
+            android:icon="@mipmap/drawer_meal"
             android:title="りょうり" />
         <item
             android:id="@+id/activity_top_drawer_washing"
-            android:src="@mipmap/rika"
+            android:src="@mipmap/drawer_towel"
             android:title="せんたく" />
         <item
             android:id="@+id/activity_top_drawer_social_study"
-            android:src="@mipmap/shakai"
+            android:src="@mipmap/drawer_book"
             android:title="べんきょう" />
         <item
             android:id="@+id/activity_top_drawer_shopping"
-            android:src="@mipmap/eigo"
+            android:src="@mipmap/drawer_cage"
             android:title="かいもの" />
         <item
             android:id="@+id/activity_top_drawer_other"
