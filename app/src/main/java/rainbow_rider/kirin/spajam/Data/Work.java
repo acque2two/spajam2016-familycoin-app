@@ -10,15 +10,15 @@ import java.io.Serializable;
  * Todo:
  */
 public class Work implements Serializable {
-    private Integer w_id;
-    private String w_text;
-    private String u_id;
-    private String f_id;
-    private String w_name;
-    private Integer g_id;
-    private Integer point;
-    private Genre genre;
-    private Integer image;
+    public Integer w_id;
+    public String w_text;
+    public String u_id;
+    public String f_id;
+    public String w_name;
+    public Integer g_id;
+    public Integer point;
+    public Genre genre;
+    public Integer image;
 
     public Integer getImage( ) {
         return image;

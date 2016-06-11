@@ -1,12 +1,15 @@
 package rainbow_rider.kirin.spajam;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,11 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import net.arnx.jsonic.JSON;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -34,6 +40,8 @@ import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkAdd;
 public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
     private ImageView imageView;
+    private Data allData;
+    private int intImage = R.drawable.ic_menu_camera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +55,50 @@ public class PostActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
 
         final Spinner genre_spinner = (Spinner) findViewById(R.id.post_genre_spinner);
-        EditText title = (EditText) findViewById(R.id.post_title);
-        EditText mainText = (EditText) findViewById(R.id.post_mainText);
-        EditText pointText = (EditText) findViewById(R.id.post_point_text);
+        final EditText title = (EditText) findViewById(R.id.post_title);
+        final EditText mainText = (EditText) findViewById(R.id.post_mainText);
+        final EditText pointText = (EditText) findViewById(R.id.post_point_text);
         FrameLayout postImageLayout = (FrameLayout) findViewById(R.id.post_image_layout);
+        Button sendButoon = (Button) findViewById(R.id.post_send_button);
 
+        assert pointText != null;
+        assert mainText != null;
+        assert sendButoon != null;
+        assert genre_spinner != null;
+        assert title != null;
+
+
+        sendButoon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Integer intTitle = Integer.valueOf(pointText.getText().toString());
+
+                Genre genre = new Genre();
+                genre.setG_id(genre_spinner.getSelectedItemPosition());
+
+                Work work = new Work();
+
+                work.setW_text(mainText.getText().toString());
+                work.setU_id(allData.getFamily().get(0).getUser().get(0).getU_id());
+                work.setW_name(title.getText().toString());
+                work.setPoint(intTitle);
+                work.setGenre(genre);
+                work.setImage(intImage);
+
+                Family family = allData.getFamily().get(0);
+                ArrayList<Work> works = new ArrayList<Work>();
+                works.add(work);
+                family.setWork(works);
+
+                new AsyncWorkAdd(family){
+                    @Override
+                    protected void onPostExecute(Data data) {
+                        super.onPostExecute(data);
+                        PostActivity.this.finish();
+                    }
+                }.execute();
+            }
+        });
 
         assert postImageLayout != null;
         postImageLayout.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +114,8 @@ public class PostActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
         //Genre spinner
         ArrayAdapter<String> genre_adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
@@ -102,11 +151,11 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
-    private User setUserData(Intent intent) {
-        User u = new User();
-//        u.setUser_id(intent.getLongExtra("user_id", i));
-//        u.setUser_name(intent.getStringExtra("user_name"));
-        return u;
+    private boolean loadData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
+        return true;
     }
 
     private String getGalleryPath() {
@@ -117,11 +166,11 @@ public class PostActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
         super.onActivityResult(requestCode, resultCode, resultData);
-        int image = resultData.getIntExtra("image", R.drawable.ic_menu_share);
+        intImage = resultData.getIntExtra("image", R.drawable.ic_menu_share);
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    imageView.setImageResource(image);
+                    imageView.setImageResource(intImage);
                 } else {
 
                 }

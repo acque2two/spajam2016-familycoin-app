@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import net.arnx.jsonic.JSON;
+
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
@@ -25,12 +27,14 @@ import rainbow_rider.kirin.spajam.transfer.async.user.AsyncUserAdd;
 
 public class LoginActivity extends AppCompatActivity {
 
+    Family family;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
 
     private User user = new User();
+    private Data allData = new Data();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                 user.setAdmin(admin[0]);
                 ArrayList<User> users = new ArrayList<User>(  );
                 users.add( user );
-                final Family family = new Family();
+                family = new Family();
                 family.setF_id( f_id );
                 family.setUser( users );
 
@@ -119,6 +123,18 @@ public class LoginActivity extends AppCompatActivity {
                         if (!reply.isStatus()){
                             // 家族未登録
 
+                            final AsyncUserAdd userAdd = new AsyncUserAdd( family ) {
+                                @Override
+                                protected void onPostExecute( Data data ) {
+                                    super.onPostExecute( data );
+                                    LoginActivity.this.findViewById( R.id.progressBar2 )
+                                                      .setVisibility( View.GONE );
+                                    Toast.makeText( LoginActivity.this.getApplicationContext
+                                            (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
+                                    LoginActivity.this.finish();
+                                }
+                            };
+
                             // 確認ダイアログの生成
                             AlertDialog.Builder alertDlg = new AlertDialog.Builder( LoginActivity.this );
                             alertDlg.setTitle("家族が未登録です");
@@ -127,43 +143,77 @@ public class LoginActivity extends AppCompatActivity {
                                     "はぁい",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility( View.VISIBLE );
-                                            new AsyncFamilyAdd( family ){
-                                                @Override
-                                                protected void onPostExecute( Data data ) {
-                                                    super.onPostExecute( data );
-                                                    new AsyncUserAdd( family ){
-                                                        @Override
-                                                        protected void onPostExecute( Data data ) {
-                                                            super.onPostExecute( data );
+                                            final EditText editView = new EditText( LoginActivity.this );
+                                            new AlertDialog.Builder( LoginActivity.this )
+                                                    .setIcon( android.R.drawable.ic_dialog_info )
+                                                    .setTitle( "家族の表示名を設定してください" )
+                                                    //setViewにてビューを設定します。
+                                                    .setView( editView )
+                                                    .setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                                                        public void onClick( DialogInterface dialog, int whichButton ) {
+                                                            //入力した文字をトースト出力する
+                                                            family.setF_name( editView.getText().toString() );
+                                                            new AsyncFamilyAdd( family ) {
+                                                                @Override
+                                                                protected void onPostExecute( Data data ) {
+                                                                    super.onPostExecute( data );
 
+                                                                    Toast.makeText(
+                                                                            LoginActivity.this.getApplicationContext(),
+                                                                            "家族登録が完了しました。",
+                                                                            Toast.LENGTH_LONG
+                                                                    ).show();
+                                                                    userAdd.execute();
+                                                                    LoginActivity.this.findViewById( R.id.progressBar2 )
+                                                                                      .setVisibility(
+                                                                                              View.GONE );
+                                                                }
+                                                            }.execute();
                                                             LoginActivity.this.findViewById( R.id.progressBar2 )
-                                                                              .setVisibility( View.GONE );
-                                                            Toast.makeText( LoginActivity.this.getApplicationContext
-                                                                    (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
-                                                            LoginActivity.this.finish();
+                                                                              .setVisibility(
+                                                                                      View.VISIBLE );
                                                         }
-                                                    }.execute(  );
-                                                }
-                                            }.execute(  );
-
+                                                    } )
+                                                    .setNegativeButton( "キャンセル", new DialogInterface.OnClickListener() {
+                                                        public void onClick( DialogInterface dialog, int whichButton ) {
+                                                        }
+                                                    } )
+                                                    .show();
+                                            LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility(
+                                                    View.VISIBLE );
                                         }
+
+
                                     });
                             alertDlg.setNegativeButton(
                                     "いいえ",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             // Cancel ボタンクリック処理
+                                            return;
                                         }
                                     });
 
-                            // 表示
+
                             alertDlg.create().show();
+                        } else {
+
+                            new AsyncUserAdd( family ) {
+                                @Override
+                                protected void onPostExecute( Data data ) {
+                                    super.onPostExecute( data );
+                                    LoginActivity.this.findViewById( R.id.progressBar2 )
+                                                      .setVisibility( View.GONE );
+                                    Toast.makeText( LoginActivity.this.getApplicationContext
+                                            (), "登録が完了しました。", Toast.LENGTH_LONG ).show();
+                                    LoginActivity.this.finish();
+                                }
+                            }.execute();
                         }
                     }
                 }.execute(  );
                 LoginActivity.this.findViewById( R.id.progressBar2 ).setVisibility( View.VISIBLE );
-                saveUserData(LoginActivity.this, name, u_id, f_id, sex[0], adult[0], admin[0]);
+                saveData(LoginActivity.this);
 
                 Toast.makeText(LoginActivity.this, "作成", Toast.LENGTH_SHORT).show();
             }
@@ -177,23 +227,20 @@ public class LoginActivity extends AppCompatActivity {
 */
     }
 
-    private void saveUserData(Context context, String name, String u_id, String f_id, Boolean sex, Boolean adult, Boolean admin) {
+
+    private boolean saveData(Context context) {
         // アプリ標準の Preferences を取得する
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor spedit = sp.edit();
+        if ( allData.family == null ) {
+            allData.family = new ArrayList<>();
+            allData.family.add( family );
+        }
+        allData.family.get(0).users.add(user);
 
-        // Preferences に書き込むための Editor クラスを取得する
-        SharedPreferences.Editor editor = sp.edit();
-
-        // putXxxx("キー",データ) にて書き込むデータを登録する
-        editor.putString("name", name);
-        editor.putString("u_id", u_id);
-        editor.putString("f_id", f_id);
-        editor.putBoolean("sex", sex);
-        editor.putBoolean("adult", adult);
-        editor.putBoolean("admin", admin);
-
-        // 書き込みを確定する
-        editor.commit();
+        spedit.putString("DATA_JSON", JSON.encode(allData));
+        spedit.apply();
+        return true;
 
     }
 
