@@ -125,7 +125,8 @@
                         android:layout_margin="10dp"
                         android:background="#ffffff"
                         android:gravity="left"
-                        android:textSize="15dp"/>
+                        android:textSize="15dp"
+                        android:hint="例：お風呂をきれいにしてください" />
 
                 </LinearLayout>
 
@@ -148,13 +149,17 @@
                         android:textColor="#56a466" />
 
                     <EditText
-                        android:id="@+id/editText"
+                        android:id="@+id/post_point_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:singleLine="true"
+                        android:maxLength="3"
+                        android:inputType="numberSigned"
                         android:layout_margin="10dp"
                         android:background="#ffffff"
                         android:gravity="left"
-                        android:textSize="15dp" />
+                        android:textSize="15dp"
+                        android:hint="100" />
                 </LinearLayout>
 
             </LinearLayout>
