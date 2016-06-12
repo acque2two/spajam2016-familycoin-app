@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import net.arnx.jsonic.JSON;
 
@@ -28,9 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(getString(R.string.app_name));
 
-//        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
-  //      ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
+        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
+        ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
 
+
+        AlphaAnimation alpha = new AlphaAnimation(0.1f, 1); // 透明度を0.1から1に変化させる
+        alpha.setDuration(3000); // 3000msかけてアニメーションする
+        activity_main_imageView.startAnimation(alpha); // アニメーション適用
+        activity_main2_imageView.startAnimation(alpha);
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
