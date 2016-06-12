@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rainbow_rider.kirin.spajam.FamilyDataFragment">
+    tools:context="rainbow_rider.kirin.spajam.FamilyDataFragment"
+    android:background="#F1F8E9">
 
     <!-- TODO: Update blank fragment layout -->
 
