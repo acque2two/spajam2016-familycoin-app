@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 boolean[] an = new boolean[2];
                 an = checkInput(name, u_id, f_id, sex, adult, admin);
-                if ( an[ 0 ] ) {
+                if ( !an[ 0 ] ) {
                     //error
                     AlertDialog.Builder alert02 = new AlertDialog.Builder(LoginActivity.this);
 //ダイアログタイトルをセット
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                     alert02.setPositiveButton("OK", null);
 //ダイアログ表示
                     alert02.show();
-                }else if(an[1]){
+                }else if(!an[1]){
                     AlertDialog.Builder alert02 = new AlertDialog.Builder(LoginActivity.this);
 //ダイアログタイトルをセット
                     alert02.setTitle("エラー");
