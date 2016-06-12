@@ -146,6 +146,8 @@ public class TopFragment extends Fragment {
                     Log.d("-------------", "NotComplete");
                 } else {
                     //mAdapter.addAll(reply.getFamily().get(0).getWork());
+                    Log.d(String.valueOf(reply.getFamily().size()) , " ------ replay get size ------ ");
+                    Log.d(reply.getFamily().get(0).getWork().get(0).getW_text(), " W text !!!------------");
                     for (int i = 0; i < reply.getFamily().size(); i++) {
                         try {
                             hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_text());
@@ -153,13 +155,11 @@ public class TopFragment extends Fragment {
                             hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "Point");
                             list_data.add(new HashMap<String, String>(hashTmp));
                             hashTmp.clear();
-                        } catch (NullPointerException e) {
-
-                        }
-
+                        } catch (NullPointerException e) {  }
                     }
                 }
-                ListView listView = (ListView) view.findViewById(R.id.fragment_family_data_listView);
+                //ListView listView = (ListView) view.findViewById(R.id.fragment_family_data_listView);
+                ListView listView = (ListView) view.findViewById(R.id.list_view);
 
                 try {
                     SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
