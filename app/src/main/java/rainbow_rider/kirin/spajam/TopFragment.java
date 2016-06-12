@@ -161,7 +161,7 @@ public class TopFragment extends Fragment {
                             hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_text());
                             hashTmp.put("u_data", reply.getFamily().get(0).getWork().get(i).getW_name());
                             hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "Point");
-                            hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "Point");
+                            hashTmp.put("num", reply.getFamily().get(0).getWork().get(i).getW_id().toString());
                             list_data.add(new HashMap<String, String>(hashTmp));
                             hashTmp.clear();
                         } catch (NullPointerException e) {  }
@@ -172,7 +172,7 @@ public class TopFragment extends Fragment {
 
                 try {
                     SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
-                            new String[]{"getWork", "u_data", "sub"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub});
+                            new String[]{"getWork", "u_data", "sub", "num"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub, R.id.num_text});
                     listView.setAdapter(simp);
 
                     //mListView.setAdapter(mAdapter);
