@@ -1,7 +1,9 @@
 package rainbow_rider.kirin.spajam;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
+import net.arnx.jsonic.JSON;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +44,8 @@ public class TopFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mGenreId;
     private String mFId;
+    private Data allData = new Data();
+
 
     private OnTopFragmentListener mListener;
 
@@ -87,6 +93,8 @@ public class TopFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        loadData(view.getContext());
 
         String genreName = new String();
         Integer genreId = Integer.valueOf(mGenreId);
@@ -152,6 +160,7 @@ public class TopFragment extends Fragment {
                         try {
                             hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_text());
                             hashTmp.put("u_data", reply.getFamily().get(0).getWork().get(i).getW_name());
+                            hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "Point");
                             hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "Point");
                             list_data.add(new HashMap<String, String>(hashTmp));
                             hashTmp.clear();
@@ -227,5 +236,17 @@ public class TopFragment extends Fragment {
     public interface OnTopFragmentListener {
         // TODO: Update argument type and name
         void onTopFragmentItemClick(Work work);
+    }
+
+    private boolean loadData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
+        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
+
+        boolean ans;
+        ans = allData.getFamily() != null;
+
+        return ans;
     }
 }
