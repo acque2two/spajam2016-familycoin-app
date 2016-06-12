@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             //画面のtextViewへ"処理が完了しました。"を表示させる。
             Log.d("処理が完了しました。", "----------------------------------------");
             Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(callIntent);
+            //startActivity(callIntent);
         }
     }
 }
