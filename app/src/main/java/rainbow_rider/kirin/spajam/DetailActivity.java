@@ -21,7 +21,7 @@ import rainbow_rider.kirin.spajam.transfer.async.achievement.unapproved.AsyncUna
 
 public class DetailActivity extends AppCompatActivity {
 
-    private Data allData;
+    private Data allData = new Data();
     private String my_id;
 
     @Override
