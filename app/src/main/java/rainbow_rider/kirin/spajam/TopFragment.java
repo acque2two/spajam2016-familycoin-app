@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -158,15 +159,24 @@ public class TopFragment extends Fragment {
 
                     }
                 }
+                ListView listView = (ListView) view.findViewById(R.id.fragment_family_data_listView);
+
                 try {
                     SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
                             new String[]{"getWork", "u_data", "sub"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub});
-                    ((ListView) view.findViewById(R.id.list_view)).setAdapter(simp);
+                    listView.setAdapter(simp);
 
                     //mListView.setAdapter(mAdapter);
                 } catch (NullPointerException v) {
                     Toast.makeText(view.getContext(), "データが空です", Toast.LENGTH_SHORT).show();
                 }
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Work work = (Work) parent.getAdapter().getItem(position);
+                        mListener.onTopFragmentItemClick(work);
+                    }
+                });
             }
         }.execute();
 
@@ -214,6 +224,6 @@ public class TopFragment extends Fragment {
      */
     public interface OnTopFragmentListener {
         // TODO: Update argument type and name
-        //void onTopFragmentItemClick(Question question);
+        void onTopFragmentItemClick(Work work);
     }
 }
