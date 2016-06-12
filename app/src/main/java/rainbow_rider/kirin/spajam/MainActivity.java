@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import net.arnx.jsonic.JSON;
@@ -23,25 +25,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadData( getApplicationContext() );
         setContentView(R.layout.activity_main);
+        loadData( getApplicationContext() );
 
         setTitle(getString(R.string.app_name));
 
-        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
-        ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
-
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(1000);
-        alphaAnimation.setFillAfter(true);
-
-        //アニメーション動作
-        activity_main_imageView.startAnimation(alphaAnimation);
-
-        activity_main2_imageView.startAnimation(alphaAnimation);
-
-        MyThread myThread = new MyThread();
-        myThread.start();
+//        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
+  //      ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
 
         Intent callIntent;
         if ( !loadData( MainActivity.this ) ) {
@@ -60,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity( callIntent );
         }
     }
+
 
     private boolean loadData(Context context) {
         // アプリ標準の Preferences を取得する
@@ -97,21 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 break;
-        }
-    }
-
-    private class MyThread extends Thread {
-        public void run() {
-            //時間のかかる処理実行します。今回は仮で10秒停止させています。
-            try {
-                //1秒停止します。
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-            }
-            //画面のtextViewへ"処理が完了しました。"を表示させる。
-            Log.d("処理が完了しました。", "----------------------------------------");
-            Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(callIntent);
         }
     }
 }
