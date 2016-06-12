@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="rainbow_rider.kirin.spajam.TopFragment"
-    android:background="#E8F5E9">
+    android:background="#F1F8E9">
 
     <ListView
         android:id="@+id/list_view"
