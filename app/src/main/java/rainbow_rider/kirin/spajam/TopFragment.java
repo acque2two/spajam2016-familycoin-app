@@ -154,7 +154,7 @@ public class TopFragment extends Fragment {
                     Log.d("-------------", "NotComplete");
                 } else {
                     //mAdapter.addAll(reply.getFamily().get(0).getWork());
-                    Log.d(String.valueOf(reply.getFamily().size()) , " ------ replay get size ------ ");
+                    Log.d(String.valueOf(reply.getFamily().get(0).getWork().size()) , " ------ replay get size ------ ");
                     Log.d(reply.getFamily().get(0).getWork().get(0).getW_text(), " W text !!!------------");
                     for (int i = 0; i < reply.getFamily().get(0).getWork().size(); i++) {
                         try {
