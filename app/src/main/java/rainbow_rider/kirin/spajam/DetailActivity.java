@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -36,10 +37,9 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int w_id = intent.getIntExtra("w_id", -1);
+        Log.d("もりがわるい！" , String.valueOf(w_id) );
         Work work = new Work();
         User user = new User();
-
-        loadData(getApplicationContext());
 
         work = allData.getFamily().get(0).getWork().get(w_id);
 /*

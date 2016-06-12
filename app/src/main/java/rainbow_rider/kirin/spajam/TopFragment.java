@@ -160,7 +160,7 @@ public class TopFragment extends Fragment {
                         try {
                             hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_text());
                             hashTmp.put("u_data", reply.getFamily().get(0).getWork().get(i).getW_name());
-                            hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "Point");
+                            hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "ポイント");
                             hashTmp.put("num", reply.getFamily().get(0).getWork().get(i).getW_id().toString());
                             list_data.add(new HashMap<String, String>(hashTmp));
                             hashTmp.clear();
