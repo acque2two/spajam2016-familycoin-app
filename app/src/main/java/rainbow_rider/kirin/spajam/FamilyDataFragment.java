@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.transfer.async.family.AsyncAllData;
 
 
 /**
@@ -35,12 +36,12 @@ public class FamilyDataFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    HashMap<String, String> hashTmp;
+    ArrayList<HashMap<String, String>> list_data;
     // TODO: Rename and change types of parameters
     private String mGenreId;
     private String mFId;
     private Data allData = new Data();
-
     private OnFragmentInteractionListener mListener;
 
     public FamilyDataFragment() {
@@ -102,22 +103,28 @@ public class FamilyDataFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        hashTmp = new HashMap<String, String>();
         Toast.makeText(view.getContext(), "かぞくのじょうほう", Toast.LENGTH_SHORT).show();
 
         loadData(view.getContext());
-        ArrayList<HashMap<String, String>> list_data = new ArrayList<HashMap<String, String>>();
-        HashMap<String, String> hashTmp = new HashMap<String, String>();
+        list_data = new ArrayList<HashMap<String, String>>();
+
 
         Log.d("  allData  ", allData.getFamily().get(0).getUser().get(0).getU_name());
-
-        for ( int i = 0; i < allData.getFamily().get(0).getUser().size(); i++ ){
-            hashTmp.put("u_name" , allData.getFamily().get(0).getUser().get(i).getU_name());
-            hashTmp.put("u_data" , allData.getFamily().get(0).getUser().get(i).getScore().toString());
-            hashTmp.put("sub" , allData.getFamily().get(0).getUser().get(i).getU_name());
-            list_data.add(new HashMap<String, String>(hashTmp));
-            hashTmp.clear();
-        }
+        new AsyncAllData( allData.family.get( 0 ) ) {
+            @Override
+            protected void onPostExecute( Data data ) {
+                super.onPostExecute( data );
+                Data reply = getReply();
+                for ( int i = 0; i < reply.getFamily().get( 0 ).getUser().size(); i++ ) {
+                    hashTmp.put( "u_name", reply.getFamily().get( 0 ).getUser().get( i ).getU_name() );
+                    hashTmp.put( "u_data", reply.getFamily().get( 0 ).getUser().get( i ).getScore().toString() );
+                    hashTmp.put( "sub", reply.getFamily().get( 0 ).getUser().get( i ).getU_name() );
+                    list_data.add( new HashMap<String, String>( hashTmp ) );
+                    hashTmp.clear();
+                }
+            }
+        }.execute();
 
         SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
                 new String[]{"u_name", "u_data", "sub"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub});
@@ -128,6 +135,18 @@ public class FamilyDataFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    private boolean loadData( Context context ) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences( context );
+
+        allData = JSON.decode( sp.getString( "DATA_JSON", "{}" ), Data.class );
+
+        boolean ans;
+        ans = allData.getFamily() != null;
+
+        return ans;
     }
 
     /**
@@ -147,18 +166,6 @@ public class FamilyDataFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    private boolean loadData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-
-        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
-
-        boolean ans;
-        ans = allData.getFamily() != null;
-
-        return ans;
     }
 }
 

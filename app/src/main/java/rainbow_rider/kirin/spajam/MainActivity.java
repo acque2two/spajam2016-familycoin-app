@@ -7,15 +7,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import net.arnx.jsonic.JSON;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.User;
+import rainbow_rider.kirin.spajam.transfer.async.family.AsyncAllData;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        loadData( getApplicationContext() );
         setContentView(R.layout.activity_main);
 
         setTitle(getString(R.string.app_name));
@@ -49,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
             callIntent = new Intent( MainActivity.this, LoginActivity.class );
             startActivityForResult( callIntent , 1);
         }else{
+            new AsyncAllData( allData.family.get( 0 ) ) {
+                @Override
+                protected void onPostExecute( Data data ) {
+                    super.onPostExecute( data );
+                    allData = getReply();
+                    saveData( MainActivity.this.getApplicationContext() );
+                }
+            }.execute();
             callIntent = new Intent( MainActivity.this, TopActivity.class );
             startActivity( callIntent );
         }
@@ -72,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor spedit = sp.edit();
         spedit.putString("DATA_JSON", JSON.encode(allData));
         spedit.apply();
+        spedit.commit();
         return true;
 
     }
