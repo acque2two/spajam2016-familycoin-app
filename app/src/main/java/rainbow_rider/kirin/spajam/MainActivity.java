@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setTitle(getString(R.string.app_name));
-/*
+
         ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
         ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
 
@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         activity_main2_imageView.startAnimation(alphaAnimation);
 
-         MyThread myThread = new MyThread();
+        MyThread myThread = new MyThread();
         myThread.start();
-*/
+
         Intent callIntent;
         if ( !loadData( MainActivity.this ) ) {
             callIntent = new Intent( MainActivity.this, LoginActivity.class );

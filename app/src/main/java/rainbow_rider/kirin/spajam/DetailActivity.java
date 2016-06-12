@@ -55,6 +55,8 @@ public class DetailActivity extends AppCompatActivity {
         Work work = new Work();
         User user = new User();
 
+        work = allData.getFamily().get(0).getWork().get(w_id);
+/*
         for (Work w : allData.getFamily().get(0).getWork()) {
             if (w.getW_id() == w_id) {
                 work = w;
@@ -62,7 +64,7 @@ public class DetailActivity extends AppCompatActivity {
             }
             break;
         }
-
+*/
         for(User u : allData.getFamily().get(0).getUser()) {
             if (my_id.equals(u.u_name)) {
                 user = u;
