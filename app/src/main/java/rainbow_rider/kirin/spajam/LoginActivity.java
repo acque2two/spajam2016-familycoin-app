@@ -234,6 +234,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         allData.family.get(0).users.add(user);
 
+        spedit.putString("my_id", user.getU_name());
         spedit.putString("DATA_JSON", JSON.encode(allData));
         spedit.apply();
         return true;

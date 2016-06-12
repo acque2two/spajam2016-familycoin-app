@@ -34,11 +34,13 @@ import java.util.List;
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Unapproved;
 import rainbow_rider.kirin.spajam.Data.User;
+import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.transfer.async.achievement.unapproved.AsyncUnapprovedAdd;
 
 public class DetailActivity extends AppCompatActivity {
 
     private Data allData;
+    private String my_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,24 @@ public class DetailActivity extends AppCompatActivity {
         //TopActivityからQuestionを受け取る。
 
         Intent intent = getIntent();
+        int w_id = intent.getIntExtra("w_id", -1);
+        Work work = new Work();
+        User user = new User();
+
+        for (Work w : allData.getFamily().get(0).getWork()) {
+            if (w.getW_id() == w_id) {
+                work = w;
+
+            }
+            break;
+        }
+
+        for(User u : allData.getFamily().get(0).getUser()) {
+            if (my_id.equals(u.u_name)) {
+                user = u;
+                break;
+            }
+        }
 
         final Button send_button = (Button) findViewById(R.id.detail_send_button);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
@@ -60,6 +80,10 @@ public class DetailActivity extends AppCompatActivity {
         assert main_text != null;
         assert title_text != null;
         assert user_text != null;
+
+        main_text.setText(work.getW_text());
+        title_text.setText(work.getW_name());
+        user_text.setText(user.getU_name());
 
         //image
         final boolean[] send = new boolean[]{false};
@@ -87,6 +111,7 @@ public class DetailActivity extends AppCompatActivity {
 
         boolean ans;
         ans = allData.getFamily() != null;
+        my_id = sp.getString("my_id", "");
 
         return ans;
     }
