@@ -146,14 +146,14 @@ public class TopFragment extends Fragment {
                     Log.d("-------------", "NotComplete");
                 } else {
                     //mAdapter.addAll(reply.getFamily().get(0).getWork());
-                    for ( int i = 0 ; i < reply.getFamily().size() ; i ++ ){
+                    for (int i = 0; i < reply.getFamily().size(); i++) {
                         try {
                             hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_text());
                             hashTmp.put("u_data", reply.getFamily().get(0).getWork().get(i).getW_name());
                             hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "Point");
                             list_data.add(new HashMap<String, String>(hashTmp));
                             hashTmp.clear();
-                        } catch (NullPointerException e){
+                        } catch (NullPointerException e) {
 
                         }
 
@@ -170,13 +170,15 @@ public class TopFragment extends Fragment {
                 } catch (NullPointerException v) {
                     Toast.makeText(view.getContext(), "データが空です", Toast.LENGTH_SHORT).show();
                 }
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Work work = (Work) parent.getAdapter().getItem(position);
-                        mListener.onTopFragmentItemClick(work);
-                    }
-                });
+                try {
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Work work = (Work) parent.getAdapter().getItem(position);
+                            mListener.onTopFragmentItemClick(work);
+                        }
+                    });
+                } catch (NullPointerException e) {}
             }
         }.execute();
 
