@@ -8,16 +8,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.Work;
-import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
 import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkGenreList;
 
 
@@ -87,9 +89,9 @@ public class TopFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         String genreName = new String();
-        Integer genreId =  Integer.valueOf(mGenreId);
+        Integer genreId = Integer.valueOf(mGenreId);
 
-        switch (Integer.valueOf(genreId)){
+        switch (Integer.valueOf(genreId)) {
             case 1:
                 genreName = "そうじクエスト";
                 break;
@@ -110,49 +112,81 @@ public class TopFragment extends Fragment {
                 break;
         }
 
-        Toast.makeText( view.getContext() , genreName,Toast.LENGTH_SHORT ).show();
+        Toast.makeText(view.getContext(), genreName, Toast.LENGTH_SHORT).show();
 
         Genre genre = new Genre();
 
-        final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
-        final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
+        //final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
+        //final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
 
         genre.setG_id(genreId);
         Family family = new Family();
         family.setF_id(mFId);
 
-        if ( genreId <= 9 ) {
-            genre = new Genre();
-            Work work = new Work();
-            ArrayList<Work> works = new ArrayList<>();
-            genre.setG_id(genreId);
-            work.setGenre(genre);
-            works.add(work);
-            family.setWork(works);
+        genre = new Genre();
+        Work work = new Work();
+        ArrayList<Work> works = new ArrayList<>();
+        genre.setG_id(genreId);
+        work.setGenre(genre);
+        works.add(work);
+        family.setWork(works);
 
-            new AsyncWorkGenreList(family) {
-                @Override
-                protected void onPostExecute(Data data) {
-                    super.onPostExecute(data);
-                    Data reply = getReply();
 
-                    if (reply == null) {
-                        Log.d("-------------", "NotComplete");
-                    } else {
-                        mAdapter.addAll(reply.getFamily().get(0).getWork());
-                    }
-                    try {
-                        mListView.setAdapter(mAdapter);
-                    } catch (NullPointerException v) {
-                        Toast.makeText(view.getContext(), "データが空です", Toast.LENGTH_SHORT).show();
+        final HashMap<String, String> hashTmp = new HashMap<String, String>();
+
+        new AsyncWorkGenreList(family) {
+            @Override
+            protected void onPostExecute(Data data) {
+                super.onPostExecute(data);
+                Data reply = getReply();
+                ArrayList<HashMap<String, String>> list_data = new ArrayList<HashMap<String, String>>();
+
+
+                if (reply == null) {
+                    Log.d("-------------", "NotComplete");
+                } else {
+                    //mAdapter.addAll(reply.getFamily().get(0).getWork());
+                    for (int i = 0; i < reply.getFamily().size(); i++) {
+                        try {
+                            hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_text());
+                            hashTmp.put("u_data", reply.getFamily().get(0).getWork().get(i).getW_name());
+                            hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "Point");
+                            list_data.add(new HashMap<String, String>(hashTmp));
+                            hashTmp.clear();
+                        } catch (NullPointerException e) {
+
+                        }
+
                     }
                 }
-            }.execute();
+                ListView listView = (ListView) view.findViewById(R.id.fragment_family_data_listView);
 
-            Log.d("------------------", "Complete");
-        } else {
-            Log.d("------------------", "----- family action----");
-        }
+                try {
+                    SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
+                            new String[]{"getWork", "u_data", "sub"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub});
+                    listView.setAdapter(simp);
+
+                    //mListView.setAdapter(mAdapter);
+                } catch (NullPointerException v) {
+                    Toast.makeText(view.getContext(), "データが空です", Toast.LENGTH_SHORT).show();
+                }
+                try {
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Work work = (Work) parent.getAdapter().getItem(position);
+                            mListener.onTopFragmentItemClick(work);
+                        }
+                    });
+                } catch (NullPointerException e) {}
+            }
+        }.execute();
+
+        Log.d("------------------", "Complete");
+
+
+
+
 
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 //            @Override
@@ -192,6 +226,6 @@ public class TopFragment extends Fragment {
      */
     public interface OnTopFragmentListener {
         // TODO: Update argument type and name
-        //void onTopFragmentItemClick(Question question);
+        void onTopFragmentItemClick(Work work);
     }
 }
