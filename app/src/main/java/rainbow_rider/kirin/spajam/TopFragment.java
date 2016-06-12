@@ -94,7 +94,7 @@ public class TopFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        loadData(view.getContext());
+        loadData( TopFragment.this.getContext().getApplicationContext() );
 
         String genreName = new String();
         Integer genreId = Integer.valueOf(mGenreId);
@@ -218,6 +218,18 @@ public class TopFragment extends Fragment {
         mListener = null;
     }
 
+    private boolean loadData( Context context ) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences( context );
+
+        allData = JSON.decode( sp.getString( "DATA_JSON", "{}" ), Data.class );
+
+        boolean ans;
+        ans = allData.getFamily() != null;
+
+        return ans;
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -231,17 +243,5 @@ public class TopFragment extends Fragment {
     public interface OnTopFragmentListener {
         // TODO: Update argument type and name
         void onTopFragmentItemClick(int wId);
-    }
-
-    private boolean loadData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-
-        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
-
-        boolean ans;
-        ans = allData.getFamily() != null;
-
-        return ans;
     }
 }

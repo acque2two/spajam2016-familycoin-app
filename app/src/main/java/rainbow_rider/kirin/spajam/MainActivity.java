@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
   //      ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
 
         Intent callIntent;
-        if ( !loadData( MainActivity.this ) ) {
+        if ( !loadData( MainActivity.this.getApplicationContext() ) ) {
             callIntent = new Intent( MainActivity.this, LoginActivity.class );
             startActivityForResult( callIntent , 1);
         }else{

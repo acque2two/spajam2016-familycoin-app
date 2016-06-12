@@ -40,7 +40,7 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        loadData(PostActivity.this);
+        loadData( PostActivity.this.getApplicationContext() );
 
         imageView = (ImageView) findViewById(R.id.imageView);
 

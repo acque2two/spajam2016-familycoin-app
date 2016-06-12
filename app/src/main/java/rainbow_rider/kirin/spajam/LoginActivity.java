@@ -240,7 +240,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }.execute();
                     LoginActivity.this.findViewById(R.id.progressBar2).setVisibility(View.VISIBLE);
-                    saveData(LoginActivity.this);
+                    saveData( LoginActivity.this.getApplicationContext() );
 
                     Toast.makeText(LoginActivity.this, "作成", Toast.LENGTH_SHORT).show();
                 }

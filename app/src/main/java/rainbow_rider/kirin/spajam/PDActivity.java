@@ -3,22 +3,19 @@ package rainbow_rider.kirin.spajam;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.arnx.jsonic.JSON;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Product;
 import rainbow_rider.kirin.spajam.Data.User;
-import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.transfer.async.user.AsyncScoreChange;
 
 public class PDActivity extends AppCompatActivity {
@@ -31,7 +28,7 @@ public class PDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pd);
 
-        loadData(PDActivity.this);
+        loadData( PDActivity.this.getApplicationContext() );
 
         Intent intent = getIntent();
         int p_id = intent.getIntExtra("p_id", -1);

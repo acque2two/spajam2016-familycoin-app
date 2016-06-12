@@ -108,7 +108,7 @@ public class FamilyDataFragment extends Fragment {
         hashTmp = new HashMap<String, String>();
         Toast.makeText(view.getContext(), "かぞくのじょうほう", Toast.LENGTH_SHORT).show();
 
-        loadData(view.getContext());
+        loadData( FamilyDataFragment.this.getContext().getApplicationContext() );
         list_data = new ArrayList<HashMap<String, String>>();
 
 
