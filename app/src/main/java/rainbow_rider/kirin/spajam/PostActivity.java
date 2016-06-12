@@ -4,17 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,16 +20,12 @@ import android.widget.Toast;
 
 import net.arnx.jsonic.JSON;
 
-import java.io.FileDescriptor;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.Genre;
-import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.Data.Work;
-import rainbow_rider.kirin.spajam.transfer.async.user.AsyncUserExist;
 import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkAdd;
 
 public class PostActivity extends AppCompatActivity {
@@ -196,7 +185,7 @@ public class PostActivity extends AppCompatActivity {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor spedit = sp.edit();
         spedit.putString("DATA_JSON", JSON.encode(allData));
-        spedit.apply();
+        spedit.commit();
         return true;
 
     }

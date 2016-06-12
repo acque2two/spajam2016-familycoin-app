@@ -130,7 +130,7 @@ public class TopActivity extends AppCompatActivity
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences( context );
         SharedPreferences.Editor spedit = sp.edit();
         spedit.putString( "DATA_JSON", JSON.encode( allData ) );
-        spedit.apply();
+        spedit.commit();
         return true;
 
     }
