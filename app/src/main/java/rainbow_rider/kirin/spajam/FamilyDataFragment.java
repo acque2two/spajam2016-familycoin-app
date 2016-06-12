@@ -125,14 +125,19 @@ public class FamilyDataFragment extends Fragment {
                     hashTmp.put( "num", reply.getFamily().get( 0 ).getUser().get( i ).getU_name() );
                     list_data.add( new HashMap<String, String>( hashTmp ) );
                     hashTmp.clear();
+
+                    ListView listView = ( ListView ) view.findViewById( R.id.fragment_family_data_listView );
+                    SimpleAdapter simp = new SimpleAdapter( view.getContext(), list_data, R.layout.two_line_list_item,
+                                                            new String[] { "u_name", "u_data", "sub", "num" },
+                                                            new int[] { R.id.item_right, R.id.item_main, R.id.item_sub,
+                                                                    R.id.num_text
+                                                            }
+                    );
+                    listView.setAdapter( simp );
                 }
             }
         }.execute();
 
-        ListView listView = (ListView) view.findViewById(R.id.list_view);
-        SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
-                new String[]{"u_name", "u_data", "sub", "num"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub, R.id.num_text});
-        listView.setAdapter(simp);
 
 
     }
