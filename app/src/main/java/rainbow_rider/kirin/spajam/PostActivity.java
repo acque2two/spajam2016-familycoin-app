@@ -1,5 +1,6 @@
 package rainbow_rider.kirin.spajam;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +36,7 @@ import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.Data.Work;
+import rainbow_rider.kirin.spajam.transfer.async.user.AsyncUserExist;
 import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkAdd;
 
 public class PostActivity extends AppCompatActivity {
@@ -118,32 +120,40 @@ public class PostActivity extends AppCompatActivity {
         sendButoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Integer intTitle = Integer.valueOf(pointText.getText().toString());
+                try {
+                    final Integer intTitle = Integer.valueOf(pointText.getText().toString());
 
-                Genre genre = new Genre();
-                genre.setG_id(genre_spinner.getSelectedItemPosition());
+                    Genre genre = new Genre();
+                    genre.setG_id(genre_spinner.getSelectedItemPosition());
 
-                Work work = new Work();
+                    Work work = new Work();
 
-                work.setW_text(mainText.getText().toString());
-                work.setU_id(allData.getFamily().get(0).getUser().get(0).getU_id());
-                work.setW_name(title.getText().toString());
-                work.setPoint(intTitle);
-                work.setGenre(genre);
-                work.setImage(intImage);
+                    work.setW_text(mainText.getText().toString());
+                    work.setU_id(allData.getFamily().get(0).getUser().get(0).getU_id());
+                    work.setW_name(title.getText().toString());
+                    work.setPoint(intTitle);
+                    work.setGenre(genre);
+                    work.setImage(intImage);
 
-                Family family = allData.getFamily().get(0);
-                ArrayList<Work> works = new ArrayList<Work>();
-                works.add(work);
-                family.setWork(works);
+                    Family family = allData.getFamily().get(0);
+                    ArrayList<Work> works = new ArrayList<Work>();
+                    works.add(work);
+                    family.setWork(works);
 
-                new AsyncWorkAdd(family){
-                    @Override
-                    protected void onPostExecute(Data data) {
-                        super.onPostExecute(data);
-                        PostActivity.this.finish();
-                    }
-                }.execute();
+                    new AsyncWorkAdd(family) {
+                        @Override
+                        protected void onPostExecute(Data data) {
+                            super.onPostExecute(data);
+                            PostActivity.this.finish();
+                        }
+                    }.execute();
+                }catch (Exception e){
+                    AlertDialog.Builder alert02 = new AlertDialog.Builder(PostActivity.this);
+                    alert02.setTitle("エラー");
+                    alert02.setMessage("入力していない項目があります");
+                    alert02.setPositiveButton("OK", null);
+                    alert02.show();
+                }
             }
         });
 
