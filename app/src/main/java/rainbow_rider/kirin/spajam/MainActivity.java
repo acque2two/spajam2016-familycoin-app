@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import net.arnx.jsonic.JSON;
 
@@ -29,22 +31,29 @@ public class MainActivity extends AppCompatActivity {
 //        ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
   //      ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
 
-        Intent callIntent;
-        if ( !loadData( MainActivity.this.getApplicationContext() ) ) {
-            callIntent = new Intent( MainActivity.this, LoginActivity.class );
-            startActivityForResult( callIntent , 1);
-        }else{
-            new AsyncAllData( allData.family.get( 0 ) ) {
-                @Override
-                protected void onPostExecute( Data data ) {
-                    super.onPostExecute( data );
-                    allData = getReply();
-                    saveData( MainActivity.this.getApplicationContext() );
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callIntent;
+                if ( !loadData( MainActivity.this.getApplicationContext() ) ) {
+                    callIntent = new Intent( MainActivity.this, LoginActivity.class );
+                    startActivityForResult( callIntent , 1);
+                }else{
+                    new AsyncAllData( allData.family.get( 0 ) ) {
+                        @Override
+                        protected void onPostExecute( Data data ) {
+                            super.onPostExecute( data );
+                            allData = getReply();
+                            saveData( MainActivity.this.getApplicationContext() );
+                        }
+                    }.execute();
+                    callIntent = new Intent( MainActivity.this, TopActivity.class );
+                    startActivity( callIntent );
                 }
-            }.execute();
-            callIntent = new Intent( MainActivity.this, TopActivity.class );
-            startActivity( callIntent );
-        }
+            }
+        });
     }
 
 
