@@ -183,8 +183,7 @@ public class TopFragment extends Fragment {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Work work = (Work) parent.getAdapter();
-                            mListener.onTopFragmentItemClick(work);
+                            mListener.onTopFragmentItemClick(position);
                         }
                     });
                 } catch (NullPointerException e) {}
@@ -231,7 +230,7 @@ public class TopFragment extends Fragment {
      */
     public interface OnTopFragmentListener {
         // TODO: Update argument type and name
-        void onTopFragmentItemClick(Work work);
+        void onTopFragmentItemClick(int wId);
     }
 
     private boolean loadData(Context context) {

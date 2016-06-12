@@ -26,7 +26,6 @@ import net.arnx.jsonic.JSON;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.User;
-import rainbow_rider.kirin.spajam.Data.Work;
 
 
 public class TopActivity extends AppCompatActivity
@@ -263,9 +262,9 @@ public class TopActivity extends AppCompatActivity
     }
 
     @Override
-    public void onTopFragmentItemClick(Work work) {
+    public void onTopFragmentItemClick(int wId) {
         Intent callIntent = new Intent(TopActivity.this, DetailActivity.class);
-        callIntent.putExtra("w_id", work.getW_id());
+        callIntent.putExtra("w_id", wId);
     }
 
 
