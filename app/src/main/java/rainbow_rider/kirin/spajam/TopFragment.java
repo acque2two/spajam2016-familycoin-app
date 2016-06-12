@@ -147,8 +147,8 @@ public class TopFragment extends Fragment {
                     //mAdapter.addAll(reply.getFamily().get(0).getWork());
                     for ( int i = 0 ; i < reply.getFamily().size() ; i ++ ){
                         try {
-                            hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_name());
-                            hashTmp.put("u_data", reply.getFamily().get(0).getWork().get(i).getW_text());
+                            hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_text());
+                            hashTmp.put("u_data", reply.getFamily().get(0).getWork().get(i).getW_name());
                             hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "Point");
                             list_data.add(new HashMap<String, String>(hashTmp));
                             hashTmp.clear();
