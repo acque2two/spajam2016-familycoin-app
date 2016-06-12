@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +30,12 @@ import rainbow_rider.kirin.spajam.transfer.async.user.AsyncUserExist;
 public class LoginActivity extends AppCompatActivity {
 
     Family family;
+    EditText name_text;
+    EditText u_id_text;
+    EditText f_id_text;
+    RadioGroup sex_group;
+    RadioGroup adult_group;
+    RadioGroup admin_group;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -39,17 +44,16 @@ public class LoginActivity extends AppCompatActivity {
     private User user = new User();
     private Data allData = new Data();
 
-    final EditText name_text = (EditText) findViewById(R.id.login_name_text);
-    final EditText u_id_text = (EditText) findViewById(R.id.login_uId_text);
-    final EditText f_id_text = (EditText) findViewById(R.id.login_fId_text);
-    final RadioGroup sex_group = (RadioGroup) findViewById(R.id.login_radioG_sex);
-    RadioGroup adult_group = (RadioGroup) findViewById(R.id.login_radioG_adult);
-    RadioGroup admin_group = (RadioGroup) findViewById(R.id.login_radioG_admin);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        name_text = ( EditText ) findViewById( R.id.login_name_text );
+        u_id_text = ( EditText ) findViewById( R.id.login_uId_text );
+        f_id_text = ( EditText ) findViewById( R.id.login_fId_text );
+        sex_group = ( RadioGroup ) findViewById( R.id.login_radioG_sex );
+        adult_group = ( RadioGroup ) findViewById( R.id.login_radioG_adult );
+        admin_group = ( RadioGroup ) findViewById( R.id.login_radioG_admin );
 
         setTitle(getString(R.string.app_name));
 
