@@ -50,6 +50,8 @@ public class DetailActivity extends AppCompatActivity {
 
         //TopActivityからQuestionを受け取る。
 
+        loadData(DetailActivity.this);
+
         Intent intent = getIntent();
         int w_id = intent.getIntExtra("w_id", -1);
         Work work = new Work();
