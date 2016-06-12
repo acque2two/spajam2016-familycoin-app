@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
-import rainbow_rider.kirin.spajam.transfer.async.Sender;
+import rainbow_rider.kirin.spajam.transfer.sync.Sender;
 
 /**
  * Created by acq on 16/06/11.
