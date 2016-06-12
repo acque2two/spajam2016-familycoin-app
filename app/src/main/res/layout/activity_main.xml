@@ -15,38 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Login"
-android:id="@+id/main_login_button"
-            android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/main_detail_button" />
-
-        <Button
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Post"
-android:id="@+id/main_post_button"
-            android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/main_top_button" />
-
-        <Button
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Detail"
-android:id="@+id/main_detail_button"
-            android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/main_post_button" />
-
-        <Button
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="TOPTOPTOP!"
-android:id="@+id/main_top_button"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true" />
-
 		<GridLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"

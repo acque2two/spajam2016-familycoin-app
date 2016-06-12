@@ -28,15 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setTitle(getString(R.string.app_name));
-        Intent callIntent;
-        if ( !loadData( MainActivity.this ) ) {
-            callIntent = new Intent( MainActivity.this, LoginActivity.class );
-            startActivityForResult( callIntent , 1);
-        }else{
-            callIntent = new Intent( MainActivity.this, TopActivity.class );
-            startActivity( callIntent );
-        }
-
+/*
         ImageView activity_main_imageView = (ImageView) findViewById(R.id.activity_main_imageView);
         ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
 
@@ -49,47 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
         activity_main2_imageView.startAnimation(alphaAnimation);
 
-        Button detailButton = (Button) findViewById(R.id.main_detail_button);
-        Button postButton = (Button) findViewById(R.id.main_post_button);
-        Button loginButton = (Button) findViewById(R.id.main_login_button);
-        Button topButton = (Button) findViewById(R.id.main_top_button);
-
-        //MyThread myThread = new MyThread();
-        //myThread.start();
-
-        topButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent callintent = new Intent(MainActivity.this, TopActivity.class);
-                callintent.putExtra( "user", user );
-                startActivity(callintent);
-            }
-        });
-
-        detailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent callintent = new Intent(MainActivity.this, DetailActivity.class);
-                startActivity(callintent);
-            }
-        });
-
-        postButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent callintent = new Intent(MainActivity.this, PostActivity.class);
-                startActivity(callintent);
-            }
-        });
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent callintent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(callintent);
-            }
-        });
-
+         MyThread myThread = new MyThread();
+        myThread.start();
+*/
+        Intent callIntent;
+        if ( !loadData( MainActivity.this ) ) {
+            callIntent = new Intent( MainActivity.this, LoginActivity.class );
+            startActivityForResult( callIntent , 1);
+        }else{
+            callIntent = new Intent( MainActivity.this, TopActivity.class );
+            startActivity( callIntent );
+        }
     }
 
     private boolean loadData(Context context) {
