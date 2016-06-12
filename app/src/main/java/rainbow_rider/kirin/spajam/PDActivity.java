@@ -40,10 +40,8 @@ public class PDActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
         TextView title_text = (TextView) findViewById(R.id.pd_title_text);
-        TextView user_text = (TextView) findViewById(R.id.pd_user_text);
 
         assert title_text != null;
-        assert user_text != null;
 
         Product product = new Product();
         User user = new User();
@@ -55,7 +53,6 @@ public class PDActivity extends AppCompatActivity {
         }
 
         title_text.setText(product.getP_name());
-        user_text.setText(user.getU_name());
 
         //send button
         assert send_button != null;
