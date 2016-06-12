@@ -156,7 +156,7 @@ public class TopFragment extends Fragment {
                     //mAdapter.addAll(reply.getFamily().get(0).getWork());
                     Log.d(String.valueOf(reply.getFamily().size()) , " ------ replay get size ------ ");
                     Log.d(reply.getFamily().get(0).getWork().get(0).getW_text(), " W text !!!------------");
-                    for (int i = 0; i < reply.getFamily().size(); i++) {
+                    for (int i = 0; i < reply.getFamily().get(0).getWork().size(); i++) {
                         try {
                             hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_text());
                             hashTmp.put("u_data", reply.getFamily().get(0).getWork().get(i).getW_name());
@@ -183,7 +183,7 @@ public class TopFragment extends Fragment {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Work work = (Work) parent.getAdapter().getItem(position);
+                            Work work = (Work) parent.getAdapter();
                             mListener.onTopFragmentItemClick(work);
                         }
                     });
@@ -192,10 +192,6 @@ public class TopFragment extends Fragment {
         }.execute();
 
         Log.d("------------------", "Complete");
-
-
-
-
 
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 //            @Override
