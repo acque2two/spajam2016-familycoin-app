@@ -112,12 +112,13 @@ public class FamilyDataFragment extends Fragment {
         for ( int i = 0; i < allData.getFamily().get(0).getUser().size(); i++ ){
             hashTmp.put("u_name" , allData.getFamily().get(0).getUser().get(i).getU_name());
             hashTmp.put("u_data" , allData.getFamily().get(0).getUser().get(i).getScore().toString() );
+            hashTmp.put("sub" , " " );
             list_data.add(new HashMap<String, String>(hashTmp));
             hashTmp.clear();
         }
 
         SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
-                new String[]{"right", "main", "sub"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub});
+                new String[]{"u_name", "u_data", "sub"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub});
 
         ((ListView) view.findViewById(R.id.fragment_family_data_listView)).setAdapter(simp);
 
