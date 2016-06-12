@@ -6,11 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ButtonBarLayout;
-import android.util.Log;
-import android.view.animation.AlphaAnimation;
-import android.widget.Button;
-import android.widget.ImageView;
 
 import net.arnx.jsonic.JSON;
 
@@ -70,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor spedit = sp.edit();
         spedit.putString("DATA_JSON", JSON.encode(allData));
-        spedit.apply();
+        spedit.commit();
         spedit.commit();
         return true;
 

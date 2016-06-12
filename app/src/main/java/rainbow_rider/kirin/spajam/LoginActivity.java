@@ -268,7 +268,7 @@ public class LoginActivity extends AppCompatActivity {
 
         spedit.putString("my_id", user.getU_name());
         spedit.putString("DATA_JSON", JSON.encode(allData));
-        spedit.apply();
+        spedit.commit();
         return true;
 
     }
