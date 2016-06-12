@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -264,7 +265,9 @@ public class TopActivity extends AppCompatActivity
     @Override
     public void onTopFragmentItemClick(int wId) {
         Intent callIntent = new Intent(TopActivity.this, DetailActivity.class);
+        Log.d(" もりがわるい！！！！！  ", String.valueOf(wId) );
         callIntent.putExtra("w_id", wId);
+        startActivity(callIntent);
     }
 
 
