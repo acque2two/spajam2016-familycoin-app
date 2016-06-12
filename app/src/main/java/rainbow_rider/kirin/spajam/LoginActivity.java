@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                     alert02.setPositiveButton("OK", null);
 //ダイアログ表示
                     alert02.show();
-                }else if(!an[1]){
+                }else if(an[1]){
                     AlertDialog.Builder alert02 = new AlertDialog.Builder(LoginActivity.this);
 //ダイアログタイトルをセット
                     alert02.setTitle("エラー");
