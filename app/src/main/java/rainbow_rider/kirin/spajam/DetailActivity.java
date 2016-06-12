@@ -16,32 +16,47 @@ import android.widget.TextView;
 import net.arnx.jsonic.JSON;
 
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.transfer.async.achievement.unapproved.AsyncUnapprovedAdd;
+import rainbow_rider.kirin.spajam.transfer.async.family.AsyncAllData;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private Data allData = new Data();
-    private String my_id;
+    public Data allData = new Data();
+    public String my_id;
+    int w_id;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_ACTION_BAR);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+    protected void onCreate( Bundle savedInstanceState ) {
+        requestWindowFeature( Window.FEATURE_ACTION_BAR );
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_detail );
 
-        //TopActivityからQuestionを受け取る。
-
-        loadData(DetailActivity.this.getApplicationContext());
 
         Intent intent = getIntent();
-        int w_id = intent.getIntExtra("w_id", -1);
-        Log.d("もりがわるい！" , String.valueOf(w_id) );
-        Work work = new Work();
-        User user = new User();
+        w_id = intent.getIntExtra( "w_id", -1 );
+        //TopActivityからQuestionを受け取る。
 
-        work = allData.getFamily().get(0).getWork().get(w_id);
+        Family f = new Family();
+        f.setF_id( "rainbow" );
+        loadData( DetailActivity.this.getApplicationContext() );
+
+        new AsyncAllData( f ) {
+            @Override
+            protected void onPostExecute( Data data ) {
+                super.onPostExecute( data );
+                final Data allData = getReply();
+                this.allData = allData;
+
+
+                Log.d( "もりがわるい！", String.valueOf( w_id ) );
+                Work work = new Work();
+                User user = new User();
+                Family f = new Family();
+                f.setF_id( "rainbow" );
+                work = allData.getFamily().get( 0 ).getWork().get( w_id );
 /*
         for (Work w : allData.getFamily().get(0).getWork()) {
             if (w.getW_id() == w_id) {
@@ -51,55 +66,57 @@ public class DetailActivity extends AppCompatActivity {
             break;
         }
 */
-        for(User u : allData.getFamily().get(0).getUser()) {
-            if (my_id.equals(u.u_name)) {
-                user = u;
-                break;
-            }
-        }
-
-        final Button send_button = (Button) findViewById(R.id.detail_send_button);
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-
-        TextView title_text = (TextView) findViewById(R.id.detail_title_text);
-        TextView user_text = (TextView) findViewById(R.id.detail_user_text);
-        TextView main_text = (TextView) findViewById(R.id.detail_main_text);
-
-        assert main_text != null;
-        assert title_text != null;
-        assert user_text != null;
-
-        main_text.setText(work.getW_text());
-        title_text.setText(work.getW_name());
-        user_text.setText(user.getU_name());
-
-        //image
-        final boolean[] send = new boolean[]{false};
-        //send button
-        assert send_button != null;
-        send_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AsyncUnapprovedAdd(allData){
-                    @Override
-                    protected void onPostExecute(Data data) {
-                        super.onPostExecute(data);
-                        finish();
+                for ( User u : allData.getFamily().get( 0 ).getUser() ) {
+                    if ( my_id.equals( u.u_name ) ) {
+                        user = u;
+                        break;
                     }
-                }.execute();
+                }
+
+                final Button send_button = ( Button ) findViewById( R.id.detail_send_button );
+                ImageView imageView = ( ImageView ) findViewById( R.id.imageView );
+
+                TextView title_text = ( TextView ) findViewById( R.id.detail_title_text );
+                TextView user_text = ( TextView ) findViewById( R.id.detail_user_text );
+                TextView main_text = ( TextView ) findViewById( R.id.detail_main_text );
+
+                assert main_text != null;
+                assert title_text != null;
+                assert user_text != null;
+
+                main_text.setText( work.getW_text() );
+                title_text.setText( work.getW_name() );
+                user_text.setText( user.getU_name() );
+
+                //image
+                final boolean[] send = new boolean[] { false };
+                //send button
+                assert send_button != null;
+                send_button.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick( View v ) {
+                        new AsyncUnapprovedAdd( allData ) {
+                            @Override
+                            protected void onPostExecute( Data data ) {
+                                super.onPostExecute( data );
+                                finish();
+                            }
+                        }.execute();
+                    }
+                } );
             }
-        });
+        }.execute();
     }
 
-    private boolean loadData(Context context) {
+    private boolean loadData( Context context ) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences( context );
 
-        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
+        allData = JSON.decode( sp.getString( "DATA_JSON", "{}" ), Data.class );
 
         boolean ans;
         ans = allData.getFamily() != null;
-        my_id = sp.getString("my_id", "");
+        my_id = sp.getString( "my_id", "" );
 
         return ans;
     }
