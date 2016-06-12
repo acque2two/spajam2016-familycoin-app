@@ -3,36 +3,18 @@ package rainbow_rider.kirin.spajam;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.arnx.jsonic.JSON;
 
-import java.io.FileDescriptor;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import rainbow_rider.kirin.spajam.Data.Data;
-import rainbow_rider.kirin.spajam.Data.Unapproved;
 import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.transfer.async.achievement.unapproved.AsyncUnapprovedAdd;
@@ -56,6 +38,8 @@ public class DetailActivity extends AppCompatActivity {
         int w_id = intent.getIntExtra("w_id", -1);
         Work work = new Work();
         User user = new User();
+
+        loadData(getApplicationContext());
 
         work = allData.getFamily().get(0).getWork().get(w_id);
 /*
