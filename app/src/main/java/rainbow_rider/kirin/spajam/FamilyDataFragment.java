@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,9 +109,11 @@ public class FamilyDataFragment extends Fragment {
         ArrayList<HashMap<String, String>> list_data = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> hashTmp = new HashMap<String, String>();
 
+        Log.d("  allData  ", allData.getFamily().get(0).getUser().get(0).getU_name());
+
         for ( int i = 0; i < allData.getFamily().get(0).getUser().size(); i++ ){
             hashTmp.put("u_name" , allData.getFamily().get(0).getUser().get(i).getU_name());
-//            hashTmp.put("u_data" , allData.getFamily().get(0).getUser().get(i).getScore().toString());
+            hashTmp.put("u_data" , allData.getFamily().get(0).getUser().get(i).getScore().toString());
             hashTmp.put("sub" , allData.getFamily().get(0).getUser().get(i).getU_name());
             list_data.add(new HashMap<String, String>(hashTmp));
             hashTmp.clear();
