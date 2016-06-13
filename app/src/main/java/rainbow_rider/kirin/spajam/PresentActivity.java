@@ -29,7 +29,7 @@ public class PresentActivity extends AppCompatActivity {
         });
 
         final ItemListAdapter mAdapter = new ItemListAdapter( getApplicationContext(), R.layout.activity_top);
-        final AbsListView mListView = (AbsListView) findViewById(R.id.list_view);
+        final AbsListView mListView = (AbsListView) findViewById(R.id.fragment_top_list_view);
 
 
 

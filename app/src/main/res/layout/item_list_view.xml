@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="-20dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
 
         <ImageView
             android:id="@+id/item_list_view_icon"
             android:layout_width="78dp"
             android:layout_height="78dp"
-            android:layout_marginStart="38dp"
             android:src="@android:mipmap/sym_def_app_icon"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
@@ -27,10 +26,11 @@
                 android:id="@+id/item_list_view_title"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:text="問  題  文"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/item_list_view_icon" />
+                android:layout_toEndOf="@+id/item_list_view_icon"
+                android:ellipsize="end" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                         android:layout_height="match_parent"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="9999999999"
-                        android:id="@+id/textView11"
+                        android:id="@+id/item_list_view_point"
                         android:textAlignment="center"
                         android:gravity="center_vertical|center_horizontal" />
 

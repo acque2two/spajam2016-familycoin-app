@@ -10,9 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import net.arnx.jsonic.JSON;
@@ -24,6 +23,7 @@ import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.Work;
+import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
 import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkGenreList;
 
 
@@ -46,9 +46,10 @@ public class TopFragment extends Fragment {
     private String mFId;
     private Data allData = new Data();
 
-
     private OnTopFragmentListener mListener;
 
+    private ItemListAdapter mAdapter;
+    private AbsListView mListView;
     public TopFragment() {
         // Required empty public constructor
     }
@@ -69,7 +70,7 @@ public class TopFragment extends Fragment {
         args.putString(ARG_PARAM2, fId);
         fragment.setArguments(args);
         Log.d("-------","--------");
-        Log.d(genreId,fId);
+        Log.d(genreId, String.valueOf(fId));
         return fragment;
     }
 
@@ -123,23 +124,25 @@ public class TopFragment extends Fragment {
         Toast.makeText(view.getContext(), genreName, Toast.LENGTH_SHORT).show();
 
         Genre genre = new Genre();
-
-        //final ItemListAdapter mAdapter = new ItemListAdapter(view.getContext(), R.layout.activity_top);
-        //final AbsListView mListView = (AbsListView) view.findViewById(R.id.list_view);
-
         genre.setG_id(genreId);
+
         Family family = new Family();
         family.setF_id(mFId);
 
-        genre = new Genre();
         Work work = new Work();
-        ArrayList<Work> works = new ArrayList<>();
-        genre.setG_id(genreId);
         work.setGenre(genre);
+
+        ArrayList<Work> works = new ArrayList<>();
         works.add(work);
         family.setWork(works);
 
         final HashMap<String, String> hashTmp = new HashMap<String, String>();
+
+        mAdapter = new ItemListAdapter(view.getContext(), R.layout.item_list_view);
+
+        mListView = (AbsListView) view.findViewById(R.id.fragment_top_list_view);
+
+        mListView.setAdapter(mAdapter);
 
         new AsyncWorkGenreList(family) {
             @Override
@@ -148,44 +151,24 @@ public class TopFragment extends Fragment {
                 Data reply = getReply();
                 ArrayList<HashMap<String, String>> list_data = new ArrayList<HashMap<String, String>>();
 
-
                 if (reply == null) {
                     Log.d("-------------", "NotComplete");
                 } else {
-                    //mAdapter.addAll(reply.getFamily().get(0).getWork());
+                    mAdapter.addAll(reply.getFamily().get(0).getWork());
+
                     Log.d(String.valueOf(reply.getFamily().get(0).getWork().size()) , " ------ replay get size ------ ");
                     Log.d(reply.getFamily().get(0).getWork().get(0).getW_text(), " W text !!!------------");
-                    for (int i = 0; i < reply.getFamily().get(0).getWork().size(); i++) {
-                        try {
-                            hashTmp.put("getWork", reply.getFamily().get(0).getWork().get(i).getW_text());
-                            hashTmp.put("u_data", reply.getFamily().get(0).getWork().get(i).getW_name());
-                            hashTmp.put("sub", reply.getFamily().get(0).getWork().get(i).getPoint().toString() + "ポイント");
-                            hashTmp.put("num", reply.getFamily().get(0).getWork().get(i).getW_id().toString());
-                            list_data.add(new HashMap<String, String>(hashTmp));
-                            hashTmp.clear();
-                        } catch (NullPointerException e) {  }
-                    }
+
                 }
-                //ListView listView = (ListView) view.findViewById(R.id.fragment_family_data_listView);
-                ListView listView = (ListView) view.findViewById(R.id.list_view);
 
                 try {
-                    SimpleAdapter simp = new SimpleAdapter(view.getContext(), list_data, R.layout.two_line_list_item,
-                            new String[]{"getWork", "u_data", "sub", "num"}, new int[]{R.id.item_right, R.id.item_main, R.id.item_sub, R.id.num_text});
-                    listView.setAdapter(simp);
-
-                    //mListView.setAdapter(mAdapter);
-                } catch (NullPointerException v) {
-                    Toast.makeText(view.getContext(), "データが空です", Toast.LENGTH_SHORT).show();
-                }
-                try {
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             mListener.onTopFragmentItemClick(position);
                         }
                     });
-                } catch (NullPointerException e) {}
+                } catch (NullPointerException e) { }
             }
         }.execute();
 

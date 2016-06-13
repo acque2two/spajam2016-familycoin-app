@@ -6,11 +6,10 @@
     android:clickable="true">
 
     <ListView
-        android:id="@+id/list_view"
+        android:id="@+id/fragment_top_list_view"
         android:layout_width="match_parent"
         android:layout_height="507dp"
         android:headerDividersEnabled="true"
         tools:listitem="@layout/item_list_view">
-
     </ListView>
 </FrameLayout>

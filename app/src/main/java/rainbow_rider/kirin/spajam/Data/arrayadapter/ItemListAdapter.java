@@ -29,9 +29,11 @@ public class ItemListAdapter extends GenericArrayAdapter<Work> {
 
             mViewHolder.icon = ( ImageView ) convertView.findViewById( R.id.item_list_view_icon );
 
+            mViewHolder.illust = ( ImageView ) convertView.findViewById( R.id.item_list_view_illust );
+
             mViewHolder.title = ( TextView ) convertView.findViewById( R.id.item_list_view_title );
 
-            mViewHolder.illust = ( ImageView ) convertView.findViewById( R.id.item_list_view_illust );
+            mViewHolder.point = ( TextView ) convertView.findViewById( R.id.item_list_view_point );
 
             convertView.setTag( mViewHolder );
 
@@ -39,13 +41,13 @@ public class ItemListAdapter extends GenericArrayAdapter<Work> {
             mViewHolder = ( ViewHolder ) convertView.getTag();
         }
 
-        //mViewHolder.food_icon.setBackground();
-
         //mViewHolder.food_icon.setBackground( listitem.getFoodIcon() );
-        //Log.d("q",listItem.getQ_name());
 
-        mViewHolder.title.setText( listItem.getW_name() );
-        mViewHolder.icon.setImageResource( listItem.getImage() );
+        mViewHolder.title.setText(listItem.getW_name());
+
+        mViewHolder.point.setText(String.valueOf(listItem.getPoint()) + "ポイント");
+
+        //mViewHolder.icon.setImageResource( listItem.getImage() );
 
         return convertView;
     }
@@ -54,6 +56,8 @@ public class ItemListAdapter extends GenericArrayAdapter<Work> {
         ImageView icon;
         ImageView illust;
         TextView title;
+        TextView content;
+        TextView point;
     }
 }
 

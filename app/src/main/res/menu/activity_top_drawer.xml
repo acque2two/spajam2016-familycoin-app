@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-<item android:title="お手伝い一覧">
-    <menu>
-        <item
-            android:id="@+id/activity_top_drawer_cleaning"
-            android:icon="@mipmap/drawer_broom"
-            android:title="そうじ" />
-        <item
-            android:id="@+id/activity_top_drawer_cuisine"
-            android:icon="@mipmap/drawer_meal"
-            android:title="りょうり" />
-        <item
-            android:id="@+id/activity_top_drawer_washing"
-            android:icon="@mipmap/drawer_towel"
-            android:title="せんたく" />
-        <item
-            android:id="@+id/activity_top_drawer_social_study"
-            android:icon="@mipmap/drawer_book"
-            android:title="べんきょう" />
-        <item
-            android:id="@+id/activity_top_drawer_shopping"
-            android:icon="@mipmap/drawer_cage"
-            android:title="かいもの" />
-        <item
-            android:id="@+id/activity_top_drawer_other"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="そのほか" />
-    </menu>
-</item>
-
+    <item android:title="お手伝い一覧">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/activity_top_drawer_cleaning"
+                    android:icon="@mipmap/drawer_broom"
+                    android:title="そうじ" />
+                <item
+                    android:id="@+id/activity_top_drawer_cuisine"
+                    android:icon="@mipmap/drawer_meal"
+                    android:title="りょうり" />
+                <item
+                    android:id="@+id/activity_top_drawer_washing"
+                    android:icon="@mipmap/drawer_towel"
+                    android:title="せんたく" />
+                <item
+                    android:id="@+id/activity_top_drawer_social_study"
+                    android:icon="@mipmap/drawer_book"
+                    android:title="べんきょう" />
+                <item
+                    android:id="@+id/activity_top_drawer_shopping"
+                    android:icon="@mipmap/drawer_cage"
+                    android:title="かいもの" />
+                <item
+                    android:id="@+id/activity_top_drawer_other"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="そのほか" />
+            </group>
+        </menu>
+    </item>
 
     <item android:title="情報">
         <menu>
             <item
+                android:checkable="false"
                 android:id="@+id/activity_top_drawer_my_data"
                 android:icon="@mipmap/drawer_own"
                 android:title="じぶん" />
             <item
+                android:checkable="false"
                 android:id="@+id/activity_top_drawer_family_data"
                 android:icon="@mipmap/drawer_family"
                 android:title="かぞく" />
