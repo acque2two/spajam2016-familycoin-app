@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ public class TopFragment extends Fragment {
     private Data allData = new Data();
 
     private OnTopFragmentListener mListener;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ItemListAdapter mAdapter;
     private AbsListView mListView;

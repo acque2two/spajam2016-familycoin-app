@@ -2,14 +2,23 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="rainbow_rider.kirin.spajam.TopFragment"
-    android:clickable="true">
+             android:clickable="true"
+             tools:context="rainbow_rider.kirin.spajam.TopFragment">
 
-    <ListView
-        android:id="@+id/fragment_top_list_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="507dp"
-        android:headerDividersEnabled="true"
-        tools:listitem="@layout/item_list_view">
-    </ListView>
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/fragment_top_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="546dp"
+            android:headerDividersEnabled="true"
+            tools:listitem="@layout/item_list_view">
+        </ListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </FrameLayout>

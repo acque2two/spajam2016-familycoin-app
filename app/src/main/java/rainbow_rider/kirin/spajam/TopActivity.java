@@ -15,7 +15,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -41,8 +40,14 @@ public class TopActivity extends AppCompatActivity
         loadData(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Family Coin");
+
+//            toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                Log.d("aaaaaaa", "bbbbbbb");
+//                return false;
+//            }
+//        });
 
         user = allData.family.get(0).users.get(0);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -57,12 +62,18 @@ public class TopActivity extends AppCompatActivity
                 Intent callIntent = new Intent(TopActivity.this, PostActivity.class);
                 startActivity(callIntent);
             }
-        });
+        });;
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Family Coin");
+        toolbar.inflateMenu(R.menu.top);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer,
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
+
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle (
+            this,
+            drawer,
+            toolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         );
@@ -128,13 +139,6 @@ public class TopActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.top, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -163,9 +167,7 @@ public class TopActivity extends AppCompatActivity
                         }
                     }).show();
                 return true;
-            case R.id.top_end_application:
-                moveTaskToBack(true);
-                return true;
+
         }
 
         return super.onOptionsItemSelected(item);
