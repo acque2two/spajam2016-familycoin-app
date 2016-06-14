@@ -47,6 +47,8 @@ public class ItemListAdapter extends GenericArrayAdapter<Work> {
 
         mViewHolder.point.setText(String.valueOf(listItem.getPoint()) + "ポイント");
 
+        listItem.getImage();
+
         //mViewHolder.icon.setImageResource( listItem.getImage() );
 
         return convertView;
