@@ -40,40 +40,40 @@ public class PhotoActivity extends AppCompatActivity {
         AssetManager assetManager = getResources().getAssets();
 
         if(genreId == 1){
-            genre = "cleaning";
-            image1 = "bath";
-            image2 = "broom";
+            genre = "cleaning/";
+            image1 = genre + "bath.png";
+            image2 = genre + "broom.png";
         }else if(genreId == 2){
-            genre = "cuisine";
-            image1 = "cook_beaf";
-            image2 = "cook_knife";
+            genre = "cuisine/";
+            image1 = genre + "cook_beef.png";
+            image2 = genre + "cook_knife.png";
         }else if(genreId == 3){
-            genre = "washing";
-            image1 = "clothes";
-            image2 = "washing_machine";
+            genre = "washing/";
+            image1 = genre + "clothes.png";
+            image2 = genre + "washing_machine.png";
         }else if(genreId == 4){
-            genre = "study";
-            image1 = "study_pen";
-            image2 = "study_book";
+            genre = "study/";
+            image1 = genre + "study_pen.png";
+            image2 = genre + "study_book.png";
         }else if(genreId == 5){
-            genre = "shopping";
-            image1 = "shopping_basket";
-            image2 = "shopping_shoes";
+            genre = "shopping/";
+            image1 = genre + "shopping_basket.png";
+            image2 = genre + "shopping_shoes.png";
         }else if(genreId == 6){
-            genre = "etc";
-            image1 = "etc_tonkachi";
-            image2  ="etc_wrench";
+            genre = "etc/";
+            image1 = genre + "etc_tonkachi.png";
+            image2 = genre + "etc_wrench.png";
         }else{
             //とりあえず。
-            genre = "cleaning";
-            image1 = "bath";
-            image2 = "broom";
+            genre = "cleaning/";
+            image1 = genre + "bath.png";
+            image2 = "broom.png";
         }
 
         //http://pentan.info/android/app/sample/asset_manager.html  たぶんもっと簡単にできる
         try {
-            InputStream inputStream1 = getResources().getAssets().open("images/" + genre + "/" + image1 + ".png");
-            InputStream inputStream2 = getResources().getAssets().open("images/" + genre + "/" + image2 + ".png");
+            InputStream inputStream1 = getResources().getAssets().open("images/" + image1);
+            InputStream inputStream2 = getResources().getAssets().open("images/" + image2);
             bitmap1 = BitmapFactory.decodeStream(inputStream1);
             bitmap2 = BitmapFactory.decodeStream(inputStream2);
         } catch (IOException e) {
