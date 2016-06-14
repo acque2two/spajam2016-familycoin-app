@@ -1,13 +1,17 @@
 package rainbow_rider.kirin.spajam;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,9 +19,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import net.arnx.jsonic.JSON;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
@@ -29,13 +39,15 @@ import rainbow_rider.kirin.spajam.transfer.async.user.AsyncUserExist;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Family family;
-    EditText name_text;
-    EditText u_id_text;
-    EditText f_id_text;
-    RadioGroup sex_group;
-    RadioGroup adult_group;
-    RadioGroup admin_group;
+    public Family family;
+
+    public String name;
+    public String u_id;
+    public String f_id;
+    public int sex = -1;
+    public int adult = -1;
+    public int admin = -1;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -43,58 +55,61 @@ public class LoginActivity extends AppCompatActivity {
 
     private User user = new User();
     private Data allData = new Data();
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        name_text = ( EditText ) findViewById( R.id.login_name_text );
-        u_id_text = ( EditText ) findViewById( R.id.login_uId_text );
-        f_id_text = ( EditText ) findViewById( R.id.login_fId_text );
-        sex_group = ( RadioGroup ) findViewById( R.id.login_radioG_sex );
-        adult_group = ( RadioGroup ) findViewById( R.id.login_radioG_adult );
-        admin_group = ( RadioGroup ) findViewById( R.id.login_radioG_admin );
+
+        final EditText name_text = (EditText) findViewById(R.id.login_name_text);
+        final EditText u_id_text = (EditText) findViewById(R.id.login_uId_text);
+        final EditText f_id_text = (EditText) findViewById(R.id.login_fId_text);
+        RadioGroup sex_group = (RadioGroup) findViewById(R.id.login_radioG_sex);
+        RadioGroup adult_group = (RadioGroup) findViewById(R.id.login_radioG_adult);
+        RadioGroup admin_group = (RadioGroup) findViewById(R.id.login_radioG_admin);
 
         setTitle(getString(R.string.app_name));
 
-        final Boolean[] sex = new Boolean[1];
         assert sex_group != null;
         sex_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = (RadioButton) findViewById(i);
-                if(radioButton.getText().equals("おとこ")){
-                    sex[0] = true;
-                }else if (radioButton.getText().equals("おんな")) {
-                    sex[0] = false;
+                if (radioButton.getText().equals("おとこ")) {
+                    sex = 1;
+                } else if (radioButton.getText().equals("おんな")) {
+                    sex = 0;
                 }
             }
         });
 
-        final Boolean[] adult = new Boolean[1];
         assert adult_group != null;
         adult_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = (RadioButton) findViewById(i);
-                if(radioButton.getText().equals("おとな")){
-                    adult[0] = true;
-                }else if (radioButton.getText().equals("こども")) {
-                    adult[0] = false;
+                if (radioButton.getText().equals("おとな")) {
+                    adult = 1;
+                } else if (radioButton.getText().equals("こども")) {
+                    adult = 0;
                 }
             }
         });
 
-        final Boolean[] admin = new Boolean[1];
         assert admin_group != null;
         admin_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = (RadioButton) findViewById(i);
-                if(radioButton.getText().equals("はい")){
-                    admin[0] = true;
-                }else if (radioButton.getText().equals("いいえ")) {
-                    admin[0] = false;
+                if (radioButton.getText().equals("はい")) {
+                    admin = 1;
+                } else if (radioButton.getText().equals("いいえ")) {
+                    admin = 0;
                 }
             }
         });
@@ -105,41 +120,29 @@ public class LoginActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                assert name_text != null;
+                assert f_id_text != null;
+                assert u_id_text != null;
 
-                String name = name_text.getText().toString();
-                String u_id = u_id_text.getText().toString();
-                String f_id = f_id_text.getText().toString();
+                name = name_text.getText().toString();
+                u_id = u_id_text.getText().toString();
+                f_id = f_id_text.getText().toString();
 
-                boolean[] an = new boolean[2];
-                an = checkInput(name, u_id, f_id, sex, adult, admin);
-                if (an[ 0 ] ) {
-                    //error
-                    AlertDialog.Builder alert02 = new AlertDialog.Builder(LoginActivity.this);
-//ダイアログタイトルをセット
-                    alert02.setTitle("エラー");
-//ダイアログメッセージをセット
-                    alert02.setMessage("すでに登録されているIDです");
-                    // ボタンがクリックされた時に呼び出されるコールバックリスナーを登録します
-                    alert02.setPositiveButton("OK", null);
-//ダイアログ表示
-                    alert02.show();
-                }else if(!an[1]){
-                    AlertDialog.Builder alert02 = new AlertDialog.Builder(LoginActivity.this);
-//ダイアログタイトルをセット
-                    alert02.setTitle("エラー");
-//ダイアログメッセージをセット
-                    alert02.setMessage("入力していない項目があります");
-                    // ボタンがクリックされた時に呼び出されるコールバックリスナーを登録します
-                    alert02.setPositiveButton("OK", null);
-//ダイアログ表示
-                    alert02.show();
-                }else {
+                int i = 10;
+
+                int ans = checkInputList();
+
+                if (ans == -1) {
+                    new CreateDialog(LoginActivity.this).alertButton("エラー", "入力されていない項目があります","OK").show();
+                } else if (ans == -2) {
+                    new CreateDialog(LoginActivity.this).alertButton("エラー", "すでに存在しているIDです", "Ok").show();
+                } else {
                     user.setU_name(name);
                     user.setU_id(u_id);
                     user.setF_id(f_id);
-                    user.setSex(sex[0]);
-                    user.setAdult(adult[0]);
-                    user.setAdmin(admin[0]);
+                    user.setSex(true);
+                    user.setAdult(true);
+                    user.setAdmin(true);
                     ArrayList<User> users = new ArrayList<User>();
                     users.add(user);
                     family = new Family();
@@ -240,7 +243,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }.execute();
                     LoginActivity.this.findViewById(R.id.progressBar2).setVisibility(View.VISIBLE);
-                    saveData( LoginActivity.this.getApplicationContext() );
+                    saveData(LoginActivity.this.getApplicationContext());
 
                     Toast.makeText(LoginActivity.this, "作成", Toast.LENGTH_SHORT).show();
                 }
@@ -253,16 +256,73 @@ public class LoginActivity extends AppCompatActivity {
 
         activity_login_title_textView.setTypeface(Typeface.SERIF);
 */
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+
+    public int checkInputList(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("処理を実行中しています");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+
+        final EditText name_text = (EditText) findViewById(R.id.login_name_text);
+        final EditText u_id_text = (EditText) findViewById(R.id.login_uId_text);
+        final EditText f_id_text = (EditText) findViewById(R.id.login_fId_text);
+        RadioGroup sex_group = (RadioGroup) findViewById(R.id.login_radioG_sex);
+        RadioGroup adult_group = (RadioGroup) findViewById(R.id.login_radioG_adult);
+        RadioGroup admin_group = (RadioGroup) findViewById(R.id.login_radioG_admin);
+
+        int white = Color.rgb(250, 250, 250);
+        int red = Color.rgb(239, 154, 154);
+
+        name_text.setBackgroundColor(white);
+        u_id_text.setBackgroundColor(white);
+        f_id_text.setBackgroundColor(white);
+        sex_group.setBackgroundColor(white);
+        adult_group.setBackgroundColor(white);
+        admin_group.setBackgroundColor(white);
+
+        int[] ans = new int[]{0};
+
+        if (name.equals("")){
+            name_text.setBackgroundColor(red);
+            ans[0] = -1;
+        }
+        if(u_id.equals("")){
+            u_id_text.setBackgroundColor(red);
+            ans[0] = -1;
+
+        }
+        if(f_id.equals("")){
+            f_id_text.setBackgroundColor(red);
+            ans[0] = -1;
+        }
+        if (sex < 0) {
+            sex_group.setBackgroundColor(red);
+            ans[0] = -1;
+        }
+        if (adult < 0) {
+            adult_group.setBackgroundColor(red);
+            ans[0] = -1;
+        }
+        if (admin < 0) {
+            admin_group.setBackgroundColor(red);
+            ans[0] = -1;
+        }
+        return ans[0];
+    }
 
     private boolean saveData(Context context) {
         // アプリ標準の Preferences を取得する
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor spedit = sp.edit();
-        if ( allData.family == null ) {
+        if (allData.family == null) {
             allData.family = new ArrayList<>();
-            allData.family.add( family );
+            allData.family.add(family);
         }
         allData.family.get(0).users.add(user);
 
@@ -273,67 +333,49 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public boolean[] checkInput(String name, String  u_id, String f_id, Boolean[] sex,Boolean[] adult,Boolean[] admin){
-        final boolean[] ans = new boolean[2];
-        for(int i = 0; i < ans.length; i++){
-            ans[i] = false;
-        }
-
-        User u = new User();
-        u.setU_id(u_id);
-        u.setF_id(f_id);
-        u.setSex(sex[0]);
-        u.setAdult(adult[0]);
-        u.setAdmin(admin[0]);
-
-        ArrayList<User> uList = new ArrayList<User>(){};
-        uList.add(u);
-
-        Family family = new Family();
-        family.setUser(uList);
-        family.setF_id(f_id);
-
-        new AsyncUserExist(family){
-            @Override
-            protected void onPostExecute(Data data) {
-                super.onPostExecute(data);
-                ans[0] = data.isStatus();
-            }
-        };
-
-        int white = android.graphics.Color.rgb(250,250,250);
-        int red = android.graphics.Color.rgb(239,154,154);
-
-            name_text.setBackgroundColor(white);
-            u_id_text.setBackgroundColor(white);
-            f_id_text.setBackgroundColor(white);
-            sex_group.setBackgroundColor(white);
-            adult_group.setBackgroundColor(white);
-            admin_group.setBackgroundColor(white);
-
-        if (name == null){
-            name_text.setBackgroundColor(red);
-        }else if(u_id == null){
-            u_id_text.setBackgroundColor(red);
-        }else if(f_id == null){
-            f_id_text.setBackgroundColor(red);
-        }else if (sex == null){
-            sex_group.setBackgroundColor(red);
-        }else if (adult == null){
-            adult_group.setBackgroundColor(red);
-        }else if (admin == null){
-            admin_group.setBackgroundColor(red);
-        }else{
-            ans[1] = true;
-        }
-
-        return ans;
-    }
-
     @Override
     public void onBackPressed() {
         //戻るボタンの禁止
         super.onBackPressed();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Login Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://rainbow_rider.kirin.spajam/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Login Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://rainbow_rider.kirin.spajam/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }

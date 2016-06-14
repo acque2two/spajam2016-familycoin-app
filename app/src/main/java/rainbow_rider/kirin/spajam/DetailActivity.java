@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,8 +52,6 @@ public class DetailActivity extends AppCompatActivity {
                 final Data allData = getReply();
                 this.allData = allData;
 
-
-                Log.d( "もりがわるい！", String.valueOf( w_id ) );
                 Work work = new Work();
                 User user = new User();
                 Family f = new Family();
@@ -119,6 +119,13 @@ public class DetailActivity extends AppCompatActivity {
         my_id = sp.getString( "my_id", "" );
 
         return ans;
+    }
+    @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            finish();
+            return true;
+        }
+        return false;
     }
 }
 /*

@@ -156,10 +156,10 @@ public class PostActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
         super.onActivityResult(requestCode, resultCode, resultData);
-        intImage = resultData.getIntExtra("image", R.drawable.ic_menu_share);
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
+                    intImage = resultData.getIntExtra("image", R.drawable.ic_menu_share);
                     imageView.setImageResource(intImage);
                 } else {
 

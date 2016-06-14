@@ -52,8 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    android:gravity="left"
-                    android:text="たろう" />
+                    android:gravity="left" />
             </LinearLayout>
 
             <LinearLayout
@@ -82,8 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    android:gravity="left"
-                    android:text="tarou" />
+                    android:gravity="left" />
             </LinearLayout>
 
             <LinearLayout
@@ -113,7 +111,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
                     android:gravity="left"
-                    android:text="niji"/>
+                    android:text="niji" />
             </LinearLayout>
 
             <LinearLayout

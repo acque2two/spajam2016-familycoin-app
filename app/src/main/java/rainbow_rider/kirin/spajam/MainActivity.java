@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
         activity_main_imageView.startAnimation(alpha); // アニメーション適用
         activity_main2_imageView.startAnimation(alpha);
 
+        new CreateDialog(MainActivity.this).alertButton("TitleAAAA", "Message", "Psi", "Neg", "Neu").show();
+
         Button button = (Button) findViewById(R.id.button);
+        assert button != null;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
                             saveData( MainActivity.this.getApplicationContext() );
                         }
                     }.execute();
-                    callIntent = new Intent( MainActivity.this, TopActivity.class );
+                    callIntent = new Intent( MainActivity.this, LoginActivity
+                            .class );
                     startActivity( callIntent );
                 }
             }
@@ -84,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor spedit = sp.edit();
         spedit.putString("DATA_JSON", JSON.encode(allData));
-        spedit.commit();
         spedit.commit();
         return true;
 
