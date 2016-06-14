@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rainbow_rider.kirin.spajam.JoinActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <ScrollView
+        android:id="@+id/scrollView6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="なまえ"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#56a466" />
+
+                <EditText
+                    android:id="@+id/join_name_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="left" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="ID"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#56a466" />
+
+                <EditText
+                    android:id="@+id/join_id_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="left" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp" >
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="家族ID"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#56a466" />
+
+                <EditText
+                    android:id="@+id/join_family_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="left"
+                    android:text="niji" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp" >
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="年齢"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#56a466" />
+
+                <RadioGroup
+                    android:id="@+id/join_adult_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/join_adult"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="おとな" />
+
+                    <RadioButton
+                        android:id="@+id/join_child"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="こども" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="性別"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#56a466" />
+
+                <RadioGroup
+                    android:id="@+id/join_sex_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/join_men"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="おとこ" />
+
+                    <RadioButton
+                        android:id="@+id/join_women"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="おんな" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="管理者"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#56a466" />
+
+                <RadioGroup
+                    android:id="@+id/join_admin_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/join_admin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="はい" />
+
+                    <RadioButton
+                        android:id="@+id/join_user"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="いいえ" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/join_create_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:scaleType="fitEnd"
+                android:text="作成"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="100dp"
+                android:layout_marginLeft="100dp"
+                android:background="#BDBDBD" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

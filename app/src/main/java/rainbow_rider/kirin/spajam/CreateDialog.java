@@ -2,6 +2,7 @@ package rainbow_rider.kirin.spajam;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 
 /**
  * Created by nozomi on 16/06/13.
@@ -10,6 +11,7 @@ public class CreateDialog extends AlertDialog.Builder{
     public CreateDialog(Context context){
         super(context);
     }
+
 
     public AlertDialog.Builder alertTitle(String title){
         super.setTitle(title);
@@ -24,6 +26,7 @@ public class CreateDialog extends AlertDialog.Builder{
 
     public AlertDialog.Builder alertButton(String title, String massage, String positiveButton){
         alertMessage(title, massage);
+        super.setCancelable(false);
         super.setPositiveButton(positiveButton, null);
         return this;
     }
@@ -37,6 +40,13 @@ public class CreateDialog extends AlertDialog.Builder{
     public AlertDialog.Builder alertButton(String title, String massage, String positiveButton, String negativaButton, String neutralButton) {
         alertButton(title, massage, positiveButton, negativaButton);
         super.setNeutralButton(neutralButton, null);
+        super.setCancelable(false);
+        super.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                CreateDialog.this.show();
+            }
+        });
         return this;
     }
 

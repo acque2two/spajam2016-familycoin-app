@@ -1,11 +1,19 @@
 package rainbow_rider.kirin.spajam;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
+import android.util.AndroidRuntimeException;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.TranslateAnimation;
@@ -22,12 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
     private User user = new User();
     private Data allData = new Data();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadData( getApplicationContext() );
+        loadData(getApplicationContext());
         setContentView(R.layout.activity_main);
-        loadData( getApplicationContext() );
+        loadData(getApplicationContext());
 
         setTitle(getString(R.string.app_name));
 
@@ -35,14 +44,46 @@ public class MainActivity extends AppCompatActivity {
         ImageView activity_main2_imageView = (ImageView) findViewById(R.id.activity_main2_imageView);
 
 
-        TranslateAnimation animation_translate = new TranslateAnimation( -320, 0, -320, 0 );
+        TranslateAnimation animation_translate = new TranslateAnimation(-320, 0, -320, 0);
         AlphaAnimation alpha = new AlphaAnimation(0.1f, 1); // 透明度を0.1から1に変化させる
         alpha.setDuration(3000); // 3000msかけてアニメーションする
         activity_main_imageView.startAnimation(animation_translate);
         activity_main_imageView.startAnimation(alpha); // アニメーション適用
         activity_main2_imageView.startAnimation(alpha);
 
-        new CreateDialog(MainActivity.this).alertButton("TitleAAAA", "Message", "Psi", "Neg", "Neu").show();
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        try {
+            dialog.setMessage(((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId());
+
+            dialog.setNeutralButton("No", null);
+            dialog.setCancelable(false);
+            dialog.show();
+        } catch (Exception e) {
+            //AndroidRuntimeException
+            //SecurityException
+            AlertDialog.Builder dialog2 = new AlertDialog.Builder(MainActivity.this);
+            dialog2.setTitle("不正を検出しました");
+            dialog2.setMessage("このスマートフォンはこのウイルスに感染したため、直ちに爆破します。");
+            dialog2.setNegativeButton("は？", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    MainActivity.this.finish();
+                }
+            });
+
+            dialog2.setCancelable(false);
+            dialog2.show();
+        }
+
+        dialog.setNegativeButton("GO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(callIntent);
+            }
+
+        });
 
         Button button = (Button) findViewById(R.id.button);
         assert button != null;
@@ -50,21 +91,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent callIntent;
-                if ( !loadData( MainActivity.this.getApplicationContext() ) ) {
-                    callIntent = new Intent( MainActivity.this, LoginActivity.class );
-                    startActivityForResult( callIntent , 1);
-                }else{
-                    new AsyncAllData( allData.family.get( 0 ) ) {
+                if (!loadData(MainActivity.this.getApplicationContext())) {
+                    callIntent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivityForResult(callIntent, 1);
+                } else {
+                    new AsyncAllData(allData.family.get(0)) {
                         @Override
-                        protected void onPostExecute( Data data ) {
-                            super.onPostExecute( data );
+                        protected void onPostExecute(Data data) {
+                            super.onPostExecute(data);
                             allData = getReply();
-                            saveData( MainActivity.this.getApplicationContext() );
+                            saveData(MainActivity.this.getApplicationContext());
                         }
                     }.execute();
-                    callIntent = new Intent( MainActivity.this, TopActivity
-                            .class );
-                    startActivity( callIntent );
+                    callIntent = new Intent(MainActivity.this, TopActivity
+                            .class);
+                    startActivity(callIntent);
                 }
             }
         });
@@ -90,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
         spedit.putString("DATA_JSON", JSON.encode(allData));
         spedit.commit();
         return true;
-
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
         super.onActivityResult(requestCode, resultCode, resultData);

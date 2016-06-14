@@ -41,12 +41,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public Family family;
 
-    public String name;
     public String u_id;
     public String f_id;
-    public int sex = -1;
-    public int adult = -1;
-    public int admin = -1;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -66,53 +62,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText name_text = (EditText) findViewById(R.id.login_name_text);
         final EditText u_id_text = (EditText) findViewById(R.id.login_uId_text);
         final EditText f_id_text = (EditText) findViewById(R.id.login_fId_text);
-        RadioGroup sex_group = (RadioGroup) findViewById(R.id.login_radioG_sex);
-        RadioGroup adult_group = (RadioGroup) findViewById(R.id.login_radioG_adult);
-        RadioGroup admin_group = (RadioGroup) findViewById(R.id.login_radioG_admin);
 
         setTitle(getString(R.string.app_name));
 
-        assert sex_group != null;
-        sex_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        Button joinButton = (Button) findViewById(R.id.login_join_button);
+        assert joinButton != null;
+        joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton radioButton = (RadioButton) findViewById(i);
-                if (radioButton.getText().equals("おとこ")) {
-                    sex = 1;
-                } else if (radioButton.getText().equals("おんな")) {
-                    sex = 0;
-                }
+            public void onClick(View view) {
+                Intent callIntent = new Intent(LoginActivity.this, JoinActivity.class);
+                startActivity(callIntent);
             }
         });
 
-        assert adult_group != null;
-        adult_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton radioButton = (RadioButton) findViewById(i);
-                if (radioButton.getText().equals("おとな")) {
-                    adult = 1;
-                } else if (radioButton.getText().equals("こども")) {
-                    adult = 0;
-                }
-            }
-        });
-
-        assert admin_group != null;
-        admin_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton radioButton = (RadioButton) findViewById(i);
-                if (radioButton.getText().equals("はい")) {
-                    admin = 1;
-                } else if (radioButton.getText().equals("いいえ")) {
-                    admin = 0;
-                }
-            }
-        });
 
         //Create Button
         Button button = (Button) findViewById(R.id.login_create_button);
@@ -120,17 +84,12 @@ public class LoginActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                assert name_text != null;
+                /*
                 assert f_id_text != null;
                 assert u_id_text != null;
 
-                name = name_text.getText().toString();
                 u_id = u_id_text.getText().toString();
                 f_id = f_id_text.getText().toString();
-
-                int i = 10;
-
-                int ans = checkInputList();
 
                 if (ans == -1) {
                     new CreateDialog(LoginActivity.this).alertButton("エラー", "入力されていない項目があります","OK").show();
@@ -248,6 +207,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "作成", Toast.LENGTH_SHORT).show();
                 }
             }
+            */
+            }
         });
 
 
@@ -261,60 +222,6 @@ public class LoginActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-
-    public int checkInputList(){
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("処理を実行中しています");
-        progressDialog.setCancelable(true);
-        progressDialog.show();
-
-        final EditText name_text = (EditText) findViewById(R.id.login_name_text);
-        final EditText u_id_text = (EditText) findViewById(R.id.login_uId_text);
-        final EditText f_id_text = (EditText) findViewById(R.id.login_fId_text);
-        RadioGroup sex_group = (RadioGroup) findViewById(R.id.login_radioG_sex);
-        RadioGroup adult_group = (RadioGroup) findViewById(R.id.login_radioG_adult);
-        RadioGroup admin_group = (RadioGroup) findViewById(R.id.login_radioG_admin);
-
-        int white = Color.rgb(250, 250, 250);
-        int red = Color.rgb(239, 154, 154);
-
-        name_text.setBackgroundColor(white);
-        u_id_text.setBackgroundColor(white);
-        f_id_text.setBackgroundColor(white);
-        sex_group.setBackgroundColor(white);
-        adult_group.setBackgroundColor(white);
-        admin_group.setBackgroundColor(white);
-
-        int[] ans = new int[]{0};
-
-        if (name.equals("")){
-            name_text.setBackgroundColor(red);
-            ans[0] = -1;
-        }
-        if(u_id.equals("")){
-            u_id_text.setBackgroundColor(red);
-            ans[0] = -1;
-
-        }
-        if(f_id.equals("")){
-            f_id_text.setBackgroundColor(red);
-            ans[0] = -1;
-        }
-        if (sex < 0) {
-            sex_group.setBackgroundColor(red);
-            ans[0] = -1;
-        }
-        if (adult < 0) {
-            adult_group.setBackgroundColor(red);
-            ans[0] = -1;
-        }
-        if (admin < 0) {
-            admin_group.setBackgroundColor(red);
-            ans[0] = -1;
-        }
-        return ans[0];
-    }
 
     private boolean saveData(Context context) {
         // アプリ標準の Preferences を取得する
