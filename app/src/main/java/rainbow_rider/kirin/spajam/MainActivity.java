@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                             saveData( MainActivity.this.getApplicationContext() );
                         }
                     }.execute();
-                    callIntent = new Intent( MainActivity.this, LoginActivity
+                    callIntent = new Intent( MainActivity.this, TopActivity
                             .class );
                     startActivity( callIntent );
                 }
