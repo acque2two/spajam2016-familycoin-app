@@ -27,15 +27,6 @@ import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
 import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkGenreList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OnTopFragmentListener} interface
- * to handle interaction events.activity_top_button
- * Use the {@link TopFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TopFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -176,13 +167,6 @@ public class TopFragment extends Fragment {
 
         Log.d("------------------", "Complete");
 
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
-
     }
 
     @Override
@@ -202,16 +186,6 @@ public class TopFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnTopFragmentListener {
         // TODO: Update argument type and name
         void onTopFragmentItemClick(int wId);
