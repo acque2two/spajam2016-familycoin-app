@@ -12,9 +12,15 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
+import net.arnx.jsonic.JSON;
+
 import java.nio.charset.Charset;
+
+import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.NFC;
 
 public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback,
         NfcAdapter.OnNdefPushCompleteCallback {
@@ -39,15 +45,22 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
     public NdefMessage createNdefMessage(NfcEvent event) {
         //Beamで送りたいメッセージ
         String text = "Beam text";
+        NFC nfc = new NFC();
+        nfc.adult = true;
+        nfc.manager = true;
+        nfc.sex = true;
+        nfc.fixedNum =( (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId() ;
+
         NdefRecord[] record = new NdefRecord[]{ createMimeRecord(
-                "application/com.example.demobeam", text.getBytes())
+                "application/com.example.demobeam", JSON.encode(nfc).getBytes()) } ;
 
                 /**
                  * 他のデバイスがAndroidアプリケーションレコード（AAR）を
                  * 受信したときに指定されたアプリケーションが実行されることが保証されています。
                 */
                 //,NdefRecord.createApplicationRecord("com.example.demobeam")
-        };
+
+
         NdefMessage msg = new NdefMessage(record);
         return msg;
     }
@@ -74,6 +87,9 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
             Toast.makeText(getApplicationContext(),
                     "received:" + receiveBeam,
                     Toast.LENGTH_LONG).show();
+            NFC nfc = JSON.decode(receiveBeam.toString(), NFC.class);
+
+
         }
     }
 

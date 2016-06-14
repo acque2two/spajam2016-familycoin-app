@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         activity_main_imageView.startAnimation(alpha); // アニメーション適用
         activity_main2_imageView.startAnimation(alpha);
 
-        Intent callIntent = new Intent(MainActivity.this, NfcActivity.class);
-        startActivity(callIntent);
+        //Intent callIntent = new Intent(MainActivity.this, NfcActivity.class);
+        //startActivity(callIntent);
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         try {
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent callIntent;
                 if (!loadData(MainActivity.this.getApplicationContext())) {
-                    callIntent = new Intent(MainActivity.this, LoginActivity.class);
+                    callIntent = new Intent(MainActivity.this, PostActivity.class);
                     startActivityForResult(callIntent, 1);
                 } else {
                     new AsyncAllData(allData.family.get(0)) {
