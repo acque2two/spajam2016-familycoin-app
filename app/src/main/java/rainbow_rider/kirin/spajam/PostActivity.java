@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +23,8 @@ import android.widget.Toast;
 
 import net.arnx.jsonic.JSON;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
@@ -160,7 +165,14 @@ public class PostActivity extends AppCompatActivity {
             case 1:
                 if (resultCode == RESULT_OK) {
                     intImage = resultData.getIntExtra("image", R.drawable.ic_menu_share);
-                    imageView.setImageResource(intImage);
+                    try {
+                        InputStream istream = getResources().getAssets().open("images/usersicon/mother_icon.png");
+                        Bitmap bitmap = BitmapFactory.decodeStream(istream);
+                        imageView.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        Log.d("Assets","Error");
+                    }
+                    //imageView.setImageResource(intImage);
                 } else {
 
                 }

@@ -165,6 +165,7 @@ public class TopFragment extends Fragment {
             }
         }.execute();
 
+
         Log.d("------------------", "Complete");
 
     }
