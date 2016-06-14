@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         activity_main_imageView.startAnimation(alpha); // アニメーション適用
         activity_main2_imageView.startAnimation(alpha);
 
+        Intent callIntent = new Intent(MainActivity.this, NfcActivity.class);
+        startActivity(callIntent);
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         try {
