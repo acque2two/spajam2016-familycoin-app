@@ -18,13 +18,13 @@ public class Work implements Serializable {
     public Integer g_id;
     public Integer point;
     public Genre genre;
-    public Integer image;
+    public String image;
 
-    public Integer getImage( ) {
+    public String getImage( ) {
         return image;
     }
 
-    public void setImage( Integer image ) {
+    public void setImage( String image ) {
         this.image = image;
     }
 
