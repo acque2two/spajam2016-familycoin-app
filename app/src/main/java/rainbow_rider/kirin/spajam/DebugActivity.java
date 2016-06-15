@@ -25,7 +25,7 @@ public class DebugActivity extends AppCompatActivity {
         Button detail = (Button) findViewById(R.id.debug_detail);
         Button post = (Button) findViewById(R.id.debug_post);
         Button photo = (Button) findViewById(R.id.debug_photo);
-        Button d1 = (Button) findViewById(R.id.debug_1);
+        Button animation = (Button) findViewById(R.id.debug_animation);
         Button d3 = (Button) findViewById(R.id.debug_3);
 
         Button login = (Button) findViewById(R.id.debug_login);
@@ -42,7 +42,7 @@ public class DebugActivity extends AppCompatActivity {
         buttons.add(detail);
         buttons.add(post);
         buttons.add(photo);
-        buttons.add(d1);
+        buttons.add(animation);
         buttons.add(d3);
 
         buttons.add(login);
@@ -136,6 +136,13 @@ public class DebugActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent callIntent = new Intent(DebugActivity.this, PDActivity.class);
+                startActivity(callIntent);
+            }
+        });
+        animation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callIntent = new Intent(DebugActivity.this, AnimeActivity.class);
                 startActivity(callIntent);
             }
         });

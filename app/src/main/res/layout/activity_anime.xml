@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="rainbow_rider.kirin.spajam.AnimeActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view"
+            android:text="Anim by ViewCompat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textIsSelectable="false"
+            android:textSize="40dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:text="push"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/ani_bottom"
+                android:layout_gravity="center_horizontal|bottom"
+                android:background="#1E88E5" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:id="@+id/ani_left"
+                android:layout_gravity="left|center_vertical"
+                android:background="#1E88E5" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:id="@+id/ani_right"
+                android:layout_gravity="right|center_vertical"
+                android:background="#1E88E5" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/ani_top"
+                android:layout_gravity="center_horizontal|top"
+                android:background="#1E88E5" />
+        </FrameLayout>
+    </LinearLayout>
+
+</RelativeLayout>
