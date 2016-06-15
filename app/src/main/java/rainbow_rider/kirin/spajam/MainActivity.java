@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.setNegativeButton("GO", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent callIntent = new Intent(MainActivity.this, TopActivity.class);
+                    Intent callIntent = new Intent(MainActivity.this, DebugActivity.class);
                     startActivity(callIntent);
                 }
             });
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent callIntent;
                 if (!loadData(MainActivity.this.getApplicationContext())) {
-                    callIntent = new Intent(MainActivity.this, PostActivity.class);
+                    callIntent = new Intent(MainActivity.this, TopActivity.class);
                     startActivityForResult(callIntent, 1);
                 } else {
                     new AsyncAllData(allData.family.get(0)) {
