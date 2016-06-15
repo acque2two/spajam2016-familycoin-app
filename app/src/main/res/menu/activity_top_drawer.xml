@@ -17,7 +17,7 @@
                     android:icon="@mipmap/drawer_towel"
                     android:title="せんたく" />
                 <item
-                    android:id="@+id/activity_top_drawer_social_study"
+                    android:id="@+id/activity_top_drawer_study"
                     android:icon="@mipmap/drawer_book"
                     android:title="べんきょう" />
                 <item

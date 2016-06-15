@@ -205,7 +205,7 @@ public class TopActivity extends AppCompatActivity
                 .addToBackStack("せんたく")
                 .commit();
             toolbar.setTitle("せんたくクエスト");
-        } else if (id == R.id.activity_top_drawer_social_study) {
+        } else if (id == R.id.activity_top_drawer_study) {
             getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_top_fragment, TopFragment.newInstance("4", fId))

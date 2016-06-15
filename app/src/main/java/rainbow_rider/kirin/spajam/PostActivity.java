@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +23,8 @@ import android.widget.Toast;
 
 import net.arnx.jsonic.JSON;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
@@ -32,7 +37,7 @@ public class PostActivity extends AppCompatActivity {
     private static final int RESULT_PICK_IMAGEFILE = 1001;
     private ImageView imageView;
     private Data allData;
-    private int intImage = R.drawable.ic_menu_camera;
+    private String stringImage = "cleaning";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +54,11 @@ public class PostActivity extends AppCompatActivity {
         final EditText mainText = (EditText) findViewById(R.id.post_mainText);
         final EditText pointText = (EditText) findViewById(R.id.post_point_text);
         FrameLayout postImageLayout = (FrameLayout) findViewById(R.id.post_image_layout);
-        Button sendButoon = (Button) findViewById(R.id.post_send_button);
+        Button sendButton = (Button) findViewById(R.id.post_send_button);
 
         assert pointText != null;
         assert mainText != null;
-        assert sendButoon != null;
+        assert sendButton != null;
         assert genre_spinner != null;
         assert title != null;
 
@@ -106,7 +111,7 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
-        sendButoon.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -122,7 +127,9 @@ public class PostActivity extends AppCompatActivity {
                     work.setW_name(title.getText().toString());
                     work.setPoint(intTitle);
                     work.setGenre(genre);
-                    work.setImage(intImage);
+
+                    //TODO work.setImage -> String
+                    //work.setImage(stringImage);
 
                     Family family = allData.getFamily().get(0);
                     ArrayList<Work> works = new ArrayList<Work>();
@@ -159,8 +166,14 @@ public class PostActivity extends AppCompatActivity {
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    intImage = resultData.getIntExtra("image", R.drawable.ic_menu_share);
-                    imageView.setImageResource(intImage);
+                    stringImage = resultData.getStringExtra("image");
+                    try {
+                        InputStream istream = getResources().getAssets().open("images/" + stringImage);
+                        Bitmap bitmap = BitmapFactory.decodeStream(istream);
+                        imageView.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        Log.d("Assets","Error");
+                    }
                 } else {
 
                 }
