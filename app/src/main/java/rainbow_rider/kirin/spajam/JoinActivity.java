@@ -52,8 +52,8 @@ public class JoinActivity extends AppCompatActivity {
         final int red = Color.rgb(239, 154, 154);
 
         AlertDialog.Builder alert = new AlertDialog.Builder(JoinActivity.this);
-        alert.setTitle("あなたは家族で初めて登録する人ですか？");
-        alert.setMessage("もし家族で登録している人がいたら「いいえ」を選択してください");
+        alert.setTitle("");
+        alert.setMessage("あなたは家族で初めて登録する人ですか？\n家族で登録している人がいる場合「いいえ」を選択してください");
         alert.setCancelable(false);
         alert.setPositiveButton("はい", null);
         alert.setNeutralButton("いいえ", new DialogInterface.OnClickListener() {

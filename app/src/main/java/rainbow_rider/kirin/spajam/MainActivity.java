@@ -56,11 +56,19 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         try {
+            dialog.setTitle("デバック画面に行きます");
             dialog.setMessage(((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId());
-
             dialog.setNeutralButton("No", null);
             dialog.setCancelable(false);
+            dialog.setNegativeButton("GO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent callIntent = new Intent(MainActivity.this, DebugActivity.class);
+                    startActivity(callIntent);
+                }
+            });
             dialog.show();
+
         } catch (Exception e) {
             //AndroidRuntimeException
             //SecurityException
@@ -77,15 +85,6 @@ public class MainActivity extends AppCompatActivity {
             dialog2.setCancelable(false);
             dialog2.show();
         }
-
-        dialog.setNegativeButton("GO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(callIntent);
-            }
-
-        });
 
         Button button = (Button) findViewById(R.id.button);
         assert button != null;
