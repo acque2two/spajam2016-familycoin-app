@@ -1,6 +1,10 @@
 package rainbow_rider.kirin.spajam;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,6 +50,20 @@ public class JoinActivity extends AppCompatActivity {
 
         final int white = Color.rgb(250, 250, 250);
         final int red = Color.rgb(239, 154, 154);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(JoinActivity.this);
+        alert.setTitle("");
+        alert.setMessage("あなたは家族で初めて登録する人ですか？\n家族で登録している人がいる場合「いいえ」を選択してください");
+        alert.setCancelable(false);
+        alert.setPositiveButton("はい", null);
+        alert.setNeutralButton("いいえ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent callIntent = new Intent(JoinActivity.this, LoginActivity.class);
+                startActivity(callIntent);
+            }
+        });
+        alert.show();
 
         assert sexGroup != null;
         sexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

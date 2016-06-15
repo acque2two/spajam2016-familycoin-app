@@ -52,7 +52,7 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
         nfc.fixedNum =( (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId() ;
 
         NdefRecord[] record = new NdefRecord[]{ createMimeRecord(
-                "application/com.example.demobeam", JSON.encode(nfc).getBytes()) } ;
+                "application/rainbow_rider.kirin.spajam", JSON.encode(nfc).getBytes()) } ;
 
                 /**
                  * 他のデバイスがAndroidアプリケーションレコード（AAR）を

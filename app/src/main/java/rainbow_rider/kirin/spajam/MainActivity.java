@@ -56,11 +56,19 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         try {
+            dialog.setTitle("デバック画面に行きます");
             dialog.setMessage(((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId());
-
             dialog.setNeutralButton("No", null);
             dialog.setCancelable(false);
+            dialog.setNegativeButton("GO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent callIntent = new Intent(MainActivity.this, DebugActivity.class);
+                    startActivity(callIntent);
+                }
+            });
             dialog.show();
+
         } catch (Exception e) {
             //AndroidRuntimeException
             //SecurityException
@@ -78,15 +86,6 @@ public class MainActivity extends AppCompatActivity {
             dialog2.show();
         }
 
-        dialog.setNegativeButton("GO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(callIntent);
-            }
-
-        });
-
         Button button = (Button) findViewById(R.id.button);
         assert button != null;
         button.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent callIntent;
                 if (!loadData(MainActivity.this.getApplicationContext())) {
-                    callIntent = new Intent(MainActivity.this, PostActivity.class);
+                    callIntent = new Intent(MainActivity.this, TopActivity.class);
                     startActivityForResult(callIntent, 1);
                 } else {
                     new AsyncAllData(allData.family.get(0)) {

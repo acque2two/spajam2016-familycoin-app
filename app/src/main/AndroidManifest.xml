@@ -35,16 +35,20 @@
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".PostActivity"
             android:label="@string/title_activity_post"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".TopActivity"
             android:label="@string/title_activity_top"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".PhotoActivity" />
+
         <activity
             android:name=".PresentActivity"
             android:label="@string/title_activity_present"
@@ -60,15 +64,20 @@
         <activity
             android:name=".JoinActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".NfcActivity">
+
+        <activity android:name=".NfcActivity">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="application/com.example.demobeam" />
+
+                <data android:mimeType="application/rainbow_rider.kirin.spajam" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".DebugActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
