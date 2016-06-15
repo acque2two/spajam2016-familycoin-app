@@ -1,11 +1,27 @@
 <resources>
+    <color name="Material.Black">#000000</color>
+    <color name="Material.Pink.100">#F8BBD0</color>
+    <color name="Material.Pink.300">#F06292</color>
+    <color name="Material.Pink.500">#E91E63</color>
+    <color name="Material.Green.100">#C8E6C9</color>
+    <color name="Material.Green.300">#81C784</color>
+    <color name="Material.Green.500">#4CAF50</color>
+    <color name="Material.Green.800">#2E7D32</color>
+    <color name="Material.Grey.800">#424242</color>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#0277bd</item>
-        <item name="colorPrimaryDark">#03a9f4</item>
-        <item name="colorAccent">#0d47a1</item>
+        <item name="colorPrimary">@color/Material.Green.300</item>
+        <item name="colorPrimaryDark">@color/Material.Green.100</item>
+        <item name="colorAccent">@color/Material.Green.500</item>
+
+        <item name="android:colorAccent">@color/Material.Green.800</item>
+        <item name="android:statusBarColor">@color/Material.Green.500</item>
+        <item name="android:textColorPrimary">@color/Material.Black</item>
+        <item name="android:colorPrimary">@color/Material.Green.300</item>
+        <item name="android:windowBackground">@color/Material.Grey.800</item>
+        <item name="android:navigationBarColor">@color/Material.Green.500</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

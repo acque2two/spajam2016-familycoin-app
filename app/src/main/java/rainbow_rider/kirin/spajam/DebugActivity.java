@@ -6,6 +6,7 @@ import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -58,6 +59,7 @@ public class DebugActivity extends AppCompatActivity {
             int j = new java.util.Random().nextInt(colors.size());
             buttons.get(i).setBackgroundColor(colors.get(j));
         }
+
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.debug_layout);
         layout.setBackgroundColor(colors.get(new java.util.Random().nextInt(colors.size())));
