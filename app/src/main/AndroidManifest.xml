@@ -65,7 +65,7 @@
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="application/com.example.demobeam" />
+                <data android:mimeType="application/rainbow_rider.kirin.spajam" />
             </intent-filter>
         </activity>
 
