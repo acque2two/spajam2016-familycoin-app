@@ -45,7 +45,7 @@ public class PresentListAdapter extends GenericArrayAdapter<Work> {
         //Log.d("q",listItem.getQ_name());
 
         mViewHolder.title.setText( listItem.getW_name() );
-        mViewHolder.icon.setImageResource( listItem.getImage() );
+        //mViewHolder.icon.setImageResource( listItem.getImage() );
 
         return convertView;
     }
