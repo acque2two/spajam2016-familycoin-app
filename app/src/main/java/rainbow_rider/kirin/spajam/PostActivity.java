@@ -128,8 +128,7 @@ public class PostActivity extends AppCompatActivity {
                     work.setPoint(intTitle);
                     work.setGenre(genre);
 
-                    //TODO work.setImage -> String
-                    //work.setImage(stringImage);
+                    work.setImage(stringImage);
 
                     Family family = allData.getFamily().get(0);
                     ArrayList<Work> works = new ArrayList<Work>();
