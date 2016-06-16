@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Todo:
  */
 public class Product implements Serializable {
-    public Integer p_id;
+    public Integer p_id ;
     public String p_name;
     public String f_id;
     public Integer p_point;

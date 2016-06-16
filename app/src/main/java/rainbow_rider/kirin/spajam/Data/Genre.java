@@ -3,7 +3,7 @@ package rainbow_rider.kirin.spajam.Data;
 import java.io.Serializable;
 
 public class Genre implements Serializable {
-    public long g_id;
+    public long g_id ;
     public String g_name;
 
     public long getG_id( ) {

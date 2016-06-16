@@ -7,27 +7,38 @@ import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import net.arnx.jsonic.JSON;
 
 import java.nio.charset.Charset;
 
-import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.NFC;
 
 public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback,
         NfcAdapter.OnNdefPushCompleteCallback {
 
     private static final int MESSAGE_SENT = 1;
-    private NfcAdapter mNfcAdapter;
     private static Context mContext;
+    private final static Handler ndefPushHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MESSAGE_SENT:
+                    Toast.makeText(mContext,
+                            "ひつようなデータをおくりました",
+                            Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+    };
+    private NfcAdapter mNfcAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,29 +55,23 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
         //Beamで送りたいメッセージ
-        String text = "Beam text";
         NFC nfc = new NFC();
         nfc.adult = true;
         nfc.manager = true;
         nfc.sex = true;
-        nfc.fixedNum =( (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId() ;
+        nfc.fixedNum = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
+                .getDeviceId();
 
-        NdefRecord[] record = new NdefRecord[]{ createMimeRecord(
-                "application/rainbow_rider.kirin.spajam", JSON.encode(nfc).getBytes()) } ;
-
-                /**
-                 * 他のデバイスがAndroidアプリケーションレコード（AAR）を
-                 * 受信したときに指定されたアプリケーションが実行されることが保証されています。
-                */
-                //,NdefRecord.createApplicationRecord("com.example.demobeam")
-
+        NdefRecord[] record = new NdefRecord[]{createMimeRecord(
+                "application/rainbow_rider.kirin.spajam", JSON.encode(nfc).getBytes()),
+                NdefRecord.createApplicationRecord("rainbow_rider.kirin.spajam")};
 
         NdefMessage msg = new NdefMessage(record);
         return msg;
     }
 
     public NdefRecord createMimeRecord(String mimeType, byte[] payload) {
-        byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
+        byte[] mimeBytes = mimeType.getBytes(Charset.forName("UTF-8"));
         NdefRecord mimeRecord = new NdefRecord(
                 NdefRecord.TNF_MIME_MEDIA, mimeBytes, new byte[0], payload);
         return mimeRecord;
@@ -84,11 +89,15 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
             NdefMessage msg = (NdefMessage) rawMsgs[0];
             //Beamのメッセージ
             String receiveBeam = new String(msg.getRecords()[0].getPayload());
-            Toast.makeText(getApplicationContext(),
-                    "received:" + receiveBeam,
-                    Toast.LENGTH_LONG).show();
-            NFC nfc = JSON.decode(receiveBeam.toString(), NFC.class);
-
+            Log.d("NFC/ONRESUME/RECEIVE","received:" + receiveBeam);
+            Toast.makeText(this.getApplicationContext(),"データをうけとりました",Toast.LENGTH_LONG).show();
+            NFC nfc = JSON.decode(receiveBeam, NFC.class);
+            Intent intent_res = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("nfc",nfc);
+            intent_res.putExtras(bundle);
+            setResult(RESULT_OK, intent_res);
+            finish();
 
         }
     }
@@ -98,17 +107,4 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
         //Beam送信完了時のハンドラー
         ndefPushHandler.obtainMessage(MESSAGE_SENT).sendToTarget();
     }
-
-    private final static Handler ndefPushHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MESSAGE_SENT:
-                    Toast.makeText(mContext,
-                            "Beam sent.....",
-                            Toast.LENGTH_LONG).show();
-                    break;
-            }
-        }
-    };
 }
