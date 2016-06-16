@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -43,6 +48,11 @@ public class AnimeActivity extends AppCompatActivity {
     // Canvas 中心点
     private float xc = 0.0f;
     private float yc = 0.0f;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +73,9 @@ public class AnimeActivity extends AppCompatActivity {
         w.setText("width: " + real.x);
         h.setText("height: " + real.y);
 
-        TestView testView = new TestView(this);
-        setContentView(testView);
-        /*
+        //TestView testView = new TestView(this);
+        //setContentView(testView);
+
         mTextView = (TextView) findViewById(R.id.text_view);
         Button button = (Button) findViewById(R.id.button);
 
@@ -117,7 +127,10 @@ public class AnimeActivity extends AppCompatActivity {
                 }
             }
 
-        });*/
+        });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @SuppressLint("NewApi")
@@ -150,6 +163,46 @@ public class AnimeActivity extends AppCompatActivity {
         return real;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Anime Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://rainbow_rider.kirin.spajam/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Anime Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://rainbow_rider.kirin.spajam/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
+
 
     class TestView extends View {
         Paint paint;
@@ -162,7 +215,7 @@ public class AnimeActivity extends AppCompatActivity {
         @Override
         protected void onDraw(Canvas canvas) {
             // 背景
-            canvas.drawColor(Color.argb(255, 0, 0, 125));
+            canvas.drawColor(Color.rgb(1,87,155));
 
             int[] w = new int[4];
             int[] h = new int[4];
@@ -192,17 +245,60 @@ public class AnimeActivity extends AppCompatActivity {
             // (x1,y1,x2,y2,paint) 始点の座標(x1,y1), 終点の座標(x2,y2)
             canvas.drawLine(xc + 100, yc - 150, xc - 250, yc + 250, paint);
 */
+
+
+            paint.setColor(Color.rgb(69,90,100));//BottomS
+            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
+            canvas.drawRect(0, (height * (7f / 10f)) - 20, width, height, paint);
+
+            paint.setColor(Color.rgb(21,101,192)); //Bottom
+            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
+            canvas.drawRect(0, (height * (7f / 10f)), width, height, paint);
+
+            paint.setColor(Color.rgb(55,71,79)); //LeftS
+            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
+            canvas.drawRect(0, 0, (width * (1f / 6f)) + 20, height, paint);
+
+            paint.setColor(Color.rgb(25,118,210)); //Left
+            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
+            canvas.drawRect(0, 0, (width * (1f / 6f)), height, paint);
+
+            paint.setColor(Color.rgb(55,71,79)); //RightS
+            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
+            canvas.drawRect((width * (5f / 6f)) - 20, 0, width, height, paint);
+
+
+            paint.setColor(Color.rgb(25,118,210)); //Right
+            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
+            canvas.drawRect((width * (5f / 6f)), 0, width, height, paint);
+
             // 三角形を書く
-            paint.setStrokeWidth(10);
-            paint.setColor(Color.WHITE);
-            Path path = new Path();
-            path.moveTo(width, 0);
+            paint.setStrokeWidth(10); //Left
+            paint.setColor(Color.rgb(30,136,229));
+            Path path4 = new Path();
+            path4.moveTo((width - (width / 12)), 0);
 
-            path.lineTo(width, 0); // 右上のてん max w : 右下のてん
-            path.lineTo((width/4), 0); // 下左のてん  1/4 w: 下右のてん
-            path.lineTo(width,(height/2)); // 左上のてん max w: 左下のてん 1/4
+            path4.lineTo(width / 12, 0); // 右上のてん max w : 右下のてん
+            path4.lineTo(0, 0); // 下左のてん  1/4 w: 下右のてん
+            path4.lineTo(0, (height / 2)); // 左上のてん max w: 左下のてん 1/4
 
-            canvas.drawPath(path, paint);
+            canvas.drawPath(path4, paint);
+
+            // 三角形を書く
+            paint.setStrokeWidth(10); //Right
+            paint.setColor(Color.rgb(33,150,243));
+            Path path5 = new Path();
+            path5.moveTo(width, 0);
+
+            path5.lineTo(width, 0); // 右上のてん max w : 右下のてん
+            path5.lineTo((width / 12), 0); // 下左のてん  1/4 w: 下右のてん
+            path5.lineTo(width, (height / 2)); // 左上のてん max w: 左下のてん 1/4
+
+            canvas.drawPath(path5, paint);
+
+
+
+
 
             /*
             path.moveTo(600, 1000);
