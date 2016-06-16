@@ -5,8 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import net.arnx.jsonic.JSON;
+
+import java.io.Serializable;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.User;
@@ -32,7 +35,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadData(getApplicationContext());
-
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+            startActivityForResult(new Intent(this, NfcActivity.class).putExtra("nfc",
+                    (Serializable) JSON.decode(new String(((NdefMessage) getIntent()
+                            .getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)[0])
+                            .getRecords()[0].getPayload()))), 30);
+        }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -105,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                             saveData(MainActivity.this.getApplicationContext());
                         }
                     }.execute();
-                    callIntent = new Intent(MainActivity.this, TopActivity
+                    callIntent = new Intent(MainActivity.this, LoginActivity
                             .class);
                     startActivity(callIntent);
                 }
@@ -116,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean loadData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp = this.getPreferences(Context.MODE_PRIVATE);
 
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
 
@@ -128,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean saveData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor spedit = sp.edit();
         spedit.putString("DATA_JSON", JSON.encode(allData));
         spedit.commit();

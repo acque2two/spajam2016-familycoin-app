@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -76,7 +75,7 @@ public class PDActivity extends AppCompatActivity {
 
     private boolean loadData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
 
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
         my_id = sp.getString("my_id", "");

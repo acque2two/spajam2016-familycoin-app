@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -110,7 +109,7 @@ public class TopActivity extends AppCompatActivity
 
     private boolean loadData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp = context.getSharedPreferences("allData",Context.MODE_PRIVATE);
 
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
 
@@ -122,7 +121,7 @@ public class TopActivity extends AppCompatActivity
 
     private boolean saveData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
         SharedPreferences.Editor spedit = sp.edit();
         spedit.putString("DATA_JSON", JSON.encode(allData));
         spedit.commit();

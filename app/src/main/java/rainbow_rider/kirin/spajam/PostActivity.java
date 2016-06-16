@@ -184,7 +184,7 @@ public class PostActivity extends AppCompatActivity {
 
     private boolean loadData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
 
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
 
@@ -194,7 +194,7 @@ public class PostActivity extends AppCompatActivity {
 
     private boolean saveData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
         SharedPreferences.Editor spedit = sp.edit();
         spedit.putString("DATA_JSON", JSON.encode(allData));
         spedit.commit();
