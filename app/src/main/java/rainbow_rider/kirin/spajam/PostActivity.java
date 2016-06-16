@@ -201,7 +201,16 @@ public class PostActivity extends AppCompatActivity {
         return true;
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        new CreateDialog(PostActivity.this).alertButton("本当にもどるん？", "もどっちゃっていいん？", "戻る").show();
+
+        super.onBackPressed();
+    }
 }
+
 
 /*
     //アクションバーの設定

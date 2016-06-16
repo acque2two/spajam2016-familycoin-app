@@ -2,6 +2,8 @@ package rainbow_rider.kirin.spajam;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -17,6 +19,8 @@ import android.widget.Toast;
 
 import net.arnx.jsonic.JSON;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,6 +29,7 @@ import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.Data.arrayadapter.ItemListAdapter;
+import rainbow_rider.kirin.spajam.Data.arrayadapter.ListItem;
 import rainbow_rider.kirin.spajam.transfer.async.work.AsyncWorkGenreList;
 
 public class TopFragment extends Fragment {
@@ -147,7 +152,20 @@ public class TopFragment extends Fragment {
                 if (reply == null) {
                     Log.d("-------------", "NotComplete");
                 } else {
-                    mAdapter.addAll(reply.getFamily().get(0).getWork());
+                    ListItem listItem = new ListItem();
+                    for (int i = 0 ; i < reply.getFamily().size(); i ++){
+                        listItem.setmTitle(reply.getFamily().get(0).getWork().get(i).getW_name());
+                        listItem.setmPoint(reply.getFamily().get(0).getWork().get(i).getPoint());
+                        String imageName = reply.getFamily().get(0).getWork().get(i).getImage();
+                        try {
+                            InputStream inputStream = getResources().getAssets().open("images/" + imageName);
+                            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                            listItem.setmIcon(bitmap);
+                        } catch (IOException e) {
+                            Log.d("---- Assets ----","---- Error ----");
+                        }
+                        mAdapter.add(listItem);
+                    }
 
                     Log.d(String.valueOf(reply.getFamily().get(0).getWork().size()) , " ------ replay get size ------ ");
                     Log.d(reply.getFamily().get(0).getWork().get(0).getW_text(), " W text !!!------------");
