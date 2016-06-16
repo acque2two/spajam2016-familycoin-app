@@ -14,9 +14,9 @@ public class Family implements Serializable {
     public String f_id;
     public String f_name;
 
-    public ArrayList<User> users;
-    public ArrayList<Work> work;
-    public ArrayList<Product> product;
+    public ArrayList<User> users  = new ArrayList<>();
+    public ArrayList<Work> work = new ArrayList<>();
+    public ArrayList<Product> product = new ArrayList<>();
 
     public ArrayList<User> getUsers( ) {
         return users;

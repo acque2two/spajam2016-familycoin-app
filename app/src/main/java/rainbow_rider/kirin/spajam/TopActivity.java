@@ -38,6 +38,8 @@ public class TopActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         Toast.makeText(getApplicationContext(), "ようこそ！", Toast.LENGTH_LONG).show();
         loadData(getApplicationContext());
+        Intent intent = getIntent();
+        // allData = (Data)intent.getSerializableExtra("allData");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top);
 
@@ -70,7 +72,7 @@ public class TopActivity extends AppCompatActivity
                 Intent callIntent = new Intent(TopActivity.this, PostActivity.class);
                 startActivity(callIntent);
             }
-        });;
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Family Coin");

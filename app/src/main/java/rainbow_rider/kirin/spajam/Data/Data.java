@@ -12,9 +12,13 @@ import java.util.ArrayList;
  */
 public class Data implements Serializable {
     public boolean status;
-    public ArrayList<Family> family;
-    public ArrayList<Genre> genre;
+    public ArrayList<Family> family = new ArrayList<>();
+    public ArrayList<Genre> genre = new ArrayList<>();
 
+    public Data(){
+        Family family_single = new Family();
+        family.add(family_single);
+    }
     public boolean isStatus( ) {
         return status;
     }
