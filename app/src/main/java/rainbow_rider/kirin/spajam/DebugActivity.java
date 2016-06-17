@@ -33,7 +33,7 @@ public class DebugActivity extends AppCompatActivity {
         Button nfc = (Button) findViewById(R.id.debug_nfc);
         Button present = (Button) findViewById(R.id.debug_present);
         Button pd = (Button) findViewById(R.id.debug_pd);
-        Button d2 = (Button) findViewById(R.id.debug_2);
+        Button receipt = (Button) findViewById(R.id.debug_receipt);
         Button d4 = (Button) findViewById(R.id.debug_4);
 
         ArrayList<Button> buttons = new ArrayList<Button>();
@@ -50,7 +50,7 @@ public class DebugActivity extends AppCompatActivity {
         buttons.add(nfc);
         buttons.add(present);
         buttons.add(pd);
-        buttons.add(d2);
+        buttons.add(receipt);
         buttons.add(d4);
 
         ArrayList<Integer> colors = colorList();
@@ -143,6 +143,14 @@ public class DebugActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent callIntent = new Intent(DebugActivity.this, AnimeActivity.class);
+                startActivity(callIntent);
+            }
+        });
+
+        receipt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callIntent = new Intent(DebugActivity.this, ReceiptActivity.class);
                 startActivity(callIntent);
             }
         });

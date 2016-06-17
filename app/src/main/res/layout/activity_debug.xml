@@ -132,8 +132,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="null"
-                android:id="@+id/debug_2"
+                android:text="Receipt"
+                android:id="@+id/debug_receipt"
                 android:layout_weight="1" />
         </LinearLayout>
 

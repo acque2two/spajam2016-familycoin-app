@@ -43,7 +43,7 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_nfc);
 
         mContext = this.getApplicationContext();
 
@@ -56,6 +56,7 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
     public NdefMessage createNdefMessage(NfcEvent event) {
         //Beamで送りたいメッセージ
         NFC nfc = new NFC();
+        nfc.name = "tarou";
         nfc.adult = true;
         nfc.manager = true;
         nfc.sex = true;
@@ -75,31 +76,6 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
         NdefRecord mimeRecord = new NdefRecord(
                 NdefRecord.TNF_MIME_MEDIA, mimeBytes, new byte[0], payload);
         return mimeRecord;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        //Beamのアクションを受け取ったとき
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
-            Intent intent = getIntent();
-            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(
-                    NfcAdapter.EXTRA_NDEF_MESSAGES);
-            NdefMessage msg = (NdefMessage) rawMsgs[0];
-            //Beamのメッセージ
-            String receiveBeam = new String(msg.getRecords()[0].getPayload());
-            Log.d("NFC/ONRESUME/RECEIVE","received:" + receiveBeam);
-            Toast.makeText(this.getApplicationContext(),"データをうけとりました",Toast.LENGTH_LONG).show();
-            NFC nfc = JSON.decode(receiveBeam, NFC.class);
-            Intent intent_res = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("nfc",nfc);
-            intent_res.putExtras(bundle);
-            setResult(RESULT_OK, intent_res);
-            finish();
-
-        }
     }
 
     @Override

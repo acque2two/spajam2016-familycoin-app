@@ -25,7 +25,14 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/rainbow_rider.kirin.spajam" />
+            </intent-filter>
+        </activity>
+
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -61,18 +68,21 @@
             android:name=".JoinActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".NfcActivity">
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="application/rainbow_rider.kirin.spajam" />
-            </intent-filter>
         </activity>
+
         <activity
             android:name=".DebugActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AnimeActivity"></activity>
+
+        <activity android:name=".AnimeActivity" />
+
+        <activity android:name=".ReceiptActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/rainbow_rider.kirin.spajam" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
