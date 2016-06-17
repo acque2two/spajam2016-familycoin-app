@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
             progressDialog.show();
             Intent intent = getIntent();
+
             Parcelable[] rawMsgs = intent.getParcelableArrayExtra(
                     NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage msg = (NdefMessage) rawMsgs[0];
