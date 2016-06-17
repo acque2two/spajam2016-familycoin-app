@@ -135,6 +135,7 @@ public class PostActivity extends AppCompatActivity {
                     alert02.show();
                 }
 
+
                 try {
                     work.setW_name(title.getText().toString());
                 } catch (Exception e){
