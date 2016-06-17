@@ -175,8 +175,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });*/
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -200,23 +198,6 @@ public class MainActivity extends AppCompatActivity {
         spedit.putString("DATA_JSON", JSON.encode(allData));
         spedit.commit();
         return true;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-        super.onActivityResult(requestCode, resultCode, resultData);
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    Intent callIntent = new Intent(MainActivity.this, TopActivity.class);
-                    startActivity(callIntent);
-                } else {
-
-                }
-                break;
-            default:
-                break;
-        }
     }
 
     @Override
