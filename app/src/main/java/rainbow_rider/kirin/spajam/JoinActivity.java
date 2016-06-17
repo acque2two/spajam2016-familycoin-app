@@ -5,11 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.view.View;
@@ -22,11 +20,10 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import net.arnx.jsonic.JSON;
-
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.F;
 import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.transfer.async.family.AsyncFamilyAdd;
@@ -136,7 +133,6 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-
         Button createButton = (Button) findViewById(R.id.join_create_button);
         assert createButton != null;
         createButton.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +174,6 @@ public class JoinActivity extends AppCompatActivity {
                     User user = new User();
                     user.setU_name(g_Name);
                     user.setU_id(g_uId);
-                    user.setF_id(g_fId);
                     user.setSex(g_sex == 1);
                     user.setAdult(g_adult == 1);
                     user.setAdmin(g_admin == 1);
@@ -187,6 +182,7 @@ public class JoinActivity extends AppCompatActivity {
                     users.add(user);
 
                     final Family family = new Family();
+                    family.setF_id(user.u_id);
                     family.setUsers(users);
 
                     final ArrayList<Family> families = new ArrayList<>();
@@ -206,7 +202,7 @@ public class JoinActivity extends AppCompatActivity {
                                     protected void onPostExecute(Data data) {
                                         super.onPostExecute(data);
                                         allData.setFamily(families);
-                                        saveData(getApplicationContext());
+                                        F.Save(allData);
                                         progressDialog.dismiss();
                                         Intent callIntent = new Intent(JoinActivity.this, TopActivity.class);
                                         startActivity(callIntent);
@@ -218,15 +214,6 @@ public class JoinActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private boolean saveData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor spedit = sp.edit();
-        spedit.putString("DATA_JSON", JSON.encode(allData));
-        spedit.commit();
-        return true;
     }
 
     public boolean[] checkInput() {

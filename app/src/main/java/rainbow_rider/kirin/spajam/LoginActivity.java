@@ -5,12 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -23,6 +21,7 @@ import net.arnx.jsonic.JSON;
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.F;
 import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.NFC;
 import rainbow_rider.kirin.spajam.Data.User;
@@ -63,7 +62,14 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("実行中");
         progressDialog.setCancelable(false);
-        if(loadData(getApplicationContext())){
+        boolean load;
+        try{
+            allData = F.Load();
+            load = allData.family.get(0).f_id != null;
+        }catch (NullPointerException e){
+            load = false;
+        }
+        if(load){
             //情報あり
             progressDialog.show();
             new AsyncUserFamilyGet(allData){
@@ -71,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 protected void onPostExecute(Data data) {
                     super.onPostExecute(data);
                     allData = getReply();
-                    saveData(getApplicationContext());
+                    F.Save(allData);
                     progressDialog.dismiss();
                     Intent callIntent = new Intent(LoginActivity.this, TopActivity.class );
                     startActivity(callIntent);
@@ -126,10 +132,11 @@ public class LoginActivity extends AppCompatActivity {
 
             Family family = new Family();
             User fUser = new User(); //親
-            fUser.u_id = fixedNum;fUser.u_id = fixedNum;
+            fUser.u_id = fixedNum;
             ArrayList<User> users= new ArrayList<>();
             users.add(fUser);
             family.users = users;
+            family.setF_id(fixedNum);
 
             //ServerからFamilyをGet
             //Get family from server
@@ -140,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
                     Data myData = getReply();
                     myData.getFamily().get(0).getUser().add(mUser);
                     allData = myData;
-                    saveData(getApplicationContext());
+                    F.Save(allData);
                     //Serverに自分を追加
                     new AsyncUserAdd(allData){
                         @Override
@@ -163,28 +170,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
             */
         }
-    }
-
-    private boolean loadData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
-        boolean ans;
-        if (sp.getString("DATA_JSON", "{}") == "{}"){
-            ans = false;
-        } else {
-            ans = true;
-        }
-        return ans;
-    }
-
-    private boolean saveData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor spedit = sp.edit();
-        spedit.putString("DATA_JSON", JSON.encode(allData));
-        spedit.commit();
-        return true;
     }
 
     @Override

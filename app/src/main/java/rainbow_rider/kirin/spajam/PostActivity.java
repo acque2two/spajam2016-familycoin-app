@@ -1,13 +1,9 @@
 package rainbow_rider.kirin.spajam;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,6 +24,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.F;
 import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.Work;
@@ -45,7 +42,7 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        loadData( PostActivity.this.getApplicationContext() );
+        allData = F.Load();
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -120,7 +117,7 @@ public class PostActivity extends AppCompatActivity {
 
                 Genre genre = new Genre();
                 genre.setG_id(genre_spinner.getSelectedItemPosition());
-
+                Log.d("JSON",JSON.encode(allData));
                 work.setU_id(allData.getFamily().get(0).getUser().get(0).getU_id());
 
                 //allDataない時用
@@ -215,10 +212,6 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
-    private String getGalleryPath() {
-        return Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/";
-    }
-
     //Result
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
@@ -243,28 +236,6 @@ public class PostActivity extends AppCompatActivity {
         }
     }
 
-    private boolean loadData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
-        boolean ans;
-        if (sp.getString("DATA_JSON", "{}") == "{}"){
-            ans = false;
-        } else {
-            ans = true;
-        }
-        return ans;
-    }
-
-    private boolean saveData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
-        SharedPreferences.Editor spedit = sp.edit();
-        spedit.putString("DATA_JSON", JSON.encode(allData));
-        spedit.commit();
-        return true;
-
-    }
 
     @Override
     public void onBackPressed() {
