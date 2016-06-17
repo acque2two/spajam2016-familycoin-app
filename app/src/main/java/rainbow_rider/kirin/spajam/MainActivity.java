@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.gms.appindexing.Action;
@@ -111,31 +112,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-/*
-        Button button = (Button) findViewById(R.id.button);
+        Button button = (Button) findViewById(R.id.main_start);
         assert button != null;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent callIntent;
-                if (!loadData(MainActivity.this.getApplicationContext())) {
-                    callIntent = new Intent(MainActivity.this, TopActivity.class);
-                    startActivityForResult(callIntent, 1);
-                } else {
-                    new AsyncAllData(allData.family.get(0)) {
-                        @Override
-                        protected void onPostExecute(Data data) {
-                            super.onPostExecute(data);
-                            allData = getReply();
-                            saveData(MainActivity.this.getApplicationContext());
-                        }
-                    }.execute();
-                    callIntent = new Intent(MainActivity.this, LoginActivity
-                            .class);
+                    callIntent = new Intent(MainActivity.this, DebugActivity.class);
                     startActivity(callIntent);
-                }
             }
-        });*/
+        });
             client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         /*new AsyncTask<String, String, String>(){
             @Override

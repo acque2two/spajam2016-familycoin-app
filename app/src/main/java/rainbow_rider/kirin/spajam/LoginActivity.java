@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent callIntent = new Intent(LoginActivity.this, TopActivity.class );
                     startActivity(callIntent);
                 }
-            };
+            }.execute();
         }else{
             //情報なし
         }
@@ -150,9 +150,9 @@ public class LoginActivity extends AppCompatActivity {
                             Intent callIntent = new Intent(LoginActivity.this, TopActivity.class);
                             startActivity(callIntent);
                         }
-                    };
+                    }.execute();
                 }
-            };
+            }.execute();
 
             /*
             Intent intent_res = new Intent();
@@ -170,7 +170,11 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
         boolean ans;
-        ans = allData.getFamily() != null;
+        if (sp.getString("DATA_JSON", "{}") == "{}"){
+            ans = false;
+        } else {
+            ans = true;
+        }
         return ans;
     }
 

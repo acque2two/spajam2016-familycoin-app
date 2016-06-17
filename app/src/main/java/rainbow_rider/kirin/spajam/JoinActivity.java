@@ -54,12 +54,14 @@ public class JoinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
-
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         final EditText nameText = (EditText) findViewById(R.id.join_name_text);
         final EditText fIdText = (EditText) findViewById(R.id.join_family_text);
 
-        final ArrayList<EditText> editTextArrayList = new ArrayList<EditText>();
+        final ArrayList<EditText> editTextArrayList = new ArrayList<>();
         editTextArrayList.add(nameText);
         editTextArrayList.add(fIdText);
 
@@ -67,7 +69,7 @@ public class JoinActivity extends AppCompatActivity {
         final RadioGroup adultGroup = (RadioGroup) findViewById(R.id.join_adult_group);
         final RadioGroup adminGroup = (RadioGroup) findViewById(R.id.join_admin_group);
 
-        final ArrayList<RadioGroup> radioGroupArrayList = new ArrayList<RadioGroup>();
+        final ArrayList<RadioGroup> radioGroupArrayList = new ArrayList<>();
         radioGroupArrayList.add(sexGroup);
         radioGroupArrayList.add(adultGroup);
         radioGroupArrayList.add(adminGroup);
@@ -134,11 +136,15 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
+
         Button createButton = (Button) findViewById(R.id.join_create_button);
         assert createButton != null;
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                assert nameText != null;
+                assert fIdText != null;
+
                 g_Name = nameText.getText().toString();
                 g_uId = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
                 g_fId = fIdText.getText().toString();
@@ -147,17 +153,19 @@ public class JoinActivity extends AppCompatActivity {
 
                 for (int i = 0; i < editTextArrayList.size(); i++) {
                     if (check[i]) {
-                        editTextArrayList.get(i).setBackgroundColor(red);
-                    } else {
                         editTextArrayList.get(i).setBackgroundColor(white);
+                    } else {
+                        editTextArrayList.get(i).setBackgroundColor(red);
                     }
                 }
 
                 for (int i = 0; i < radioGroupArrayList.size(); i++) {
                     if (check[i + 2]) {
-                        radioGroupArrayList.get(i).setBackgroundColor(red);
-                    } else {
                         radioGroupArrayList.get(i).setBackgroundColor(white);
+
+                    } else {
+                        radioGroupArrayList.get(i).setBackgroundColor(red);
+
                     }
                 }
                 if (check[check.length - 1]) {
@@ -203,16 +211,13 @@ public class JoinActivity extends AppCompatActivity {
                                         Intent callIntent = new Intent(JoinActivity.this, TopActivity.class);
                                         startActivity(callIntent);
                                     }
-                                };
+                                }.execute();
                             }
                         }
-                    };
+                    }.execute();
                 }
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private boolean saveData(Context context) {
@@ -230,21 +235,21 @@ public class JoinActivity extends AppCompatActivity {
             ans[0] = true;
         }
         if (!g_fId.equals("")) {
-            ans[2] = true;
+            ans[1] = true;
         }
         if (g_sex >= 0) {
-            ans[3] = true;
+            ans[2] = true;
         }
         if (g_adult >= 0) {
-            ans[4] = true;
+            ans[3] = true;
         }
         if (g_admin >= 0) {
-            ans[5] = true;
+            ans[4] = true;
         }
 
         int ok = 0;
         for (int i = 0; i < ans.length - 1; i++) {
-            if (!ans[0]) {
+            if (ans[0]) {
                 ok += 1;
             }
         }
