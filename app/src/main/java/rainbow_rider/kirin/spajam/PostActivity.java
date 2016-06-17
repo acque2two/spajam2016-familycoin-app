@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -135,7 +136,6 @@ public class PostActivity extends AppCompatActivity {
                     alert02.show();
                 }
 
-
                 try {
                     work.setW_name(title.getText().toString());
                 } catch (Exception e){
@@ -245,12 +245,15 @@ public class PostActivity extends AppCompatActivity {
 
     private boolean loadData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
-
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
-
-        return true;
-
+        boolean ans;
+        if (sp.getString("DATA_JSON", "{}") == "{}"){
+            ans = false;
+        } else {
+            ans = true;
+        }
+        return ans;
     }
 
     private boolean saveData(Context context) {
