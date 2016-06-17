@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class NFC implements Serializable{
     public String fixedNum;
+    public String name;
     public boolean sex;
     public boolean adult;
     public boolean manager;

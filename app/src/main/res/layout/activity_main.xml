@@ -55,6 +55,11 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textColor="#FFCC80"
-        android:textSize="30dp" />
+        android:textSize="30sp"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="1.5"
+        />
 
 </RelativeLayout>

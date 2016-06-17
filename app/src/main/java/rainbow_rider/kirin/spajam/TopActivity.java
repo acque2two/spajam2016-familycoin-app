@@ -14,6 +14,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -30,7 +32,7 @@ public class TopActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, TopFragment.OnTopFragmentListener {
     NavigationView navigationView;
 
-    User user;
+    User user = new User();
     Data allData;
 
     @Override
@@ -50,7 +52,15 @@ public class TopActivity extends AppCompatActivity
 //            }
 //        });
 
-        user = allData.family.get(0).users.get(0);
+        //user = allData.family.get(0).users.get(0);
+        user.setF_id("niji");
+        user.setAdmin(true);
+        user.setAdult(true);
+        user.setScore( 300 );
+        user.setSex(true);
+        user.setU_id("三郎");
+        user.setU_id("saburou");
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         if (user.getAdmin() == false) {
@@ -250,6 +260,34 @@ public class TopActivity extends AppCompatActivity
         Intent callIntent = new Intent(TopActivity.this, DetailActivity.class);
         callIntent.putExtra("w_id", wId);
         startActivity(callIntent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        //menu.add( 1, 0, Menu.NONE, "設定" );
+
+        //menu.findItem(R.id.menu_move_to_add_friend_button);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate( R.menu.menu_detail, menu );
+        MenuItem a = menu.findItem( R.id.menu_detail_favourite_button );
+        a.setTitle( "★" );
+
+        a.setCheckable( true );
+        a.setOnMenuItemClickListener( new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick( MenuItem item ) {
+                //    Intent callIntent = new Intent( DetailActivity.this, AddFriendActivity.class );
+                //    startActivity( callIntent );
+                Toast.makeText(TopActivity.this,"okini",Toast.LENGTH_SHORT).show();
+
+                //お気に入り処理
+
+                return false;
+            }
+        } );
+
+        return super.onCreateOptionsMenu( menu );
+
     }
 
 }
