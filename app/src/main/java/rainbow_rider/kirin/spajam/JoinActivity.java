@@ -133,7 +133,6 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-
         Button createButton = (Button) findViewById(R.id.join_create_button);
         assert createButton != null;
         createButton.setOnClickListener(new View.OnClickListener() {
