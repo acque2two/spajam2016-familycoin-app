@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
-import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.transfer.async.Sender;
 
 /**
@@ -30,17 +29,4 @@ public class AsyncUserAdd extends Sender {
         allData.setFamily( familyArrayList );
         super.setPath( "/useradd" );
     }
-    public AsyncUserAdd( User user ) {
-        ArrayList<User> userArrayList = new ArrayList<>();
-        userArrayList.add( user );
-
-        Family family = new Family();
-        family.setUser( userArrayList );
-        ArrayList<Family> familyArrayList = new ArrayList<>();
-        familyArrayList.add( family );
-        allData = new Data();
-        allData.setFamily( familyArrayList );
-        super.setPath( "/useradd" );
-    }
-
 }
