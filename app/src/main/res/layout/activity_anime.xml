@@ -34,57 +34,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/ani_bottom"
-                android:layout_gravity="center_horizontal|bottom"
-                android:background="#1E88E5" />
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:id="@+id/ani_left"
-                android:layout_gravity="left|center_vertical"
-                android:background="#00ACC1" />
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:id="@+id/ani_right"
-                android:layout_gravity="right|center_vertical"
-                android:background="#00ACC1" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/ani_top"
-                android:layout_gravity="center_horizontal|top"
-                android:background="#00897B" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
+            <TextureView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:id="@+id/textureView"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Width"
-                    android:id="@+id/ani_width"
-                    android:layout_gravity="center"
-                    android:background="#ffffff" />
+            <TextureView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textureView2"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Heigh"
-                    android:id="@+id/ani_height"
-                    android:layout_gravity="center"
-                    android:background="#ffffff" />
-            </LinearLayout>
+            <TextureView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textureView4"/>
 
+            <TextureView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textureView3"/>
+
+            <TextureView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textureView5"/>
         </FrameLayout>
     </LinearLayout>
 

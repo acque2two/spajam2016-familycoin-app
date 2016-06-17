@@ -2,6 +2,7 @@ package rainbow_rider.kirin.spajam;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,15 +10,13 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +25,6 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 
 public class AnimeActivity extends AppCompatActivity {
     private boolean TEXT_VISIBILITY = true;
@@ -73,9 +71,9 @@ public class AnimeActivity extends AppCompatActivity {
         w.setText("width: " + real.x);
         h.setText("height: " + real.y);
 
-        //TestView testView = new TestView(this);
-        //setContentView(testView);
-
+        TestView testView = new TestView(this);
+        setContentView(testView);
+/*
         mTextView = (TextView) findViewById(R.id.text_view);
         Button button = (Button) findViewById(R.id.button);
 
@@ -127,7 +125,7 @@ public class AnimeActivity extends AppCompatActivity {
                 }
             }
 
-        });
+        });*/
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -214,63 +212,34 @@ public class AnimeActivity extends AppCompatActivity {
 
         @Override
         protected void onDraw(Canvas canvas) {
+            float diff = 5f;
             // 背景
             canvas.drawColor(Color.rgb(1,87,155));
-
-            int[] w = new int[4];
-            int[] h = new int[4];
-
-            // Canvas 中心点
-            xc = canvas.getWidth() / 2;
-            yc = canvas.getHeight() / 2;
-
-            /*
-            // 円
-            paint.setColor(Color.argb(255, 125, 125, 255));
-            paint.setStrokeWidth(50);
-            paint.setAntiAlias(true);
-            paint.setStyle(Paint.Style.STROKE);
-            // (x1,y1,r,paint) 中心x1座標, 中心y1座標, r半径
-            canvas.drawCircle(xc - 50, yc - 200, xc / 2, paint);
-
-            // 矩形
-            paint.setColor(Color.argb(255, 255, 0, 255));
-            paint.setStyle(Paint.Style.STROKE);
-            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
-            canvas.drawRect(xc - 100, yc - 200, xc + 400, yc + 200, paint);
-
-            // 線
-            paint.setStrokeWidth(10);
-            paint.setColor(Color.argb(255, 0, 255, 0));
-            // (x1,y1,x2,y2,paint) 始点の座標(x1,y1), 終点の座標(x2,y2)
-            canvas.drawLine(xc + 100, yc - 150, xc - 250, yc + 250, paint);
-*/
-
-
-            paint.setColor(Color.rgb(69,90,100));//BottomS
-            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
-            canvas.drawRect(0, (height * (7f / 10f)) - 20, width, height, paint);
+            Paint paintshadow = new Paint();
+            paintshadow.setStyle(Paint.Style.FILL);
+            paintshadow.setColor(Color.argb(112, 0, 0, 0));
+            BlurMaskFilter blur = new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL);
+            paintshadow.setMaskFilter(blur);
 
             paint.setColor(Color.rgb(21,101,192)); //Bottom
+            paint.setShadowLayer(1f, 0.2f, 0.2f, Color.BLACK);
             // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
+            canvas.drawRect(0-diff, (height * (7f / 10f))-diff, width+diff, height+diff,
+                    paintshadow);
             canvas.drawRect(0, (height * (7f / 10f)), width, height, paint);
 
-            paint.setColor(Color.rgb(55,71,79)); //LeftS
-            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
-            canvas.drawRect(0, 0, (width * (1f / 6f)) + 20, height, paint);
 
             paint.setColor(Color.rgb(25,118,210)); //Left
             // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
+            canvas.drawRect(0-diff, 0-diff, (width * (1f / 6f))+diff, height+diff, paintshadow);
             canvas.drawRect(0, 0, (width * (1f / 6f)), height, paint);
-
-            paint.setColor(Color.rgb(55,71,79)); //RightS
-            // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
-            canvas.drawRect((width * (5f / 6f)) - 20, 0, width, height, paint);
-
 
             paint.setColor(Color.rgb(25,118,210)); //Right
             // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
+            canvas.drawRect((width * (5f / 6f))-diff, 0-diff, width+diff, height+diff,
+                    paintshadow);
             canvas.drawRect((width * (5f / 6f)), 0, width, height, paint);
+
 
             // 三角形を書く
             paint.setStrokeWidth(10); //Left
@@ -282,6 +251,14 @@ public class AnimeActivity extends AppCompatActivity {
             path4.lineTo(0, 0); // 下左のてん  1/4 w: 下右のてん
             path4.lineTo(0, (height / 2)); // 左上のてん max w: 左下のてん 1/4
 
+            Path path4shadow = new Path();
+            path4shadow.moveTo((width - (width / 12))-diff, 0-diff);
+
+            path4shadow.lineTo(width / 12 + diff, 0); // 右上のてん max w : 右下のてん
+            path4shadow.lineTo(0, 0); // 下左のてん  1/4 w: 下右のてん
+            path4shadow.lineTo(0, (height / 2)+diff); // 左上のてん max w: 左下のてん 1/4
+
+            canvas.drawPath(path4shadow, paintshadow);
             canvas.drawPath(path4, paint);
 
             // 三角形を書く
@@ -294,29 +271,16 @@ public class AnimeActivity extends AppCompatActivity {
             path5.lineTo((width / 12), 0); // 下左のてん  1/4 w: 下右のてん
             path5.lineTo(width, (height / 2)); // 左上のてん max w: 左下のてん 1/4
 
+            Path path5shadow = new Path();
+            path5shadow.moveTo(width+diff, 0-diff);
+
+            path5shadow.lineTo(width+diff, 0-diff); // 右上のてん max w : 右下のてん
+            path5shadow.lineTo((width / 12)-diff, 0-diff); // 下左のてん  1/4 w: 下右のてん
+            path5shadow.lineTo(width-diff, (height / 2)-diff); // 左上のてん max w: 左下のてん 1/4
+
+            canvas.drawPath(path5shadow, paintshadow);
             canvas.drawPath(path5, paint);
 
-
-
-
-
-            /*
-            path.moveTo(600, 1000);
-
-            path.lineTo(1000, 1400);
-            path.lineTo(240, 1400);
-            path.lineTo(600, 1000);
-             */
-/*
-
-            // 円
-            paint.setColor(Color.YELLOW);
-            paint.setStrokeWidth(20);
-            paint.setAntiAlias(true);
-            paint.setStyle(Paint.Style.STROKE);
-            // (x,y,r,paint) x座標, y座標, r半径
-            canvas.drawCircle(650, 440, 80, paint);
-*/
         }
     }
 }
