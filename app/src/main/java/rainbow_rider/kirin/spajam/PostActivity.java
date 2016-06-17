@@ -1,6 +1,5 @@
 package rainbow_rider.kirin.spajam;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -114,27 +113,92 @@ public class PostActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Work work = new Work();
+
+                final Integer intPoint = Integer.valueOf(pointText.getText().toString());
+
+                Genre genre = new Genre();
+                genre.setG_id(genre_spinner.getSelectedItemPosition());
+
+                work.setU_id(allData.getFamily().get(0).getUser().get(0).getU_id());
+
+                //allDataない時用
+                // work.setU_id("test_user");
+
                 try {
-                    final Integer intTitle = Integer.valueOf(pointText.getText().toString());
-
-                    Genre genre = new Genre();
-                    genre.setG_id(genre_spinner.getSelectedItemPosition());
-
-                    Work work = new Work();
-
                     work.setW_text(mainText.getText().toString());
-                    work.setU_id(allData.getFamily().get(0).getUser().get(0).getU_id());
+                } catch (Exception e){
+                    AlertDialog.Builder alert02 = new AlertDialog.Builder(PostActivity.this);
+                    alert02.setTitle("エラー");
+                    alert02.setMessage("内容を入力してください");
+                    alert02.setPositiveButton("OK", null);
+                    alert02.show();
+                }
+
+                try {
                     work.setW_name(title.getText().toString());
-                    work.setPoint(intTitle);
+                } catch (Exception e){
+                    AlertDialog.Builder alert02 = new AlertDialog.Builder(PostActivity.this);
+                    alert02.setTitle("エラー");
+                    alert02.setMessage("タイトルを入力してください");
+                    alert02.setPositiveButton("OK", null);
+                    alert02.show();
+                }
+
+                try {
+                    work.setPoint(intPoint);
+                } catch (Exception e) {
+                    AlertDialog.Builder alert02 = new AlertDialog.Builder(PostActivity.this);
+                    alert02.setTitle("ポイントを入力してください。");
+                    alert02.setMessage("入力していない項目があります");
+                    alert02.setPositiveButton("OK", null);
+                    alert02.show();
+                }
+
+                try {
                     work.setGenre(genre);
+                } catch (Exception e) {
+                    AlertDialog.Builder alert02 = new AlertDialog.Builder(PostActivity.this);
+                    alert02.setTitle("エラー");
+                    alert02.setMessage("ジャンルを選択をしてください");
+                    alert02.setPositiveButton("OK", null);
+                    alert02.show();
+                }
 
+                try {
                     work.setImage(stringImage);
+                }catch (Exception e) {
+                    AlertDialog.Builder alert02 = new AlertDialog.Builder(PostActivity.this);
+                    alert02.setTitle("エラー");
+                    alert02.setMessage("画像を選択してください");
+                    alert02.setPositiveButton("OK", null);
+                    alert02.show();
+                }
 
-                    Family family = allData.getFamily().get(0);
-                    ArrayList<Work> works = new ArrayList<Work>();
-                    works.add(work);
-                    family.setWork(works);
+                Family family = allData.getFamily().get(0);
 
+                //allDataない時用 うまく動作してんのかしらん
+
+                /*Family family = new Family();
+                family.setF_id("niji");
+                family.setF_name("niji");
+                rainbow_rider.kirin.spajam.Data.User user = new rainbow_rider.kirin.spajam.Data.User();
+                user.setU_id("test");
+                user.setSex(true);
+                user.setAdult(true);
+                user.setF_id("niji");
+                user.setU_id("三郎");
+                user.setU_id("saburou");
+                user.setScore(100);
+                ArrayList<rainbow_rider.kirin.spajam.Data.User> users = new ArrayList<>();
+                users.add(user);
+                family.setUser(users);*/
+
+                ArrayList<Work> works = new ArrayList<Work>();
+                works.add(work);
+                family.setWork(works);
+
+                try{
                     new AsyncWorkAdd(family) {
                         @Override
                         protected void onPostExecute(Data data) {
@@ -143,11 +207,7 @@ public class PostActivity extends AppCompatActivity {
                         }
                     }.execute();
                 }catch (Exception e){
-                    AlertDialog.Builder alert02 = new AlertDialog.Builder(PostActivity.this);
-                    alert02.setTitle("エラー");
-                    alert02.setMessage("入力していない項目があります");
-                    alert02.setPositiveButton("OK", null);
-                    alert02.show();
+                    Toast.makeText( getApplicationContext(), "送信が完了しました。", Toast.LENGTH_LONG ).show();
                 }
             }
         });
@@ -184,7 +244,7 @@ public class PostActivity extends AppCompatActivity {
 
     private boolean loadData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
 
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
 
@@ -194,14 +254,23 @@ public class PostActivity extends AppCompatActivity {
 
     private boolean saveData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
         SharedPreferences.Editor spedit = sp.edit();
         spedit.putString("DATA_JSON", JSON.encode(allData));
         spedit.commit();
         return true;
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        new CreateDialog(PostActivity.this).alertButton("本当にもどるん？", "もどっちゃっていいん？", "戻る").show();
+
+        super.onBackPressed();
+    }
 }
+
 
 /*
     //アクションバーの設定

@@ -43,7 +43,8 @@
         android:text="Debug"
         android:id="@+id/main_start"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:translationZ="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"

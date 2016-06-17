@@ -6,10 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.R;
 
-public class ItemListAdapter extends GenericArrayAdapter<Work> {
+public class ItemListAdapter extends GenericArrayAdapter<ListItem> {
 
     ViewHolder mViewHolder;
 
@@ -19,7 +18,7 @@ public class ItemListAdapter extends GenericArrayAdapter<Work> {
 
     public View getView( int position, View convertView, ViewGroup parent ) {
 
-        Work listItem = getItem( position );
+        ListItem listItem = getItem( position );
 
         if ( convertView == null ) {
 
@@ -43,13 +42,11 @@ public class ItemListAdapter extends GenericArrayAdapter<Work> {
 
         //mViewHolder.food_icon.setBackground( listitem.getFoodIcon() );
 
-        mViewHolder.title.setText(listItem.getW_name());
+        mViewHolder.title.setText(listItem.getmTitle());
 
-        mViewHolder.point.setText(String.valueOf(listItem.getPoint()) + "ポイント");
+        mViewHolder.point.setText(String.valueOf(listItem.getmPoint()) + "ポイント");
 
-        listItem.getImage();
-
-        //mViewHolder.icon.setImageResource( listItem.getImage() );
+        mViewHolder.icon.setImageBitmap( listItem.getmIcon() );
 
         return convertView;
     }
