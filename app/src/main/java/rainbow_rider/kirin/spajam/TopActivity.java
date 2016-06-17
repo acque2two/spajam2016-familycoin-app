@@ -14,6 +14,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -258,6 +260,34 @@ public class TopActivity extends AppCompatActivity
         Intent callIntent = new Intent(TopActivity.this, DetailActivity.class);
         callIntent.putExtra("w_id", wId);
         startActivity(callIntent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        //menu.add( 1, 0, Menu.NONE, "設定" );
+
+        //menu.findItem(R.id.menu_move_to_add_friend_button);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate( R.menu.menu_detail, menu );
+        MenuItem a = menu.findItem( R.id.menu_detail_favourite_button );
+        a.setTitle( "★" );
+
+        a.setCheckable( true );
+        a.setOnMenuItemClickListener( new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick( MenuItem item ) {
+                //    Intent callIntent = new Intent( DetailActivity.this, AddFriendActivity.class );
+                //    startActivity( callIntent );
+                Toast.makeText(TopActivity.this,"okini",Toast.LENGTH_SHORT).show();
+
+                //お気に入り処理
+
+                return false;
+            }
+        } );
+
+        return super.onCreateOptionsMenu( menu );
+
     }
 
 }
