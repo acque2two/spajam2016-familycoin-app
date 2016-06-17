@@ -174,7 +174,6 @@ public class JoinActivity extends AppCompatActivity {
                     User user = new User();
                     user.setU_name(g_Name);
                     user.setU_id(g_uId);
-                    user.setF_id(g_fId);
                     user.setSex(g_sex == 1);
                     user.setAdult(g_adult == 1);
                     user.setAdmin(g_admin == 1);
@@ -183,6 +182,7 @@ public class JoinActivity extends AppCompatActivity {
                     users.add(user);
 
                     final Family family = new Family();
+                    family.setF_id(user.u_id);
                     family.setUsers(users);
 
                     final ArrayList<Family> families = new ArrayList<>();

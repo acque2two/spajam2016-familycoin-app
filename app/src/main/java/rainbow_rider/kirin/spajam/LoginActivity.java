@@ -62,7 +62,14 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setMessage("実行中");
         progressDialog.setCancelable(false);
-        if(F.Load().isStatus()){
+        boolean load;
+        try{
+            allData = F.Load();
+            load = allData.family.get(0).f_id != null;
+        }catch (NullPointerException e){
+            load = false;
+        }
+        if(load){
             //情報あり
             progressDialog.show();
             new AsyncUserFamilyGet(allData){
@@ -125,10 +132,11 @@ public class LoginActivity extends AppCompatActivity {
 
             Family family = new Family();
             User fUser = new User(); //親
-            fUser.u_id = fixedNum;fUser.u_id = fixedNum;
+            fUser.u_id = fixedNum;
             ArrayList<User> users= new ArrayList<>();
             users.add(fUser);
             family.users = users;
+            family.setF_id(fixedNum);
 
             //ServerからFamilyをGet
             //Get family from server
