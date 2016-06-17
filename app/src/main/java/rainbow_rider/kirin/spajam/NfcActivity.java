@@ -3,6 +3,7 @@ package rainbow_rider.kirin.spajam;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -19,7 +20,10 @@ import net.arnx.jsonic.JSON;
 
 import java.nio.charset.Charset;
 
+import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.NFC;
+import rainbow_rider.kirin.spajam.Data.User;
 
 public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback,
         NfcAdapter.OnNdefPushCompleteCallback {
@@ -91,7 +95,16 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
             String receiveBeam = new String(msg.getRecords()[0].getPayload());
             Log.d("NFC/ONRESUME/RECEIVE","received:" + receiveBeam);
             Toast.makeText(this.getApplicationContext(),"データをうけとりました",Toast.LENGTH_LONG).show();
+            loadData(getApplicationContext());
             NFC nfc = JSON.decode(receiveBeam, NFC.class);
+            if(allData.family.isEmpty())
+                allData.family.add(new Family());
+            if(allData.family.get(0).users.isEmpty())
+                allData.family.get(0).users.add(new User());
+            allData.family.get(0).users.get(0).adult = nfc.adult;
+            allData.family.get(0).users.get(0).admin = nfc.manager;
+            allData.family.get(0).users.get(0).sex = nfc.sex;
+            allData.family.get(0).f_id = nfc.fixedNum;
             Intent intent_res = new Intent();
             Bundle bundle = new Bundle();
             bundle.putSerializable("nfc",nfc);
@@ -107,4 +120,30 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
         //Beam送信完了時のハンドラー
         ndefPushHandler.obtainMessage(MESSAGE_SENT).sendToTarget();
     }
+
+
+    Data allData;
+
+    private boolean loadData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = this.getPreferences(Context.MODE_PRIVATE);
+
+        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
+
+        boolean ans;
+        ans = allData.getFamily() != null;
+
+        return ans;
+    }
+
+    private boolean saveData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor spedit = sp.edit();
+        spedit.putString("DATA_JSON", JSON.encode(allData));
+        spedit.commit();
+        return true;
+    }
+
+
 }

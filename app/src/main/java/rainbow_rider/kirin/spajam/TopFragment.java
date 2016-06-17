@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -212,7 +211,7 @@ public class TopFragment extends Fragment {
 
     private boolean loadData(Context context) {
         // アプリ標準の Preferences を取得する
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
 
         allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
 
