@@ -4,11 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.nfc.NdefMessage;
-import android.nfc.NfcAdapter;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
@@ -17,34 +13,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import net.arnx.jsonic.JSON;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-
-import rainbow_rider.kirin.spajam.Data.Data;
-import rainbow_rider.kirin.spajam.Data.User;
-
 public class MainActivity extends AppCompatActivity {
-
-    private User user = new User();
-    private Data allData = new Data();
-
-    private boolean VISIBILITY = true;
-
-    private Animation bottom_to_top;
-    private Animation top_to_bottom;
-    private Animation right_to_left;
-    private Animation left_to_right;
-    private Animation top_right;
-    private Animation top_left;
 
     ImageView bottom;
     ImageView left;
@@ -60,13 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadData(getApplicationContext());
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
-            startActivityForResult(new Intent(this, NfcActivity.class).putExtra("nfc",
-                    (Serializable) JSON.decode(new String(((NdefMessage) getIntent()
-                            .getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)[0])
-                            .getRecords()[0].getPayload()))), 30);
-        }
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -83,20 +52,12 @@ public class MainActivity extends AppCompatActivity {
         topRight = (ImageView) findViewById(R.id.main_topRight);
 
 
-        bottom_to_top = AnimationUtils.loadAnimation(this, R.anim.bottom_to_top);
-        top_to_bottom = AnimationUtils.loadAnimation(this, R.anim.top_to_bottom);
-        right_to_left = AnimationUtils.loadAnimation(this, R.anim.right_to_left);
-        left_to_right = AnimationUtils.loadAnimation(this, R.anim.left_to_right);
-        top_left = AnimationUtils.loadAnimation(this, R.anim.top_left);
-        top_right = AnimationUtils.loadAnimation(this, R.anim.top_right);
+        Animation bottom_to_top = AnimationUtils.loadAnimation(this, R.anim.bottom_to_top);
+        Animation right_to_left = AnimationUtils.loadAnimation(this, R.anim.right_to_left);
+        Animation left_to_right = AnimationUtils.loadAnimation(this, R.anim.left_to_right);
+        Animation top_left = AnimationUtils.loadAnimation(this, R.anim.top_left);
+        Animation top_right = AnimationUtils.loadAnimation(this, R.anim.top_right);
 
-        final ArrayList<ImageView> images = new ArrayList<ImageView>() {{
-            add(bottom);
-            add(left);
-            add(right);
-            add(topLeft);
-            add(topRight);
-        }};
         bottom.setAnimation(bottom_to_top);
         bottom.setVisibility(View.VISIBLE);
 
@@ -115,27 +76,18 @@ public class MainActivity extends AppCompatActivity {
         //Intent callIntent = new Intent(MainActivity.this, NfcActivity.class);
         //startActivity(callIntent);
 
-        final Button startButton = (Button) findViewById(R.id.main_start);
-        assert startButton != null;
-        startButton.setOnClickListener(new View.OnClickListener() {
+        top_right.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onClick(View view) {
+            public void onAnimationStart(Animation animation) {
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
                 try {
-                    dialog.setTitle("デバック画面に行きます");
-                    dialog.setMessage(((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId());
-                    dialog.setNeutralButton("No", null);
-                    dialog.setCancelable(false);
-                    dialog.setNegativeButton("GO", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent callIntent = new Intent(MainActivity.this, DebugActivity.class);
-                            startActivity(callIntent);
-                        }
-                    });
-                    dialog.show();
-
+                    ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+                    Intent callIntent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(callIntent);
                 } catch (Exception e) {
                     //AndroidRuntimeException
                     //SecurityException
@@ -151,9 +103,14 @@ public class MainActivity extends AppCompatActivity {
                     dialog2.setCancelable(false);
                     dialog2.show();
                 }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
 
             }
         });
+
 /*
         Button button = (Button) findViewById(R.id.button);
         assert button != null;
@@ -179,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });*/
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        new AsyncTask<String, String, String>(){
+            client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        /*new AsyncTask<String, String, String>(){
             @Override
             protected String doInBackground(String... params) {
                 try {
@@ -198,29 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }.execute();
-    }
-
-
-    private boolean loadData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = this.getPreferences(Context.MODE_PRIVATE);
-
-        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
-
-        boolean ans;
-        ans = allData.getFamily() != null;
-
-        return ans;
-    }
-
-    private boolean saveData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor spedit = sp.edit();
-        spedit.putString("DATA_JSON", JSON.encode(allData));
-        spedit.commit();
-        return true;
+        }.execute();*/
     }
 
     @Override

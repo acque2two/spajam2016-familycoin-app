@@ -1,18 +1,36 @@
 package rainbow_rider.kirin.spajam;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import net.arnx.jsonic.JSON;
+
 import java.util.ArrayList;
+
+import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.Family;
+import rainbow_rider.kirin.spajam.Data.User;
+import rainbow_rider.kirin.spajam.transfer.async.family.AsyncFamilyAdd;
+import rainbow_rider.kirin.spajam.transfer.async.family.AsyncFamilyExist;
 
 public class JoinActivity extends AppCompatActivity {
 
@@ -23,18 +41,26 @@ public class JoinActivity extends AppCompatActivity {
     int g_adult = -1;
     int g_admin = -1;
 
+    ProgressDialog progressDialog;
+
+    Data allData;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
+
         final EditText nameText = (EditText) findViewById(R.id.join_name_text);
-        final EditText uIdText = (EditText) findViewById(R.id.join_id_text);
         final EditText fIdText = (EditText) findViewById(R.id.join_family_text);
 
         final ArrayList<EditText> editTextArrayList = new ArrayList<EditText>();
         editTextArrayList.add(nameText);
-        editTextArrayList.add(uIdText);
         editTextArrayList.add(fIdText);
 
         final RadioGroup sexGroup = (RadioGroup) findViewById(R.id.join_sex_group);
@@ -69,6 +95,7 @@ public class JoinActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 RadioButton checkedButton = (RadioButton) findViewById(checkedId);
                 sexGroup.setBackgroundColor(white);
+                assert checkedButton != null;
                 if (checkedButton.getText().equals("おとこ")) {
                     g_sex = 1;
                 } else if (checkedButton.getText().equals("おんな")) {
@@ -83,6 +110,7 @@ public class JoinActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 RadioButton checkedButton = (RadioButton) findViewById(checkedId);
                 adultGroup.setBackgroundColor(white);
+                assert checkedButton != null;
                 if (checkedButton.getText().equals("おとな")) {
                     g_adult = 1;
                 } else if (checkedButton.getText().equals("こども")) {
@@ -97,6 +125,7 @@ public class JoinActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 RadioButton checkedButton = (RadioButton) findViewById(checkedId);
                 adminGroup.setBackgroundColor(white);
+                assert checkedButton != null;
                 if (checkedButton.getText().equals("はい")) {
                     g_admin = 1;
                 } else if (checkedButton.getText().equals("いいえ")) {
@@ -111,7 +140,7 @@ public class JoinActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 g_Name = nameText.getText().toString();
-                g_uId = uIdText.getText().toString();
+                g_uId = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
                 g_fId = fIdText.getText().toString();
 
                 boolean[] check = checkInput();
@@ -125,24 +154,80 @@ public class JoinActivity extends AppCompatActivity {
                 }
 
                 for (int i = 0; i < radioGroupArrayList.size(); i++) {
-                    if (check[i + 3]) {
+                    if (check[i + 2]) {
                         radioGroupArrayList.get(i).setBackgroundColor(red);
                     } else {
                         radioGroupArrayList.get(i).setBackgroundColor(white);
                     }
                 }
+                if (check[check.length - 1]) {
+                    progressDialog = new ProgressDialog(JoinActivity.this);
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.setMessage("実行中");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
 
+                    User user = new User();
+                    user.setU_name(g_Name);
+                    user.setU_id(g_uId);
+                    user.setF_id(g_fId);
+                    user.setSex(g_sex == 1);
+                    user.setAdult(g_adult == 1);
+                    user.setAdmin(g_admin == 1);
+
+                    ArrayList<User> users = new ArrayList<>();
+                    users.add(user);
+
+                    final Family family = new Family();
+                    family.setUsers(users);
+
+                    final ArrayList<Family> families = new ArrayList<>();
+                    families.add(family);
+
+                    new AsyncFamilyExist(family){
+                        @Override
+                        protected void onPostExecute(Data data) {
+                            super.onPostExecute(data);
+                            getReply();
+                            if(getReply().isStatus()){
+                                new CreateDialog(JoinActivity.this).alertButton("すでに存在するIDです", "家族IDを変更してください", "OK");
+                                progressDialog.dismiss();
+                            }else{
+                                new AsyncFamilyAdd(family){
+                                    @Override
+                                    protected void onPostExecute(Data data) {
+                                        super.onPostExecute(data);
+                                        allData.setFamily(families);
+                                        saveData(getApplicationContext());
+                                        progressDialog.dismiss();
+                                        Intent callIntent = new Intent(JoinActivity.this, TopActivity.class);
+                                        startActivity(callIntent);
+                                    }
+                                };
+                            }
+                        }
+                    };
+                }
             }
         });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private boolean saveData(Context context) {
+        // アプリ標準の Preferences を取得する
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor spedit = sp.edit();
+        spedit.putString("DATA_JSON", JSON.encode(allData));
+        spedit.commit();
+        return true;
     }
 
     public boolean[] checkInput() {
         boolean[] ans = new boolean[6];
         if (!g_Name.equals("")) {
             ans[0] = true;
-        }
-        if (!g_uId.equals("")) {
-            ans[1] = true;
         }
         if (!g_fId.equals("")) {
             ans[2] = true;
@@ -156,7 +241,57 @@ public class JoinActivity extends AppCompatActivity {
         if (g_admin >= 0) {
             ans[5] = true;
         }
+
+        int ok = 0;
+        for (int i = 0; i < ans.length - 1; i++) {
+            if (!ans[0]) {
+                ok += 1;
+            }
+        }
+        if (ok >= ans.length - 1) {
+            ans[ans.length - 1] = true;
+        }
         return ans;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+            Action.TYPE_VIEW, // TODO: choose an action type.
+            "Join Page", // TODO: Define a title for the content shown.
+            // TODO: If you have web page content that matches this app activity's content,
+            // make sure this auto-generated web page URL is correct.
+            // Otherwise, set the URL to null.
+            Uri.parse("http://host/path"),
+            // TODO: Make sure this auto-generated app URL is correct.
+            Uri.parse("android-app://rainbow_rider.kirin.spajam/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+            Action.TYPE_VIEW, // TODO: choose an action type.
+            "Join Page", // TODO: Define a title for the content shown.
+            // TODO: If you have web page content that matches this app activity's content,
+            // make sure this auto-generated web page URL is correct.
+            // Otherwise, set the URL to null.
+            Uri.parse("http://host/path"),
+            // TODO: Make sure this auto-generated app URL is correct.
+            Uri.parse("android-app://rainbow_rider.kirin.spajam/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 }
 /*

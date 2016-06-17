@@ -2,16 +2,13 @@ package rainbow_rider.kirin.spajam;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.IntegerRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class DebugActivity extends AppCompatActivity {
 
@@ -147,13 +144,13 @@ public class DebugActivity extends AppCompatActivity {
             }
         });
 
-        receipt.setOnClickListener(new View.OnClickListener() {
+       /* receipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent callIntent = new Intent(DebugActivity.this, ReceiptActivity.class);
                 startActivity(callIntent);
             }
-        });
+        });*/
     }
 
     public ArrayList<Integer> colorList(){

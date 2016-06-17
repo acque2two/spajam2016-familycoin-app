@@ -1,6 +1,7 @@
 package rainbow_rider.kirin.spajam;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,12 +16,10 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import net.arnx.jsonic.JSON;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
@@ -33,11 +32,13 @@ import rainbow_rider.kirin.spajam.transfer.async.user.AsyncUserFamilyGet;
 public class LoginActivity extends AppCompatActivity {
 
     private Data allData;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_receipt);
+        setContentView(R.layout.activity_login);
+
         try {
             ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
         }catch (Exception e){
@@ -49,38 +50,46 @@ public class LoginActivity extends AppCompatActivity {
             dialog2.setNegativeButton("は？", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    //MainActivity.this.finish();
+                    LoginActivity.this.finish();
                 }
             });
 
             dialog2.setCancelable(false);
             dialog2.show();
         }
+
         //ログイン判定
+        progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("実行中");
+        progressDialog.setCancelable(false);
         if(loadData(getApplicationContext())){
             //情報あり
+            progressDialog.show();
             new AsyncUserFamilyGet(allData){
                 @Override
                 protected void onPostExecute(Data data) {
                     super.onPostExecute(data);
                     allData = getReply();
                     saveData(getApplicationContext());
+                    progressDialog.dismiss();
                     Intent callIntent = new Intent(LoginActivity.this, TopActivity.class );
                     startActivity(callIntent);
                 }
             };
         }else{
             //情報なし
-            Button button = (Button) findViewById(R.id.login_join_button);
-            assert button != null;
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent callIntent = new Intent(LoginActivity.this, JoinActivity.class);
-                    startActivity(callIntent);
-                }
-            });
         }
+
+        Button button = (Button) findViewById(R.id.login_join_button);
+        assert button != null;
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent callIntent = new Intent(LoginActivity.this, JoinActivity.class);
+                startActivity(callIntent);
+            }
+        });
     }
 
     //NFC受け取り
@@ -89,7 +98,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onResume();
 
         //Beamのアクションを受け取ったとき
+        progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("実行中");
+        progressDialog.setCancelable(false);
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+            progressDialog.show();
             Intent intent = getIntent();
             Parcelable[] rawMsgs = intent.getParcelableArrayExtra(
                     NfcAdapter.EXTRA_NDEF_MESSAGES);
@@ -111,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Family family = new Family();
             User fUser = new User(); //親
-            fUser.u_id = fixedNum;
+            fUser.u_id = fixedNum;fUser.u_id = fixedNum;
             ArrayList<User> users= new ArrayList<>();
             users.add(fUser);
             family.users = users;
@@ -131,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         protected void onPostExecute(Data data) {
                             super.onPostExecute(data);
+                            progressDialog.dismiss();
                             Intent callIntent = new Intent(LoginActivity.this, TopActivity.class);
                             startActivity(callIntent);
                         }
@@ -165,8 +180,8 @@ public class LoginActivity extends AppCompatActivity {
         spedit.putString("DATA_JSON", JSON.encode(allData));
         spedit.commit();
         return true;
-
     }
+
     @Override
     public void onBackPressed() {
         //戻るボタンの禁止
