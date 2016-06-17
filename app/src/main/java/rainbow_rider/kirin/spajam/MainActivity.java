@@ -148,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
                             //MainActivity.this.finish();
                         }
                     });
-
                     dialog2.setCancelable(false);
                     dialog2.show();
                 }
