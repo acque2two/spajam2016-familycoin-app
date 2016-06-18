@@ -49,14 +49,14 @@ public class TopActivity extends AppCompatActivity
 //            }
 //        });
 
-        //user = allData.family.get(0).users.get(0);
-        user.setF_id("niji");
+        user = allData.family.get(0).users.get(0);
+        /*user.setF_id("niji");
         user.setAdmin(true);
         user.setAdult(true);
         user.setScore( 300 );
         user.setSex(true);
         user.setU_id("三郎");
-        user.setU_id("saburou");
+        user.setU_id("saburou");*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
