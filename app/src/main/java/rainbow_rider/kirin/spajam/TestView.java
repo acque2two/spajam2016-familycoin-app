@@ -12,13 +12,8 @@ import android.view.SurfaceView;
 import java.util.EnumMap;
 
 
-
 public class TestView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
-
-    enum pos {
-        TOPLEFT, TOPRIGHT, LEFT, RIGHT, BOTTOM
-    }
 
     private static final long FPS = 30;
     private static final long FRAME_TIME = 1000 / FPS;
@@ -27,7 +22,6 @@ public class TestView extends SurfaceView implements SurfaceHolder.Callback, Run
     private int width = -1;
     private SurfaceHolder surfaceHolder;
     private Thread thread;
-
     private Context context;
 
     public TestView(Context context) {
@@ -107,7 +101,6 @@ public class TestView extends SurfaceView implements SurfaceHolder.Callback, Run
         drawMap.put(pos.TOPRIGHT, new MyDraw(this.getContext(), paint, path));
 
 
-
 // アニメーションの時間(3秒)を設定する
 /*        anim = ValueAnimator.ofFloat(0f, 1000f);
         anim.setDuration(10000);
@@ -171,6 +164,10 @@ public class TestView extends SurfaceView implements SurfaceHolder.Callback, Run
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         thread = null;
+    }
+
+    enum pos {
+        TOPLEFT, TOPRIGHT, LEFT, RIGHT, BOTTOM
     }
 /*
     @Override

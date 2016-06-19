@@ -12,8 +12,10 @@ public class MyDraw {
     public Path path = new Path();
     public Paint paint = new Paint();
     public float[] defaultfloat = {0, 0, 0, 0};
+    public float movex = 0f;
+    public float movey = 0f;
 
-    public MyDraw(Context context,Paint paint, Path path) {
+    public MyDraw(Context context, Paint paint, Path path) {
         this.paint = paint;
         setDefaultpath(path);
         paintshadow.setShadowLayer(15f, 0f, 0f, Color.BLACK);
@@ -27,21 +29,19 @@ public class MyDraw {
         path.set(defaultpath);
     }
 
-    public float movex = 0f;
-    public float movey = 0f;
-
     public void Move(float diffx, float diffy) {
         path.offset(diffx, diffy);
         movex += diffx;
         movey += diffy;
     }
 
-    public void MoveDef(float diffx, float diffy){
+    public void MoveDef(float diffx, float diffy) {
         path.set(defaultpath);
         path.offset(diffx, diffy);
         movex = diffx;
         movey = diffy;
     }
+
     public void setDefaultpath(float fl[]) {
         defaultfloat[0] = fl[0];
         defaultfloat[1] = fl[1];
