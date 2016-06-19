@@ -66,9 +66,10 @@ public class F {
             fr.close();
             fis.close();
 
-            Log.d("F/Load/Result", bw.readLine());
+            Log.d("F/Load/Result", "True - Success");
             return out;
         } catch (Exception e) {
+            Log.e("F/Load/Result", "False - Failed!");
             e.printStackTrace();
             return null;
         }
