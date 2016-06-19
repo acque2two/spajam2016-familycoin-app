@@ -10,7 +10,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStreamReader;
+import java.io.FileReader;
 import java.io.OutputStreamWriter;
 
 /**
@@ -56,8 +56,8 @@ public class F {
         Data out;
         try {
             fis = new FileInputStream(file);
-            InputStreamReader osw = new InputStreamReader(fis, "UTF-8");
-            BufferedReader bw = new BufferedReader(osw);
+            FileReader fr = new FileReader(file);
+            BufferedReader bw = new BufferedReader(fr);
             out = JSON.decode(bw,Data.class);
 
             Log.d("F/Load/Result", bw.readLine());
