@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
-import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -14,7 +13,6 @@ public class AnimeActivity extends AppCompatActivity {
     private static int width;
     private static int height;
 
-    SurfaceView tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
