@@ -62,14 +62,16 @@ public class AnimeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anime);
 
         // ステータスバー、ナビゲーションバーを含めた実画素数を取得する
-        TextView w = (TextView) findViewById(R.id.ani_width);
-        TextView h = (TextView) findViewById(R.id.ani_height);
+//        TextView w = (TextView) findViewById(R.id.ani_width);
+//        TextView h = (TextView) findViewById(R.id.ani_height);
         Point real = getRealSize();
 
         width = real.x;
         height = real.y;
+/*
         w.setText("width: " + real.x);
-        h.setText("height: " + real.y);
+        h.setText("height: " + real.y);*/
+
 
         TestView testView = new TestView(this);
         setContentView(testView);
@@ -212,7 +214,9 @@ public class AnimeActivity extends AppCompatActivity {
 
         @Override
         protected void onDraw(Canvas canvas) {
-            float diff = 5f;
+            float diff = 0f;
+            Path path = new Path();
+            Path pathshadow = new Path();
             // 背景
             canvas.drawColor(Color.rgb(1,87,155));
             Paint paintshadow = new Paint();
@@ -220,36 +224,52 @@ public class AnimeActivity extends AppCompatActivity {
             paintshadow.setColor(Color.argb(112, 0, 0, 0));
             BlurMaskFilter blur = new BlurMaskFilter(8, BlurMaskFilter.Blur.NORMAL);
             paintshadow.setMaskFilter(blur);
+            paintshadow.setFlags(Paint.ANTI_ALIAS_FLAG);
+            paint.setFlags(Paint.ANTI_ALIAS_FLAG);
 
+            paintshadow.setShadowLayer(20f,0f, 0f, Color.BLACK);
             paint.setColor(Color.rgb(21,101,192)); //Bottom
-            paint.setShadowLayer(1f, 0.2f, 0.2f, Color.BLACK);
             // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
-            canvas.drawRect(0-diff, (height * (7f / 10f))-diff, width+diff, height+diff,
-                    paintshadow);
-            canvas.drawRect(0, (height * (7f / 10f)), width, height, paint);
+            //canvas.drawRect(0-diff, (height * (7f / 10f))-diff, width+diff, height+diff,
+            //        paintshadow);
+            path.moveTo(0,(height * (7f / 10f)) );
+            path.lineTo(width,(height * (7f / 10f)));
+            path.lineTo(width,height);
+            path.lineTo(0,height);
+            canvas.drawPath(path, paintshadow);
+            canvas.drawPath(path, paint);
 
 
             paint.setColor(Color.rgb(25,118,210)); //Left
             // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
-            canvas.drawRect(0-diff, 0-diff, (width * (1f / 6f))+diff, height+diff, paintshadow);
-            canvas.drawRect(0, 0, (width * (1f / 6f)), height, paint);
+            path = new Path();
+            path.moveTo(0,0);
+            path.lineTo((width * (1f / 6f)),0);
+            path.lineTo((width * (1f / 6f)),height);
+            path.lineTo(0,height);
+            path.moveTo((width * (1f / 6f))+20f,height);
+
+
+            canvas.drawPath(path,paintshadow);
+            canvas.drawPath(path,paint);
+
 
             paint.setColor(Color.rgb(25,118,210)); //Right
             // (x1,y1,x2,y2,paint) 左上の座標(x1,y1), 右下の座標(x2,y2)
-            canvas.drawRect((width * (5f / 6f))-diff, 0-diff, width+diff, height+diff,
-                    paintshadow);
-            canvas.drawRect((width * (5f / 6f)), 0, width, height, paint);
+            path = new Path();
+            path.moveTo(width * (5f / 6f),0);
+            path.lineTo(width,0);
+            path.lineTo(width,height);
+            path.lineTo(width * (5f / 6f),height);
+            path.moveTo((width*(5f/6f)-20f),height);
 
+
+            canvas.drawPath(path,paintshadow);
+            canvas.drawPath(path,paint);
 
             // 三角形を書く
             paint.setStrokeWidth(10); //Left
             paint.setColor(Color.rgb(30,136,229));
-            Path path4 = new Path();
-            path4.moveTo((width - (width / 12)), 0);
-
-            path4.lineTo(width / 12, 0); // 右上のてん max w : 右下のてん
-            path4.lineTo(0, 0); // 下左のてん  1/4 w: 下右のてん
-            path4.lineTo(0, (height / 2)); // 左上のてん max w: 左下のてん 1/4
 
             Path path4shadow = new Path();
             path4shadow.moveTo((width - (width / 12))-diff, 0-diff);
@@ -257,6 +277,13 @@ public class AnimeActivity extends AppCompatActivity {
             path4shadow.lineTo(width / 12 + diff, 0); // 右上のてん max w : 右下のてん
             path4shadow.lineTo(0, 0); // 下左のてん  1/4 w: 下右のてん
             path4shadow.lineTo(0, (height / 2)+diff); // 左上のてん max w: 左下のてん 1/4
+
+            Path path4 = new Path();
+            path4.moveTo((width - (width / 12)), 0);
+
+            path4.lineTo(width / 12, 0); // 右上のてん max w : 右下のてん
+            path4.lineTo(0, 0); // 下左のてん  1/4 w: 下右のてん
+            path4.lineTo(0, (height / 2)); // 左上のてん max w: 左下のてん 1/4
 
             canvas.drawPath(path4shadow, paintshadow);
             canvas.drawPath(path4, paint);
