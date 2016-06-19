@@ -21,7 +21,6 @@ import net.arnx.jsonic.JSON;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.Family;
@@ -133,8 +132,6 @@ public class TopFragment extends Fragment {
         works.add(work);
         family.setWork(works);
 
-        final HashMap<String, String> hashTmp = new HashMap<String, String>();
-
         mAdapter = new ItemListAdapter(view.getContext(), R.layout.item_list_view);
 
         mListView = (AbsListView) view.findViewById(R.id.fragment_top_list_view);
@@ -146,7 +143,6 @@ public class TopFragment extends Fragment {
             protected void onPostExecute(Data data) {
                 super.onPostExecute(data);
                 Data reply = getReply();
-                ArrayList<HashMap<String, String>> list_data = new ArrayList<HashMap<String, String>>();
 
                 if (reply == null) {
                     Log.d("-------------", "NotComplete");
