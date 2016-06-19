@@ -37,6 +37,9 @@ public class F {
             bw.write(JSON.encode(allData));
             bw.flush();
             bw.close();
+            bw.close();
+            osw.close();
+            fos.close();
             Log.d("F/Save/Result", "True - Success");
 
             return true;
@@ -59,6 +62,9 @@ public class F {
             FileReader fr = new FileReader(file);
             BufferedReader bw = new BufferedReader(fr);
             out = JSON.decode(bw,Data.class);
+            bw.close();
+            fr.close();
+            fis.close();
 
             Log.d("F/Load/Result", bw.readLine());
             return out;
