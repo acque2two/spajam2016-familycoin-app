@@ -1,6 +1,5 @@
 package rainbow_rider.kirin.spajam;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,33 +11,24 @@ import android.view.SurfaceView;
 
 import java.util.EnumMap;
 
-/**
- * Created by acq on 6/19/16.
- */
 
-
-enum pos {
-    TOPLEFT, TOPRIGHT, LEFT, RIGHT, BOTTOM
-}
 
 public class TestView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
 
-    static final long FPS = 30;
-    static final long FRAME_TIME = 1000 / FPS;
-    static final int BALL_R = 30;
-    public EnumMap<pos, MyDraw> drawMap;
-    ValueAnimator anim;
-    Paint paint;
-    Canvas canvas;
-    int height = -1;
-    int width = -1;
-    SurfaceHolder surfaceHolder;
-    Thread thread;
-    int cx = BALL_R, cy = BALL_R;
-    int screen_width, screen_height;
+    enum pos {
+        TOPLEFT, TOPRIGHT, LEFT, RIGHT, BOTTOM
+    }
 
-    Context context;
+    private static final long FPS = 30;
+    private static final long FRAME_TIME = 1000 / FPS;
+    private EnumMap<pos, MyDraw> drawMap;
+    private int height = -1;
+    private int width = -1;
+    private SurfaceHolder surfaceHolder;
+    private Thread thread;
+
+    private Context context;
 
     public TestView(Context context) {
         super(context);
@@ -131,11 +121,11 @@ public class TestView extends SurfaceView implements SurfaceHolder.Callback, Run
 
     @Override
     public void run() {
-        Canvas canvas = null;
+        Canvas canvas;
         Paint bgPaint = new Paint();
         bgPaint.setARGB(0, 0, 0, 0);
         long loopCount = 0;
-        long waitTime = 0;
+        long waitTime;
         long startTime = System.currentTimeMillis();
         float animValue = 0f;
         while (thread != null) {
@@ -169,8 +159,6 @@ public class TestView extends SurfaceView implements SurfaceHolder.Callback, Run
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        screen_width = width;
-        screen_height = height;
     }
 
     @Override

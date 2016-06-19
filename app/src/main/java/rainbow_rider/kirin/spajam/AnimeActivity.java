@@ -10,8 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class AnimeActivity extends AppCompatActivity {
-    private static int width;
-    private static int height;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +22,6 @@ public class AnimeActivity extends AppCompatActivity {
 
         setContentView(new TestView(this));
         Point real = getRealSize();
-        width = real.x;
-        height = real.y;
 
     }
 
