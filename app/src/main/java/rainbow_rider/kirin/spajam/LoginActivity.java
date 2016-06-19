@@ -79,10 +79,11 @@ public class LoginActivity extends AppCompatActivity {
                     allData = getReply();
                     F.Save(allData);
                     progressDialog.dismiss();
-                    Intent callIntent = new Intent(LoginActivity.this, TopActivity.class );
-                    startActivity(callIntent);
                 }
-            }.execute();
+            };
+
+            Intent callIntent = new Intent(LoginActivity.this, TopActivity.class );
+            startActivity(callIntent);
         }else{
             //情報なし
         }
@@ -145,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                 protected void onPostExecute(Data data) {
                     super.onPostExecute(data);
                     Data myData = getReply();
-                    myData.getFamily().get(0).getUser().add(mUser);
+                    myData.getFamily().get(0).getUsers().add(mUser);
                     allData = myData;
                     F.Save(allData);
                     //Serverに自分を追加

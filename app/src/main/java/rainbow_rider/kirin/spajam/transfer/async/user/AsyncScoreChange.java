@@ -35,7 +35,7 @@ public class AsyncScoreChange extends Sender {
         userArrayList.add( user );
 
         Family family = new Family();
-        family.setUser( userArrayList );
+        family.setUsers( userArrayList );
         ArrayList<Family> familyArrayList = new ArrayList<>();
         familyArrayList.add( family );
         allData = new Data();

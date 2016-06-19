@@ -118,7 +118,7 @@ public class PostActivity extends AppCompatActivity {
                 Genre genre = new Genre();
                 genre.setG_id(genre_spinner.getSelectedItemPosition());
                 Log.d("JSON",JSON.encode(allData));
-                work.setU_id(allData.getFamily().get(0).getUser().get(0).getU_id());
+                work.setU_id(allData.getFamily().get(0).getUsers().get(0).getU_id());
 
                 //allDataない時用
                 // work.setU_id("test_user");
@@ -190,7 +190,7 @@ public class PostActivity extends AppCompatActivity {
                 user.setScore(100);
                 ArrayList<rainbow_rider.kirin.spajam.Data.User> users = new ArrayList<>();
                 users.add(user);
-                family.setUser(users);*/
+                family.setUsers(users);*/
 
                 ArrayList<Work> works = new ArrayList<Work>();
                 works.add(work);

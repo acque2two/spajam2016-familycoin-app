@@ -56,10 +56,10 @@ public class PDActivity extends AppCompatActivity {
         send_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0; i < allData.getFamily().get(0).getUser().size(); i++){
-                    if(my_id.equals(allData.getFamily().get(0).getUser().get(i))){
-                        allData.getFamily().get(0).getUser().get(i).setScore(
-                                allData.getFamily().get(0).getUser().get(i).getScore() - finalProduct.getP_point());
+                for(int i = 0; i < allData.getFamily().get(0).getUsers().size(); i++){
+                    if(my_id.equals(allData.getFamily().get(0).getUsers().get(i))){
+                        allData.getFamily().get(0).getUsers().get(i).setScore(
+                                allData.getFamily().get(0).getUsers().get(i).getScore() - finalProduct.getP_point());
                     }
                 }
                 new AsyncScoreChange(allData){

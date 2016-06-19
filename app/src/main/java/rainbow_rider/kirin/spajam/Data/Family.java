@@ -50,13 +50,6 @@ public class Family implements Serializable {
         this.f_name = f_name;
     }
 
-    public ArrayList<User> getUser( ) {
-        return users;
-    }
-
-    public void setUser( ArrayList<User> user ) {
-        this.users = user;
-    }
 
     public ArrayList<Work> getWork( ) {
         return work;

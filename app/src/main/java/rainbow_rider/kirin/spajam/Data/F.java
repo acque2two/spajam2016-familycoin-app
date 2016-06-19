@@ -69,6 +69,7 @@ public class F {
             Log.d("F/Load/Result", bw.readLine());
             return out;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

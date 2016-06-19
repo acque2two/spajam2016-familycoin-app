@@ -111,16 +111,18 @@ public class FamilyDataFragment extends Fragment {
         list_data = new ArrayList<HashMap<String, String>>();
 
 
-        Log.d("  allData  ", allData.getFamily().get(0).getUser().get(0).getU_name());
+        Log.d("  allData  ", allData.getFamily().get(0).getUsers().get(0).getU_name());
         new AsyncAllData( allData.family.get( 0 ) ) {
             @Override
             protected void onPostExecute( Data data ) {
                 super.onPostExecute( data );
                 Data reply = getReply();
-                for ( int i = 0; i < reply.getFamily().get( 0 ).getUser().size(); i++ ) {
-                    hashTmp.put( "u_name", reply.getFamily().get( 0 ).getUser().get( i ).getU_name() );
-                    hashTmp.put( "u_data", reply.getFamily().get( 0 ).getUser().get( i ).getScore().toString() + "ポイント");
-                    hashTmp.put( "sub", reply.getFamily().get( 0 ).getUser().get( i ).getU_id() );
+                for ( int i = 0; i < reply.getFamily().get( 0 ).getUsers().size(); i++ ) {
+                    hashTmp.put( "u_name", reply.getFamily().get( 0 ).getUsers().get( i )
+                            .getU_name() );
+                    hashTmp.put( "u_data", reply.getFamily().get( 0 ).getUsers().get( i )
+                            .getScore().toString() + "ポイント");
+                    hashTmp.put( "sub", reply.getFamily().get( 0 ).getUsers().get( i ).getU_id() );
                     list_data.add( new HashMap<String, String>( hashTmp ) );
                     hashTmp.clear();
 

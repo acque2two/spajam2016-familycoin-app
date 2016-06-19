@@ -63,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
             break;
         }
 */
-                for ( User u : allData.getFamily().get( 0 ).getUser() ) {
+                for ( User u : allData.getFamily().get( 0 ).getUsers() ) {
                     if ( my_id.equals( u.u_name ) ) {
                         user = u;
                         break;
