@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.F;
 import rainbow_rider.kirin.spajam.transfer.async.family.AsyncAllData;
 
 
@@ -107,7 +108,7 @@ public class FamilyDataFragment extends Fragment {
         hashTmp = new HashMap<String, String>();
         Toast.makeText(view.getContext(), "かぞくのじょうほう", Toast.LENGTH_SHORT).show();
 
-        loadData( FamilyDataFragment.this.getContext().getApplicationContext() );
+        allData = F.Load();
         list_data = new ArrayList<HashMap<String, String>>();
 
 
@@ -145,18 +146,6 @@ public class FamilyDataFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    private boolean loadData( Context context ) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
-
-        allData = JSON.decode( sp.getString( "DATA_JSON", "{}" ), Data.class );
-
-        boolean ans;
-        ans = allData.getFamily() != null;
-
-        return ans;
     }
 
     /**

@@ -209,15 +209,4 @@ public class TopFragment extends Fragment {
         void onTopFragmentItemClick(int wId);
     }
 
-    private boolean loadData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
-
-        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
-
-        boolean ans;
-        ans = allData.getFamily() != null;
-
-        return ans;
-    }
 }

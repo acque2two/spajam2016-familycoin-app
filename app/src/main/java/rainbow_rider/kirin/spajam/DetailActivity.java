@@ -1,8 +1,6 @@
 package rainbow_rider.kirin.spajam;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -12,9 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.arnx.jsonic.JSON;
-
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.F;
 import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.Data.Work;
@@ -40,7 +37,7 @@ public class DetailActivity extends AppCompatActivity {
 
         Family f = new Family();
         f.setF_id( "rainbow" );
-        loadData( DetailActivity.this.getApplicationContext() );
+        allData = F.Load();
 
         new AsyncAllData( f ) {
             @Override
@@ -103,19 +100,6 @@ public class DetailActivity extends AppCompatActivity {
                 } );
             }
         }.execute();
-    }
-
-    private boolean loadData( Context context ) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp = context.getSharedPreferences("allData",Context.MODE_PRIVATE);
-
-        allData = JSON.decode( sp.getString( "DATA_JSON", "{}" ), Data.class );
-
-        boolean ans;
-        ans = allData.getFamily() != null;
-        my_id = sp.getString( "my_id", "" );
-
-        return ans;
     }
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==KeyEvent.KEYCODE_BACK){
