@@ -30,7 +30,8 @@
                 android:text="問  題  文"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/item_list_view_icon"
-                android:ellipsize="end" />
+                android:ellipsize="end"
+                android:textColor="#dddddd"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -59,7 +60,8 @@
                         android:text="9999999999"
                         android:id="@+id/item_list_view_point"
                         android:textAlignment="center"
-                        android:gravity="center_vertical|center_horizontal" />
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="#dddddd"/>
 
                 </LinearLayout>
 
