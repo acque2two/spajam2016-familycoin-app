@@ -122,9 +122,11 @@ public class TopFragment extends Fragment {
 
         Genre genre = new Genre();
         genre.setG_id(genreId);
+        Log.d("TopFragment -- fid", genreId.toString());
 
         Family family = new Family();
         family.setF_id(mFId);
+        Log.d("TopFragment -- fid", mFId);
 
         Work work = new Work();
         work.setGenre(genre);
@@ -151,7 +153,6 @@ public class TopFragment extends Fragment {
                     ListItem listItem = new ListItem();
                     for (int i = 0 ; i < reply.getFamily().get(0).getWork().size(); i ++){
                         listItem.setmTitle(reply.getFamily().get(0).getWork().get(i).getW_name());
-                        //Log.d("getW_name" , reply.getFamily().get(0).getWork().get(i).getW_name());
                         listItem.setmPoint(reply.getFamily().get(0).getWork().get(i).getPoint());
                         String imageName = reply.getFamily().get(0).getWork().get(i).getImage();
                         try {
@@ -165,7 +166,8 @@ public class TopFragment extends Fragment {
                     }
 
                     Log.d(String.valueOf(reply.getFamily().get(0).getWork().size()) , " ------ replay get size ------ ");
-                    Log.d(reply.getFamily().get(0).getWork().get(0).getW_text(), " W text !!!------------");
+                    //Log.d("getW_name" , reply.getFamily().get(0).getWork().get(0).getW_name());
+                    //Log.d( "---- getW_text ----", reply.getFamily().get(0).getWork().get(0).getW_text());
 
                 }
 
