@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -98,6 +99,7 @@ public class TopActivity extends AppCompatActivity
         //text.setText(user.getU_name());
 
         String fId = allData.getFamily().get(0).getF_id();
+        Log.d("TopActivity -- fid", fId);
 
         getSupportFragmentManager()
             .beginTransaction()
@@ -220,6 +222,9 @@ public class TopActivity extends AppCompatActivity
                 .addToBackStack("かぞくのじょうほう")
                 .commit();
             toolbar.setTitle("家族の情報");
+        } else if (id == R.id.activity_top_drawer_go_to_nfc_activity) {
+            Intent callIntent = new Intent(TopActivity.this, NfcActivity.class);
+            startActivity(callIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_top_drawer_layout);
