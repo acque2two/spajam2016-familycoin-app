@@ -44,6 +44,11 @@
                 android:id="@+id/activity_top_drawer_family_data"
                 android:icon="@mipmap/drawer_family"
                 android:title="かぞく" />
+            <item
+                android:checkable="false"
+                android:id="@+id/activity_top_drawer_go_to_nfc_activity"
+                android:icon="@mipmap/drawer_family"
+                android:title="家族登録" />
         </menu>
     </item>
 
