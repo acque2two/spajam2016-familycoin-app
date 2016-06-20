@@ -21,7 +21,6 @@ import net.arnx.jsonic.JSON;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
 import rainbow_rider.kirin.spajam.Data.F;
@@ -192,9 +191,7 @@ public class PostActivity extends AppCompatActivity {
                 users.add(user);
                 family.setUsers(users);*/
 
-                ArrayList<Work> works = new ArrayList<Work>();
-                works.add(work);
-                family.setWork(works);
+                family.getWork().add(work);
 
                 try{
                     new AsyncWorkAdd(family) {

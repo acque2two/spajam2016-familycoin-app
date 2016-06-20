@@ -56,7 +56,7 @@ public class F {
 
         Log.v("F/Load/Path", filePath);
         FileInputStream fis;
-        Data out;
+        Data out = new Data();
         try {
             fis = new FileInputStream(file);
             FileReader fr = new FileReader(file);
@@ -72,6 +72,8 @@ public class F {
             Log.e("F/Load/Result", "False - Failed!");
             e.printStackTrace();
             return null;
+        } finally {
+            return out;
         }
     }
 }
