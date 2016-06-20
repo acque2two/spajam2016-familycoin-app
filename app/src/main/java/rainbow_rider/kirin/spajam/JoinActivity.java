@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -203,6 +204,7 @@ public class JoinActivity extends AppCompatActivity {
                                         super.onPostExecute(data);
                                         allData.setFamily(families);
                                         F.Save(allData);
+                                        Log.d("Add/Family", getReply().getFamily().get(0).getUsers().get(0).getU_name());
                                         progressDialog.dismiss();
                                         Intent callIntent = new Intent(JoinActivity.this, TopActivity.class);
                                         startActivity(callIntent);

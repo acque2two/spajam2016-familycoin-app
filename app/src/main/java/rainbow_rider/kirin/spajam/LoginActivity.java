@@ -138,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
             users.add(fUser);
             family.users = users;
             family.setF_id(fixedNum);
+            family.setF_name("ヤマダ");
 
             //ServerからFamilyをGet
             //Get family from server

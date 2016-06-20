@@ -64,8 +64,8 @@ public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessag
         //Beamで送りたいメッセージ
         NFC nfc = new NFC();
         nfc.name = "tarou";
-        nfc.adult = true;
-        nfc.manager = true;
+        nfc.adult = false;
+        nfc.manager = false;
         nfc.sex = true;
         nfc.fixedNum = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
                 .getDeviceId();
