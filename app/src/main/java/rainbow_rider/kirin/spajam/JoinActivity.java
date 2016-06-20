@@ -184,6 +184,7 @@ public class JoinActivity extends AppCompatActivity {
 
                     final Family family = new Family();
                     family.setF_id(user.u_id);
+                    family.setF_name(g_Name);
                     family.setUsers(users);
 
                     final ArrayList<Family> families = new ArrayList<>();
@@ -202,7 +203,7 @@ public class JoinActivity extends AppCompatActivity {
                                     @Override
                                     protected void onPostExecute(Data data) {
                                         super.onPostExecute(data);
-                                        allData.setFamily(families);
+                                        allData.family = families;
                                         F.Save(allData);
                                         Log.d("Add/Family", getReply().getFamily().get(0).getUsers().get(0).getU_name());
                                         progressDialog.dismiss();
