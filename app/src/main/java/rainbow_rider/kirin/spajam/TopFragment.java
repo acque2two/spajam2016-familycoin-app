@@ -1,7 +1,6 @@
 package rainbow_rider.kirin.spajam;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -15,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Toast;
-
-import net.arnx.jsonic.JSON;
 
 import java.io.IOException;
 import java.io.InputStream;
