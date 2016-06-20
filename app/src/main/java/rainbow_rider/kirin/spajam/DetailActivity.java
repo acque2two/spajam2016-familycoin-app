@@ -16,93 +16,74 @@ import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.Data.Work;
 import rainbow_rider.kirin.spajam.transfer.async.achievement.unapproved.AsyncUnapprovedAdd;
-import rainbow_rider.kirin.spajam.transfer.async.family.AsyncAllData;
 
 public class DetailActivity extends AppCompatActivity {
 
     public Data allData = new Data();
     public String my_id;
-    int w_id;
+    Work w;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState ) {
-        requestWindowFeature( Window.FEATURE_ACTION_BAR );
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_detail );
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_ACTION_BAR);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
 
 
         Intent intent = getIntent();
-        w_id = intent.getIntExtra( "w_id", -1 );
+        w = (Work) intent.getSerializableExtra("work");
         //TopActivityからQuestionを受け取る。
 
-        Family f = new Family();
-        f.setF_id( "rainbow" );
         allData = F.Load();
 
-        new AsyncAllData( f ) {
-            @Override
-            protected void onPostExecute( Data data ) {
-                super.onPostExecute( data );
-                final Data allData = getReply();
-                this.allData = allData;
-
-                Work work = new Work();
-                User user = new User();
-                Family f = new Family();
-                f.setF_id( "rainbow" );
-                work = allData.getFamily().get( 0 ).getWork().get( w_id );
-/*
-        for (Work w : allData.getFamily().get(0).getWork()) {
-            if (w.getW_id() == w_id) {
-                work = w;
-
+        Work work = new Work();
+        User user = new User();
+        Family f = new Family();
+        f.setF_id("rainbow");
+        work = w;
+        for (User u : allData.getFamily().get(0).getUsers()) {
+            if (my_id.equals(u.u_name)) {
+                user = u;
+                break;
             }
-            break;
         }
-*/
-                for ( User u : allData.getFamily().get( 0 ).getUsers() ) {
-                    if ( my_id.equals( u.u_name ) ) {
-                        user = u;
-                        break;
-                    }
-                }
 
-                final Button send_button = ( Button ) findViewById( R.id.detail_send_button );
-                ImageView imageView = ( ImageView ) findViewById( R.id.imageView );
+        final Button send_button = (Button) findViewById(R.id.detail_send_button);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
-                TextView title_text = ( TextView ) findViewById( R.id.detail_title_text );
-                TextView user_text = ( TextView ) findViewById( R.id.detail_user_text );
-                TextView main_text = ( TextView ) findViewById( R.id.detail_main_text );
+        TextView title_text = (TextView) findViewById(R.id.detail_title_text);
+        TextView user_text = (TextView) findViewById(R.id.detail_user_text);
+        TextView main_text = (TextView) findViewById(R.id.detail_main_text);
 
-                assert main_text != null;
-                assert title_text != null;
-                assert user_text != null;
+        assert main_text != null;
+        assert title_text != null;
+        assert user_text != null;
 
-                main_text.setText( work.getW_text() );
-                title_text.setText( work.getW_name() );
-                user_text.setText( user.getU_name() );
+        main_text.setText(w.getW_text());
+        title_text.setText(w.getW_name());
+        user_text.setText(allData.family.get(0).getUsers().get(0).u_name);
 
-                //image
-                final boolean[] send = new boolean[] { false };
-                //send button
-                assert send_button != null;
-                send_button.setOnClickListener( new View.OnClickListener() {
+        //image
+        final boolean[] send = new boolean[]{false};
+        //send button
+        assert send_button != null;
+        send_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AsyncUnapprovedAdd(allData) {
                     @Override
-                    public void onClick( View v ) {
-                        new AsyncUnapprovedAdd( allData ) {
-                            @Override
-                            protected void onPostExecute( Data data ) {
-                                super.onPostExecute( data );
-                                finish();
-                            }
-                        }.execute();
+                    protected void onPostExecute(Data data) {
+                        super.onPostExecute(data);
+                        finish();
                     }
-                } );
+                }.execute();
             }
-        }.execute();
+        });
     }
-    @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==KeyEvent.KEYCODE_BACK){
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();
             return true;
         }
