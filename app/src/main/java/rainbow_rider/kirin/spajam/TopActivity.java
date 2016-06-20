@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import rainbow_rider.kirin.spajam.Data.Data;
@@ -29,7 +28,6 @@ public class TopActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener, TopFragment.OnTopFragmentListener {
     NavigationView navigationView;
 
-    User user = new User();
     Data allData;
 
     @Override
@@ -49,7 +47,8 @@ public class TopActivity extends AppCompatActivity
 //            }
 //        });
 
-        user = allData.family.get(0).users.get(0);
+        //user = allData.family.get(0).users.get(0);
+
         /*user.setF_id("niji");
         user.setAdmin(true);
         user.setAdult(true);
@@ -60,9 +59,9 @@ public class TopActivity extends AppCompatActivity
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        if (user.getAdmin() == false) {
-            fab.setVisibility(View.GONE);
-        }
+        //if ( == false) {
+        //    fab.setVisibility(View.GONE);
+        //}
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,10 +94,10 @@ public class TopActivity extends AppCompatActivity
         View header = LayoutInflater.from(this).inflate(R.layout.nav_header_top, null);
         navigationView.addHeaderView(header);
 
-        TextView text = (TextView) header.findViewById(R.id.nav_header_top_textView);
-        text.setText(user.getU_name());
+        //TextView text = (TextView) header.findViewById(R.id.nav_header_top_textView);
+        //text.setText(user.getU_name());
 
-        String fId = user.getF_id();
+        String fId = allData.getFamily().get(0).getF_id();
 
         getSupportFragmentManager()
             .beginTransaction()

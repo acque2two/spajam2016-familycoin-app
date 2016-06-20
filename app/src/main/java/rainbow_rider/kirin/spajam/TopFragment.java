@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.F;
 import rainbow_rider.kirin.spajam.Data.Family;
 import rainbow_rider.kirin.spajam.Data.Genre;
 import rainbow_rider.kirin.spajam.Data.Work;
@@ -91,7 +92,7 @@ public class TopFragment extends Fragment {
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        loadData(view.getContext());
+        allData = F.Load();
 
         String genreName = new String();
         Integer genreId = Integer.valueOf(mGenreId);
@@ -148,8 +149,9 @@ public class TopFragment extends Fragment {
                     Log.d("-------------", "NotComplete");
                 } else {
                     ListItem listItem = new ListItem();
-                    for (int i = 0 ; i < reply.getFamily().size(); i ++){
+                    for (int i = 0 ; i < reply.getFamily().get(0).getWork().size(); i ++){
                         listItem.setmTitle(reply.getFamily().get(0).getWork().get(i).getW_name());
+                        //Log.d("getW_name" , reply.getFamily().get(0).getWork().get(i).getW_name());
                         listItem.setmPoint(reply.getFamily().get(0).getWork().get(i).getPoint());
                         String imageName = reply.getFamily().get(0).getWork().get(i).getImage();
                         try {

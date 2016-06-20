@@ -30,7 +30,7 @@ import rainbow_rider.kirin.spajam.transfer.async.user.AsyncUserFamilyGet;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Data allData;
+    private Data allData = new Data();
     private ProgressDialog progressDialog;
 
     @Override
