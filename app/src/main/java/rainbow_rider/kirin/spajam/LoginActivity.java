@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                     F.Save(allData);
                     progressDialog.dismiss();
                 }
-            };
+            }.execute();
 
             Intent callIntent = new Intent(LoginActivity.this, TopActivity.class );
             startActivity(callIntent);

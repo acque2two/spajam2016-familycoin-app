@@ -65,7 +65,7 @@ public class PDActivity extends AppCompatActivity {
                         super.onPostExecute(data);
                         finish();
                     }
-                };
+                }.execute();
             }
         });
     }
