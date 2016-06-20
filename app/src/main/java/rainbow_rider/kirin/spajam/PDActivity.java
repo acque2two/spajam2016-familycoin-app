@@ -1,8 +1,6 @@
 package rainbow_rider.kirin.spajam;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,9 +8,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.arnx.jsonic.JSON;
-
 import rainbow_rider.kirin.spajam.Data.Data;
+import rainbow_rider.kirin.spajam.Data.F;
 import rainbow_rider.kirin.spajam.Data.Product;
 import rainbow_rider.kirin.spajam.Data.User;
 import rainbow_rider.kirin.spajam.transfer.async.user.AsyncScoreChange;
@@ -27,7 +24,7 @@ public class PDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pd);
 
-        loadData( PDActivity.this.getApplicationContext() );
+        allData = F.Load();
 
         Intent intent = getIntent();
         int p_id = intent.getIntExtra("p_id", -1);
@@ -73,15 +70,4 @@ public class PDActivity extends AppCompatActivity {
         });
     }
 
-    private boolean loadData(Context context) {
-        // アプリ標準の Preferences を取得する
-        SharedPreferences sp =  context.getSharedPreferences("allData",Context.MODE_PRIVATE);
-
-        allData = JSON.decode(sp.getString("DATA_JSON", "{}"), Data.class);
-        my_id = sp.getString("my_id", "");
-        boolean ans;
-        ans = allData.getFamily() != null;
-
-        return ans;
-    }
 }
