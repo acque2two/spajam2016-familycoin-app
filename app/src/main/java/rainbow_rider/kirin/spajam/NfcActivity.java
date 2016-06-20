@@ -24,6 +24,13 @@ import rainbow_rider.kirin.spajam.Data.NFC;
 public class NfcActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback,
         NfcAdapter.OnNdefPushCompleteCallback {
 
+    String g_Name;
+    String g_uId;
+    String g_fId;
+    int g_sex = -1;
+    int g_adult = -1;
+    int g_admin = -1;
+
     private static final int MESSAGE_SENT = 1;
     private static Context mContext;
     private final static Handler ndefPushHandler = new Handler() {

@@ -148,7 +148,7 @@ public class TopFragment extends Fragment {
                     Log.d("-------------", "NotComplete");
                 } else {
                     ListItem listItem = new ListItem();
-                    for (int i = 0 ; i < reply.getFamily().size(); i ++){
+                    for (int i = 0 ; i < reply.getFamily().get(0).getWork().size(); i ++){
                         listItem.setmTitle(reply.getFamily().get(0).getWork().get(i).getW_name());
                         listItem.setmPoint(reply.getFamily().get(0).getWork().get(i).getPoint());
                         String imageName = reply.getFamily().get(0).getWork().get(i).getImage();
